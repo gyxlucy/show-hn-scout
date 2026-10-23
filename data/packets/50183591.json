@@ -1,0 +1,53 @@
+{
+  "id": 50183591,
+  "title": "Show HN: Riff – An iPhone calendar you zoom instead of switching views",
+  "url": "https://riffcalendar.com",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "rexikan",
+    "descendants": 1,
+    "id": 50183591,
+    "kids": [
+      50191222
+    ],
+    "score": 4,
+    "text": "Hi, HN. I am Magnus from Sweden with a side project:<p>Riff is an iPhone calendar where you can zoom smoothly from half a year to a single day, and every stop on the way is a working calendar. You create, edit, and reschedule with your other events in view. As with a paper planner, you find a free spot and type only what you need.<p>This is an idea I had for several years, but only now, with AI-assisted development, has it become feasible. Still, it took four months and 1,400 commits trying different concepts and, in the end, fine-tuning the feel and usability. I have since learned that the idea isn&#x27;t quite novel, but I believe the execution is.<p>It works directly on the calendars already on your phone. There is no account, no server, and no analytics. It is free for three weeks with nothing to sign up for, then $39.99 once, or a subscription at $1.99 a month or $19.99 a year. I hope it will get some traction, but even if it doesn&#x27;t, I will continue to maintain it as I wouldn&#x27;t want to be without it.<p>Even if you don&#x27;t install it, the homepage has a screen recording. I would love to hear how the zoom feels and what would make Riff your calendar.",
+    "time": 1792599902,
+    "title": "Show HN: Riff – An iPhone calendar you zoom instead of switching views",
+    "type": "story",
+    "url": "https://riffcalendar.com"
+  },
+  "sources": [
+    {
+      "url": "https://riffcalendar.com",
+      "fetched_at": "2026-10-22T06:02:42.327453+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://riffcalendar.com",
+      "sha256": "adf556be2ab7e087f7d73817f62f84824c2db81e3aaa6512bd824090984a475c",
+      "raw_path": "data/raw/20261022T055848874425Z/adf556be2ab7e087f7d73817f62f84824c2db81e3aaa6512bd824090984a475c.html",
+      "content_type": "text/html",
+      "text": "Tyler Hall\nBuilding Mac apps since 2006\nOn Mastodon,\n2 September 2026\nThis is seriously impressive. It’s rare to find such a well-done new\ntake on an established category like calendar apps.\nA closer look\nCreate an event by holding its time\nHold an empty slot and a new event appears there. Slide to adjust\nthe start, and drag the bar at its foot to set the duration. For an\nall-day event, hold under the date.\nRound times by default, exact when needed\nDrags snap to round times. For an exact time, pause before you drag\non, or drag the time tag at the left edge.\nRiff remembers your regular events\nType the start of a title you have used before, and Riff suggests the\nevent with its length, place and alert from last time. There is\nnothing to set up. The suggestions come from your own calendar.\nReschedule with your calendar in view\nTap the arrows beside an event’s time and it lifts off. Scroll to\nanother week or day, then place it among what is already there.\nThe weather where you plan\nEach day’s forecast stands beside its date, and a single day shows it\nhour by hour. An event pinned to a place shows the forecast\nthere. Weather is a switch in Riff’s settings.\nSee when it gets dark\nA faint shade covers the hours between sunset and sunrise where you\nare, so an evening run before dark is easy to plan. Daylight is a\nswitch in Riff’s settings.\nAnd there is more: reminders beside your events, search by\ntitle or place, alerts in a tap, time zones when you travel, a one-thumb\nzoom…\nThe calendar itself, as a widget\nThe Schedule widget is the calendar itself: every event drawn at\nits hour, with its length and its name. Each size shows as many days\nas you choose, up to three on the small, a week on the medium and two\nwhole weeks on the large. Month draws this month, or this month and\nthe next, and Up next lists what is coming, on the Home Screen or the\nLock Screen.\nThree days at true scale on the large widget, the day’s list on the medium.\nYour calendars, not copies of them\nWork\nPersonal\nFamily\nRiff works directly on the calendars already on your iPhone: iCloud,\nGoogle, Exchange, whatever Apple Calendar sees. There is no Riff account\nand nothing to import. Events you create or move in Riff show up\neverywhere else. Delete the app and your data hasn’t gone anywhere.\nData collected: none\nRiff has no server, no account and no analytics. Your events pass\nbetween Apple’s calendar database and your screen. Riff adds no stop of\nits own. Not collecting data isn’t a policy. There is nowhere for it\nto go.\nGet Riff\n★★★★★\nThe best interface for a calendar app I have yet found. Zooming in\nand out is smooth and adding events is a breeze. I actually like to\nadd more events to my calendar now.\nAshlyme, in an App Store review\nGet Riff on the App Store\niPhone · iOS 26 or later\nLeave your address for an email when Riff gets a major update.\nEmail address\nEmail me about updates",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50183591",
+      "fetched_at": "2026-10-22T06:02:43.650241+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50183591",
+      "sha256": "de03f4f951a2ca015fae126b3acf06df14e7514059f4fc82c58fca442b78e8db",
+      "raw_path": "data/raw/20261022T055848874425Z/de03f4f951a2ca015fae126b3acf06df14e7514059f4fc82c58fca442b78e8db.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50191222",
+          "by": "cavo2000",
+          "is_author": false,
+          "text": "I've been using Riff for a little while during late testing stage. It takes a little to get used to but moving around the calendar is a lot like Google/Apple Maps. Recurring meetings, which are not exact, like getting a haircut is very easy to book with just one small swipe. The best feature is how quickly you can see an overview. Just like maps."
+        }
+      ]
+    }
+  ]
+}

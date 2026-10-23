@@ -1,0 +1,42 @@
+{
+  "id": 50179254,
+  "title": "Show HN: Commit code into a neural network, see what it remembers (browser demo)",
+  "url": "https://nicobrenner.github.io/lossy-git/demo.html",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "nico",
+    "descendants": 0,
+    "id": 50179254,
+    "score": 1,
+    "time": 1792582885,
+    "title": "Show HN: Commit code into a neural network, see what it remembers (browser demo)",
+    "type": "story",
+    "url": "https://nicobrenner.github.io/lossy-git/demo.html"
+  },
+  "sources": [
+    {
+      "url": "https://nicobrenner.github.io/lossy-git/demo.html",
+      "fetched_at": "2026-10-22T06:02:33.124803+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://nicobrenner.github.io/lossy-git/demo.html",
+      "sha256": "a983ec258dae297273ffcd1ffd33231a513e7f7aab6e04e885e03966ff7888c8",
+      "raw_path": "data/raw/20261022T055848874425Z/a983ec258dae297273ffcd1ffd33231a513e7f7aab6e04e885e03966ff7888c8.html",
+      "content_type": "text/html",
+      "text": "lgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50179254",
+      "fetched_at": "2026-10-22T06:02:34.008514+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50179254",
+      "sha256": "85dea90d5757d92b161311a8134252dac80f1334241db564faa26642559bb0af",
+      "raw_path": "data/raw/20261022T055848874425Z/85dea90d5757d92b161311a8134252dac80f1334241db564faa26642559bb0af.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

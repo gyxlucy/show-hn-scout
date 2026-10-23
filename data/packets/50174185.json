@@ -1,0 +1,59 @@
+{
+  "id": 50174185,
+  "title": "Show HN: One click flight booking in Claude",
+  "url": "https://mcp.bonbook.co/claude-setup",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "themagyar",
+    "descendants": 2,
+    "id": 50174185,
+    "kids": [
+      50174285
+    ],
+    "score": 5,
+    "text": "tldr; Travelers wanted to find and book flights super fast in Claude, so we built this.<p>--<p>BonBook started as flights via email because I was flying once a week in &#x27;24 and the UX got to me.<p>Since then we&#x27;ve handled tens of thousands of requests for hundreds of travelers.<p>The new MCP lets you search live flights with as little&#x2F;much detail as you like, get options and then book without filling any forms. Points and status intact. All in ~35 seconds.",
+    "time": 1792539377,
+    "title": "Show HN: One click flight booking in Claude",
+    "type": "story",
+    "url": "https://mcp.bonbook.co/claude-setup"
+  },
+  "sources": [
+    {
+      "url": "https://mcp.bonbook.co/claude-setup",
+      "fetched_at": "2026-10-22T06:02:26.731184+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://mcp.bonbook.co/claude-setup",
+      "sha256": "f3559a524f4d8c5d20e42d9401ff90d7fd14346480226c8b8c144bd2abf6c2dd",
+      "raw_path": "data/raw/20261022T055848874425Z/f3559a524f4d8c5d20e42d9401ff90d7fd14346480226c8b8c144bd2abf6c2dd.html",
+      "content_type": "text/html",
+      "text": "Three steps. About one minute. No account or password.\nOpen Claude\nand go to\nSettings → Connectors → Add custom connector\n.\nPaste this address\ninto the URL box and click\nAdd\n.\nCopy\nName it\nBonBook Travel\n. Leave everything else empty.\nClick Connect.\nA BonBook page appears for a second and closes by itself. You're done.\nNow start a new chat and ask for a flight, for example:\nFind me a flight from Austin to Los Angeles next Friday, one way.\nYour first booking opens a secure bonbook.co checkout page. After that, just say “book option 2”.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50174185",
+      "fetched_at": "2026-10-22T06:02:28.623558+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50174185",
+      "sha256": "034afb2fb285af74c80ce886bc77813736d0d765b615a0a8184510d91a0f82c1",
+      "raw_path": "data/raw/20261022T055848874425Z/034afb2fb285af74c80ce886bc77813736d0d765b615a0a8184510d91a0f82c1.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50174285",
+          "by": "arlattimore",
+          "is_author": false,
+          "text": "Who processes the booking & payment, an aggregator like Expedia or the airlines direct?"
+        },
+        {
+          "id": "50174300",
+          "by": "themagyar",
+          "is_author": true,
+          "text": "Airlines process and charge your card directly. So a booking on Delta shows up as 'Delta Air Lines' and you keep credit card points."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": 50189982,
+  "title": "Show HN: GitPushups, block your code if you don't do pushups during your workday",
+  "url": "https://gitpushups.com",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "higgins",
+    "descendants": 0,
+    "id": 50189982,
+    "score": 2,
+    "text": "Hi HN!<p>I made this tool for a hackathon last year and since then me and other developers have done ~40K pushups during our workday.<p>I&#x27;ve made all the features free (originally was freemium to compete in RevenueCat&#x27;s Shipaton 2025) and also added an apple watch app.<p>More on those changes in the first &quot;monthly press&quot; update:\n<a href=\"https:&#x2F;&#x2F;gitpushups.com&#x2F;monthly-press&#x2F;october-2026\" rel=\"nofollow\">https:&#x2F;&#x2F;gitpushups.com&#x2F;monthly-press&#x2F;october-2026</a><p>What do you think?",
+    "time": 1792632508,
+    "title": "Show HN: GitPushups, block your code if you don't do pushups during your workday",
+    "type": "story",
+    "url": "https://gitpushups.com"
+  },
+  "sources": [
+    {
+      "url": "https://gitpushups.com",
+      "fetched_at": "2026-10-22T06:02:38.874849+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://gitpushups.com",
+      "sha256": "892d3d9fd2e733a804aabfea3875ac233dec7bdbf1e53f7a6067cb51a051f740",
+      "raw_path": "data/raw/20261022T055848874425Z/892d3d9fd2e733a804aabfea3875ac233dec7bdbf1e53f7a6067cb51a051f740.html",
+      "content_type": "text/html",
+      "text": "Do pushups...\nor we block\nyour commits.\nJoin developers who have built a pushup habit into their coding routine and logged\n42,490\n0\n42,490\npushups\nduring their workday.\nAll free and no ad spam.\nSign in with GitHub\nThese GitHub users do\npushups while coding.\nPrimeagen\nMarc Lou\nCassidy Williams\nScott Tolinski\nPieter Levels\nMelkey\nTheo\nWes Bos\nJason Lengstorf\nFireship\nHelp us get these developers\ndoing the reps, too!\nKnow them? Invite them to join.\nConfigure your training\nChoose how often you want to do pushups\nSet up with your agent\nGit hook\n›\nSet me up for GitPushups. Read the setup instructions at https://gitpushups.com/agent-setup/prompt.md?frequency=daily, ask for my GitHub username, and preserve my existing Git hooks.\nBefore\nAfter\nDaily\n8 hours\n4 hours\n1 hour\n15 min\nPushups daily\nWhy this works\nAn existing routine\nThis is a\nhabit stacking\ntool. You are already coding; add this to your routine and you’ll get stronger.\nA small interruption\nYou can do as many or as few pushups as you want. Your growth is based on the technique known as\n“greasing the groove”\n. Practice good form, frequently, at sub-maximal intensity to build neuromuscular efficiency.\nRepetition\nLike coding, eventually doing pushups while you work will become second nature. That repetition will make you stronger.\nTrack your progress\nSet your daily goal. Track your pushups.\nWatch your contribution graph fill in and see where you are on the global leaderboard.\nGlobal leaderboard\nToday’s developers\nReps\n1\ntorvalds\n120\n2\nkarpathy\n108\n3\ncassidoo\n96\n4\ngaearon\n84\n5\nsindresorhus\n72\nYour contributions\n2,674\npushups\nLess\nMore\nDaily goal\n40 pushups\nSample ranks and rep counts\nActive community\nFocus this row to stop the animation and scroll through the quotes. Each card links to its original source.\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nLatest community update\nThe Monthly Press: October 2026\nRead update\nFAQ\nWhy pushups?\n+\nCan I sync with Apple Health?\n+\nHelp! I got too swol!\n+\nWhat if I already have a workout routine?\n+\nI have a feature request!\n+\nI found a bug!\n+\nHow do I delete my account?\n+\nHow can I support this project?\n+\nWho made this?\n+",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50189982",
+      "fetched_at": "2026-10-22T06:02:41.896974+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50189982",
+      "sha256": "2f4b4adc3c1b38dfcebe4a6aa23b0dcc3bdc20988e99c625fa4659b357839315",
+      "raw_path": "data/raw/20261022T055848874425Z/2f4b4adc3c1b38dfcebe4a6aa23b0dcc3bdc20988e99c625fa4659b357839315.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

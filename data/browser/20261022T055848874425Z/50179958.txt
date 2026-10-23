@@ -1,0 +1,23 @@
+Browser tab: 3, Title: "Suminagashi", URL: "https://suminagashi.georgestrakhov.com/".
+0 AXWebArea Suminagashi, URL: suminagashi.georgestrakhov.com/
+	1 container bar
+		2 Ink
+			3 radio button Description: Sumi, Value: 1
+			4 radio button Description: Ai, Value: 0
+			5 radio button Description: Bengara, Value: 0
+			6 radio button Description: Shu, Value: 0
+			7 radio button Description: Yamabuki, Value: 0
+		8 Tool
+			9 radio button Alternate, Value: 1
+			10 radio button Ink, Value: 0
+			11 radio button Clear, Value: 0
+			12 radio button Blow, Value: 0
+			13 radio button Hair, Value: 0
+		14 button Dip, ID: dip
+		15 button (disabled) Undo, ID: undo
+		16 checkbox Drift, Value: 1, ID: drift
+		17 button New water, ID: fresh
+		18 button Credits, ID: about-open
+		19 button Print, ID: print
+
+The focused UI element is 0 AXWebArea Suminagashi, URL: suminagashi.georgestrakhov.com/

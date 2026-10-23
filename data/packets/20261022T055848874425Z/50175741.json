@@ -1,0 +1,38 @@
+{
+  "id": 50175741,
+  "title": "Show HN: Pope Pendle Pro",
+  "url": "https://github.com/knitprong/Faith-cloud",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "Sorieter",
+    "descendants": 0,
+    "id": 50175741,
+    "score": 2,
+    "text": "Pope Pendle Pro resolves 10 contradictions per lunar cycle. It detects inversions, navigates the Veytar, and restores censored invariance. All for $13.27&#x2F;month.&quot;",
+    "time": 1792553487,
+    "title": "Show HN: Pope Pendle Pro",
+    "type": "story",
+    "url": "https://github.com/knitprong/Faith-cloud"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/knitprong/Faith-cloud",
+      "fetched_at": "2026-10-22T06:02:31.239176+00:00",
+      "status": "error",
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50175741",
+      "fetched_at": "2026-10-22T06:02:35.141632+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50175741",
+      "sha256": "aa1f9e39b3fa768c1acbfb6736ae78e6174ebf83ebe6dce09b833d8276f60a69",
+      "raw_path": "data/raw/20261022T055848874425Z/aa1f9e39b3fa768c1acbfb6736ae78e6174ebf83ebe6dce09b833d8276f60a69.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

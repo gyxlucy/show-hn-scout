@@ -1,0 +1,53 @@
+{
+  "id": 50181222,
+  "title": "Show HN: Euspell – Spelling reform: an enginnering approach",
+  "url": "https://euspell.org/try/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "kamranossia",
+    "descendants": 1,
+    "id": 50181222,
+    "kids": [
+      50189583
+    ],
+    "score": 1,
+    "text": "Hi HN. Euspell is a conservastive respelling of English and all the software needed to implement it. The link above converts the text you paste, in your browser. Other ways to try it out are the browser extensions and EPUB&#x2F;PDF readers.<p>Previous spelling reforms have failed for two reasons: they asked people to apply rules by hand or remember a large set of new spellings, and they couldn&#x27;t handle homographs: &quot;read&quot; is reed or red, &quot;records&quot; is a noun or a verb, &quot;wound&quot; is an injury or a past tense - writing in pure phonetics will actually create hundreds of homographs. Euspell approaches spelling reform differently, with the goal of aiding reading and comprehension.<p>- A lexicon with 205505 entries, each with CLAWS7 part-of-speech tags. Of these, 164067 (80%) are left unchanged. No diacritics are used. Proper nouns are untouched. American spelling is the base, in the line of Webster&#x27;s reforms.\n- 5920 entries are ambiguous and need context. The noun&#x2F;verb -s split (records&#x2F;recordz) is a linear SVM: 93.2% on held-out text. The hand-written rule it replaced scored 75.9%. The full evaluation is at <a href=\"https:&#x2F;&#x2F;github.com&#x2F;ossiak&#x2F;euspell&#x2F;blob&#x2F;main&#x2F;docs&#x2F;paper-evaluation.md\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;ossiak&#x2F;euspell&#x2F;blob&#x2F;main&#x2F;docs&#x2F;paper-evalu...</a>\n- Semantic splits (e.g. bow, tear, lead) are hand-written rules and less accurate: &quot;read&quot; gets about four in five right on its test set.\n- Runs locally in a browser extension (Chrome&#x2F;Firefox&#x2F;Safari, including PDFs), MS Word, LibreOffice, Google Docs, and a standalone EPUB&#x2F;PDF reader for Windows, MacOS, Android and iOS.\n- Code is GPL-3.0, lexicon is CC BY-SA 4.0: <a href=\"https:&#x2F;&#x2F;github.com&#x2F;ossiak&#x2F;euspell\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;ossiak&#x2F;euspell</a>. White paper: <a href=\"https:&#x2F;&#x2F;euspell.org&#x2F;paper\" rel=\"nofollow\">https:&#x2F;&#x2F;euspell.org&#x2F;paper</a><p>The changes can be toggled on and off: Euspell changes what you read, not the source text. AI tools (Claude) helped with the software, the site and the videos; the reform and the lexicon are mine. There is also a 14-part video series: <a href=\"https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list=PLfCd5hTV7IWg\" rel=\"nofollow\">https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list=PLfCd5hTV7IWg</a><p>Most useful feedback: sentences where it picks the wrong spelling.",
+    "time": 1792591578,
+    "title": "Show HN: Euspell – Spelling reform: an enginnering approach",
+    "type": "story",
+    "url": "https://euspell.org/try/"
+  },
+  "sources": [
+    {
+      "url": "https://euspell.org/try/",
+      "fetched_at": "2026-10-22T06:02:42.810313+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://euspell.org/try/",
+      "sha256": "8decab301b818e15fde29d87b6d27a898a5e7e71c6f782630adca20b55460c01",
+      "raw_path": "data/raw/20261022T055848874425Z/8decab301b818e15fde29d87b6d27a898a5e7e71c6f782630adca20b55460c01.html",
+      "content_type": "text/html",
+      "text": "Try it\nRead your own text in euspell\nPaste any English text. It is converted in your browser, by the same engine the extension runs, and nothing you type leaves this page.\nExamples\nHomographs\nSilent letters\nPlain prose\nClear\nTraditional spelling\nShe records every meeting and keeps the records in a drawer. I wound the bandage around the wound. I want to read the book she read last year. The wind was too strong to wind the sail. She shed a tear when she saw the tear in her coat.\nEuspell\nLoading the lexicon: about 1.7 MB, once.\nMark the changed words (hover one for its old spelling)\nCopy euspell\nWhat you are looking at\nEach word is looked up in the lexicon, and most are left exactly as they are. The ones that change are marked. A word like\nrecords\n,\nwound\nor\nread\nhas two pronunciations and so two euspellings, and which one it gets depends on\nwhat it is doing in the sentence\n: the engine tags the words around it before choosing.\nIt gets most of those right, not all of them. If a word comes out wrong,\ntell us which one and in what sentence\n. That is the most useful report there is.\nThe page downloads the engine and the lexicon once, about 1.7 MB between them, and converts everything locally. There is no server behind it to send text to.\nKeep reading\nReform rules\nThe twelve rules, with worked examples\nDisambiguation\nHow the sentence decides a homograph\nBrowser extension\nThe same conversion on every page you read",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50181222",
+      "fetched_at": "2026-10-22T06:02:44.250473+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50181222",
+      "sha256": "bef929b8e83abd154f8a7e1fcde06fec7291fba5ac59b7b660082f1688e730ab",
+      "raw_path": "data/raw/20261022T055848874425Z/bef929b8e83abd154f8a7e1fcde06fec7291fba5ac59b7b660082f1688e730ab.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50189583",
+          "by": "naishoya",
+          "is_author": false,
+          "text": "ok; I'll be that person: enginnering <~ engineering\nconservastive <~ conservative Normally, i just don't care about a person's spelling.  In fact, in these days of LLM tokenized prose, a little random keyboard 'mahsup' can be endearing.  However, proposing a spelling help product that was made with an LLM, and then either aren't using it or it doesn't work.  Not a strong Show HN outing. I like the semantic approach though. Using context to identify the words which are likely and checking those for correct spelling is novel, at least to my awareness.  Perhaps look for options to 'de-Webster' the spelling as an user choice.  The American version of English is not automatically the best in all cases, much like the Oxford comma rule is not always the right way to compose a long list of similar ideas within the same sentence. Colourful and creative authors prefer to have freedom, to choose how they organise the spelling, prose, structure and composition of their verse."
+        }
+      ]
+    }
+  ]
+}

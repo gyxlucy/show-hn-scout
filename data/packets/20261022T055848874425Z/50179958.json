@@ -1,0 +1,59 @@
+{
+  "id": 50179958,
+  "title": "Show HN: Japanese Paper Marbling in the Browser",
+  "url": "https://suminagashi.georgestrakhov.com/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "georgestrakhov",
+    "descendants": 2,
+    "id": 50179958,
+    "kids": [
+      50180183
+    ],
+    "score": 1,
+    "text": "Just a fun 20-min project with claude, but kids are having a lot of fun with it. So great that we can now make things on a whim.",
+    "time": 1792586650,
+    "title": "Show HN: Japanese Paper Marbling in the Browser",
+    "type": "story",
+    "url": "https://suminagashi.georgestrakhov.com/"
+  },
+  "sources": [
+    {
+      "url": "https://suminagashi.georgestrakhov.com/",
+      "fetched_at": "2026-10-22T06:02:45.748906+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://suminagashi.georgestrakhov.com/",
+      "sha256": "c944bd68dbc55e32d134de2be079bbc1566e7b84b459d19ef9e8548c56da4ddb",
+      "raw_path": "data/raw/20261022T055848874425Z/c944bd68dbc55e32d134de2be079bbc1566e7b84b459d19ef9e8548c56da4ddb.html",
+      "content_type": "text/html",
+      "text": "",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50179958",
+      "fetched_at": "2026-10-22T06:02:47.497678+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50179958",
+      "sha256": "cf421f830fa5b433ec1633c6403a0f1587c4d587e6ddd49802db3cb9d36c855e",
+      "raw_path": "data/raw/20261022T055848874425Z/cf421f830fa5b433ec1633c6403a0f1587c4d587e6ddd49802db3cb9d36c855e.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50180183",
+          "by": "BElluu",
+          "is_author": false,
+          "text": "I do not know why, but it's so laggy on my PC in chrome. When I cut some ink or do some chaotic moves it's more than 1000ms Presentation delay"
+        },
+        {
+          "id": "50181329",
+          "by": "georgestrakhov",
+          "is_author": true,
+          "text": "yes, definitely some optimizations are due if you go beyond 20-30 moves or move fast. would love a PR on that if anyone cares!"
+        }
+      ]
+    }
+  ]
+}

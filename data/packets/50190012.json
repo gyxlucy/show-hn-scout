@@ -1,0 +1,43 @@
+{
+  "id": 50190012,
+  "title": "Show HN: HarnessHive – collaborative wiring harness design platform in browser",
+  "url": "https://harnesshive.com",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "danielkopelke",
+    "descendants": 0,
+    "id": 50190012,
+    "score": 1,
+    "text": "Hey HN! We built <a href=\"https:&#x2F;&#x2F;harnesshive.com\" rel=\"nofollow\">https:&#x2F;&#x2F;harnesshive.com</a>, a browser based tool to help you design wiring harnesses together.\nHarnessHive has three key features 1) multiple engineers editing the same harness in real time 2) BOM and drawings that stay in sync automatically and 3) AI-native agent + MCP to assist designing.\nWe hope HarnessHive can make harness design less painful than Excel and Visio for some of you :). Let me know if you have any questions&#x2F;comments&#x2F;feature requests!",
+    "time": 1792632761,
+    "title": "Show HN: HarnessHive – collaborative wiring harness design platform in browser",
+    "type": "story",
+    "url": "https://harnesshive.com"
+  },
+  "sources": [
+    {
+      "url": "https://harnesshive.com",
+      "fetched_at": "2026-10-22T06:02:36.795833+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://harnesshive.com",
+      "sha256": "df9360f6e319e571ea30817dc8a0d36405c8b09fda546bc396e86a7c43a4facf",
+      "raw_path": "data/raw/20261022T055848874425Z/df9360f6e319e571ea30817dc8a0d36405c8b09fda546bc396e86a7c43a4facf.html",
+      "content_type": "text/html",
+      "text": "The AI-native, collaborative, browser-based and versioned design ecosystem for wiring harness engineers\nThe\nAI-Native\nCollaborative\nBrowser-Based\nVersioned\nAI-Native\nDesign Ecosystem for\nWiring Harness Engineers\nSchematic, layout, BOM and a\nTO-SCALE\nformboard, all in one live document. With an assistant that helps you at every step.\nBook a demo\n25 minutes\nStart free trial\nNo credit card ·\n14 days ·\nnothing to install\nClose\nSchematic\nWiring\nBOM & cut list\nFormboard\nScroll\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nSchematic\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nWiring\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nBOM & cut list\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nFormboard\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nEverything a harness team needs,\nin one live document\n.\nCollaboration & history\nDraw together, in real time.\nEveryone edits the same live harness: cursors, drags and changes as they happen. Undo only reverts your own work, and every action lands in a history anyone can open read-only.\nLive cursors and presence\nPer-user undo\nViewer, Editor and Admin roles\nHistory by day, snapshots read-only\nStart free trial\nAI assistant\nAn assistant that reads your harness.\nAsk it to find real parts from trusted supplier sources, add them to your library, place them and connect the cavities. Every edit arrives as a proposal; nothing changes until you apply it.\nReads CSV wire lists you attach\nCreates parts from supplier pages\nGenerates a whole harness as one proposal\nApplied changes show up in history\nStart free trial\nIntegrations\nFits the tools you already use.\nBring wire lists, supplier data and whole harnesses in; send full-scale drawings, BOMs and a complete JSON back out. KiCad and Onshape importers are on the way.\nFormboard PDF at true 1:1 scale\nBOM and cut list as XLSX\nHarness JSON round-trip\nKiCad and Onshape · coming soon\nStart free trial\nParts & libraries\nReal parts, versioned.\nConnector housings, terminals, conductors, seals, splices. Every occurrence in a harness pins the exact version it was built with, so a library update never silently changes your design.\nOrganization libraries and local parts\nCavity counts on the part definition\nExact version pinned per occurrence\nBOM rows follow the model\nStart free trial\nAgents & MCP\nBring your own agent.\nHarnessHive ships an MCP server. Point Claude, ChatGPT, Cursor or your own agent at the workspace to read harnesses, BOMs, empty cavities and libraries. Tokens are read-only unless you opt in.\nEight read tools for every token\nWrites behind an explicit opt-in\nScoped to one workspace\nRevoke a token instantly\nWorks with\nRead the MCP docs\nJoin our community.\nA small team building this with the people who use it. Come say hi, show us what you’re wiring, and hear about new things first.\nJoin our Discord\nNew\nNewsletter\nBe the first to hear about new features and blog posts.\nEmail address\nWebsite\nSubscribe\nI agree to the\nPrivacy Policy\nand to receive product updates by email.\nBuilt for teams who\nactually build\n.\n[public\n/teams/startups.webp\n]\nStartups & machine builders\nShip the first harness without buying a seat of legacy EDA.\n[public\n/teams/students.webp\n]\nStudent teams\nHand the harness over each season with its full history intact.\n[public\n/teams/shops.webp\n]\nHarness shops & freelancers\nSend a 1:1 formboard and a clean BOM to the build bench.\nStudent teams\nwe sponsor\n.\nFormula Student teams across the globe, building their cars with our support.\nYour next harness, designed in the browser.\nBook a demo\n25 min\nStart free trial\n→",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50190012",
+      "fetched_at": "2026-10-22T06:02:38.595832+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50190012",
+      "sha256": "2707a9e4a1922df9b123423cce0c85a4645f4bef5fa16cec677290771b19882d",
+      "raw_path": "data/raw/20261022T055848874425Z/2707a9e4a1922df9b123423cce0c85a4645f4bef5fa16cec677290771b19882d.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

@@ -1,0 +1,1624 @@
+[
+  {
+    "id": 50191433,
+    "name": "Commit-quiz · 提交代码前，先考考提交者",
+    "summary": "一个 Git pre-commit hook：在提交 AI 生成的改动前，要求开发者回答关于本次 diff 的问题。",
+    "mechanism": "调用已有 AI CLI，把 staged diff 变成四个陈述，其中两个正确、两个貌似合理但错误。答错会中止提交并展示真实改动摘要；模型或交互不可用时放行。",
+    "uncertainty": "已读 README，未安装试用。尚不清楚题目能否测出理解程度，以及长期使用是否变成机械答题。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "它把检查对象转向提交者是否理解改动，而不仅是代码有没有问题；机制能直接针对 AI 编程中的责任与理解脱节。",
+      "next_check": "试做真实 diff 的题目，检查猜答案的难度、误判率及与已有代码理解测验工具的区别。"
+    },
+    "case_id": "01",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50191433,
+      "title": "Show HN: Commit-quiz – A pre-commit hook that quizzes you on your own diff",
+      "url": "https://github.com/Cristopheer96/commit-quiz",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792645872,
+      "score": 1,
+      "age_hours": 0.8,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/Cristopheer96/commit-quiz"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50191433"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50191433.json",
+        "sha256": "bc8a7b6ea4e710cd887e68a412587183345545f10c75e4a3d47fc373917f7b99",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50179254,
+    "name": "Lossy Git · 把代码提交进神经网络",
+    "summary": "一个浏览器实验：commit 时训练小神经网络记住文件，checkout 时从权重重建，文件可能被记错。",
+    "mechanism": "用位置编码映射代码字节或图像像素；可以调网络大小和训练次数，对照原文件与重建结果，观察压缩与错误之间的关系。",
+    "uncertainty": "已读演示页说明，未运行页面里的代码。它明确定位为实验，不能当可靠版本控制系统。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "把不可接受的数据损坏变成可观察的学习材料；用户能通过熟悉的 commit/checkout 理解参数记忆的局限。",
+      "next_check": "亲自验证不同网络容量的错误，并比较它与已有神经压缩演示的交互差异。"
+    },
+    "case_id": "02",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50179254,
+      "title": "Show HN: Commit code into a neural network, see what it remembers (browser demo)",
+      "url": "https://nicobrenner.github.io/lossy-git/demo.html",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792582885,
+      "score": 1,
+      "age_hours": 18.3,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://nicobrenner.github.io/lossy-git/demo.html"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50179254"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50179254.json",
+        "sha256": "51205577035da1f3eeb86cd096a2d028b7dba2e383f4fc370eb0ca98e4de909c",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50185268,
+    "name": "Moodly · 只存在浏览器里的心情日记",
+    "summary": "选择日期、五档心情和可选备注，生成月历与心情分布，支持导出 JSON/CSV。",
+    "mechanism": "记录保存在当前浏览器站点数据中，无账户、云备份或跨设备同步；页面明确提示清理浏览器数据会丢失记录。",
+    "uncertainty": "已读实际表单和数据说明，未写入记录；没有查看源代码或比较其他心情记录工具。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "工具的边界清楚，但本地保存、月历和导出这组功能尚未给出足够具体的新想法。",
+      "next_check": "如果用户特别重视极简本地工具，再评估它的操作细节；不能仅凭免费和隐私就认定原创。"
+    },
+    "case_id": "03",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50185268,
+      "title": "Show HN: Moodly – A free mood tracker that keeps entries in the browser",
+      "url": "https://mood-tracker.org/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792606678,
+      "score": 1,
+      "age_hours": 11.7,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://mood-tracker.org/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50185268"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50185268.json",
+        "sha256": "1ec0bd1f674217f415aed01e481b8480189a8a1842c0b394d7328e16ce08d693",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50178183,
+    "name": "Non-call · 一场没有胜利条件的值班夜",
+    "summary": "一个模拟工程师夜间 on-call 的小游戏：从深夜撑到早上交班，同时面对告警与生活打断。",
+    "mechanism": "起始界面写明告警会重叠、生活事件有倒计时、不作决定也有后果；到 07:00 就交班，不要求把所有事情解决。",
+    "uncertainty": "已用浏览器查看起始界面与规则，尚未完成一局；暂不能评价游戏节奏和重复可玩性。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "用没有终极胜利的游戏规则表达值班工作的结构性冲突，值得检验它是否把工程经验转成了可感受的 insight。",
+      "next_check": "玩一局，观察工作与生活的选择是否影响局面，而非仅是随机弹窗。"
+    },
+    "case_id": "04",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50178183,
+      "title": "Show HN: Non-call, an on-call simulator mini-game",
+      "url": "https://serum.sh/non-call/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792576088,
+      "score": 2,
+      "age_hours": 20.2,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://serum.sh/non-call/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50178183"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50178183.json",
+        "sha256": "ea0e55f6c0e3d6bf6b6723b442bb092e1f58978a38e164bc371158ae4fba0dc4",
+        "kind": "captured_packet"
+      },
+      {
+        "path": "data/browser/20261022T055848874425Z/50178183.txt",
+        "sha256": "659c738960160a94737d7571c044eb0853ed33dcfba6f1c05d22625f359730d3",
+        "kind": "browser_accessibility_snapshot",
+        "url": "https://serum.sh/non-call/",
+        "captured_at": "2026-10-22T06:05:21.980261+00:00"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50173690,
+    "name": "Melra · 写操作结果不明时，先停下来核对",
+    "summary": "一个供 agent 调用的本地执行层，统一检查工具权限、验证执行证据，并记录操作回执。",
+    "mechanism": "对经过它的任务写操作，在派发前记录状态并限制最多派发一次；超时或崩溃后若无法确认结果，就进入待核对状态，不盲目重放。文档明确外部效果的 exactly-once 仍依赖服务方。",
+    "uncertainty": "已读 README，未做故障注入。只约束经由该运行时的调用；存储状态和核对逻辑的可靠性尚未验证。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "它把“请求失败”与“副作用可能已发生”分开处理，这个具体边界比泛泛的 agent 安全宣传更有解释力。",
+      "next_check": "构造服务已写入但响应丢失的场景，验证是否重复派发，以及恢复证据不足时如何处理。"
+    },
+    "case_id": "05",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50173690,
+      "title": "Show HN: Melra – pause ambiguous MCP writes instead of blindly retrying",
+      "url": "https://github.com/XAGI-Lab/melra",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792536182,
+      "score": 1,
+      "age_hours": 31.3,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/XAGI-Lab/melra"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50173690"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50173690.json",
+        "sha256": "bafa4f5acb2c9331cb662dfd7c79c45acec34103abbff99074b44509a89932d1",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50174998,
+    "name": "ANE Fieldfare · 用 ANE、GPU 和文件缓存协作推理",
+    "summary": "在 Apple Silicon 上运行稀疏专家模型的实验实现，试图降低预填充延迟并提高生成速度。",
+    "mechanism": "README 描述 GPU 解包量化专家、ANE 进行部分预填充计算，生成时在 GPU 上做推测解码，并通过 mmap 让操作系统文件缓存承载专家权重。",
+    "uncertainty": "作者给出分工作负载的测量，未独立复现。标题的峰值速度不是普遍速度；较小的进程 RSS 不代表操作系统缓存不占内存。使用私有 Apple 接口。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "有具体的硬件分工和内存取舍可以研究，价值来自机制与测量，不是标题里的峰值数字。",
+      "next_check": "在相同模型、采样参数和提示词上对照上游 Turbo Fieldfare，测量总内存、缓存、功耗和速度。"
+    },
+    "case_id": "06",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50174998,
+      "title": "Show HN: Reverse engineering the ANE to run Gemma 4 26B at 100 Tok/s",
+      "url": "https://github.com/zw5/ane-fieldfare",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792546497,
+      "score": 1,
+      "age_hours": 28.4,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/zw5/ane-fieldfare"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50174998"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50174998.json",
+        "sha256": "8adc350097df7cd25a8d7489e0005350115076c3c76098c198993f439f2ef0a4",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50183591,
+    "name": "Riff · 用缩放浏览日历",
+    "summary": "一个 iPhone 日历，通过连续缩放从半年移动到单日，缩放过程中的各层都能查看和操作事件。",
+    "mechanism": "用户在时间网格中长按建事件、拖动长度，或把事件提起来，移动到其他日期再放下；直接使用手机已有日历。",
+    "uncertainty": "已读作者说明和产品页，未在 iPhone 实测。作者主动说明后来发现这个想法并非全新，认为差异在执行体验。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "它是“概念已有，但执行可能带来新体验”的边界案例；只读文字无法判断连续缩放是否足以构成推荐理由。",
+      "next_check": "看完整操作演示，比较缩放时的事件可读性和编辑行为，并询问用户是否把优秀执行纳入目标。"
+    },
+    "case_id": "07",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50183591,
+      "title": "Show HN: Riff – An iPhone calendar you zoom instead of switching views",
+      "url": "https://riffcalendar.com",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792599902,
+      "score": 4,
+      "age_hours": 13.6,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://riffcalendar.com"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50183591"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50183591.json",
+        "sha256": "ecc062d700d4ede47c6de28020875b1cf9ebbd24a78120d03dd7c3cff1ed4cae",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50174244,
+    "name": "eze · 把 HTML 文件夹变成公司内部工具",
+    "summary": "自托管的内部网站发布工具：上传 HTML/CSS/JS，获得仅公司登录用户可访问的地址。",
+    "mechanism": "页面加载一个 SDK 即可使用数据库、实时更新、文件和 AI 能力，并沿用浏览者的公司身份。文档选择让公司内用户都可打开、修改和重部署站点。",
+    "uncertainty": "已读产品页，没有搭建部署。权限简化有明确取舍，但与现有内部应用托管工具的差异尚未对照。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "组合可能实用，但当前证据主要展示统一部署与后端封装，尚缺足够独特的机制。",
+      "next_check": "比较零配置后端和公司全员可编辑这两个取舍是否产生了新的协作方式。"
+    },
+    "case_id": "08",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50174244,
+      "title": "Show HN: Drop in a folder of HTML and get back a private URL",
+      "url": "https://eze.page/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792539903,
+      "score": 3,
+      "age_hours": 30.2,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://eze.page/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50174244"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50174244.json",
+        "sha256": "b00e048135b65599f830be86d956aa0f3c77d14bde39d4a5edf86fa3ee4174ca",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50190012,
+    "name": "HarnessHive · 多人一起设计实体线束",
+    "summary": "面向线束工程师的浏览器设计工具，把电路逻辑、实体布线、物料清单和制造图放在同一工程中。",
+    "mechanism": "四个视图共享一个模型，修改线束后材料和裁线长度跟随更新，并导出 1:1 装配板图；元件实例固定其库版本，支持实时协作。",
+    "uncertainty": "已读作者介绍与功能说明，没有进入需注册的产品；尚未对照其他线束 CAD 的相应功能。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "多视图一致性与元件版本固定是具体设计，但这些机制在该领域是否稀缺，仍需要行业参照。",
+      "next_check": "选一个实际线束改动，观察多视图如何同步，并与现有线束工具比较。"
+    },
+    "case_id": "09",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50190012,
+      "title": "Show HN: HarnessHive – collaborative wiring harness design platform in browser",
+      "url": "https://harnesshive.com",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792632761,
+      "score": 1,
+      "age_hours": 4.4,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://harnesshive.com"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50190012"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50190012.json",
+        "sha256": "dc072c71bc8957d773862b0b5fdc21b279ee0c45723f55ac1d97bfa464a9b989",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50176914,
+    "name": "Grafista · 根据内容重建参考版式",
+    "summary": "用户提供文本、图片和品牌信息，系统生成可编辑的社交图片、演示或宣传材料。",
+    "mechanism": "产品把 Blueprint 当作生成参考，而不是让用户逐格填写固定模板；生成后可手工编辑，也可让 agent 修改。",
+    "uncertainty": "已读产品介绍，未注册或比较生成结果。“减少设计同质化”的效果还没有可审阅的对照证据。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "Blueprint 的说法可能有用，但目前没有显示它相对于参考图驱动设计工具改变了什么关键机制。",
+      "next_check": "用相同参考与不同内容做生成对照，看布局是否真的重构，以及编辑结果能否保留结构。"
+    },
+    "case_id": "10",
+    "batch": 1,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50176914,
+      "title": "Show HN: Grafista – AI graphic designer built to fight slop",
+      "url": "https://grafista.io/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792564997,
+      "score": 3,
+      "age_hours": 23.3,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://grafista.io/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50176914"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50176914.json",
+        "sha256": "5cb797426b3f6a763641a034624a9f5f7de874652abf64bf2f508b3108e8c43b",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50181222,
+    "name": "Euspell · 在阅读端试行英语拼写改革",
+    "summary": "一套英语重拼写方案和阅读工具：用户看到转换后的文本，原始文章本身保持原样。",
+    "mechanism": "词典保留大部分原拼写；遇到 read、wound 等依赖上下文的词，用词性模型和规则消歧。在浏览器本地转换，并允许切回原文。",
+    "uncertainty": "已读作者原文、演示页与已披露的消歧限制。识别准确率是作者报告；是否帮助理解或增加学习负担尚未测试。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "把语言改革从要求作者和社会统一迁移，改成读者可撤销的显示层选择，是一个清晰的采用路径变化。",
+      "next_check": "比较阅读体验与既有拼写转换扩展，抽查歧义句，并看真实读者是否受益。"
+    },
+    "case_id": "11",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50181222,
+      "title": "Show HN: Euspell – Spelling reform: an enginnering approach",
+      "url": "https://euspell.org/try/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792591578,
+      "score": 1,
+      "age_hours": 15.9,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://euspell.org/try/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50181222"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50181222.json",
+        "sha256": "bcda46a86c109a7491e57bef13887a0a84fbe6daa0d272851738e901881e404a",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180355,
+    "name": "Stop Bots · 家庭自托管服务的防护控制台",
+    "summary": "用一个 Rust 终端界面管理已有防火墙和 Web 服务器，结合已知地址列表及日志中的异常行为屏蔽访问。",
+    "mechanism": "作者的家庭服务必须支持不方便接 VPN 的设备，又不想依赖外部 CDN；工具把 SSH 和 HTTP 检测集中起来，提供规则预览、配置检查与避免锁死管理员的措施。",
+    "uncertainty": "已读 README 和作者讨论，未部署测试；当前 README 与较早评论对支持的代理种类已有差异，材料需按抓取时间解读。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "问题背景具体、实现有实用价值，但现有防护策略的集中管理还不足以支持较强原创性判断。",
+      "next_check": "核对是否有独特的检测或恢复机制，而非仅以作者个人使用场景和实现规模加分。"
+    },
+    "case_id": "12",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50180355,
+      "title": "Show HN: TUI to manage firewall and HTTP server, in Rust",
+      "url": "https://github.com/ivankovic/stop-bots",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792588255,
+      "score": 2,
+      "age_hours": 16.8,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/ivankovic/stop-bots"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180355"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180355.json",
+        "sha256": "48acae9793833d96023c7a32c073dcb3729ef02f0ca91f0687478ba49aca5998",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50187838,
+    "name": "Steam Frame Dongle · 重新理解无线适配器",
+    "summary": "作者忘带 Steam Frame 适配器后，研究头显的无线连接方式，并制作让普通电脑 Wi-Fi 连接其隐藏热点的工具。",
+    "mechanism": "研究发现连接方向与最初想象相反：热点在头显端。项目记录从 SSH 探索到建立连接的过程，尝试利用设备的多链路串流能力。",
+    "uncertainty": "已读技术故事与作者说明，未在硬件上复现；作者主要测试 Linux x86，其他平台支持有限。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "它纠正了一个具体的硬件架构假设，并将发现落实为替代连接工具，研究过程本身可带来启发。",
+      "next_check": "核对完整握手过程、普通网卡兼容性，以及相对官方方案的稳定性限制。"
+    },
+    "case_id": "13",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50187838,
+      "title": "Show HN: The Steam Frame's wireless adapter isn't what you think",
+      "url": "https://github.com/Sharktheone/steamframe-dongle",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792617774,
+      "score": 2,
+      "age_hours": 8.6,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/Sharktheone/steamframe-dongle"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50187838"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50187838.json",
+        "sha256": "b5bc723f78b4f6838aa1651636131fdaf0e0ce2045377e50a3b5b5918a094c09",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180037,
+    "name": "Omalauncher · Android 桌面里的 Linux 窗口",
+    "summary": "一个 Android launcher，结合原生手机应用、可编辑小组件和可选的 Arch Linux ARM 环境。",
+    "mechanism": "用 proot 运行 Linux，并充当 Wayland compositor，让 Linux 窗口以独立 Android 任务出现；桌面输入栏既能打开应用，也能向编码 agent 发请求。",
+    "uncertainty": "已读 README，没有在手机上安装。无 root 的桌面融合和窗口行为尚未亲测，也未系统比较已有移动 Linux 方案。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "将 Linux 窗口映射为 Android 任务、再把桌面组件做成可编辑语言，形成了具体的手机可编程环境设想。",
+      "next_check": "验证窗口融合与触摸输入，区分已继承的 proot 能力和项目新增的交互。"
+    },
+    "case_id": "14",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50180037,
+      "title": "Show HN: Omalauncher Agentic Android Launcher",
+      "url": "https://github.com/SimonSchubert/omalauncher",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792587028,
+      "score": 1,
+      "age_hours": 17.1,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/SimonSchubert/omalauncher"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180037"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180037.json",
+        "sha256": "b9f46f630c709b1992f55eb433f92e004df5fc3f997ed179d381a40b23a8e902",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180257,
+    "name": "Uberblok · 按源码讲解 ZFS 的交互博物馆",
+    "summary": "把 ZFS 的写时复制、事务组、快照、缓存等机制拆成展厅，用文字和动画解释。",
+    "mechanism": "浏览器页面把说明连接到固定 OpenZFS 提交的源码行；首页演示 uberblock 环，可改变扇区大小，观察槽位数量与事务组写入位置。",
+    "uncertainty": "已用浏览器阅读首页、展厅目录与源码引用，未逐一核验全部动画的技术正确性。它讲解既有系统，并不声称发明新的文件系统。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "把解释绑定到固定版本源码，并让读者改变参数观察后果，可能比一般动画文章更能传递工程 insight。",
+      "next_check": "抽验两个展厅的交互是否忠于源码，再判断原创教学表达是否属于用户想看的工作。"
+    },
+    "case_id": "15",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50180257,
+      "title": "Show HN: Uberblok – an interactive museum of ZFS internals",
+      "url": "https://uberblok.storagebits.workers.dev/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792587865,
+      "score": 1,
+      "age_hours": 16.9,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://uberblok.storagebits.workers.dev/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180257"
+      },
+      {
+        "label": "浏览器阅读页面",
+        "url": "https://uberblok.storagebits.workers.dev/en/"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180257.json",
+        "sha256": "eefcb702e2e0e9a524953753958104cf87065744c20328ac6832bc02aa2a687c",
+        "kind": "captured_packet"
+      },
+      {
+        "path": "data/browser/20261022T055848874425Z/50180257.txt",
+        "sha256": "7666c7d2b38d79b218e78f6bc144f1171913e1d52e622c04217ebe794688d90b",
+        "kind": "browser_accessibility_snapshot",
+        "url": "https://uberblok.storagebits.workers.dev/en/",
+        "captured_at": "2026-10-22T06:05:22.065161+00:00"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180216,
+    "name": "PySide6 Blueprints · 用可复用模式学习 Qt",
+    "summary": "一本面向初中级 Python 开发者的 Qt Widgets 教程，覆盖界面、对象模型、模型视图、多线程等。",
+    "mechanism": "以分步讲解、完整示例和可复用模式组织内容；作者称免费 sample 包含全文，并提供示例代码仓库。",
+    "uncertainty": "已读作者说明与目录，未逐章阅读正文和验证代码。仅凭主题覆盖范围不能评价教学方法。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "它可能是扎实资料，但目录不能证明独特 insight；需要一个能代表其教学方法的章节。",
+      "next_check": "阅读对象所有权或线程章节，比较讲解和示例是否澄清了常见教材遗漏的问题。"
+    },
+    "case_id": "16",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50180216,
+      "title": "Show HN: PySide6 Blueprints - a free book on building Qt Widgets apps in Python",
+      "url": "https://leanpub.com/pyside6blueprints",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792587687,
+      "score": 1,
+      "age_hours": 17.0,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://leanpub.com/pyside6blueprints"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180216"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180216.json",
+        "sha256": "0799b7cf87babbc35e25eae568d197143afb94f58fa22ac63b56a4614beeff09",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50186893,
+    "name": "Lasso · 先在屏幕上圈出来，再交给 agent",
+    "summary": "Mac 屏幕标注工具：在任意应用上画圈、箭头和编号，也可截取标注后的画面给 AI 或同事看。",
+    "mechanism": "临时透明画布覆盖当前屏幕，快捷键进入、Esc 退出；标注之后按 S 截图，再拖入对话，而不必先截屏再打开编辑器。",
+    "uncertainty": "已读产品页和作者原文，未安装；尚未与其他屏幕标注工具进行操作流程对照。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "它改善了表达位置的操作顺序，但“给 AI 用”本身不足以让已有标注能力变得原创。",
+      "next_check": "比较在真实 agent 对话中能减少多少解释成本，以及是否有进一步的结构化指向能力。"
+    },
+    "case_id": "17",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50186893,
+      "title": "Show HN: I made a free Mac app to annotate screen for AI agents",
+      "url": "https://www.trylasso.online",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792613272,
+      "score": 1,
+      "age_hours": 9.8,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://www.trylasso.online"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50186893"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50186893.json",
+        "sha256": "f7ee55c4dbd5aeee1ddc14fe308e754bbf853edaa9ed6f3bf6ff19c08e739086",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50179603,
+    "name": "Velocity · 能回放、带来源说明的航迹地图",
+    "summary": "自托管的飞机和船舶跟踪界面，保留自己的历史数据，并允许回放过去的时刻。",
+    "mechanism": "README 描述把位置写入时序存储，同时显示独立来源数、数据年龄和置信规则；避免把刚抓到的旧数据误画成实时位置。",
+    "uncertainty": "已读 README，未部署；来源可靠性、覆盖率和历史存储性能均未独立核实。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "相较只画实时点位，显式呈现来源与数据年龄能改变用户解读地图的方式；这是可以检查的具体 insight。",
+      "next_check": "挑选来源冲突或缓存陈旧的航迹，查看 UI 是否真的把不确定性传达出来。"
+    },
+    "case_id": "18",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50179603,
+      "title": "Show HN: A self-hosted flight and ship tracker you can rewind",
+      "url": "https://github.com/AndrewCTF/velocity",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792584803,
+      "score": 1,
+      "age_hours": 17.8,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/AndrewCTF/velocity"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50179603"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50179603.json",
+        "sha256": "fb4d2d03931e18a8830df7519480839fe26f62a4703c7b82ff6d14ec9c49a0d1",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50189982,
+    "name": "GitPushups · 把运动插进提交代码的习惯",
+    "summary": "按设定频率提醒开发者做俯卧撑，并用 Git hook 阻止尚未完成要求时提交代码。",
+    "mechanism": "将身体活动绑在已有的提交习惯上，提供运动记录和进度。作者说明项目已有一段使用历史，本次新增或调整免费功能与手表支持。",
+    "uncertainty": "已读产品页和作者介绍，未安装 hook；长期行为效果与记录真实性未验证，也不是首次发布该想法。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "把承诺机制放在开发者日常动作上有趣，但是否超出习惯绑定的常见变体，取决于用户对轻巧创意的偏好。",
+      "next_check": "确认用户是否愿意看这种小型行为设计，并比较打断成本与实际持续使用。"
+    },
+    "case_id": "19",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50189982,
+      "title": "Show HN: GitPushups, block your code if you don't do pushups during your workday",
+      "url": "https://gitpushups.com",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792632508,
+      "score": 2,
+      "age_hours": 4.5,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://gitpushups.com"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50189982"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50189982.json",
+        "sha256": "449c84acb931861600407fefd1a9c830b10b8a3d529cf8551aff30c5a7755c31",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50175741,
+    "name": "Pope Pendle Pro · 目前无法核实的项目",
+    "summary": "HN 投稿介绍一项按月收费的服务，声称可以解决矛盾、检测反转，并使用了未解释的术语。",
+    "mechanism": "帖子提供的 GitHub 地址本次返回 404，未获得可阅读的实现或演示，也无法从投稿说明还原具体工作流程。",
+    "uncertainty": "保留在随机样本中，表示真实采集会遇到材料不足。无法判断是失效链接、概念作品还是其他情况。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "目前没有足够材料判断它在做什么；既不能当原创，也不应由无法访问直接推出质量差。",
+      "next_check": "等待可访问的项目说明或更正链接；不据标题猜测功能。"
+    },
+    "case_id": "20",
+    "batch": 2,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50175741,
+      "title": "Show HN: Pope Pendle Pro",
+      "url": "https://github.com/knitprong/Faith-cloud",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792553487,
+      "score": 2,
+      "age_hours": 26.5,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/knitprong/Faith-cloud"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50175741"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50175741.json",
+        "sha256": "a49c04930c2ba56aa6eced9840b0ea4018e9326bcdc2a813143d50ee88601afe",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50183690,
+    "name": "Basesheet · 从一个地址生成场地底图",
+    "summary": "为景观设计准备底图：输入美国地址，组合地块、地形等高线、洪水区、湿地、土壤、航拍等信息。",
+    "mechanism": "把多个公共空间数据源整理成 CAD、SketchUp、GIS 和 PDF 可用文件；界面允许选择图层、等高距和图层命名。",
+    "uncertainty": "已读作者说明与实际输入页面，没有提交地址生成文件；数据质量、覆盖范围和与专业工具的差异尚未验证。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "把分散公共数据变成专业工作流入口很有用，但需要核实领域中是否已有同等便捷的方案。",
+      "next_check": "使用一个公开示例地块检查输出，关注跨源对齐、坐标系和数据缺失的处理。"
+    },
+    "case_id": "21",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50183690,
+      "title": "Show HN: Open-source site base plans from any US address",
+      "url": "https://basesheet.site/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792600308,
+      "score": 3,
+      "age_hours": 13.5,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://basesheet.site/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50183690"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50183690.json",
+        "sha256": "887b07aaee965260925273a3674044ff3574b5a513d2734a56c337a6d396474e",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50183915,
+    "name": "Pipe · 可逐层展开的可视化程序",
+    "summary": "一种通用可视化语言及浏览器 IDE，允许把程序表示成图，同时保留文本代码。",
+    "mechanism": "作者主张从包住现有项目的顶层块开始，逐层拆成工作流；目标是让运行中的块可观察、可替换，而不是只在编辑阶段画图。",
+    "uncertainty": "已读作者的架构说明与产品页，未运行复杂程序。通用性、热替换和改善审查效率等主要仍是项目主张。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "活的图结构和渐进迁移是可讨论的取舍，但宣传覆盖面很广，需要真实复杂例子证明语义与可读性。",
+      "next_check": "用含状态、异常和并发的程序检验图的表达能力，并与既有可视化编程方案比较。"
+    },
+    "case_id": "22",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50183915,
+      "title": "Show HN: IDE for a general-purpose visual programming language \"Pipe\"",
+      "url": "https://www.pipelang.com/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792601183,
+      "score": 2,
+      "age_hours": 13.2,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://www.pipelang.com/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50183915"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50183915.json",
+        "sha256": "aafc1e66e7c4c169beb8025749aae1fef6977c3cb42ac8063f16fd6866b5e6c6",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50182480,
+    "name": "Tapirscan · 旋转条码的同图对照实验",
+    "summary": "一个条码识别库和浏览器演示，重点处理任意方向的条码，并与多个识别器比较。",
+    "mechanism": "所有选中的识别器接收相同图像像素，显示检测框、解码值和耗时；用户可以旋转图像，切换识别投入等级，也可用本地图片或 PDF。",
+    "uncertainty": "已读演示说明和作者评论，未上传图片或使用摄像头。作者建立的样本可能带偏；页面明确单图演示不是完整 benchmark。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "针对一个具体失败面提供可操作的对照界面，比仅宣称识别更好更容易检验工程改进。",
+      "next_check": "用独立的旋转、模糊和低对比度样本比较准确率与耗时，核对算法与训练样本的边界。"
+    },
+    "case_id": "23",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50182480,
+      "title": "Show HN: Tapirscan – Scan barcodes at any angle in the browser",
+      "url": "https://tapirscan.f-kleinicke.de/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792595842,
+      "score": 3,
+      "age_hours": 14.7,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://tapirscan.f-kleinicke.de/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50182480"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50182480.json",
+        "sha256": "da8537bc30dbd988eebb4db5b502622ab528ff5c309e7b97a2f9008feef27c0c",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50173195,
+    "name": "Flyte devbox · 容器做代理，Mac 执行 GPU 工作",
+    "summary": "让 Flyte 开发环境在 Apple Silicon 上运行原生 GPU 任务，仍沿用开发环境的日志、产物和任务入口。",
+    "mechanism": "容器无法直接得到 Metal 时，把工作负载交给主机上的 Python 环境执行；容器转发日志、退出状态、中止信号和端口。",
+    "uncertainty": "已读作者技术文章，未运行。原生执行放弃了容器隔离，系统依赖也不能完整继承；作者在文中明确列出这些取舍。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "它重新分配容器与主机的职责来保留开发工作流，约束、机制和代价都说得具体。",
+      "next_check": "检查依赖转换与失败传播，比较这种代理方式和常见主机侧模型服务方案的适用范围。"
+    },
+    "case_id": "24",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50173195,
+      "title": "Show HN: Flyte devbox now runs GPU workloads on Apple Silicon",
+      "url": "https://www.union.ai/blog-post/your-code-on-the-apple-silicon-gpu-apple-silicon-flyte-devbox",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792533092,
+      "score": 1,
+      "age_hours": 32.1,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://www.union.ai/blog-post/your-code-on-the-apple-silicon-gpu-apple-silicon-flyte-devbox"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50173195"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50173195.json",
+        "sha256": "45500d8b1094d7dac3247ec9649b267124b44cb5ce084a800801837ff595593f",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180280,
+    "name": "KeibiDrop · 把远端文件按需挂到本地",
+    "summary": "把另一台电脑的文件夹挂载为本地路径，让现有应用直接打开和编辑大型文件。",
+    "mechanism": "通过 P2P 连接或转发中继传输需要的部分数据，结合各平台文件系统驱动，并回写修改；作者把重点放在隐藏远程延迟。",
+    "uncertainty": "已读 README 与作者架构说明，未进行跨设备测试。“不下载”意指不必先下载完整文件，实际读取仍要传输数据。",
+    "baseline": {
+      "decision": "信息不足",
+      "reason": "远程挂载和按需读取本身并不新，能否在高延迟场景中实现不同的体验，需要具体缓存和一致性证据。",
+      "next_check": "检验跨洲随机读写、断线恢复和缓存一致性，并对照既有远程文件系统。"
+    },
+    "case_id": "25",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50180280,
+      "title": "Show HN: KeibiDrop – Work on remote large files on-demand (no upload/download)",
+      "url": "https://github.com/KeibiSoft/KeibiDrop/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792587969,
+      "score": 4,
+      "age_hours": 16.9,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/KeibiSoft/KeibiDrop/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180280"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180280.json",
+        "sha256": "079eb0991af8782e736b087435f7e732a8aa99de8b60bd0beb7f5a690763ecee",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50179736,
+    "name": "Context Window · 记录 AI 官方文档改了哪一行",
+    "summary": "持续对比 AI 厂商发布的模型、定价、限制和废弃通知等文档，把新增、删除和修改列成信息流。",
+    "mechanism": "浏览器页面展示变更前后的行、抓取时刻和原始来源链接，可按厂商、文档类别和字段过滤，并提供 RSS。",
+    "uncertainty": "文本抓取因页面过大失败，已用浏览器补读。尚未逐项验证差异；页面中也能看到日期变化、算式和格式噪声。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "直接跟踪一手资料有用，但当前主要是文档 diff 的领域应用，且噪声过滤能力尚不明显。",
+      "next_check": "比较它能否识别语义变化并合并重复项，而不只是转发每处文字变化。"
+    },
+    "case_id": "26",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50179736,
+      "title": "Show HN: Context Window, what changed in AI labs' own documents",
+      "url": "https://agentwire.thecompound.tech/context-window",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792585509,
+      "score": 1,
+      "age_hours": 17.6,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://agentwire.thecompound.tech/context-window"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50179736"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50179736.json",
+        "sha256": "ce4b2b973a5d412dc5ad030d0df91d012c1ad50cff129210d0d4ba3b93825cc8",
+        "kind": "captured_packet"
+      },
+      {
+        "path": "data/browser/20261022T055848874425Z/50179736.txt",
+        "sha256": "fe3a08c1d5ec5877fe30dc636bafc1dc738bfb75bee4fb591398c7c755a22c5e",
+        "kind": "browser_accessibility_snapshot",
+        "url": "https://agentwire.thecompound.tech/context-window",
+        "captured_at": "2026-10-22T06:05:22.604916+00:00"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50179958,
+    "name": "Suminagashi · 浏览器里的纸上浮墨",
+    "summary": "在浏览器画布上模拟日式浮墨纹理，可选择颜色、滴墨和扰动工具。",
+    "mechanism": "界面提供 Ink、Clear、Blow、Hair 等工具以及 Drift、Undo、Print；作者将其描述为一个短时间完成、给孩子玩的项目。",
+    "uncertainty": "已查看浏览器画布与工具，未完整试画。评论反馈复杂或快速操作会卡顿，作者认可需优化；算法原创性未核实。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "可能是令人愉快的小作品，但现有材料尚未说明相对既有浮墨模拟的新机制。制作时间短本身不作为扣分理由。",
+      "next_check": "体验工具是否产生独特的创作方式，并比较既有数字浮墨作品。"
+    },
+    "case_id": "27",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50179958,
+      "title": "Show HN: Japanese Paper Marbling in the Browser",
+      "url": "https://suminagashi.georgestrakhov.com/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792586650,
+      "score": 1,
+      "age_hours": 17.2,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://suminagashi.georgestrakhov.com/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50179958"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50179958.json",
+        "sha256": "039e1ff0c40b6bcf204102edc3ec43da8e3a8552a0cdb1aa232cd8e20c18209b",
+        "kind": "captured_packet"
+      },
+      {
+        "path": "data/browser/20261022T055848874425Z/50179958.txt",
+        "sha256": "fb6830e6bd98da15348ad2cf3d5d5a4e565b4f6ba396c9df146c1b78641d8a3b",
+        "kind": "browser_accessibility_snapshot",
+        "url": "https://suminagashi.georgestrakhov.com/",
+        "captured_at": "2026-10-22T06:05:22.272573+00:00"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50180337,
+    "name": "Memdoor · 把 agent 的步骤保存成可重跑工作流",
+    "summary": "一个编码 agent，可把任务写成 YAML 定义的依赖图，从命令行、CI 或计划任务中再次执行。",
+    "mechanism": "步骤完成依据检查结果而非模型自述；失败后从失败步骤恢复，需人决定的节点可暂停。README 也描述用独立决策模型筛选上下文。",
+    "uncertainty": "已读 README 和作者对 DAG 的解释，没有运行工作流；可重跑能力与既有编排工具的区别尚未验证。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "目前看到的核心是把 agent 与已有工作流编排机制连接，尚未展示足以区分它的恢复或规划能力。",
+      "next_check": "选一个真实 backfill，检查生成的工作流是否可审计、失败后是否正确重跑，再看决策模型带来的独立价值。"
+    },
+    "case_id": "28",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50180337,
+      "title": "Show HN: Memdoor – A coding agent that can build and run headless workflows",
+      "url": "https://github.com/guregodevo/memdoor",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792588214,
+      "score": 1,
+      "age_hours": 16.8,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://github.com/guregodevo/memdoor"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50180337"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50180337.json",
+        "sha256": "19dbb81cb73170b4b20a2220d9a46e532894252f5f68270e51d1399c3605772d",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50187882,
+    "name": "Powderworks · 为静态分析维护版本化语法",
+    "summary": "提供持续维护的 Tree-sitter 兼容 WASM 语法，面向安全扫描、代码分析等需要准确解析的工具。",
+    "mechanism": "产品强调编辑器容错解析与静态分析需求不同，为语言版本和方言分别提供语法，并声称对照语言参考解析器做测试。",
+    "uncertainty": "已读产品页与作者说明，未下载执行语法或核实覆盖率。维护承诺和商业支持不等于新的解析算法。",
+    "baseline": {
+      "decision": "值得进一步看",
+      "reason": "它指出“适合编辑器的容错树”未必适合安全分析这一具体需求错位，可能值得作为工程 insight 阅读。",
+      "next_check": "用跨版本语法与错误代码对照实际解析结果，确认是新的保证还是已有能力的商业包装。"
+    },
+    "case_id": "29",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "purposeful",
+    "observation": {
+      "id": 50187882,
+      "title": "Show HN: Professionally maintained Tree-sitter compatible WASM grammars",
+      "url": "https://powderworks.dev/",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792617985,
+      "score": 1,
+      "age_hours": 8.5,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://powderworks.dev/"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50187882"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50187882.json",
+        "sha256": "c316eff6489437ff56323f575c84b94b3fbcf3b8872650c17bed408145b3cadb",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  },
+  {
+    "id": 50174185,
+    "name": "BonBook · 在 Claude 对话中搜索和预订航班",
+    "summary": "通过 MCP 让用户在对话里提出出行需求、获得实时航班选项并继续预订。",
+    "mechanism": "初次预订跳转到结账页，之后可按对话选项继续操作；作者表示航司直接处理付款，保留航司积分与会员权益。",
+    "uncertainty": "已读接入页和作者回复，未安装连接器、输入旅行信息或进行任何预订。速度和权益主张未独立验证。",
+    "baseline": {
+      "decision": "暂不推",
+      "reason": "减少填表可能有价值，但目前材料主要展示把已有预订流程接入聊天，还看不到独特机制。",
+      "next_check": "若用户对交易型 agent 感兴趣，再检验确认、改签和失败恢复等真正困难的部分。"
+    },
+    "case_id": "30",
+    "batch": 3,
+    "split": "calibration",
+    "label_source": "not_yet_human_labeled",
+    "sampling": "random",
+    "observation": {
+      "id": 50174185,
+      "title": "Show HN: One click flight booking in Claude",
+      "url": "https://mcp.bonbook.co/claude-setup",
+      "first_seen": "2026-10-22T05:58:48.874694+00:00",
+      "posted_at": 1792539377,
+      "score": 5,
+      "age_hours": 30.4,
+      "current_show": "absent",
+      "observed_ever_show": false,
+      "history_before_first_seen": "unknown",
+      "run_id": "20261022T055848874425Z"
+    },
+    "sources": [
+      {
+        "label": "项目 / README",
+        "url": "https://mcp.bonbook.co/claude-setup"
+      },
+      {
+        "label": "HN 原帖与作者说明",
+        "url": "https://news.ycombinator.com/item?id=50174185"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "data/packets/20261022T055848874425Z/50174185.json",
+        "sha256": "eaf7f86aae28e8b65cc011538211d7cd1b89f6882a043ccec87229b3a181d963",
+        "kind": "captured_packet"
+      }
+    ],
+    "baseline_provenance": {
+      "author": "Codex assistant in this conversation",
+      "kind": "qualitative_editorial_judgment",
+      "repeatable_model_run": false,
+      "not_ground_truth": true
+    }
+  }
+]

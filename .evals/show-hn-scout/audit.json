@@ -1,0 +1,25 @@
+{
+  "problems": [],
+  "cases": 30,
+  "labeled": 0,
+  "unlabeled": 30,
+  "duplicate_ids": 0,
+  "duplicate_story_ids": 0,
+  "duplicate_prompts": 0,
+  "by_primary_tag": {
+    "purposeful": 15,
+    "random": 15
+  },
+  "by_evidence_tag": {
+    "page-text": 25,
+    "browser-snapshot": 4,
+    "no-page-text": 1
+  },
+  "by_gold_decision": {},
+  "prompt_chars": {
+    "min": 327,
+    "median": 5554,
+    "max": 40305
+  },
+  "note": "No human labels yet: gold.jsonl is empty. Majority-class baseline, precision and recall are undefined until labels exist."
+}

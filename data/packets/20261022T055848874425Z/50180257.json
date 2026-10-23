@@ -1,0 +1,43 @@
+{
+  "id": 50180257,
+  "title": "Show HN: Uberblok – an interactive museum of ZFS internals",
+  "url": "https://uberblok.storagebits.workers.dev/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "storagebits",
+    "descendants": 0,
+    "id": 50180257,
+    "score": 1,
+    "text": "I&#x27;ve worked for a long time in the storage field during my career and ZFS is the piece of engineering I admire most in that space. I wanted a way to pay homage to it and to explore and better understand its internals. So I built Uberblok: a museum of ZFS. A deep dive into copy-on-write, txgs, vdevs, RAID-Z, snapshots, the ARC, metaslabs, the ZIL, send&#x2F;receive with explanations and animated diagrams.<p>I&#x27;m sure people here know these internals better than I do, so corrections are very welcome.<p>I built it with my agent swarm organization, Algotitan.<p>I hope you&#x27;ll enjoy the deep dive into Uberblok as much as I do.<p>Museum: <a href=\"https:&#x2F;&#x2F;uberblok.storagebits.workers.dev\" rel=\"nofollow\">https:&#x2F;&#x2F;uberblok.storagebits.workers.dev</a>\nRepo: <a href=\"https:&#x2F;&#x2F;github.com&#x2F;algotitanhq&#x2F;uberblok\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;algotitanhq&#x2F;uberblok</a>",
+    "time": 1792587865,
+    "title": "Show HN: Uberblok – an interactive museum of ZFS internals",
+    "type": "story",
+    "url": "https://uberblok.storagebits.workers.dev/"
+  },
+  "sources": [
+    {
+      "url": "https://uberblok.storagebits.workers.dev/",
+      "fetched_at": "2026-10-22T06:02:44.597155+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://uberblok.storagebits.workers.dev/",
+      "sha256": "880eab33371fe0674f70c4fc577e60bf5fd35089b9d8976e8ca674af1596a2be",
+      "raw_path": "data/raw/20261022T055848874425Z/880eab33371fe0674f70c4fc577e60bf5fd35089b9d8976e8ca674af1596a2be.html",
+      "content_type": "text/html",
+      "text": "Uberblok, in English\nUberblok, en français\nUberblok, en español",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50180257",
+      "fetched_at": "2026-10-22T06:02:46.559120+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50180257",
+      "sha256": "bcb3818c48c0d6412fdfb4ee446dbcb6266d8f47138154e99cf9dc13baac45b2",
+      "raw_path": "data/raw/20261022T055848874425Z/bcb3818c48c0d6412fdfb4ee446dbcb6266d8f47138154e99cf9dc13baac45b2.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

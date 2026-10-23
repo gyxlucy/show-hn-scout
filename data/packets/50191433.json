@@ -1,0 +1,46 @@
+{
+  "id": 50191433,
+  "title": "Show HN: Commit-quiz – A pre-commit hook that quizzes you on your own diff",
+  "url": "https://github.com/Cristopheer96/commit-quiz",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "cristopheer96",
+    "descendants": 0,
+    "id": 50191433,
+    "kids": [
+      50191434,
+      50191475
+    ],
+    "score": 1,
+    "time": 1792645872,
+    "title": "Show HN: Commit-quiz – A pre-commit hook that quizzes you on your own diff",
+    "type": "story",
+    "url": "https://github.com/Cristopheer96/commit-quiz"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/Cristopheer96/commit-quiz",
+      "fetched_at": "2026-10-22T06:02:39.438331+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/Cristopheer96/commit-quiz",
+      "sha256": "2b0d727f6622883bf61e8d2b1c27b3d909c39e302218f70eb8e5feddfa02623e",
+      "raw_path": "data/raw/20261022T055848874425Z/2b0d727f6622883bf61e8d2b1c27b3d909c39e302218f70eb8e5feddfa02623e.html",
+      "content_type": "text/html",
+      "text": "commit-quiz\nA\npre-commit\nhook that verifies the developer\nactually read their changes\nbefore committing. Useful when AI agents (Claude Code, Cursor, Codex…) generate\nthe code and the dev just hits \"commit\" without reviewing.\nEvery AI code-review tool reviews the code. This one quizzes\nyou\n.\nnpm install -g commit-quiz\ncommit-quiz install\n#\nin the repo you want guarded\nHow it works\nOn commit, the hook takes the staged diff (\ngit diff --cached\n).\nIt sends it to an AI CLI you already have and generates\n4 statements about\nthe diff: 2 true and 2 plausible-but-false\n(wrong file, inverted\ncondition, different value…).\nThe dev marks which ones are true:\nIn a terminal\n: interactive prompt, with colors.\nFrom the editor UI\n(VS Code, Cursor — no terminal): native dialogs\n(macOS via\nosascript\n, Linux via\nzenity\nwhen installed), including a\n\"generating…\" heads-up and a verdict dialog with the real summary when\nthe answer is wrong.\nOn a correct answer the commit goes through. On a wrong one the commit is\naborted and the\nreal summary\nof the diff is shown.\nThe hook is\nfail-open\n: if the LLM does not respond, there is no network, or\nthere is no way to ask, the commit goes through with a notice. A gate that gets\nin the way ends up disabled; this one only gets in the way when it can do its\njob.\nPrivacy\nWhat is sent?\nThe staged diff (\ngit diff --cached\n, unified context of 1\nline), truncated to 30 KB, plus a fixed instruction prompt. The diff carries\nthe paths of the changed files in its headers, as any diff does. Nothing else:\nno repo name, no git history, no author identity, no other files.\nTo whom?\nOnly to the AI provider you already use, through its own CLI and\nunder your own account:\nclaude\n→ Anthropic,\ncodex\n→ OpenAI,\ngemini\n→\nGoogle. The diff goes from your machine to that provider's API, the same path\nit takes when you use the CLI directly. There is no commit-quiz server, no\nshared key and no middleman. Which provider is used is yours to pin with\ngit config commit-quiz.cli\n.\nWhen?\nOnly on commits with 20 or more changed lines (configurable), and\nnever on merges, rebases or cherry-picks. Everything below the threshold is\nnever sent anywhere.\nWhat does commit-quiz keep?\nNothing. There is\nzero telemetry\n. The\noptional debug log (off by default) records timings, the chosen channel and\nyour answers, never the diff.\nWhat is excluded by default?\nLockfiles (\npnpm-lock.yaml\n,\npackage-lock.json\n,\nyarn.lock\n,\nGemfile.lock\n,\nPodfile.lock\n),\n*.snap\nand\n*.svg\n.\nHow do I keep sensitive paths out?\nAdd git pathspecs, per repo or\n--global\n; the option is repeatable:\ngit config --add commit-quiz.exclude\n\"\nconfig/credentials/**\n\"\ngit config --add commit-quiz.exclude\n\"\n*.pem\n\"\ngit config --add commit-quiz.exclude\n\"\ndb/seeds/customers.rb\n\"\nExcluded files are not sent and do not count toward the line threshold.\nHow do I skip it for one commit?\nCOMMIT_QUIZ=0 git commit …\n(or\n--no-verify\n, which skips every hook).\nCan it run fully local?\nNot yet. Providers are a small table in\nsrc/providers.js\n; a local CLI (for example one backed by Ollama) would be a\nfew lines, and contributions are welcome.\nIf sending diffs to your AI provider is not acceptable in your organization,\ndo not install this tool.\nRequirements\nNode ≥ 18.\nSome AI CLI on the PATH:\nClaude Code\n(\nclaude\n), OpenAI Codex CLI (\ncodex\n) or Gemini CLI (\ngemini\n). The first\none found is used, or the one set via config.\nNative dialogs: macOS out of the box; Linux needs\nzenity\n. Without a dialog\nbackend, editor-UI commits fail open (terminal commits always work).\nInstall\nOnce per machine:\nnpm install -g commit-quiz\n#\nonce published to npm\nnpm install -g github:Cristopheer96/commit-quiz\n#\nmeanwhile, straight from GitHub\nThen, once per repo you want guarded:\ncd\n/path/to/repo\ncommit-quiz install\nThat appends the hook line to\n.husky/pre-commit\nif the repo uses husky,\notherwise to\n.git/hooks/pre-commit\n. Idempotent. To remove it:\ncommit-quiz uninstall\nWhy once per repo? Git only runs hooks configured in each repository — that is\ngit's design, not the tool's. In husky repos the hook line is versioned, so\none teammate commits it and the whole team gets it\n; each dev only needs the\none-time\nnpm install -g\n.\nTry it without staging anything\ncd\n/path/to/repo\ncommit-quiz --range HEAD~1..HEAD --dry-run\n#\nquiz over the last commit, answers visible\ncommit-quiz --range HEAD~1..HEAD\n#\nsame but interactive\ncommit-quiz --diff-file changes.diff --dry-run\nConfiguration\nEvery option reads, in order:\nenvironment variable →\ngit config\n→ default\n.\ngit config\ncan be per repo or\n--global\n, and it also reaches hooks launched\nfrom editor UIs, where your shell environment does not.\nEnv var\ngit config key\nDefault\nWhat it does\nCOMMIT_QUIZ=0\n—\n—\nSkips the quiz for that commit (escape hatch)\nCOMMIT_QUIZ_MIN_LINES\ncommit-quiz.minlines\n20\nMinimum changed lines to trigger the quiz\nCOMMIT_QUIZ_CLI\ncommit-quiz.cli\nauto\nProvider:\nclaude\n,\ncodex\nor\ngemini\nCOMMIT_QUIZ_MODEL\ncommit-quiz.model\nhaiku\n(claude only)\nModel that generates the quiz\nCOMMIT_QUIZ_LANG\ncommit-quiz.lang\nsystem locale\nQuiz and UI language:\nen\nor\nes\nCOMMIT_QUIZ_TIMEOUT_MS\ncommit-quiz.timeoutms\n90000\nLLM call timeout\nCOMMIT_QUIZ_DEBUG=1\ncommit-quiz.debug\noff\nAppends a debug log in the temp dir\n—\ncommit-quiz.exclude\n(repeatable)\nlockfiles,\n*.snap\n,\n*.svg\nExtra pathspecs kept out of the quiz\nThe quiz and all messages are available in\nEnglish and Spanish\n(adding a\nlanguage is one new entry in\nsrc/i18n.js\n). It also skips itself on merges,\nrebases and cherry-picks in progress.\nDebugging\nEditor-spawned hooks have no visible output. With\nCOMMIT_QUIZ_DEBUG=1\n(or\ngit config commit-quiz.debug true\n) every run appends decisions and timings to\ncommit-quiz-debug.log\nin your temp dir.\nPlatform support\nTerminal commits\nEditor-UI commits\nmacOS\n✅\n✅ native dialogs\nLinux\n✅\n✅ with\nzenity\n, fail-open without\nWindows\n✅ (expected; untested)\nfail-open\nDevelopment\nbin/commit-quiz.mjs   thin CLI entry (args + top-level flow)\nsrc/config.js         env + git config resolution\nsrc/i18n.js           all user-facing copy (en, es)\nsrc/diff.js           reading the diff out of git\nsrc/providers.js      AI CLIs (claude/codex/gemini) + quiz generation\nsrc/ui/terminal.js    terminal prompt and rendering\nsrc/ui/dialogs.js     native dialogs (osascript / zenity)\nsrc/install.js        hook install/uninstall\nNo dependencies, no build step — plain Node ESM with JSDoc types. Releases are\ntagged\nvX.Y.Z\nand published to npm by the\nrelease.yml\nworkflow (requires\nthe\nNPM_TOKEN\nrepo secret); see\nCHANGELOG.md\n.\nKnown limitations\ngit commit --no-verify\nskips it, like any hook. The goal is culture, not\nsecurity.\nEach quiz is one LLM call: ~8-15 s and some cost per commit. Hence the line\nthreshold, the cheap default model, and thinking disabled.\nStatements are only as good as the diff: huge diffs are truncated to ~30 KB\nand the quiz may fall short.\nLicense\nMIT",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50191433",
+      "fetched_at": "2026-10-22T06:02:41.024929+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50191433",
+      "sha256": "53449108727dad67d6e39192308ce82f10e4e16cfdc2df48b1fadf1197253f1c",
+      "raw_path": "data/raw/20261022T055848874425Z/53449108727dad67d6e39192308ce82f10e4e16cfdc2df48b1fadf1197253f1c.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

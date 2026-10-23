@@ -1,0 +1,329 @@
+Browser tab: 4, Title: "Context Window: what changed in AI labs' own documents", URL: "https://agentwire.thecompound.tech/context-window".
+0 AXWebArea Context Window: what changed in AI labs' own documents, URL: agentwire.thecompound.tech/context-window
+	1 container
+		2 container
+			3 link Description: Compound Labs, Value: thecompound.tech/
+			4 container Compound Labs
+				5 button (collapsed) Developer tools, Secondary Actions: Expand
+				6 button (collapsed) Developer news, Secondary Actions: Expand
+				7 link Description: Meet Lid, Value: thecompound.tech/meet-lid
+				8 link Description: Blog, Value: thecompound.tech/blog
+			9 link Description: Get the newsletter, Value: thecompound.tech/list
+		10 container
+			11 link Description: AgentWire New Developer Tools, Value: agentwire.thecompound.tech/
+			12 container AgentWire sections
+				13 link Description: Front, Value: agentwire.thecompound.tech/
+				14 link Description: New tools, Value: agentwire.thecompound.tech/wire
+				15 link Description: Context Window, Value: agentwire.thecompound.tech/context-window
+				16 link Description: ToolDrift, Value: agentwire.thecompound.tech/tooldrift
+				17 link Description: StillShipping, Value: agentwire.thecompound.tech/stillshipping
+				18 link Description: Search, Value: agentwire.thecompound.tech/search
+			19 text Read 13:26
+		20 container
+			21 link Description: Context Window AI Models, Pricing & API Changes, Value: agentwire.thecompound.tech/context-window
+			22 container Sections
+				23 link Description: The wire, Value: agentwire.thecompound.tech/context-window
+				24 link Description: Ledger, Value: agentwire.thecompound.tech/context-window/search
+				25 link Description: Follow, Value: bsky.app/profile/ctxwindow.thecompound.tech
+				26 link Description: Masthead, Value: thecompound.tech/wires
+			27 link Description: GET /context-window/feed.xml, Value: agentwire.thecompound.tech/context-window/feed.xml
+		28 container
+			29 heading What changed in the documents the AI labs publish, Value: 1
+				30 text What changed in the documents the AI labs publish
+			31 container
+				32 text The model cards, system cards, pricing pages, API changelogs and deprecation notices OpenAI ,  Anthropic ,  Google DeepMind ,  Meta ,  Mistral ,  xAI ,  Qwen  and  DeepSeek publish about their own models, diffed line by line.
+			33 definition list Lines on the wire
+				34 container Added
+					35 text Added
+				36 text 197
+				37 container Removed
+					38 text Removed
+				39 text 86
+				40 container Changed
+					41 text Changed
+				42 text 34
+			43 container
+				44 heading Lab, Value: 4
+					45 text Lab
+				46 link Description: OpenAI 86, Value: agentwire.thecompound.tech/context-window#
+				47 link Description: Anthropic 53, Value: agentwire.thecompound.tech/context-window#
+				48 link Description: Google DeepMind 127, Value: agentwire.thecompound.tech/context-window#
+				325 link (disabled) Meta 0
+					326 text Meta 0
+				50 link Description: Mistral 25, Value: agentwire.thecompound.tech/context-window#
+				51 link Description: xAI 19, Value: agentwire.thecompound.tech/context-window#
+				52 link Description: Qwen 3, Value: agentwire.thecompound.tech/context-window#
+				53 link Description: DeepSeek 4, Value: agentwire.thecompound.tech/context-window#
+				54 heading What kind of document, Value: 4
+					55 text What kind of document
+				56 link Description: pricing 184, Value: agentwire.thecompound.tech/context-window#
+				57 link Description: deprecation 46, Value: agentwire.thecompound.tech/context-window#
+				58 link Description: limits 23, Value: agentwire.thecompound.tech/context-window#
+				59 link Description: model-roster 23, Value: agentwire.thecompound.tech/context-window#
+				60 link Description: changelog 19, Value: agentwire.thecompound.tech/context-window#
+				61 link Description: status 13, Value: agentwire.thecompound.tech/context-window#
+				62 link Description: capability 7, Value: agentwire.thecompound.tech/context-window#
+				63 link Description: research 2, Value: agentwire.thecompound.tech/context-window#
+				64 heading What the line carries, Value: 4
+					65 text What the line carries
+				66 link Description: price 187, Value: agentwire.thecompound.tech/context-window#
+				67 link Description: modelId 171, Value: agentwire.thecompound.tech/context-window#
+				68 link Description: limit 119, Value: agentwire.thecompound.tech/context-window#
+				69 link Description: date 39, Value: agentwire.thecompound.tech/context-window#
+				70 link Description: lifecycle 32, Value: agentwire.thecompound.tech/context-window#
+				71 link Description: capability 17, Value: agentwire.thecompound.tech/context-window#
+			72 container The documents on the beat
+				73 text The documents on the beat
+				74 text Choose one facet to filter the wire.
+				75 button deepseek-pricing 3changes
+					76 text deepseek-pricing
+					77 container
+						78 text 3 changes
+				79 button openai-news 8changes
+					80 text openai-news
+					81 container
+						82 text 8 changes
+				83 button openai-models-api 5changes
+					84 text openai-models-api
+					85 container
+						86 text 5 changes
+				87 button gdm-pricing 94changes
+					88 text gdm-pricing
+					89 container
+						90 text 94 changes
+				91 button xai-pricing 12changes
+					92 text xai-pricing
+					93 container
+						94 text 12 changes
+				95 button mistral-models-doc 21changes
+					96 text mistral-models-doc
+					97 container
+						98 text 21 changes
+			99 container The wire
+				100 text The wire
+				101 text 317 changes on the page Fri Oct 16 2 changes
+				102 link Value: agentwire.thecompound.tech/context-window/changes/deepseek-pricing-mvb04c7h-eoiy6x, Description: DeepSeek Pricing Added 13:26 DeepSeek added a price for Fetch, reading "Per 1,000 successful requests | $0.75". + Fetch: "Per 1,000 successful requests | $0.75" Read at api-docs.deepseek.com/quick_start/pricing/ price limit
+				103 link Value: agentwire.thecompound.tech/context-window/changes/deepseek-pricing-mvb04bey-82c6s5, Description: DeepSeek Pricing Added 13:26 DeepSeek added a price for Search, reading "Per 1,000 successful requests | $0.75". + Search: "Per 1,000 successful requests | $0.75" Read at api-docs.deepseek.com/quick_start/pricing/ price limit
+				104 text Thu Oct 15 5 changes
+				105 link Value: agentwire.thecompound.tech/context-window/changes/openai-news-mva3rsbw-fn38q4, Description: OpenAI Changelog Added 22:20 OpenAI added https://openai.com/index/introducing-the-rosalind-academic-plan to its own change log, reading "Bringing GPT-Rosalind to academic research labs". + https://openai.com/index/introducing-the-rosalind-academic-plan: "Bringing GPT-Rosalind to academic research labs" Read at openai.com/news/rss.xml modelId capability
+				106 link Value: agentwire.thecompound.tech/context-window/changes/openai-models-api-mv9zgj45-3vk7bd, Description: OpenAI Deprecation Changed 20:20 OpenAI changed the retirement line for gpt-4o. It said "null" and it now says "2027-01-14". - gpt-4o null + gpt-4o 2027-01-14 Read at api.openai.com/v1/models date modelId
+				107 link Value: agentwire.thecompound.tech/context-window/changes/openai-models-api-mv9zggdg-8rlhh, Description: OpenAI Deprecation Changed 20:20 OpenAI changed the retirement line for gpt-4.1-mini. It said "null" and it now says "2027-01-14". - gpt-4.1-mini null + gpt-4.1-mini 2027-01-14 Read at api.openai.com/v1/models date modelId
+				108 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv9rsu13-uo5qh7, Description: Google DeepMind Pricing Changed 16:45 Google DeepMind changed the price it lists for Cache tokens. It said "$1.50 | $1.50" and it now says "$0.15 | $0.15". - Cache tokens $1.50 | $1.50 + Cache tokens $0.15 | $0.15 Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price
+				109 link Value: agentwire.thecompound.tech/context-window/changes/openai-models-api-mv9rsj6m-35ohvu, Description: OpenAI Deprecation Changed 16:45 OpenAI changed the retirement line for gpt-4o-2024-08-06. It said "null" and it now says "2027-01-14". - gpt-4o-2024-08-06 null + gpt-4o-2024-08-06 2027-01-14 Read at api.openai.com/v1/models date modelId
+				110 text Wed Oct 14 5 changes
+				111 link Value: agentwire.thecompound.tech/context-window/changes/xai-pricing-mv8dngc8-5b1k6m, Description: xAI Pricing Removed 17:22 xAI deleted Speech to Speech ( grok-voice-think-fast-2.0 ) Deprecated from its own price list. It used to read "$0.08 / min ( $4.80 / hr) $0.004 / text input". - Speech to Speech ( grok-voice-think-fast-2.0 ) Deprecated: "$0.08 / min ( $4.80 / hr) $0.004 / text input" Read at docs.x.ai/developers/pricing price modelId lifecycle
+				112 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv87kn8t-q8jotr, Description: Google DeepMind Pricing Added 14:31 Google DeepMind added a price for $1.35 / 1,000,000 count, reading "$1.35 / 1,000,000 count". + $1.35 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				113 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv87kljy-op4uvl, Description: Google DeepMind Pricing Added 14:31 Google DeepMind added a price for $0.61 / 1,000,000 count, reading "$0.61 / 1,000,000 count". + $0.61 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				114 link Value: agentwire.thecompound.tech/context-window/changes/mistral-models-doc-mv7eeqpb-d065sk, Description: Mistral Limits Added 00:55 Mistral added a line to its own page about limits that was not there before, reading "Codestral Mamba 7B ↗". + Codestral Mamba 7B ↗ Read at docs.mistral.ai/models modelId limit
+				115 link Value: agentwire.thecompound.tech/context-window/changes/mistral-models-doc-mv7eep26-5l8ha8, Description: Mistral Limits Added 00:55 Mistral added Codestral Mamba 7B ↗ to its own page about limits, reading "0.1 | open-codestral-mamba | 6/6/2025 6/6/2025 | Codestral". + Codestral Mamba 7B ↗: "0.1 | open-codestral-mamba | 6/6/2025 6/6/2025 | Codestral" Read at docs.mistral.ai/models modelId limit
+				116 text Tue Oct 13 14 changes
+				117 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv7bwlyj-nl6njl, Description: Google DeepMind Pricing Added 23:45 Google DeepMind added a price for Price / 1M tokens (USD), reading "Price / 1M tokens (USD)". + Price / 1M tokens (USD) Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				118 link Value: agentwire.thecompound.tech/context-window/changes/anthropic-pricing-mv7bnuiv-3tfy5v, Description: Anthropic Pricing Removed 23:38 Anthropic deleted a line from its own price list that used to read "50,000 × $5 / 1,000,000". - 50,000 × $5 / 1,000,000 Read at platform.claude.com/docs/en/about-claude/pricing price limit
+				119 link Value: agentwire.thecompound.tech/context-window/changes/anthropic-pricing-mv7bnu3o-t19eqf, Description: Anthropic Pricing Added 23:38 Anthropic added a price for 40,000 × $4 × 0.05 / 1,000,000, reading "40,000 × $4 × 0.05 / 1,000,000". + 40,000 × $4 × 0.05 / 1,000,000 Read at platform.claude.com/docs/en/about-claude/pricing price limit
+				120 link Value: agentwire.thecompound.tech/context-window/changes/anthropic-pricing-mv7bnqx4-13yb7a, Description: Anthropic Pricing Changed 23:38 Anthropic changed the price it lists for Uncached input tokens. It said "10,000 × $5 / 1,000,000 | $0.05" and it now says "10,000 × $4 / 1,000,000 | $0.04". - Uncached input tokens 10,000 × $5 / 1,000,000 | $0.05 + Uncached input tokens 10,000 × $4 / 1,000,000 | $0.04 Read at platform.claude.com/docs/en/about-claude/pricing price limit
+				121 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv75oiai-1xhsh, Description: Google DeepMind Pricing Added 20:51 Google DeepMind added a price for $4.18 / 1,000,000 count, reading "$4.18 / 1,000,000 count". + $4.18 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				122 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv75oggq-q4m32p, Description: Google DeepMind Pricing Added 20:51 Google DeepMind added a price for $6.72 / 1,000,000 count, reading "$6.72 / 1,000,000 count". + $6.72 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				123 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv75oefl-2x31pr, Description: Google DeepMind Pricing Added 20:51 Google DeepMind added a price for $0.67 / 1,000,000 count, reading "$0.67 / 1,000,000 count". + $0.67 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				124 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv75ocfy-f4v4hd, Description: Google DeepMind Pricing Added 20:50 Google DeepMind added a price for $1.14 / 1,000,000 count, reading "$1.14 / 1,000,000 count". + $1.14 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				125 link Value: agentwire.thecompound.tech/context-window/changes/gdm-model-versions-mv6zluo7-nuphl6, Description: Google DeepMind Deprecation Added 18:01 Google DeepMind put a retirement notice on gemini-3.8-live, reading "September 24, 2026 | No retirement date announced". + gemini-3.8-live: "September 24, 2026 | No retirement date announced" Read at docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions date modelId lifecycle
+				126 link Value: agentwire.thecompound.tech/context-window/changes/gdm-model-versions-mv6w0kvz-tio5j7, Description: Google DeepMind Deprecation Added 16:20 Google DeepMind put a retirement notice on gemini-4-argon-cyber-permissive, reading "October 13, 2026 | No retirement date announced". + gemini-4-argon-cyber-permissive: "October 13, 2026 | No retirement date announced" Read at docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions date modelId lifecycle
+				127 link Value: agentwire.thecompound.tech/context-window/changes/gdm-models-api-mv6w0j8v-tk03gx, Description: Google DeepMind Model roster Added 16:20 Google DeepMind added models/gemini-4-argon to the list of models it will answer with. + models/gemini-4-argon: "version=3.0, displayName=Gemini 4 Argon, inputTokenLimit=1048576, outputTokenLimit=32768, supportedGenerationMethods=batchGenerateContent, countTokens, generateContent" Read at generativelanguage.googleapis.com/v1beta/models modelId
+				128 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv6qddfg-wqg11r, Description: Google DeepMind Pricing Removed 13:42 Google DeepMind deleted a line from its own price list that used to read "$1.82 / 1,000,000 count". - $1.82 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				129 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv6qdbp9-4ebl9r, Description: Google DeepMind Pricing Removed 13:42 Google DeepMind deleted a line from its own price list that used to read "$0.0015 / 1,000 count". - $0.0015 / 1,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				130 link Value: agentwire.thecompound.tech/context-window/changes/mistral-models-doc-mv5yyg67-k06hbw, Description: Mistral Model roster Removed 00:55 Mistral stopped listing Codestral ↗ among the models it will answer with. - Codestral ↗: "25.01 | codestral-2501 | 11/6/2025 11/30/2025 | Codestral || 24.05 | codestral-2405 | 12/2/2024 6/16/2025 | Codestral" Read at docs.mistral.ai/models modelId
+				131 text Mon Oct 12 10 changes
+				132 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv5pq61d-nl6njl, Description: Google DeepMind Pricing Added 20:36 Google DeepMind added a price for Price / 1M tokens (USD), reading "Price / 1M tokens (USD)". + Price / 1M tokens (USD) Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				133 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv5pq49k-xif2r3, Description: Google DeepMind Pricing Added 20:36 Google DeepMind added a price for $5.77 / 1,000,000 count, reading "$5.77 / 1,000,000 count". + $5.77 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				134 link Value: agentwire.thecompound.tech/context-window/changes/gdm-pricing-mv5o7jea-219htb, Description: Google DeepMind Pricing Removed 19:54 Google DeepMind deleted a line from its own price list that used to read "$1.14 / 1,000,000 count". - $1.14 / 1,000,000 count Read at cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing price limit
+				135 link Value: agentwire.thecompound.tech/context-window/changes/xai-release-notes-mv5kksfe-r2v5l0, Description: xAI Deprecation Changed 18:12 xAI changed the retirement line for Last updated. It said "October 9, 2026" and it now says "October 10, 2026". - Last updated October 9, 2026 + Last updated October 10, 2026 Read at docs.x.ai/developers/release-notes date
+				136 text This page shows  30  of  317  changes.
+				137 button Show more changes
+			138 container
+				139 heading The documents, Value: 4
+					140 text The documents
+				141 button gdm-pricing last moved 7d ago, cloud.google.com 94
+					142 text gdm-pricing
+					143 container
+						144 text last moved  7d  ago,  cloud.google.com
+					145 text 94
+				146 button openai-pricing last moved 12d ago, developers.openai.com 64
+					147 text openai-pricing
+					148 container
+						149 text last moved  12d  ago,  developers.openai.com
+					150 text 64
+				151 button mistral-models-doc last moved 8d ago, docs.mistral.ai 21
+					152 text mistral-models-doc
+					153 container
+						154 text last moved  8d  ago,  docs.mistral.ai
+					155 text 21
+				156 button gdm-model-versions last moved 9d ago, docs.cloud.google.com 20
+					157 text gdm-model-versions
+					158 container
+						159 text last moved  9d  ago,  docs.cloud.google.com
+					160 text 20
+				161 button xai-pricing last moved 8d ago, docs.x.ai 12
+					162 text xai-pricing
+					163 container
+						164 text last moved  8d  ago,  docs.x.ai
+					165 text 12
+				166 button anthropic-pricing last moved 8d ago, platform.claude.com 10
+					167 text anthropic-pricing
+					168 container
+						169 text last moved  8d  ago,  platform.claude.com
+					170 text 10
+				171 button anthropic-rate-limits last moved 15d ago, platform.claude.com 10
+					172 text anthropic-rate-limits
+					173 container
+						174 text last moved  15d  ago,  platform.claude.com
+					175 text 10
+				176 button anthropic-status last moved 17d ago, status.claude.com 10
+					177 text anthropic-status
+					178 container
+						179 text last moved  17d  ago,  status.claude.com
+					180 text 10
+				181 button openai-news last moved 6d ago, openai.com 8
+					182 text openai-news
+					183 container
+						184 text last moved  6d  ago,  openai.com
+					185 text 8
+				186 button anthropic-deprecations last moved 15d ago, platform.claude.com 8
+					187 text anthropic-deprecations
+					188 container
+						189 text last moved  15d  ago,  platform.claude.com
+					190 text 8
+				191 button gdm-models-api last moved 9d ago, generativelanguage.googleapis.com 7
+					192 text gdm-models-api
+					193 container
+						194 text last moved  9d  ago,  generativelanguage.googleapis.com
+					195 text 7
+				196 button xai-release-notes last moved 10d ago, docs.x.ai 7
+					197 text xai-release-notes
+					198 container
+						199 text last moved  10d  ago,  docs.x.ai
+					200 text 7
+				201 button anthropic-release-notes last moved 51d ago, platform.claude.com 7
+					202 text anthropic-release-notes
+					203 container
+						204 text last moved  51d  ago,  platform.claude.com
+					205 text 7
+				206 button openai-models-api last moved 6d ago, api.openai.com 5
+					207 text openai-models-api
+					208 container
+						209 text last moved  6d  ago,  api.openai.com
+					210 text 5
+				211 button openai-deprecations last moved 15d ago, developers.openai.com 5
+					212 text openai-deprecations
+					213 container
+						214 text last moved  15d  ago,  developers.openai.com
+					215 text 5
+				216 button deepseek-pricing last moved 6d ago, api-docs.deepseek.com 3
+					217 text deepseek-pricing
+					218 container
+						219 text last moved  6d  ago,  api-docs.deepseek.com
+					220 text 3
+				221 button anthropic-models-api last moved 15d ago, api.anthropic.com 3
+					222 text anthropic-models-api
+					223 container
+						224 text last moved  15d  ago,  api.anthropic.com
+					225 text 3
+				226 button anthropic-news last moved 20d ago, anthropic.com 3
+					227 text anthropic-news
+					228 container
+						229 text last moved  20d  ago,  anthropic.com
+					230 text 3
+				231 button gdm-blog last moved 22d ago, deepmind.google 3
+					232 text gdm-blog
+					233 container
+						234 text last moved  22d  ago,  deepmind.google
+					235 text 3
+				236 button gdm-models-doc last moved 10d ago, docs.cloud.google.com 2
+					237 text gdm-models-doc
+					238 container
+						239 text last moved  10d  ago,  docs.cloud.google.com
+					240 text 2
+				241 button openai-status last moved 14d ago, status.openai.com 2
+					242 text openai-status
+					243 container
+						244 text last moved  14d  ago,  status.openai.com
+					245 text 2
+				246 button anthropic-models-doc last moved 15d ago, platform.claude.com 2
+					247 text anthropic-models-doc
+					248 container
+						249 text last moved  15d  ago,  platform.claude.com
+					250 text 2
+				251 button mistral-changelog last moved 21d ago, docs.mistral.ai 2
+					252 text mistral-changelog
+					253 container
+						254 text last moved  21d  ago,  docs.mistral.ai
+					255 text 2
+				256 button openai-changelog last moved 30d ago, developers.openai.com 2
+					257 text openai-changelog
+					258 container
+						259 text last moved  30d  ago,  developers.openai.com
+					260 text 2
+				261 button qwen-models-hf last moved 32d ago, huggingface.co 2
+					262 text qwen-models-hf
+					263 container
+						264 text last moved  32d  ago,  huggingface.co
+					265 text 2
+				266 button mistral-pricing last moved 12d ago, mistral.ai 1
+					267 text mistral-pricing
+					268 container
+						269 text last moved  12d  ago,  mistral.ai
+					270 text 1
+				271 button qwen-card-flagship last moved 30d ago, huggingface.co 1
+					272 text qwen-card-flagship
+					273 container
+						274 text last moved  30d  ago,  huggingface.co
+					275 text 1
+				276 button deepseek-status last moved 32d ago, status.deepseek.com 1
+					277 text deepseek-status
+					278 container
+						279 text last moved  32d  ago,  status.deepseek.com
+					280 text 1
+				281 button gdm-devblog last moved 35d ago, developers.googleblog.com 1
+					282 text gdm-devblog
+					283 container
+						284 text last moved  35d  ago,  developers.googleblog.com
+					285 text 1
+				286 button mistral-card-shieldstral last moved 52d ago, huggingface.co 1
+					287 text mistral-card-shieldstral
+					288 container
+						289 text last moved  52d  ago,  huggingface.co
+					290 text 1
+				291 text Context Window reads what the labs publish about their own models and files the line that moved. It does not summarise the document or report on the model. The quoted line on a row is the line on the page at the URL beside it.
+		292 container When a lab changes a document
+			293 heading When a lab changes a document, Value: 2, ID: foot-list-h
+				294 text When a lab changes a document
+			295 text The engine refetches every registered document on a schedule and files the line that moved. Model cards, system cards, pricing pages, API changelogs and deprecation notices all change without an announcement. Leave an address and Context Window writes when one does.
+			296 container
+				297 text Your email address
+				298 text field (settable) Your email address
+				299 button (disabled) Email me what moved
+		300 container
+			301 text Context Window Context Window publishes one post per document and records what changed in it. The engine fetches each registered document on a schedule, diffs it against the last snapshot, and files the line that moved with the URL where it was read.
+			302 heading Read, Value: 5
+				303 text Read
+			304 link Description: the wire, Value: agentwire.thecompound.tech/context-window
+			305 link Description: ledger, Value: agentwire.thecompound.tech/context-window/search
+			306 link Description: rss, Value: agentwire.thecompound.tech/context-window/feed.xml
+			307 heading Answers, Value: 5
+				308 text Answers
+			309 link Description: about, Value: …
+			310 link Description: alternatives, Value: …
+			311 link Description: status, Value: …
+			312 link Description: security, Value: …
+			313 heading Terms, Value: 5
+				314 text Terms
+			315 link Description: privacy, Value: …
+			316 link Description: terms of use, Value: …
+			317 link Description: cookies, Value: …
+			318 heading Accounts, Value: 5
+				319 text Accounts
+			320 link Description: bluesky, Value: …
+			321 link Description: threads, Value: …
+			322 link Description: Built by Compound Labs, Value: …
+			323 text . The quoted line on a row is the line on the page at the URL beside it.
+			324 link Description: masthead, Value: …
+
+The focused UI element is 0 AXWebArea Context Window: what changed in AI labs' own documents, URL: agentwire.thecompound.tech/context-window

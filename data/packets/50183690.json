@@ -1,0 +1,43 @@
+{
+  "id": 50183690,
+  "title": "Show HN: Open-source site base plans from any US address",
+  "url": "https://basesheet.site/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "hthillman",
+    "descendants": 0,
+    "id": 50183690,
+    "score": 3,
+    "text": "I built this tool for a landscape architect friend.<p>Enter a US address and you get a site base plan: parcel line, LiDAR contours, flood zones, wetlands, soils and an aerial, as DXF, SketchUp, GIS and PDF files.<p>Code is MIT licensed: <a href=\"https:&#x2F;&#x2F;github.com&#x2F;hthillman&#x2F;site-base-plan\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;hthillman&#x2F;site-base-plan</a>",
+    "time": 1792600308,
+    "title": "Show HN: Open-source site base plans from any US address",
+    "type": "story",
+    "url": "https://basesheet.site/"
+  },
+  "sources": [
+    {
+      "url": "https://basesheet.site/",
+      "fetched_at": "2026-10-22T06:02:41.204027+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://basesheet.site/",
+      "sha256": "b905b91c68e6b3928438baa9f26cf8a413507f35a5cf9073c61f994263666e34",
+      "raw_path": "data/raw/20261022T055848874425Z/b905b91c68e6b3928438baa9f26cf8a413507f35a5cf9073c61f994263666e34.html",
+      "content_type": "text/html",
+      "text": "A site base plan from any US address\nParcel line, contours, slopes, soils, flood zones, wetlands, aerial and 3D building massing, ready for AutoCAD, SketchUp, Civil 3D and GIS.\nFree, no account.\nContinue\nThat code didn't work.\nBuild base plan\nState\nAuto\nAlabama\nAlaska\nArizona\nArkansas\nCalifornia\nColorado\nConnecticut\nDelaware\nDistrict of Columbia\nFlorida\nGeorgia\nHawaii\nIdaho\nIllinois\nIndiana\nIowa\nKansas\nKentucky\nLouisiana\nMaine\nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nMontana\nNebraska\nNevada\nNew Hampshire\nNew Jersey\nNew Mexico\nNew York\nNorth Carolina\nNorth Dakota\nOhio\nOklahoma\nOregon\nPennsylvania\nRhode Island\nSouth Carolina\nSouth Dakota\nTennessee\nTexas\nUtah\nVermont\nVirginia\nWashington\nWest Virginia\nWisconsin\nWyoming\nCounty\n+ Add parcel\n·\nChange\nBasesheet does not provide professional advice. Verify important information with surveyors and your jurisdiction before you rely on it for design, permitting, purchase, financing, construction or any other decision. (\nTerms\n)\nBuffer\nft\nContours\n1 ft\n2 ft\n5 ft\nLayers\nDefault (SITE-*)\nNCS-style (V-PROP-LINE…)\nCustom…\nApartment test fit\n(experimental, Thurston Co. WA)\nTest fits are part of\nBasesheet Pro\n.\nInclude (fewer layers can be faster)\nAerial\nSoils\nFlood zones\nWetlands\n3D massing\nYour layer names: edit the right side of each line. Saved in this browser.\nSITE-PARCEL = SITE-PARCEL\nSITE-PARCEL-ASSEMBLED = SITE-PARCEL-ASSEMBLED\nSITE-EXTENT = SITE-EXTENT\nSITE-CONTOUR-MAJOR = SITE-CONTOUR-MAJOR\nSITE-CONTOUR-MINOR = SITE-CONTOUR-MINOR\nSITE-CONTOUR-LABEL = SITE-CONTOUR-LABEL\nSITE-PARCEL-ADJ = SITE-PARCEL-ADJ\nSITE-PARCEL-ADJ-LABEL = SITE-PARCEL-ADJ-LABEL\nSITE-ROAD-CL = SITE-ROAD-CL\nSITE-ROAD-LABEL = SITE-ROAD-LABEL\nSITE-ROW-APPROX = SITE-ROW-APPROX\nSITE-SOILS = SITE-SOILS\nSITE-SOILS-LABEL = SITE-SOILS-LABEL\nSITE-FLOOD = SITE-FLOOD\nSITE-FLOOD-LABEL = SITE-FLOOD-LABEL\nSITE-WETLAND = SITE-WETLAND\nSITE-WETLAND-LABEL = SITE-WETLAND-LABEL\nSITE-SLOPE = SITE-SLOPE\nSITE-AERIAL = SITE-AERIAL\nSITE-BASEPOINT = SITE-BASEPOINT\nSITE-BLDG = SITE-BLDG\nSITE-BLDG-MASS = SITE-BLDG-MASS\nSITE-ENVELOPE-MASS = SITE-ENVELOPE-MASS\nSITE-NOTES = SITE-NOTES\nSee an example:\nPDF\n·\nall files\nfor a waterfront lot in Olympia, WA.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50183690",
+      "fetched_at": "2026-10-22T06:02:43.079687+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50183690",
+      "sha256": "e76b8ac5194b5750061b887ac0000daac9ad5fde92d8da1563a8406c03b0890a",
+      "raw_path": "data/raw/20261022T055848874425Z/e76b8ac5194b5750061b887ac0000daac9ad5fde92d8da1563a8406c03b0890a.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

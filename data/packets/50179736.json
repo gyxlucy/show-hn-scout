@@ -1,0 +1,37 @@
+{
+  "id": 50179736,
+  "title": "Show HN: Context Window, what changed in AI labs' own documents",
+  "url": "https://agentwire.thecompound.tech/context-window",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "kyisaiah47",
+    "descendants": 0,
+    "id": 50179736,
+    "score": 1,
+    "time": 1792585509,
+    "title": "Show HN: Context Window, what changed in AI labs' own documents",
+    "type": "story",
+    "url": "https://agentwire.thecompound.tech/context-window"
+  },
+  "sources": [
+    {
+      "url": "https://agentwire.thecompound.tech/context-window",
+      "fetched_at": "2026-10-22T06:02:28.620670+00:00",
+      "status": "error",
+      "error": "ValueError: Response exceeds 2 MB; not silently truncated",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50179736",
+      "fetched_at": "2026-10-22T06:02:32.552547+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50179736",
+      "sha256": "24186f9ac081bdbc983eb402d467ed3b8ebe8237172df4497fb32e399e6c2d42",
+      "raw_path": "data/raw/20261022T055848874425Z/24186f9ac081bdbc983eb402d467ed3b8ebe8237172df4497fb32e399e6c2d42.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

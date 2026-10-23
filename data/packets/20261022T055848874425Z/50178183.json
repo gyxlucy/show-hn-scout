@@ -1,0 +1,43 @@
+{
+  "id": 50178183,
+  "title": "Show HN: Non-call, an on-call simulator mini-game",
+  "url": "https://serum.sh/non-call/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "cyberfart",
+    "descendants": 0,
+    "id": 50178183,
+    "score": 2,
+    "text": "It&#x27;s a goofy weekend side-project trying to show how it feels being on-call and highlight some absurdities.<p>I hope you enjoy.",
+    "time": 1792576088,
+    "title": "Show HN: Non-call, an on-call simulator mini-game",
+    "type": "story",
+    "url": "https://serum.sh/non-call/"
+  },
+  "sources": [
+    {
+      "url": "https://serum.sh/non-call/",
+      "fetched_at": "2026-10-22T06:02:26.731126+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://serum.sh/non-call/",
+      "sha256": "333593f6e401dd2fbc63120646b6e2a42b0043770d80fa6f965f3ee7ee166ae9",
+      "raw_path": "data/raw/20261022T055848874425Z/333593f6e401dd2fbc63120646b6e2a42b0043770d80fa6f965f3ee7ee166ae9.html",
+      "content_type": "text/html",
+      "text": "",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50178183",
+      "fetched_at": "2026-10-22T06:02:27.871551+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50178183",
+      "sha256": "fdebf9c10ff51a7677e52f241301f56cff0e9dc4bcef3cab9a0cebb7e682154a",
+      "raw_path": "data/raw/20261022T055848874425Z/fdebf9c10ff51a7677e52f241301f56cff0e9dc4bcef3cab9a0cebb7e682154a.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

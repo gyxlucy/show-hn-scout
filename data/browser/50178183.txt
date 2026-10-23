@@ -1,0 +1,37 @@
+Browser tab: 1, Title: "non-call", URL: "https://serum.sh/non-call/".
+0 AXWebArea non-call, URL: serum.sh/non-call/
+	1 container root
+		2 text //
+		3 text 23:47   ON-CALL
+		4 heading non-call, Value: 1
+			5 text non-call
+		6 container
+			7 text a game by
+			8 link Description: serum.sh, Value: serum.sh/?ref=non-call-title
+		9 text An on-call simulator. There is no win condition. There is a 07:00.
+		10 content list
+			11 container
+				12 text 01 The work is in the terminal, real life is not.
+			13 container
+				14 text 02 Real life interruptions are on countdown. Not deciding is a decision.
+			15 container
+				16 text 03 Keyboard shortcuts.
+			17 container
+				18 text 04 Open alerts cost the company money.
+			19 container
+				20 text 05 A second alert does not wait for the first.
+			21 container
+				22 text 06 At 07:00 you hand off, done or not.
+			23 container
+				24 text 07 Slow terminal? Press any key to print it all.
+		25 button start the night [enter]
+			26 text start the night
+			27 text [enter]
+		28 text The phone is charging on the other side of the room.
+		29 container serum
+			30 link Description: serum.sh website, Value: serum.sh/?ref=non-call-link
+			31 link Description: serum on GitHub, Value: github.com/serum-sh/
+			32 link Description: serum on LinkedIn, Value: linkedin.com/company/serum-sh/
+			33 link Description: serum on X / Twitter, Value: x.com/serumsh
+
+The focused UI element is 0 AXWebArea non-call, URL: serum.sh/non-call/

@@ -1,0 +1,43 @@
+{
+  "id": 50176914,
+  "title": "Show HN: Grafista – AI graphic designer built to fight slop",
+  "url": "https://grafista.io/",
+  "run_id": "20261022T055848874425Z",
+  "item": {
+    "by": "GiorgosGennaris",
+    "descendants": 0,
+    "id": 50176914,
+    "score": 3,
+    "text": "You don&#x27;t need advanced prompt or design skills to create a professional designs using Grafista. Just add your content and your brand.\nFully editable designs in any language. Plans from €10&#x2F;month, no per seat charge. Startups get 50% for the first 3 months.",
+    "time": 1792564997,
+    "title": "Show HN: Grafista – AI graphic designer built to fight slop",
+    "type": "story",
+    "url": "https://grafista.io/"
+  },
+  "sources": [
+    {
+      "url": "https://grafista.io/",
+      "fetched_at": "2026-10-22T06:02:35.263292+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://grafista.io/",
+      "sha256": "867c5d6b880ce8321b326487cb04a7e8003da7ad0f8109fe4401d0d31f881c8d",
+      "raw_path": "data/raw/20261022T055848874425Z/867c5d6b880ce8321b326487cb04a7e8003da7ad0f8109fe4401d0d31f881c8d.html",
+      "content_type": "text/html",
+      "text": "Create amazing AI designs without the effort or the cost\nGenerate branded and editable social media posts, presentations, flyers and more. No design knowledge or prompt skills required.\nSign up for free\nOne space to design everything\nCreate designs in any language, from quick marketing assets to text-heavy brochures.\nHow it works\nGrafista is a content-first design platform. You add your text, images and branding and get complete designs in minutes.\n1\nStart with what matters, your text and images\nWrite, import, or generate content with AI.\n2\nDefine the look and feel\nPick size, add instructions or choose a Blueprint.\n3\nTurn your content into a complete design, fast\nLayout, spacing and decorations are taken care of for you.\n4\nEdit and refine\nEdit manually or ask the Agent for changes.\nMeet\nBlueprints\n. The end of template editing.\nUnlike traditional templates, blueprints aren't edited. They are references for generating designs. Grafista recreates the chosen blueprint using your content.\nSearch blueprints\nLoading...\nAll the essential features you need\nGenerate text with AI\nImport documents\nProofread instantly\nPublish designs online\nExport designs\nCreate with your team",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50176914",
+      "fetched_at": "2026-10-22T06:02:37.798654+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50176914",
+      "sha256": "aab72903ebba1793504133ecce0b074ee5e03936cadccba9234a9d675a4cf659",
+      "raw_path": "data/raw/20261022T055848874425Z/aab72903ebba1793504133ecce0b074ee5e03936cadccba9234a9d675a4cf659.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}
