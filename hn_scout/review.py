@@ -1,5 +1,6 @@
 """Human labels are append-only and kept apart from assistant suggestions."""
 import json
+import re
 from pathlib import Path
 from .collect import DATA, ROOT, now
 
@@ -17,18 +18,18 @@ def load_cases(path=CASES):
     return cases
 
 
-def record_label(case_id, decision, reason, originality="unclear", interest="unclear", path=FEEDBACK, cases_path=CASES):
+def record_label(case_id, decision, reason, originality="unclear", interest="unclear", path=FEEDBACK, cases_path=CASES, require_reason=True, rubric_version="v0-draft"):
     cases = load_cases(cases_path)
     matches = [c for c in cases if str(c["id"]) == str(case_id) or c["case_id"] == str(case_id)]
     if len(matches) != 1:
         raise ValueError(f"Unknown or ambiguous case: {case_id}")
     if decision not in DECISIONS or originality not in ATTRIBUTES or interest not in ATTRIBUTES:
         raise ValueError("Invalid feedback label")
-    if not reason.strip():
+    if require_reason and not reason.strip():
         raise ValueError("A reason is required; it distinguishes taste from novelty")
     row = {"case_id": matches[0]["case_id"], "story_id": matches[0]["id"], "decision": decision,
            "originality": originality, "interest": interest, "reason": reason.strip(),
-           "label_source": "human", "recorded_at": now(), "rubric_version": "v0-draft"}
+           "label_source": "human", "recorded_at": now(), "rubric_version": rubric_version}
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as stream:
         stream.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -42,6 +43,41 @@ def latest_labels(path=FEEDBACK):
             row = json.loads(line)
             result[row["case_id"]] = row
     return result
+
+
+REVIEW_DECISIONS = {"值得推": "push", "不值得推": "pass", "信息不足": "unsure"}
+_JUDGEMENT = re.compile(r"\*\*你的判断：\*\*\s*(.*?)\s*\*\*原因：\*\*[ \t]*(.*)")
+
+
+def parse_review_labels(review_dir=None):
+    """Read the user's own answers from the rendered cards. Untouched cards (still listing all options) are skipped."""
+    review_dir = review_dir or ROOT / "review"
+    found = {}
+    for path in sorted(review_dir.glob("batch-*.md")):
+        case_id = None
+        for line in path.read_text(encoding="utf-8").splitlines():
+            head = re.match(r"## (\d\d) · ", line)
+            if head:
+                case_id = head.group(1)
+                continue
+            m = _JUDGEMENT.match(line)
+            if m and case_id:
+                decision = REVIEW_DECISIONS.get(m.group(1).strip())
+                if decision:  # "值得推 / 不值得推 / 信息不足" is not a valid answer
+                    found[case_id] = (decision, m.group(2).strip())
+    return found
+
+
+def import_review_labels(path=FEEDBACK, review_dir=None, cases_path=CASES, rubric_version="v0-draft"):
+    """Append a human label for each filled-in card whose latest recorded label differs. Never infers anything."""
+    current = latest_labels(path)
+    added = []
+    for case_id, (decision, reason) in sorted(parse_review_labels(review_dir).items()):
+        old = current.get(case_id)
+        if old and old["decision"] == decision and old["reason"] == reason:
+            continue
+        added.append(record_label(case_id, decision, reason, path=path, cases_path=cases_path, require_reason=False, rubric_version=rubric_version))
+    return added
 
 
 def escape(value):
@@ -67,12 +103,14 @@ def render():
         selected = [c for c in cases if c["batch"] == batch]
         lines = [f"# Show HN · 第 {batch} 批品味校准", "",
             "每个项目只需要回复：**值得推 / 不值得推 / 信息不足**，加一句原因。也可以补充“有原创性，但我不感兴趣”。", "",
-            "本页隐藏票数、榜单状态和助手推荐结论。以下是来源材料的摘要，作者的性能与效果主张尚未独立验证。第一轮用于校准品味，不是已确认未上榜的推送名单。", "",
+            "本页隐藏票数和榜单状态。每张卡附有助手的建议判断与理由，方便快速审阅；它不是你的标签，只是对照参考，不同意直接改判即可。以下是来源材料的摘要，作者的性能与效果主张尚未独立验证。第一轮用于校准品味，不是已确认未上榜的推送名单。", "",
             "例如：`01 值得推：这个约束下的做法让我想到新的应用。02 不值得推：只是已有工具的组合。`", ""]
         for c in selected:
             lines += [f"## {c['case_id']} · {escape(c['name'])}", "", f"**做什么：** {escape(c['summary'])}", "",
                       f"**具体做法：** {escape(c['mechanism'])}", "", f"**材料边界：** {escape(c['uncertainty'])}", "",
                       "**来源：** " + " · ".join(link(s['label'], s['url']) for s in c['sources']), "",
+                      f"**助手建议：** {escape(c['baseline']['decision'])}　**理由：** {escape(c['baseline']['reason'])}", "",
+                      f"**待验证：** {escape(c['baseline']['next_check'])}", "",
                       "**你的判断：** 值得推 / 不值得推 / 信息不足　　**原因：**", "", "---", ""]
         (out / f"batch-{batch:02}.md").write_text("\n".join(lines), encoding="utf-8")
     lines = ["# 助手初步判断 · v0", "", "这是 Codex 在当前对话中阅读材料后的初评，不是用户标签，也不是可重复的 API 模型评测。建议先读盲评材料，再看本页，避免被结论影响。", "",

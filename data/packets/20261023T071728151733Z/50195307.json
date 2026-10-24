@@ -1,0 +1,53 @@
+{
+  "id": 50195307,
+  "title": "Show HN: Lalabase, self-hosted project management with an AI that cites sources",
+  "url": "https://github.com/lalabase/lalabase",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "heurekamala",
+    "descendants": 1,
+    "id": 50195307,
+    "kids": [
+      50195650,
+      50195315
+    ],
+    "score": 1,
+    "time": 1792676923,
+    "title": "Show HN: Lalabase, self-hosted project management with an AI that cites sources",
+    "type": "story",
+    "url": "https://github.com/lalabase/lalabase"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/lalabase/lalabase",
+      "fetched_at": "2026-10-23T07:23:55.159220+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/lalabase/lalabase",
+      "sha256": "a15c5dadb37a3fe63aebcf0716d6bebc15bd7daca81781f7fa3c1a8d783f5d8c",
+      "raw_path": "data/raw/20261023T071728151733Z/a15c5dadb37a3fe63aebcf0716d6bebc15bd7daca81781f7fa3c1a8d783f5d8c.html",
+      "content_type": "text/html",
+      "text": "Lalabase\nA self-hosted project brain for devs and customers.\nRUBY ON RAILS · POSTGRESQL\nTickets, time tracking, docs and meetings for software agencies and their clients, with an AI\nassistant that answers from your own project data and cites its sources. Free on your own server,\nor hosted by us in Germany.\nTry the live demo\n: no sign-up, the login is on the page, and\neverything resets every night.\nWebsite\n·\nSelf-hosting\n·\nCloud pricing\n·\nChangelog\nAsk about a ticket.\nThe answer cites the ticket, a comment and a meeting.\nAsk about a meeting.\nSummary, action items and transcript next to the answer.\nTickets as a board\nor a list, with your own statuses per project.\nTime tracking per ticket.\nEvery session billable on its own.\nClick a picture for the full size. The pictures show the same invented company as the\nlive demo\n.\nIn production for customers since September 2025. This repository starts with the first public\nrelease, 2026.10.0;\nmore under Status\n. If Lalabase is useful to you, a star helps\nothers find it.\nWhat it does\nClients and projects.\nOne organisation per client, any number of projects below it.\nClients get their own access, and roles decide what they see.\nTasks.\nAs a list or a board, with the statuses, priorities and fields you define per\nproject.\nTime tracking.\nSeveral sessions per ticket, each one billable on its own, with exports\nfor the invoice.\nDocumentation.\nNotes and documents in the project, and a folder in your GitHub or GitLab\nrepository becomes the project's docs.\nMeetings.\nTranscript, AI summary and the tasks that follow from it.\nAI assistant.\nOne question across tickets, docs, time and meetings, or about the one ticket\nor meeting you are looking at, answered with its sources.\nYour data, your AI.\nThe AI stays off until you switch it on. Then you pick the provider:\nOpenAI, Anthropic, Google Gemini through Vertex AI in the EU, Mistral, IONOS, OVHcloud, or any\nOpenAI-compatible endpoint, including a model in your own network. No project data goes to a\nprovider you did not choose.\nMCP server and REST API.\nConnect Claude, Cursor or your own agent with a personal access\ntoken: list, create and update tickets, comment, log time, search the knowledge base, read the\ninbox, and look things up in the indexed code of your repositories.\nBuilt with\nRails 8.1 on Ruby 4, PostgreSQL with pgvector for the assistant's search, Hotwire (Turbo and\nStimulus) with ViewComponent and Tailwind, and no React. Background jobs run on Solid Queue.\nNon-trivial writes go through command objects (\napp/services/actors/\n), tenants are kept apart\nwith\nacts_as_tenant\n, and the project's own rules are enforced by guard specs in CI\n(\nspec/architecture/\n) rather than by review comments. More in\nDEVELOPMENT.md\n.\nWho it is for\nSoftware agencies, freelancers and small software companies that work on projects for clients\nand want their project data, and the AI that works on it, under their own control. Lalabase\nreplaces the usual mix of ticket tool, wiki, time tracking, chat and reporting spreadsheets.\nMost teams come from Redmine, Jira, OpenProject, Asana or spreadsheets. The website\ncompares Lalabase with each of them\n, starting with what\nthe other tool does well.\nTwo ways to run it\nYour own server\nOur cloud\nCost\nFree under AGPL-3.0. You pay for the server.\nMonthly, see\npricing\nOperation, updates, backups\nYou\nUs, hosted in Germany, with a DPA\nFeatures\nAll of them, with each release\nAll of them, always current\nAI\nYour own key or your own model\nThe provider you choose\nSelf-host with Docker\nYou need a server with at least 2 vCPU, 4 GB RAM and 20 GB disk, Docker 24 or later with\nDocker Compose v2, and a domain pointing at it.\ngit clone https://github.com/lalabase/lalabase.git\n&&\ncd\nlalabase\ngit checkout\n\"\n$(\ngit describe --tags --abbrev=0\n)\n\"\n#\nthe latest release, not main\ncp .env.docker.example .env\n#\nfill in the values it asks for\ndocker compose up -d --build\ndocker compose\nexec\nweb bin/rails lalabase:setup\ncompose.yml\nstarts the application, a job worker, PostgreSQL with pgvector, Valkey and Caddy,\nwhich fetches a TLS certificate for\nLALABASE_HOST\n. If a proxy of your own terminates TLS, drop\nthe\nCOMPOSE_PROFILES=tls\nline. Build the image on the architecture it runs on.\nThe guide covers installation, configuration, AI keys, backups and updates, in English and\nGerman:\nlalabase.com/docs\n.\nWe help with the installation on request:\nhello@lalabase.com\n.\nTry it on your own computer\nThe same steps work without a server, a domain or a mail account. In\n.env\n, fill in the keys\nand the database password as the file describes, then change three things:\nLALABASE_HOST=localhost:3000\nLALABASE_FORCE_SSL=false\n#\nand delete the line COMPOSE_PROFILES=tls\nAfter\nlalabase:setup\n, sign in at\nhttp://localhost:3000/admin\nand create your first user\nthere. A user created by the admin needs no confirmation mail, so the mail settings can stay as\nthey are.\nStatus\nLalabase has been developed since October 2024: more than 2,300 commits and about 970 pull\nrequests, in production for customers since September 2025. This repository starts with the first\npublic release, 2026.10.0. The earlier history stays private, because it holds customer data\nand details of our servers. Development continues here, in the open.\nLicense and contributing\nLalabase is licensed under the\nGNU Affero General Public License, version 3 only\n(SPDX:\nAGPL-3.0-only\n). Later versions of the license do not apply unless a release says so.\nThe full license text is in\nLICENSE\n.\nBug reports, ideas and questions are always welcome as issues. Pull requests are not accepted:\nin other projects we have seen that, since AI coding assistants, outside pull requests take more\nwork to review and fold in than the change itself, so we write every change ourselves. An issue\nthat describes the problem helps most. Details in\nCONTRIBUTING.md\n.\nBundled third-party components keep their own licenses, listed in\nTHIRD_PARTY_NOTICES.txt\n.\nThe license covers the code. It grants no rights to the name Lalabase, and none to Lala, the\nmascot in\n.github/readme/lala-*.svg\n: the figure is not covered by the AGPL, all rights are\nreserved, and it may not be copied, modified or used outside this repository.\nWorking on the code: stack, setup, releases and where things live are in\nDEVELOPMENT.md\n.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50195307",
+      "fetched_at": "2026-10-23T07:23:58.806300+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50195307",
+      "sha256": "c7471a708c3454536a7c5f6d4ad99646248623c58449e945cbc093e4476e2931",
+      "raw_path": "data/raw/20261023T071728151733Z/c7471a708c3454536a7c5f6d4ad99646248623c58449e945cbc093e4476e2931.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50195650",
+          "by": "heurekamala",
+          "is_author": true,
+          "text": "Two years ago, I started building my own project management tool.  \nToday, I use it for all my clients, and my clients use it themselves as well. It lets you manage tickets, documents, transcriptions, and more, and query them using an internal AI. The good thing is, that you can choose which AI you want to use. The system is available as a cloud platform, but also as open source (AGPL). It is well documented and thoroughly tested. This is not just a weekend project, it now has about 150,000 lines of code and around 24,000 RSpec tests. It is absolutely ready for serious business use. I made a docker for it, so the setup is very easy.\nA short demo version without a signup: https://demo.lalabase.com"
+        }
+      ]
+    }
+  ]
+}

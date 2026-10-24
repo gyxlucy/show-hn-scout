@@ -1,0 +1,52 @@
+{
+  "id": 50198583,
+  "title": "Show HN: Route Optimization Mini-Games",
+  "url": "https://www.routific.com/rovins-route-rush",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "mck-",
+    "descendants": 1,
+    "id": 50198583,
+    "kids": [
+      50201064
+    ],
+    "score": 1,
+    "time": 1792690693,
+    "title": "Show HN: Route Optimization Mini-Games",
+    "type": "story",
+    "url": "https://www.routific.com/rovins-route-rush"
+  },
+  "sources": [
+    {
+      "url": "https://www.routific.com/rovins-route-rush",
+      "fetched_at": "2026-10-23T07:24:09.830101+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://www.routific.com/rovins-route-rush",
+      "sha256": "6d267702b1ccaeedd1604ef98494f63c52bc7d588f480755192e99251f4b2d9f",
+      "raw_path": "data/raw/20261023T071728151733Z/6d267702b1ccaeedd1604ef98494f63c52bc7d588f480755192e99251f4b2d9f.html",
+      "content_type": "text/html",
+      "text": "Three free route-planning games starring Rovin, George and Buzz. Plan the delivery run, untangle the spaghetti, defend the zones, then dare your friends to beat your score.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50198583",
+      "fetched_at": "2026-10-23T07:24:10.987745+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50198583",
+      "sha256": "592b3fe406d32725b063310a43f7b3fe58f2f9e1018d9f3d340ee9e406319511",
+      "raw_path": "data/raw/20261023T071728151733Z/592b3fe406d32725b063310a43f7b3fe58f2f9e1018d9f3d340ee9e406319511.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50201064",
+          "by": "abktya",
+          "is_author": false,
+          "text": "Target the Turkish market.\nWill the game be released for mobile devices?"
+        }
+      ]
+    }
+  ]
+}

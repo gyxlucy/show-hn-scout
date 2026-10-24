@@ -7,7 +7,7 @@
 - [第一批：10 个项目](review/batch-01.md)
 - [第二批](review/batch-02.md) / [第三批](review/batch-03.md)
 - [判断标准 v0](docs/rubric-v0.md)
-- [助手初评（建议先盲评）](review/assistant-baseline.md)
+- [助手初评汇总](review/assistant-baseline.md)（每张阅读卡里也附有助手建议）
 - [评测 skill 接入与当前边界](docs/eval-handoff.md)
 
 可以直接在对话中回复 `01 值得推：原因；02 不值得推：原因`，由助手原样记录。

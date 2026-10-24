@@ -1,0 +1,42 @@
+{
+  "id": 50199611,
+  "title": "Show HN: A Claude Code plugin that plays a song and shows a startup card",
+  "url": "https://github.com/heyyviv/claude-boot-beats",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "heyviv",
+    "descendants": 0,
+    "id": 50199611,
+    "score": 1,
+    "time": 1792695726,
+    "title": "Show HN: A Claude Code plugin that plays a song and shows a startup card",
+    "type": "story",
+    "url": "https://github.com/heyyviv/claude-boot-beats"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/heyyviv/claude-boot-beats",
+      "fetched_at": "2026-10-23T07:24:09.139220+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/heyyviv/claude-boot-beats",
+      "sha256": "fc4a1f7e1fe3f457883d31a65833a18b466e0f9f37b5760fd796902218ffebea",
+      "raw_path": "data/raw/20261023T071728151733Z/fc4a1f7e1fe3f457883d31a65833a18b466e0f9f37b5760fd796902218ffebea.html",
+      "content_type": "text/html",
+      "text": "startup-song 🎵\nA Claude Code plugin that plays a few seconds of a random song every time you start Claude Code.\nRotates through genres, one per session:\npop → hip hop → retro hits → pop …\nFor each one, it searches the\niTunes Search API\n(free, no key) and plays a random song from the\ntop 10\nresults.\nShows a startup card above the prompt while it plays:\nCoding streak\n: days in a row you've started Claude Code\nRepo status\n: branch, changed files, ahead/behind, last commit\nOn this day\n: one event from\nWikipedia's on-this-day feed\n(grim ones skipped)\nThe card goes away when the song ends. Press\nEsc\nat an empty prompt to stop it early.\n/today\nopens the card again.\nUses\nzero tokens\n: no model call, just two web requests, two local\ngit\ncommands and an audio clip.\nAudio is Apple's official 30-second preview of each track; nothing is downloaded or stored.\nInstall\n/plugin install startup-song --marketplace heyyviv/claude-boot-beats\nOr try it from a local copy:\nclaude --plugin-dir ./claude-startup-song\nSettings\nChange these in\n/config\n:\nSetting\nDefault\nWhat it does\ngenres\npop, hip hop, retro hits\nComma-separated search words, used in turn\nseconds\n10\nHow long to play (max 30)\nRequirements\nmacOS (playback uses\nafplay\n). On Linux/Windows the plugin stays silent.\nInternet at startup. Offline, it simply plays nothing.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50199611",
+      "fetched_at": "2026-10-23T07:24:10.829333+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50199611",
+      "sha256": "1f7312e9383eebfa4f3644714916190847839470a49c558016c1c6a18074195f",
+      "raw_path": "data/raw/20261023T071728151733Z/1f7312e9383eebfa4f3644714916190847839470a49c558016c1c6a18074195f.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

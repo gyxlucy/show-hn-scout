@@ -1,0 +1,42 @@
+{
+  "id": 50196590,
+  "title": "Show HN: Online timer you can see",
+  "url": "https://urtimer.com/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "artiomartiom",
+    "descendants": 0,
+    "id": 50196590,
+    "score": 1,
+    "time": 1792682229,
+    "title": "Show HN: Online timer you can see",
+    "type": "story",
+    "url": "https://urtimer.com/"
+  },
+  "sources": [
+    {
+      "url": "https://urtimer.com/",
+      "fetched_at": "2026-10-23T07:24:15.708331+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://urtimer.com/",
+      "sha256": "1e24d9f3fefcfed7d92c7127f6bc0ee6f1a7200755daefc9be118599b669b81a",
+      "raw_path": "data/raw/20261023T071728151733Z/1e24d9f3fefcfed7d92c7127f6bc0ee6f1a7200755daefc9be118599b669b81a.html",
+      "content_type": "text/html",
+      "text": "The online timer you can see.\nWatch time run out as a shape instead of a number. Pick a length, choose one of 19 styles and press Start. Free, no sign-up.\n5\nmin\n10\nmin\n15\nmin\n25\nmin\n30\nmin\n45\nmin\n60\nmin\nCustom\nhours\n:\nmin\n:\nsec\nCancel\nSet timer\n25:00\nReset\nStart\nFull screen\nShare\nAdd task\nSound on\nRepeat\nStyle\nClassic\nClassic\nCircle\nBloom\nOrbit\nTide\nHorizon\nBricks\nHoneycomb\nInk\nMaze\nStars\nHourglass\nRetro\nCandle\nHatch\nBattery\nProgress bar\nHeart\nBomb\nColor\nBackground\nYour photo stays in this browser.\nRemove photo\nReset to defaults\nTasks\nAuto-start next\nmin\nAdd\nType a name for the task, then press Add.\nNo tasks yet. Add one and press play to run it on the timer.\nHow to use urTimer\nurTimer shows the time left as a shape that shrinks, drains or fills. You can read it from across the room, so it works for classrooms, meetings, workouts and focused work.\nPick a length\nTap a preset from 5 to 60 minutes, or choose Custom for any time up to 12 hours. On the Classic dial you can also drag around the face to set the minutes.\nChoose a style\nPick one of 19 styles, from the Classic dial and the full Circle to Tide, Hourglass and Stars. Change the color, or set your own background color or photo.\nPress Start\nPause whenever you need to. Reset brings back the full time. A soft chime plays when time is up, and your screen stays awake while the timer runs.\nLine up tasks\nAdd tasks with their own lengths and press play to run one. Turn on Auto-start next to move through the list without touching anything.\nPress Start and watch the time run out. The line under the timer shows when it ends.\nFull screen hides everything except the timer, so it is easy to read on a projector or a TV.\nPick one of 19 styles, then a color and a background of your own.\nKeyboard shortcuts\nStart or pause\nSpace\nReset\nR\nFull screen\nF\nNext style\nS\nGood to know\nFull screen hides everything except the timer, which makes it easy to read on a classroom projector or a TV.\nShare creates a link that opens with the same time, style and colors. Your settings and tasks stay in this browser.\nMore timers and tools\n1 Minute Timer\n5 Minute Timer\n10 Minute Timer\n15 Minute Timer\n30 Minute Timer\n1 Hour Timer\nClassroom Timer\nFocus Timer\nWorkout Timer\nCooking Timer\nPresentation Timer\nTea Timer\nHow many days until Christmas?\nHow many days until Halloween?\nHow many days until Thanksgiving?\nCountdown to New Year 2027\nHow many days until my birthday?\nCountdown to midnight\nEST to PST converter\nCST to EST converter\nTime calculator\nHow many days are left in 2026?\nWhat is today’s Julian date?\nOnline stopwatch",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50196590",
+      "fetched_at": "2026-10-23T07:24:17.139017+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50196590",
+      "sha256": "1ecd1aeeb2abade84b4d31dae94c0fd0a13b492761a4e13221ab5d743695f0f1",
+      "raw_path": "data/raw/20261023T071728151733Z/1ecd1aeeb2abade84b4d31dae94c0fd0a13b492761a4e13221ab5d743695f0f1.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

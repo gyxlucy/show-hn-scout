@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_39994c78839e4d7c9fdbe3c31456f5e2",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3418,
+      "cached_tokens": 0,
+      "output_tokens": 117,
+      "total_tokens": 3535,
+      "context_tokens": 3535
+    },
+    "transcript": [
+      {
+        "id": "34f89c91-89ce-4b45-9075-35025a83dac1",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: GitPushups, block your code if you don't do pushups during your workday\nProject URL: https://gitpushups.com\nPosted (UTC): 2026-10-22T01:28:28Z\n\n## Project page text (fetch status: ok)\n\n```text\nDo pushups...\nor we block\nyour commits.\nJoin developers who have built a pushup habit into their coding routine and logged\n42,490\n0\n42,490\npushups\nduring their workday.\nAll free and no ad spam.\nSign in with GitHub\nThese GitHub users do\npushups while coding.\nPrimeagen\nMarc Lou\nCassidy Williams\nScott Tolinski\nPieter Levels\nMelkey\nTheo\nWes Bos\nJason Lengstorf\nFireship\nHelp us get these developers\ndoing the reps, too!\nKnow them? Invite them to join.\nConfigure your training\nChoose how often you want to do pushups\nSet up with your agent\nGit hook\n›\nSet me up for GitPushups. Read the setup instructions at https://gitpushups.com/agent-setup/prompt.md?frequency=daily, ask for my GitHub username, and preserve my existing Git hooks.\nBefore\nAfter\nDaily\n8 hours\n4 hours\n1 hour\n15 min\nPushups daily\nWhy this works\nAn existing routine\nThis is a\nhabit stacking\ntool. You are already coding; add this to your routine and you’ll get stronger.\nA small interruption\nYou can do as many or as few pushups as you want. Your growth is based on the technique known as\n“greasing the groove”\n. Practice good form, frequently, at sub-maximal intensity to build neuromuscular efficiency.\nRepetition\nLike coding, eventually doing pushups while you work will become second nature. That repetition will make you stronger.\nTrack your progress\nSet your daily goal. Track your pushups.\nWatch your contribution graph fill in and see where you are on the global leaderboard.\nGlobal leaderboard\nToday’s developers\nReps\n1\ntorvalds\n120\n2\nkarpathy\n108\n3\ncassidoo\n96\n4\ngaearon\n84\n5\nsindresorhus\n72\nYour contributions\n2,674\npushups\nLess\nMore\nDaily goal\n40 pushups\nSample ranks and rep counts\nActive community\nFocus this row to stop the animation and scroll through the quotes. Each card links to its original source.\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nLatest community update\nThe Monthly Press: October 2026\nRead update\nFAQ\nWhy pushups?\n+\nCan I sync with Apple Health?\n+\nHelp! I got too swol!\n+\nWhat if I already have a workout routine?\n+\nI have a feature request!\n+\nI found a bug!\n+\nHow do I delete my account?\n+\nHow can I support this project?\n+\nWho made this?\n+\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792733279012_u38x0kp90",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"The page describes a git hook that blocks commits until pushups are logged, which is a clear mechanism, but it is a gamified habit-tracker concept with no novel technical insight or overlooked need beyond the familiar 'block until you do X' pattern, and the evidence is mostly marketing copy and testimonials.\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3418,
+            "cached_tokens": 0,
+            "output_tokens": 117,
+            "total_tokens": 3535,
+            "context_tokens": 3535
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The page supports the claims of a Git hook option, the 'Do pushups... or we block your commits' messaging, and content that is largely testimonials and marketing. The reason names that concrete mechanism and backs a pass by arguing the 'block until you do X' pattern is familiar and not novel."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2484,
+      "inputTokenDetails": {
+        "noCacheTokens": 2484,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 124,
+      "outputTokenDetails": {
+        "textTokens": 124,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2608,
+      "raw": {
+        "input_tokens": 2484,
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

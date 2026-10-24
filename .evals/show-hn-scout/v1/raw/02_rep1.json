@@ -1,0 +1,52 @@
+{
+  "run": {
+    "task_id": "ct_fb6324bf2b3e4470826c81e367db7753",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 2636,
+      "cached_tokens": 0,
+      "output_tokens": 236,
+      "total_tokens": 2872,
+      "context_tokens": 2872
+    },
+    "transcript": [
+      {
+        "id": "4bf68c1f-3672-4978-8bd7-e6036ac3e2a9",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792778932448_0hzv28mlb",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "<think>This is an interesting Show HN post. It's a version control system where the storage is a neural network. You commit code/images, it trains a neural network to memorize them, and checkout reconstructs from memory. The fun is in the failures where neural corruption breaks the program in unique ways.\n\nThis is a creative and playful project. It's a clever idea (version control using a neural network), a creative way of presenting a concept, and a useful sample of what people are building now. It's professional and solid (has a full writeup, code on GitHub).\n\nDecision: push. Reason: it's a creative and fun project — a version control system that stores files in a neural network — and shows interesting neural corruption behaviors.\n\nJSON response only.</think>{\"decision\": \"push\", \"reason\": \"这是一个既有创意又好玩的项目：一个用神经网络存储代码的版本控制系统，提交后神经网络尝试记住文件，检出时从内存重构——而且神经网络特有的“腐蚀”错误比传统文件损坏更有趣、更反直觉。\" }",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 2636,
+            "cached_tokens": 0,
+            "output_tokens": 236,
+            "total_tokens": 2872,
+            "context_tokens": 2872
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": null
+}

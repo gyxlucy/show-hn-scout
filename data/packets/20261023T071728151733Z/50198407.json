@@ -1,0 +1,42 @@
+{
+  "id": 50198407,
+  "title": "Show HN: Trace Intelligence for Claude Code, Codex, Cursor, OpenCode, Grok",
+  "url": "https://github.com/viktor-com/tracequest",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "everlier",
+    "descendants": 0,
+    "id": 50198407,
+    "score": 1,
+    "time": 1792689999,
+    "title": "Show HN: Trace Intelligence for Claude Code, Codex, Cursor, OpenCode, Grok",
+    "type": "story",
+    "url": "https://github.com/viktor-com/tracequest"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/viktor-com/tracequest",
+      "fetched_at": "2026-10-23T07:24:15.505696+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/viktor-com/tracequest",
+      "sha256": "3d6b1c1dd8342fdd9ffeef092ea89db4bf09e6b843c2d469961bced442d7e6f8",
+      "raw_path": "data/raw/20261023T071728151733Z/3d6b1c1dd8342fdd9ffeef092ea89db4bf09e6b843c2d469961bced442d7e6f8.html",
+      "content_type": "text/html",
+      "text": "Follow your coding agents. Find what happened.\nTraceQuest is a local web app and CLI for reading coding-agent sessions. It shows\neach session's messages, tool calls, errors, timing and token usage. It reads\nsessions from Claude Code, Codex CLI, Cursor, Droid (Factory), OpenCode, Grok CLI,\nvktr (Viktor's fork of the Grok CLI), fx (Vercel's coding agent) and DeepSeek Harness.\nIt can also import Cursor Cloud Agent sessions and copy sessions from other\nmachines over SSH.\nTry it\n·\nFeatures\n·\nDocumentation\nThe screenshots use the bundled Claude Code samples and synthetic Codex recordings.\nThe hub shows copies under demo machine names.\nCosts are estimated from token counts and model prices. They are not billing data.\nFeatures\nSearch and filter sessions\nThe session list searches message text. You can filter by project, source,\nmachine, model, tool, error count and age. The summary row above the list shows\ntotals for the sessions that match.\nHow to use it:\nrun\nnpm start\n, open\nAll sessions\n, type a filter such as\nsource:codex errors:>0 test\nand press\nEnter\n. To search from the terminal,\nrun\nnode bin/tracequest.js search \"cache invalidation\"\n.\nSearch commands and filters\n.\nInspect a session\nThe activity timeline shows when the agent was working and when it was idle. The\ntoken chart shows input and output tokens for each turn, with markers for chapter\nstarts and tool errors. Each chapter lists the prompt, the commands the agent ran,\ntheir output and any retries.\nHow to use it:\nopen a session and choose\nAnalytics\n, then\nOpen full page\n. Click a bar or a\nchapter to open it.\nnode bin/tracequest.js latest --open\nopens a report for\nyour most recent session.\nRendering and export options\n.\nFind out why tool calls fail\nInsights groups failed tool calls by cause. It also shows error rates, retries,\nloops, active time and estimated cost. Expand a row to see the failed output and\na link to the session it came from. You can limit the figures to a project,\nsource, machine or time range. The analysis runs on your machine and makes no\nmodel calls.\nHow to use it:\nopen\n/insights\non your TraceQuest server.\nnode bin/tracequest.js insights --refresh\nupdates the analysis and prints a\nsummary in the terminal.\nInsights options\n.\nCompare two sessions\nThe compare view puts two sessions side by side. It shows duration, tokens,\ncache use, errors, retries, tool counts and chapter outcomes. Each column links\nto the full session.\nHow to use it:\nin\nAll sessions\n, tick the checkboxes of two sessions and\nchoose\nCompare\n.\nBrowser and session commands\n.\nRead, start and continue conversations\nThe conversation view shows a session's messages and tool output, and updates\nwhile the agent is still working.\n+ New run\nstarts an installed agent in a\ndirectory you choose. You can send follow-up messages to runs started from\nTraceQuest and continue supported sessions. Starting and continuing runs needs\ntmux.\nHow to use it:\nrun\nnpm start\nand choose a session or\n+ New run\n.\nSupported agents and setup\n.\nExport reports and write handoffs\nExport\nsaves a session as a single HTML file with its timeline and chapters.\nMarkdown\nsaves the session text. The\nhandoff\ncommand searches your sessions\nand prints Markdown snippets, each with the commands to open the matching session.\nHow to use it:\nopen a session and choose\nExport\nor\nMarkdown\n, or run\nnode bin/tracequest.js handoff \"cache invalidation\" --limit 5\nin the checkout.\nHandoff and sharing options\n.\nCollect sessions from several machines\nA hub is a read-only TraceQuest server that copies sessions from other machines\nover SSH. The Machines table shows each machine's session count, newest session,\ncollection status and last successful copy. A config file lists the machines,\nthe folders to copy and the address the server listens on.\nHow to use it:\nfollow the\nhub deployment guide\nto\nwrite a config, import sessions and start the hub. The guide includes a local\nexample you can run on one machine. A hub rejects changes and hides values that\nlook like secrets. Sessions still contain conversation text, so restrict who can\nreach the hub on your network.\nTry it\nYou need\nNode.js 22.5 or later\nand\ngit\n.\ngit clone https://github.com/viktor-com/tracequest.git\ncd\ntracequest\nnpm install\nnpm run demo\nOpen\nlocalhost:7777\n. The demo shows two small sample\nsessions that ship with the repository. It needs no agent account or API key.\nTo see your own sessions, stop the demo with\nCtrl-C\nand run:\nnpm start\nInstallation, imports and troubleshooting\n.\nData and network access\nBrowsing and analysis only read local files. TraceQuest sends no telemetry.\nIt contacts other services only when you ask it to: sharing a session, importing\nremote sessions, or checking plan usage limits. Standup summaries and agent runs\nuse the agent you have configured.\nThe server listens on localhost and has no login. Read the\ndeployment guide\nand\nsecurity notes\nbefore making it reachable from other machines.\nDocumentation\nDocumentation\n: command reference, configuration, session\nlocations, live-run API, deployment and development guides. It is written so\nthat a coding agent can follow it too.\nContribute\n·\nReport a bug\n·\nChangelog\n·\nMIT License",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50198407",
+      "fetched_at": "2026-10-23T07:24:17.683207+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50198407",
+      "sha256": "ada1611d242ec03a53fb3dce7ac5b462cbb93f2e9ab9fa60bd59fa8de790a31b",
+      "raw_path": "data/raw/20261023T071728151733Z/ada1611d242ec03a53fb3dce7ac5b462cbb93f2e9ab9fa60bd59fa8de790a31b.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

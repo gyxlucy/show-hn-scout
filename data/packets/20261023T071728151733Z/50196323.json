@@ -1,0 +1,43 @@
+{
+  "id": 50196323,
+  "title": "Show HN: Gol – An interactive globe of the other side of everywhere",
+  "url": "https://gol-six-beta.vercel.app/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "fiveleavesleft",
+    "descendants": 0,
+    "id": 50196323,
+    "score": 1,
+    "text": "An attempt to show our geographical connectedness on this big blue marble.",
+    "time": 1792681117,
+    "title": "Show HN: Gol – An interactive globe of the other side of everywhere",
+    "type": "story",
+    "url": "https://gol-six-beta.vercel.app/"
+  },
+  "sources": [
+    {
+      "url": "https://gol-six-beta.vercel.app/",
+      "fetched_at": "2026-10-23T07:24:02.351752+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://gol-six-beta.vercel.app/",
+      "sha256": "91f9ed53bfff2b947d596329a786081e731d8c9b1f6daf76006803060024ef07",
+      "raw_path": "data/raw/20261023T071728151733Z/91f9ed53bfff2b947d596329a786081e731d8c9b1f6daf76006803060024ef07.html",
+      "content_type": "text/html",
+      "text": "Layers\nGol is designed for larger screens. On a phone, some views may be cramped or slow.\nOK\nDig here\n×\nMirror world\ni\nShows every continent moved to the exact opposite side of the Earth. Where a blue outline\noverlaps real land, digging straight down from there would bring you out on land. Light\ndots mark those spots.\nSame latitude and longitude\ni\nDraws the east–west line (latitude) and the north–south line (longitude) through your pin,\nand lists major cities on each. Places on the same latitude get similar day lengths. The\nlongitude line also runs through your exit point on the far side.\nStatic page, runs entirely in your browser. ·\nVibe Creator\nStart\nExit\nLayer\nCrust\nDepth\n0 km\nTemperature\n15 °C\nSpeed\n0.00 km/s\nTrip time\n0:00\nDistance\n0 km\nSpeed and trip time assume a frictionless fall through a uniform Earth.\nSkip\nStatic page, runs entirely in your browser. ·\nVibe Creator",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50196323",
+      "fetched_at": "2026-10-23T07:24:03.644305+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50196323",
+      "sha256": "f3e90a45d5e8f21c68ea06a25e5b3484fb63477b5611550e5a844545d11dc4d0",
+      "raw_path": "data/raw/20261023T071728151733Z/f3e90a45d5e8f21c68ea06a25e5b3484fb63477b5611550e5a844545d11dc4d0.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

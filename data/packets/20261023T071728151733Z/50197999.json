@@ -1,0 +1,53 @@
+{
+  "id": 50197999,
+  "title": "Show HN: shapcn brings shape-aware icon morphing",
+  "url": "https://shapcn.com/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "seahorsecastle",
+    "descendants": 1,
+    "id": 50197999,
+    "kids": [
+      50198955
+    ],
+    "score": 1,
+    "text": "I wanted delightful icon animations in my front-end work, but auto tweening looks horrible, and keyframing every transition is a lot of work.<p>The essential question was: could we deterministically make the right choices about morphing icons... to the point where it looks like an expert animator did it?<p>shapcn is my answer. It rigs each icon, then moves the parts in order. One script tag, MIT license, etc. Drop it in and try it out.",
+    "time": 1792688088,
+    "title": "Show HN: shapcn brings shape-aware icon morphing",
+    "type": "story",
+    "url": "https://shapcn.com/"
+  },
+  "sources": [
+    {
+      "url": "https://shapcn.com/",
+      "fetched_at": "2026-10-23T07:23:55.159935+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://shapcn.com/",
+      "sha256": "b883a4cdc904d13a0176c75a9bfcdee8de9fdc96b44cb37df71c7fb136f8eda9",
+      "raw_path": "data/raw/20261023T071728151733Z/b883a4cdc904d13a0176c75a9bfcdee8de9fdc96b44cb37df71c7fb136f8eda9.html",
+      "content_type": "text/html",
+      "text": "Examples\nPlayground\n1\nLibrary\n2\nWhich two icons?\nFrom\nTo\nRandom pair\nPick the start icon\n3\nHow should it feel?\nDuration\n600 ms\nTry it\n4\nReady to copy?\nHTML\nReact\nThe shapcn package is not live yet. This is the planned API.\nCopy code\nNo more sloptweening\nPoint-to-point tween\nEvery point slides to a point, all at once.\nShape-aware rig\nRigged first. Parts move in order.\nHow it works\nshapcn\nThe rig\nt = 0.00\n1 of 6\nEach shape gets a weight.\nWeight is the length of a stroke. A closed shape counts 1.5 times. Strokes at half of the largest weight or more are the body. The rest are parts.\n2 of 6\nThe rig.\nBefore it moves anything, shapcn rigs the icon, as an animator parents layers.\nThe heaviest shapes are the root: the body.\nA part belongs to the shape it touches. The antenna belongs to the head. The head belongs to the body.\nThe rig sets the order. Deepest parts leave first and arrive last. Mirror parts move together.\n3 of 6\nWhat morphs?\nThe root of the rig becomes the root. The body becomes the body. A part ties to a part only when they are alike.\n4 of 6\nWhat moves?\nEach part rides on its parent. A part with no partner goes into the body. A new part grows out of the edge it connects to. Nothing melts or fades.\n5 of 6\nA twin slides out.\nA twin starts at half size behind its twin and slides out. Mirror parts in the rig move together.\n6 of 6\nWhen?\nThe rig sets the order. Old parts go in, deepest first: antennae into the head, then the head into the body. The body changes. New parts grow out in reverse order, deepest last.\nUsage\n75 KB\nengine, gzipped\n220 KB with all Lucide icons\nWhat you download\nScript tag\nAll Lucide icons included\n220 KB gzipped\nnpm, engine only\nIn progress\n75 KB gzipped\nnpm, engine + 2 icons\nIn progress\n75 KB gzipped\nnpm, all Lucide\nIn progress\n171 KB gzipped\nIcons you do not import are not downloaded (npm).\nIn your code\n<morph-icon name=\"sun\"></morph-icon>\nel.setAttribute('name', 'moon') // later\nHTML\nReact\n<head>\n+\nAdded:\n<script type=\"module\" src=\"https://shapcn.com/morph-icon.js\"></script>\n</head>\n<button id=\"theme\">\n-\nRemoved:\n<svg viewBox=\"0 0 24 24\">...sun...</svg>\n+\nAdded:\n<morph-icon name=\"sun\"></morph-icon>\n</button>\n<script>\ntheme.onclick = () => {\ndark = !dark;\n-\nRemoved:\ntheme.innerHTML = dark ? MOON_SVG : SUN_SVG;\n+\nAdded:\ntheme.firstElementChild.name = dark ? 'moon' : 'sun';\n};\n</script>\n@@\nindex.html\n+\nAdded:\n<script type=\"module\" src=\"https://shapcn.com/morph-icon.js\"></script>\n@@\nThemeToggle.jsx\n-\nRemoved:\nimport { Moon, Sun } from 'lucide-react';\n<button onClick={() => setDark(!dark)}>\n-\nRemoved:\n{dark ? <Moon /> : <Sun />}\n+\nAdded:\n<morph-icon name={dark ? 'moon' : 'sun'} />\n</button>\nThe result\nDark\nInstall\nScript tag works today. npm package is in progress. Source is on GitHub.\nAny site\n<script type=\"module\" src=\"https://shapcn.com/morph-icon.js\"></script>\n<morph-icon name=\"menu\"></morph-icon>\nCopy\nnpm (in progress)\nnpm i shape-aware-morph\nUse the source today:\ngithub.com/seahorsecastle/shapcn\ngit clone https://github.com/seahorsecastle/shapcn\ncd shapcn/package\nnpm install && npm run build\nThen import from the package folder, or use dist/morph-icon.js.\nCopy",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50197999",
+      "fetched_at": "2026-10-23T07:23:58.814767+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50197999",
+      "sha256": "2be1acda9e77fcb11b87f239d51f92851eed017969a9104b090bdae14c7ae8d5",
+      "raw_path": "data/raw/20261023T071728151733Z/2be1acda9e77fcb11b87f239d51f92851eed017969a9104b090bdae14c7ae8d5.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50198955",
+          "by": "seahorsecastle",
+          "is_author": true,
+          "text": "npm coming soon"
+        }
+      ]
+    }
+  ]
+}

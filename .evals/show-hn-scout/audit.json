@@ -1,8 +1,8 @@
 {
   "problems": [],
   "cases": 30,
-  "labeled": 0,
-  "unlabeled": 30,
+  "labeled": 30,
+  "unlabeled": 0,
   "duplicate_ids": 0,
   "duplicate_story_ids": 0,
   "duplicate_prompts": 0,
@@ -15,11 +15,14 @@
     "browser-snapshot": 4,
     "no-page-text": 1
   },
-  "by_gold_decision": {},
+  "by_gold_decision": {
+    "push": 15,
+    "pass": 15
+  },
   "prompt_chars": {
     "min": 327,
     "median": 5554,
     "max": 40305
   },
-  "note": "No human labels yet: gold.jsonl is empty. Majority-class baseline, precision and recall are undefined until labels exist."
+  "note": "Report precision/recall per tags[0] group; the random group is the only one that approximates real traffic."
 }

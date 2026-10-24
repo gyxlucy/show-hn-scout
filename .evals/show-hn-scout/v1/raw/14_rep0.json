@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_a9de2f4f374a4af1af2a03150a07fa51",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3190,
+      "cached_tokens": 0,
+      "output_tokens": 75,
+      "total_tokens": 3265,
+      "context_tokens": 3265
+    },
+    "transcript": [
+      {
+        "id": "cea184f4-de29-4a2b-9d3f-a9684b943cba",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Omalauncher Agentic Android Launcher\nProject URL: https://github.com/SimonSchubert/omalauncher\nPosted (UTC): 2026-10-21T12:50:28Z\n\n## Project page text (fetch status: ok)\n\n```text\nOmalauncher\nAn Android home screen with the look of\nOmarchy\n, and an\noptional Arch Linux ARM system next to your phone apps. Omalauncher runs the\nsystem under proot, without root, and is its Wayland compositor: every Linux\nwindow opens as its own Android task, with its own card in Recents.\nThemes\n: all 22 Omarchy themes, with their wallpapers, applied to the\nlauncher and to the Linux apps, plus the community themes from\nomarchy.org/themes\n, or your own in\n~/.config/omarchy/themes\nWidgets\nwritten in OWL, a small declarative language you can edit on the\nphone, plus a\nwidget store\nLinux, optional\n: pacman and the AUR, Linux apps in their own windows,\nterminal widgets, a file manager, and opt-in GPU acceleration on Mali and Adreno 6xx+ GPUs\nCoding agents\n: the bar at the bottom sends a prompt to Claude Code, Codex,\nCopilot, opencode and others, which open in a terminal\nNo account, no ads, no tracking\nNeeds an arm64 phone with Android 10 or newer. Without Linux, the launcher still\nhas the themes, wallpapers, Android apps and the widgets that don't run commands.\nUsing it\nThe bar: the one input at the bottom of the home screen opens apps and asks\ncoding agents. Focusing it opens the list of Linux and Android apps; typing\nnarrows the list, and Enter opens the highlighted app or sends the text to the\nagent. Short queries that name an app open it, sentences go to the agent; Tab\nand the arrow keys move the highlight. Tap the agent's name to pick another\ninstalled one; the choice is saved in\n~/.config/omalauncher/agent\n. Hold the mic to talk and release to send, or tap it to dictate\ninto the field. Speech is recognized by Android (on the device when the phone\nsupports it), so only text reaches Linux.\nThe app drawer is a widget too,\ndrawer.owl\nin the widgets folder, so an\nagent can rewrite it. Here Grok sorts it into folders:\nTouch input in Linux windows: tap is a left click, long press is a right\nclick, drag scrolls; apps with touch support (foot, GTK) get real touch.\nHardware keyboard shortcuts: Super+Enter (terminal), Super+Space or\nSuper+A (the bar), Super+1..9 (home pages) on the home screen; Super+Enter\nand Super+W (close) in Linux windows.\nBuilding\n./scripts/fetch-proot.sh\n#\nTermux's proot -> app/src/main/jniLibs (needs bsdtar)\n./gradlew :app:installDebug\n#\noptional: skip the 830 MB download on the device\nadb push ArchLinuxARM-aarch64-latest.tar.gz /sdcard/Android/data/dev.omalauncher/files/\nTests:\n./gradlew :owl:test :app:testDebugUnitTest\n.\n./gradlew :owl:owlJar\nbuilds\nowl/build/cli/owl.jar\n, the checker the widget store's CI runs.\nIn debug builds you can launch guest commands with\nadb shell am start -n dev.omalauncher/.MainActivity --es exec foot\n.\ndocs/ARCHITECTURE.md\n: the compositor, rendering, GPU\nacceleration, and how updates reach existing installs\ndocs/RELEASING.md\n: Play releases and store assets\napp/src/main/assets/widgets/README.md\n:\nthe widget language\nLayout\napp/\n: the Android app (Kotlin, Jetpack Compose, and the JNI bridge in\nsrc/main/cpp\n)\nowl/\n: the widget language and the\nowl\ncommand line, plain Kotlin\nart/\n: SVG masters for the app, agent and store icons\nstore/\n: Play listing sources (screenshot frames, privacy policy)\nfastlane/\n: the Play listing and the upload lanes\nscripts/\n: fetching proot and theme colors, rendering icons, screenshots and widget previews\nLicense\nMIT, see\nLICENSE\n, for Omalauncher's own code and artwork. The\ncoding agents' logos, the symbol font and Omarchy's theme colors are not\ncovered;\nTHIRD_PARTY.md\nlists them with their sources and\nlicenses. The app also ships proot, talloc and libandroid-shmem (GPL-2.0,\nLGPL-3.0 and BSD-3-Clause, prebuilt by Termux), listed in the app under\nsettings › licenses.\nOmalauncher is an independent project and is not affiliated with or endorsed\nby Omarchy, Arch Linux, or the makers of the coding agents it installs.\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792779511077_r1cpc71gw",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\n \"decision\": \"push\",\n \"reason\": \"这是一个非常聪明且有新意的产品：一个在 Android 上通过 proot 运行 Arch Linux ARM 的桌面启动器，把每个 Linux 窗口变成 Android 的一个任务卡片。这种让手机既能运行 Linux 应用又有原生 Android 体验的创意非常有趣，值得一看。\"\n}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3190,
+            "cached_tokens": 0,
+            "output_tokens": 75,
+            "total_tokens": 3265,
+            "context_tokens": 3265
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says the launcher runs Arch Linux ARM under proot and opens each Linux window as its own Android task card, and both claims match the project page. Those are concrete mechanisms taken from this post, and the reason argues the project is worth a look, which supports push."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2794,
+      "inputTokenDetails": {
+        "noCacheTokens": 2794,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 114,
+      "outputTokenDetails": {
+        "textTokens": 114,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2908,
+      "raw": {
+        "input_tokens": 2794,
+        "output_tokens": 114,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

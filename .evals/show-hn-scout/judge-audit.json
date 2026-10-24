@@ -1,0 +1,287 @@
+{
+  "judge_model": "claude-opus-5-5",
+  "probes": [
+    {
+      "name": "grounded and specific (positive control)",
+      "expect": {
+        "grounded": true,
+        "specific": true,
+        "consistent": true
+      },
+      "got": {
+        "grounded": true,
+        "specific": true,
+        "consistent": true,
+        "reasoning": "The reason correctly states that the hook sends the staged diff to an existing AI CLI, which generates 2 true and 2 false statements the dev must answer correctly; both points are on the page. Its judgment that the tool is a thin wrapper with no unique insight supports the pass decision."
+      },
+      "match": true,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4385,
+        "inputTokenDetails": {
+          "noCacheTokens": 4385,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 301,
+        "outputTokenDetails": {
+          "textTokens": 121,
+          "reasoningTokens": 180
+        },
+        "totalTokens": 4686,
+        "raw": {
+          "input_tokens": 4385,
+          "output_tokens": 301,
+          "output_tokens_details": {
+            "thinking_tokens": 180
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    },
+    {
+      "name": "empty reason",
+      "expect": {
+        "grounded": false,
+        "specific": false,
+        "consistent": false
+      },
+      "got": {
+        "grounded": false,
+        "specific": false,
+        "consistent": false,
+        "reasoning": "The agent's reason is an empty string. Per the rubric, an empty reason fails all three properties: it makes no claims, names no feature of commit-quiz, and gives nothing in support of the push decision."
+      },
+      "match": true,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4303,
+        "inputTokenDetails": {
+          "noCacheTokens": 4303,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 95,
+        "outputTokenDetails": {
+          "textTokens": 95,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 4398,
+        "raw": {
+          "input_tokens": 4303,
+          "output_tokens": 95,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    },
+    {
+      "name": "I don't know",
+      "expect": {
+        "grounded": false,
+        "specific": false,
+        "consistent": false
+      },
+      "got": {
+        "grounded": false,
+        "specific": false,
+        "consistent": false,
+        "reasoning": "The reason is just \"I don't know.\" and makes no claim about the commit-quiz hook or its diff-quiz mechanism. Per the rubric, a bare \"I don't know\" fails all three, and it also never says what is missing to justify unsure."
+      },
+      "match": true,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4310,
+        "inputTokenDetails": {
+          "noCacheTokens": 4310,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 113,
+        "outputTokenDetails": {
+          "textTokens": 113,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 4423,
+        "raw": {
+          "input_tokens": 4310,
+          "output_tokens": 113,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    },
+    {
+      "name": "answer about a different project",
+      "expect": {
+        "grounded": false,
+        "specific": false,
+        "consistent": true
+      },
+      "got": {
+        "grounded": false,
+        "specific": false,
+        "consistent": false,
+        "reasoning": "The reason describes a Rust database engine with a new B-tree that doubles query throughput. The post is actually a Node pre-commit hook that quizzes developers on their staged diff, so the reason is about a different project and fails all three properties."
+      },
+      "match": false,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4344,
+        "inputTokenDetails": {
+          "noCacheTokens": 4344,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 105,
+        "outputTokenDetails": {
+          "textTokens": 105,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 4449,
+        "raw": {
+          "input_tokens": 4344,
+          "output_tokens": 105,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    },
+    {
+      "name": "fabricated claim",
+      "expect": {
+        "grounded": false,
+        "specific": true,
+        "consistent": true
+      },
+      "got": {
+        "grounded": false,
+        "specific": true,
+        "consistent": true,
+        "reasoning": "The claimed independent benchmark showing 90% defect interception and the 'first of its kind' claim appear nowhere in the evidence. The page reports no testing, and the tool quizzes developers rather than catching defects. The reason does name the post's real gap (unreviewed AI-generated code), and its praise supports the push decision."
+      },
+      "match": true,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4354,
+        "inputTokenDetails": {
+          "noCacheTokens": 4354,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 390,
+        "outputTokenDetails": {
+          "textTokens": 135,
+          "reasoningTokens": 255
+        },
+        "totalTokens": 4744,
+        "raw": {
+          "input_tokens": 4354,
+          "output_tokens": 390,
+          "output_tokens_details": {
+            "thinking_tokens": 255
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    },
+    {
+      "name": "reason contradicts decision",
+      "expect": {
+        "grounded": true,
+        "specific": true,
+        "consistent": false
+      },
+      "got": {
+        "grounded": true,
+        "specific": false,
+        "consistent": false,
+        "reasoning": "The reason says the tool is just a thin wrapper around existing AI CLIs; the page does show it calls the claude/codex/gemini CLIs, so that is loosely supported. It is generic, though: it never mentions the diff quiz, the pre-commit gating or the fail-open design. It also argues against surfacing the post (\"not worth bothering readers\") while the decision is push."
+      },
+      "match": false,
+      "failure_class": null,
+      "judge_model": "claude-opus-5-5",
+      "judge_usage": {
+        "inputTokens": 4337,
+        "inputTokenDetails": {
+          "noCacheTokens": 4337,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 549,
+        "outputTokenDetails": {
+          "textTokens": 154,
+          "reasoningTokens": 395
+        },
+        "totalTokens": 4886,
+        "raw": {
+          "input_tokens": 4337,
+          "output_tokens": 549,
+          "output_tokens_details": {
+            "thinking_tokens": 395
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global",
+          "speed": "standard"
+        }
+      }
+    }
+  ]
+}

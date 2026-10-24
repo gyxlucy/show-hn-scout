@@ -10,13 +10,19 @@
 //          CASES.md     sign-off index for the user.
 //          audit.json   tier-1 programmatic checks (eval-audit.md section 1).
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const HERE = import.meta.dir;
 const ROOT = resolve(HERE, "../..");
-const CASES_SRC = join(ROOT, "data/calibration/cases.json");
-const FEEDBACK = join(ROOT, "data/review/feedback.jsonl");
+// `--set heldout` builds the held-out set (data/heldout/*) into .evals/show-hn-scout/heldout/ instead of the dev set.
+const setIdx = process.argv.indexOf("--set");
+const SET = setIdx >= 0 ? process.argv[setIdx + 1] : "dev";
+if (SET !== "dev" && SET !== "heldout") throw new Error(`unknown --set ${SET}`);
+const HELDOUT = SET === "heldout";
+const OUT = HELDOUT ? join(HERE, "heldout") : HERE;
+const CASES_SRC = join(ROOT, HELDOUT ? "data/heldout/cases.json" : "data/calibration/cases.json");
+const FEEDBACK = join(ROOT, HELDOUT ? "data/heldout/feedback.jsonl" : "data/review/feedback.jsonl");
 const check = process.argv.includes("--check");
 
 type Comment = { id: string; by: string; is_author: boolean; text: string };
@@ -26,7 +32,7 @@ type Evidence = { path: string; sha256: string; kind: string };
 type SrcCase = {
   id: number; case_id: string; batch: number; split: string; sampling: string; name: string;
   evidence: Evidence[]; observation: { run_id: string; posted_at: number };
-  baseline: { decision: string; reason: string; next_check: string };
+  baseline?: { decision: string; reason: string; next_check: string }; // dev set only; the held-out set has no assistant verdict
 };
 
 const sha256 = (buf: Buffer) => createHash("sha256").update(buf).digest("hex");
@@ -88,7 +94,7 @@ for (const c of srcCases) {
   ];
 
   // Leak check: nothing from the assistant's verdict may appear in the model-visible prompt.
-  for (const leak of [c.baseline.reason, c.baseline.next_check]) {
+  for (const leak of [c.baseline?.reason, c.baseline?.next_check]) {
     if (leak && prompt.includes(leak)) audit.problems.push(`case ${c.case_id}: assistant baseline text appears in prompt`);
   }
 
@@ -162,9 +168,13 @@ const md = [
   "",
   `${rows.length} cases, ${gold.length} human-labeled. Flow: given one Show HN post's evidence, answer \`push\` / \`pass\` / \`unsure\` with a reason.`,
   "",
-  "- Model-visible input: `cases.jsonl` (`prompt`). Read it as rendered cards in `review/batch-01.md` to `batch-03.md`.",
-  "- Gold: `gold.jsonl`, built only from your labels in `data/review/feedback.jsonl`. Nothing is inferred from the assistant baseline.",
-  "- All 30 cases were already used to calibrate the rubric, so this is a development set, not a held-out test.",
+  HELDOUT
+    ? "- Model-visible input: `cases.jsonl` (`prompt`). Cards were `review/heldout/batch-04.md` to `batch-06.md` (blind: no assistant verdict)."
+    : "- Model-visible input: `cases.jsonl` (`prompt`). Read it as rendered cards in `review/batch-01.md` to `batch-03.md`.",
+  `- Gold: \`gold.jsonl\`, built only from your labels in \`${HELDOUT ? "data/heldout/feedback.jsonl" : "data/review/feedback.jsonl"}\`. Nothing is inferred from an assistant verdict.`,
+  HELDOUT
+    ? "- Held-out set: drawn and labeled after the v1 rubric was written; never used to write or tune a prompt. Analyzers must not read it."
+    : "- All 30 cases were already used to calibrate the rubric, so this is a development set, not a held-out test.",
   "- The prompt carries title, URL, post time, project page text, the HN comments that existed at capture time, and browser snapshots where used. It omits votes, ranking, sampling origin, and the assistant verdict.",
   "",
   "| id | story | tags | evidence | prompt chars | expected |",
@@ -184,9 +194,10 @@ if (audit.problems.length) {
   console.error("Audit problems:\n" + audit.problems.join("\n"));
   process.exit(1);
 }
+mkdirSync(OUT, { recursive: true });
 let stale = 0;
 for (const [name, content] of Object.entries(outputs)) {
-  const path = join(HERE, name);
+  const path = join(OUT, name);
   if (check) {
     if (!existsSync(path) || readFileSync(path, "utf8") !== content) (stale++, console.error(`stale: ${name}`));
   } else writeFileSync(path, content);

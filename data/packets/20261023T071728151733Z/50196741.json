@@ -1,0 +1,43 @@
+{
+  "id": 50196741,
+  "title": "Show HN: PDT – Open-source deployment of scheduled jobs on your own cloud",
+  "url": "https://github.com/AutoIDM/pdt",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "visch",
+    "descendants": 0,
+    "id": 50196741,
+    "score": 3,
+    "text": "Hi, I&#x27;m Derek. I&#x27;ve been doing data integrations &#x2F; ETL work since 2014, first for K-12, now for commercial companies think ADP&#x2F;BambooHR to AzureAD, etc. I&#x27;ve written so many deployment systems for integrations, each slightly different. Instead, we took the best parts of all the systems we&#x27;ve built and put them into one tool. PDT takes your job and deploys it to AWS, Azure, GCP, or even Task Scheduler. It&#x27;s a convention-over-configuration deployment tool specifically made for Scheduled Jobs. Things like data integrations, scans, reports, etc.<p>With AI, writing scripts is easier than ever. Deploying them into production isn&#x27;t as easy. Because the AI needs to know what you want, this can be tricky as there are so many choices to make! Do I use Azure Functions, Duarble Functions, Container Instances, Azure Batch, AKS CronJob, Azure Automation Runbooks, Logic Apps? ahhh, I just want this to run in production.<p>To give it a shot, install uv, then:<p><pre><code>  uv tool install pdt-cli\n  uv tool update-shell\n  pdt init jobs\n  cd jobs\n  pdt run hello-world # runs locally\n  pdt deploy hello-world # runs on cloud \n  pdt new hello --from powershell-hello-world # give powershell a shot\n</code></pre>\nPDT gives you a standard set of primitives to use for scheduling, secrets, storage, logs, and alerts. This means you already know how to track state, where to drop the file you wanted to drop, how to know when the job fails, and how to answer all the other orchestration-related questions.",
+    "time": 1792682872,
+    "title": "Show HN: PDT – Open-source deployment of scheduled jobs on your own cloud",
+    "type": "story",
+    "url": "https://github.com/AutoIDM/pdt"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/AutoIDM/pdt",
+      "fetched_at": "2026-10-23T07:23:59.611329+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/AutoIDM/pdt",
+      "sha256": "0ffffea68cbda9d84ff131596d2b0182336517082b4ff59433edf45f9a6a0a01",
+      "raw_path": "data/raw/20261023T071728151733Z/0ffffea68cbda9d84ff131596d2b0182336517082b4ff59433edf45f9a6a0a01.html",
+      "content_type": "text/html",
+      "text": "pdt - process deploy tool\nTurn any script into a scheduled job in your cloud.\npdt builds, runs, and deploys scheduled jobs to AWS, Azure, Google Cloud, or Windows Task Scheduler. It gives every job the same\nprimitives\n, chosen from years of deploying scheduled jobs for businesses on each cloud. No servers to run and nothing extra to install, and everything it makes lives in your own account.\nKey Features\nBring your scripts\n- Drop in your PowerShell or Python files. pdt finds what they need and runs them.\nOne command to deploy\n- No cloud skills needed.\npdt deploy\ninstalls the tools it needs and opens the sign-in page for you.\nAny cloud\n- Move a job between AWS, Azure, Google Cloud, and Windows by changing one line.\nKnow the cost first\n- See the plan and a monthly cost estimate before anything changes.\nKnow when it breaks\n- Health checks, logs, a dashboard, and alerts to Slack, Teams, or email.\nQuick Start\nWindows\nDownload and run the\npdt installer\n.\nmacOS / Linux - with uv\nInstall\nuv\n, then pdt:\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nsource $HOME/.local/bin/env\nuv tool install pdt-cli\nuv tool update-shell\nFor other ways to install, and how to update or remove pdt, see\ndocs/install.md\n.\nDeploy your first job\nThen run:\npdt init jobs\ncd jobs\npdt new hello-powershell --from powershell-hello-world\ncd hello-powershell\npdt run\npdt deploy\npdt logs\nDeploy your own script\nCreate the job with\npdt new your-powershell-job --from powershell-hello-world\nReplace\nhello.ps1\nin the\nyour-powershell-job\nfolder with your own\n.ps1\nscript\nTest the job locally with\npdt run your-powershell-job\nDeploy it with\npdt deploy your-powershell-job\nSee\nevery command\n.\nExample deployment\nA first deploy of the\nhello-world-example\napp to Azure, then a look at its run:\nSee\nthe same output as text\n.\nThe bundled examples\nRun\npdt examples\nto list them, then\npdt new <name> --from <example>\nto copy one.\nhello-world\nSmall job that logs \"Hello world.\"\npdt init\nputs a copy of this in every new empty project.\nazure-license-waste\nPowerShell job. Finds the Microsoft 365 licenses a tenant pays for that nobody uses: paid licenses on disabled accounts, on accounts that have not signed in for 90 days (or never did), and seats bought but assigned to nobody. Each run keeps a\nLicenseWaste-<date>.xlsx\nworkbook in the job's data store, with a Summary sheet of monthly and annual cost and one sheet per finding.\nimpossible-travel-report\nLooks at recent Entra ID sign-ins. Sends an email when one person signs in from two far-apart places too quickly: Dallas an hour ago, Paris now.\nSettings for the lookback window, the minimum distance, and the email addresses live in the job's\nconfig.yml\n. The env vars it needs are listed there too, and in its\nenv.template\n.\nintune-export\nPowerShell job. Once a week it exports the Intune configuration of a tenant with the bulk export of\nIntuneManagement\nversion 4, and keeps an\nIntuneExport-<date>.zip\nin the job's data store. To import, unzip it and point IntuneManagement's import at the company folder inside.\nmonday-orphaned-account-report\nReports active Monday users whose email address does not match the\nuserPrincipalName\nof an active Entra ID user.\npowershell-hello-world\nA PowerShell job whose one script,\nhello.ps1\n, writes \"Hello, world!\". It is the job the\nQuick Start\ndeploys. Put your own\n.ps1\nfiles in its folder in place of\nhello.ps1\nto deploy your own PowerShell job.\npowershell-report\nPowerShell job. small CSV report with\nExport-Csv\n, and pdt keeps the file in the app's data store.\nSupport\nAutoIDM\nmakes pdt. Any issues, questions, ideas, or concerns? Use any of these methods to get a hold of us:\nDiscord\nReport a problem at\nhttps://github.com/AutoIDM/pdt/issues\n.\nDocumentation\nHow pdt works\n: the building blocks every job gets on each cloud, and the practices behind them\nProjects and apps\n: set up a project, add an app, and where pdt keeps its files\nDeploying\n: deploy, run, pause, and destroy a job, and run pdt from CI\nCommands\n: every\npdt\ncommand and its options\nChoosing where jobs run\n: AWS, Azure, Google Cloud, Windows Task Scheduler, and your own Dockerfile\nKeeping files between runs\n: the storage folder every app gets, and state that carries from one run to the next\nThe dashboard\n:\npdt gui\n, the browser view of every app's runs, logs, and files\nWriting your own app\n: Python and PowerShell apps, and logging\nSending email\n: send mail from an app over SMTP, Microsoft Graph, SES, or Resend\nMore ways to install\n: other installs, and how to update or remove pdt",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50196741",
+      "fetched_at": "2026-10-23T07:24:01.417993+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50196741",
+      "sha256": "a59b79f88bad2c9cabf0df77afb659be7e1e922ac070eac9d2837c9370468d70",
+      "raw_path": "data/raw/20261023T071728151733Z/a59b79f88bad2c9cabf0df77afb659be7e1e922ac070eac9d2837c9370468d70.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

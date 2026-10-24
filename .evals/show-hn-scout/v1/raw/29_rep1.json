@@ -1,0 +1,52 @@
+{
+  "run": {
+    "task_id": "ct_f0cdbddd4572487a935d2d52dc225c88",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3812,
+      "cached_tokens": 0,
+      "output_tokens": 396,
+      "total_tokens": 4208,
+      "context_tokens": 4208
+    },
+    "transcript": [
+      {
+        "id": "ef199bea-523e-4474-82ce-daa129af9873",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Professionally maintained Tree-sitter compatible WASM grammars\nProject URL: https://powderworks.dev/\nPosted (UTC): 2026-10-21T21:26:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nNo more forking Tree-sitter grammars.\nPowderworks provides professionally maintained, well-tested Tree-sitter compatible Wasm grammars for security and code analysis, with comprehensive coverage of all the languages you care about.\nThe Tree-sitter ecosystem is great for editors. Its grammars are fast, incremental, and forgiving: they keep highlighting while you type and patch over code they don't understand. Static analysis needs something else. A SAST tool has to read every file the way the language's own tooling does, in the language version the project actually uses, and a grammar that patches or skips over code it doesn't understand means missed findings and false alarms.\nSo teams fork. When a grammar doesn't know a new syntax or a dialect your customers write, you patch your own copy and wait, hoping that the next upstream release will happen sometime this year and address your issue. Our goal is to end the forking: grammars for every programming language, for every version and dialect of each, all continually updated, maintained, and tested.\nOur grammars are Tree-sitter compatible WebAssembly modules. They load into web-tree-sitter like any other grammar, and your queries, cursors, and bindings work just as they do with grammars Tree-sitter generates. They're the same parsers that power\nUr\n.\nTry one for free:\ndownload the Python 3.12 grammar\n, rebuilt every night. This code runs it in Node or a browser:\nimport\n{ Language\n,\nParser }\nfrom\n'web-tree-sitter'\n;\nawait\nParser\n.init\n();\nconst\ngrammar\n=\nawait\nfetch\n(\n'https://ur.dev/samples/ur_python_3_12.wasm'\n);\nconst\npython\n=\nawait\nLanguage\n.load\n(\nnew\nUint8Array\n(\nawait\ngrammar\n.arrayBuffer\n()));\nconst\nparser\n=\nnew\nParser\n();\nparser\n.setLanguage\n(python);\nconsole\n.log\n(\nparser\n.parse\n(\n'print(\"hello\")\\n'\n).\nrootNode\n.toString\n());\nOne grammar per version\nThe same line of code can be valid in one version of a language and an error in the next. Our Python 2.7, 3.8, and 3.12 grammars read these three lines differently:\nCode\n2.7\n3.8\n3.12\nprint \"hello\"\n✅\nError\nError\nif (n := 10) > 5: pass\nError\n✅\n✅\nmatch command:\ncase _: pass\nError\nError\n✅\nA single grammar for every version gets some of these wrong whichever version your project uses, and the scanner, linter, or migration tool built on it misreads your code. Pick the grammar for the version you target: it parses what that version parses, and returns a file the version rejects as one parse error, not a guessed tree. Dialects work the same way: PostgreSQL's\nDISTINCT ON\nparses in our PostgreSQL grammars and fails in our MySQL grammars.\nTested and maintained\nWe test each grammar against its language's reference parser on large real-world codebases, and check each Tree-sitter grammar against Ur's own trees, node for node. We maintain them continuously and fix the bugs you report promptly. Every grammar must parse all the real-world code we test it on, node for node and field for field.\nLanguages, versions, and dialects\nWe currently offer 77 grammars across 13 languages. Each version or dialect is a grammar of its own, named for it:\npython-3.12\nloads as\nur_python_3_12.wasm\n.\nLanguage\nDialect\nGrammars\nC\nGNU\nc-89\nc-99\nc-11\nc-17\nc-23\nJava\nJavac\njava-8\njava-11\njava-17\njava-21\njava-25\njava-27\nJavaScript\nJavaScript\necmascript-2025\necmascript-2025-jsx\nTypeScript\nTypeScript\ntypescript-5.9\ntypescript-5.9-experimental-decorators\ntypescript-5.9-jsx\ntypescript-5.9-experimental-decorators-jsx\nJinja\nJinja2\njinja-3.1\nDbt\njinja-dbt-3.1\nLean\nLean4\nlean-4\nMarkdown\nGFM\nmarkdown-0.31\nPython\nCPython\npython-2.7\npython-3.7\npython-3.8\npython-3.9\npython-3.10\npython-3.11\npython-3.12\npython-3.13\npython-3.14\nFuturePrintFunction\npython-2.7-print-function\nRuby\nCRuby\nruby-3.3\nruby-3.4\nruby-4.0\nRust\nRustc\nrust-2015\nrust-2018\nrust-2021\nrust-2024\nShell\nPOSIX\nshell-posix-2008\nshell-posix-2024\nBash\nshell-bash-3.2\nshell-bash-4.0\nshell-bash-4.1\nshell-bash-4.2\nshell-bash-4.3\nshell-bash-4.4\nshell-bash-5.0\nshell-bash-5.1\nshell-bash-5.2\nshell-bash-5.3\nKsh\nshell-ksh-88\nshell-ksh-93\nZsh\nshell-zsh-5.9\nSQL\nANSI\nsql-ansi\nsql-ansi-jinja\nSQLite\nsql-sqlite-3\nMySQL\nsql-mysql-5.7\nsql-mysql-8.4\nsql-mysql-9.7\nsql-mysql-26.7\nPostgreSQL\nsql-postgres-14\nsql-postgres-15\nsql-postgres-16\nsql-postgres-17\nsql-postgres-18\nsql-postgres-14-jinja\nsql-postgres-15-jinja\nsql-postgres-16-jinja\nsql-postgres-17-jinja\nsql-postgres-18-jinja\nSparkSQL\nsql-sparksql-3.5\nsql-sparksql-4.0\nsql-sparksql-4.1\nsql-sparksql-4.2\nClickHouse\nsql-clickhouse-25.8\nsql-clickhouse-26.9\nTLA+\nSANY\ntlaplus-2\nPricing\nEvery license is perpetual: you keep the releases it covers, and each release includes every grammar in the table above. We're always adding grammars and dialects, and making every grammar more accurate and faster.\nMonthly\n$2,500\nper month\nA perpetual license to every release published that month\nSupport by email and Slack\nAnnual\n$25,000\nper year\nA perpetual license to every release published that year\nSupport by email and Slack\nTwelve months for the price of ten\nEnterprise\nContact us\nEnterprise support\nYour languages first: tell us which grammars you need, and we build them\nWe're working through a list of languages to support next, and enterprise customers' requests go to the front of it. For a license, enterprise support, or anything else, email\ninfo@powderworks.dev\n.\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792779672943_mhtywuiel",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "<think>Let me look at this Show HN post and decide.\n\nThe project is Powderworks — professionally maintained Tree-sitter compatible WASM grammars. The core insight: Tree-sitter's standard grammars are designed for editors (incremental, forgiving, patching over errors), which is bad for static analysis / SAST tools that need to read files exactly as the reference compiler does (with specific versions/dialects). So teams fork grammars. Powderworks provides grammars per version/dialect (e.g. python-3.12, python-3.8, postgres-17) that are well-tested against the language's reference parser.\n\nThis is an interesting product idea: a specialized product for a niche (static analysis tools that need accurate parsing across versions/dialects), presenting a fresh angle on a familiar problem (Tree-sitter grammars). It's a useful sample of what people are building now.\n\nThe pricing is high ($2,500/month), but that's for enterprise/SAST teams. That doesn't disqualify it as an interesting product idea.\n\nI'll decide \"push\" because it presents a clear, well-thought-through insight about why stock Tree-sitter grammars fail for static analysis, and offers a concrete solution (version-specific, tested grammars). It's a nice niche product.</think>{\"decision\": \"push\", \"reason\": \"这是一个清晰的 niche 产品：指出 Tree-sitter 的通用语法为了编辑器容错而牺牲了准确性，不适合需要严格按语言版本/方言解析的代码分析和 SAST 工具，因此提供每个具体版本（如 python-3.12, postgres-17）独立且对照参考编译器测试的 WASM 语法。这种对痛点的洞察和专门的垂直场景很值得一读。\"",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3812,
+            "cached_tokens": 0,
+            "output_tokens": 396,
+            "total_tokens": 4208,
+            "context_tokens": 4208
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": null
+}

@@ -1,0 +1,42 @@
+{
+  "id": 50198769,
+  "title": "Show HN: Podium, presentation rehearsal with coaching",
+  "url": "https://news.ycombinator.com/item?id=50198769",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "jvanveen",
+    "descendants": 0,
+    "id": 50198769,
+    "score": 1,
+    "text": "I&#x27;m horrible at presenting, so it (Claude) built a simple application to practice it with. Hearing myself, a mumbling crowd, rehearsing and discussing the content with the agent, while adapting the presentation seems useful to me. Didn&#x27;t try the other personas yet. Feel free to try: <a href=\"https:&#x2F;&#x2F;code.garage44.eu&#x2F;jeroen&#x2F;podium\" rel=\"nofollow\">https:&#x2F;&#x2F;code.garage44.eu&#x2F;jeroen&#x2F;podium</a> (needs an openai api key)",
+    "time": 1792691419,
+    "title": "Show HN: Podium, presentation rehearsal with coaching",
+    "type": "story"
+  },
+  "sources": [
+    {
+      "url": "https://news.ycombinator.com/item?id=50198769",
+      "fetched_at": "2026-10-23T07:24:07.105507+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50198769",
+      "sha256": "fa2dfb0cda39bd93cd087a029aa0106fe7aac4285d02719027d485958c0675e6",
+      "raw_path": "data/raw/20261023T071728151733Z/fa2dfb0cda39bd93cd087a029aa0106fe7aac4285d02719027d485958c0675e6.html",
+      "content_type": "text/html",
+      "text": "Hacker News\nnew\n|\npast\n|\ncomments\n|\nask\n|\nshow\n|\njobs\n|\nsubmit\nlogin\nShow HN: Podium, presentation rehearsal with coaching\n1 point\nby\njvanveen\n13 hours ago\n|\nhide\n|\npast\n|\nfavorite\n|\ndiscuss\nI'm horrible at presenting, so it (Claude) built a simple application to practice it with. Hearing myself, a mumbling crowd, rehearsing and discussing the content with the agent, while adapting the presentation seems useful to me. Didn't try the other personas yet. Feel free to try:\nhttps://code.garage44.eu/jeroen/podium\n(needs an openai api key)\nhelp\nConsider applying for YC's Winter 2027 batch!\nApplications\nare open till November 2.\nGuidelines\n|\nFAQ\n|\nLists\n|\nAPI\n|\nSecurity\n|\nLegal\n|\nApply to YC\n|\nContact\nSearch:",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50198769",
+      "fetched_at": "2026-10-23T07:24:08.108874+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50198769",
+      "sha256": "fa2dfb0cda39bd93cd087a029aa0106fe7aac4285d02719027d485958c0675e6",
+      "raw_path": "data/raw/20261023T071728151733Z/fa2dfb0cda39bd93cd087a029aa0106fe7aac4285d02719027d485958c0675e6.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

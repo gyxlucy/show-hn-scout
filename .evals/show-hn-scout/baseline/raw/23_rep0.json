@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_7fe059d2ea284a7ca5a4f41d184b9087",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3366,
+      "cached_tokens": 0,
+      "output_tokens": 552,
+      "total_tokens": 3918,
+      "context_tokens": 3918
+    },
+    "transcript": [
+      {
+        "id": "befa4867-abb0-498f-b07f-b53c467297a6",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Tapirscan – Scan barcodes at any angle in the browser\nProject URL: https://tapirscan.f-kleinicke.de/\nPosted (UTC): 2026-10-21T15:17:22Z\n\n## Project page text (fetch status: ok)\n\n```text\nTapirscan: barcode scanning, including rotated barcodes\nTapirscan is a barcode scanner designed for reliable detection, including barcodes rotated\nat different angles. This interactive demo compares its four scanning effort levels—TS-Low,\nTS-Med, TS-High and TS-VHigh—with the independent ZXing and ZBar barcode readers. More\nscanners also offers Quagga2 (linear barcodes), ZXing-JS (with optional extra search\npasses), jsQR (QR codes only, one per scan) and the browser’s native BarcodeDetector where\nsupported.\nWhat you see in the demo\nEach selected scanner analyzes the same image pixels. Colored outlines mark detected barcode\nlocations; nearby labels show the decoded values and the scanners that found them. Scanner\nbuttons and result cards report decoded values and processing times. The four Tapirscan\nlevels offer different trade-offs between scanning effort and speed. This demo lets you\nexplore results on individual images; it is not a comprehensive benchmark.\nTry images, PDFs and your camera\nChoose a demo image, load your own photo, or use a webcam or phone camera. Rotate and zoom\nimages, or double-click or double-tap to move the view center. Fullscreen provides a larger\nview, and Adjust opens rotation and zoom controls for photos and frozen frames. Pause /\nfreeze turns a live camera frame into an image you can explore.\nLoad a PDF to detect barcodes on complete pages. Previous page and Next page let you scan\nthe document page by page, using its stored orientation without zoom, rotation or cropping.\nPDF pages are rendered locally in your browser.\nThe Detect selector offers EAN-13, Retail, Common and All barcode formats. Readers scan the\nformats they support. Read up to controls the input resolution. Save image downloads the\nscanner input as a PNG with its crop, zoom and rotation applied, without the result\noverlays; in live mode it saves the latest analyzed frame.\nImages, PDFs and camera frames are processed locally in your browser and are not uploaded.\nLearn more or use Tapirscan in your own project on\nGitHub\n.\nPackages:\nnpm (JavaScript / TypeScript)\n·\nPyPI (Python)\n·\ncrates.io (Rust)\n.\n```\n\n## HN discussion (1 comment)\n\n- [author] kleinicke: Current open source barcode scanner libraries like zxing and zbar perform (for nowadays) remarkable bad on scanning barcodes. I built the website demo to compare these libraries with a new library (tapirscan), I built out of frustration over them. The existing scanner rely on horizontal or vertical scanlines. My new rust based scanner works well with arbitrary orientations. On the demo website you can try out the library in comparison to zxing and zbar. You can also use your own images or use your webcam to scan objects. By default it just looks at Ean-13 barcodes, but there is a setting to allow more types. I built a test suite with multiple real world images that I labeled and used GPT-6 to develop the algorithm. The code is here: https://github.com/kleinicke/tapirscan The developed library is available at js: https://www.npmjs.com/package/tapirscan , python: https://pypi.org/project/tapirscan/ and Rust: https://crates.io/crates/tapirscan (Where else should I publish it, what languages to support, let me know here or as a GitHub issue and I’ll add it) I know this topic is not a hot topic research wise (therefore there were so little advances in that field in the last 5 years), but I hope to find some people that can use it."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792733287302_fmxnn36ub",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"unsure\", \"reason\": \"The page clearly states what it does: rotation-tolerant barcode decoding, compared against ZXing and ZBar, with browser demos and packages. It does not explain the mechanism beyond saying it is not scanline-based, and the superiority claims rest on the author's own comparison, so the idea's novelty and reliability can't be judged from this evidence.\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3366,
+            "cached_tokens": 0,
+            "output_tokens": 552,
+            "total_tokens": 3918,
+            "context_tokens": 3918
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "Every claim checks out: the page describes rotation-tolerant scanning compared against ZXing and ZBar, with browser demos and npm/PyPI/crates packages. The author contrasts it with scanline-based scanners but gives no further mechanism, and the evidence is the author's own labeled test suite plus a demo the page itself calls 'not a comprehensive benchmark'. The reason is specific to this project, and for an unsure decision it names what is missing: mechanism detail and independent validation."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2313,
+      "inputTokenDetails": {
+        "noCacheTokens": 2313,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 400,
+      "outputTokenDetails": {
+        "textTokens": 191,
+        "reasoningTokens": 209
+      },
+      "totalTokens": 2713,
+      "raw": {
+        "input_tokens": 2313,
+        "output_tokens": 400,
+        "output_tokens_details": {
+          "thinking_tokens": 209
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

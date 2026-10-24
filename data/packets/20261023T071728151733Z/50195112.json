@@ -1,0 +1,67 @@
+{
+  "id": 50195112,
+  "title": "Show HN: Hookman – One stable webhook URL that follows your preview branch",
+  "url": "https://hookman.dev/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "royletron",
+    "descendants": 3,
+    "id": 50195112,
+    "kids": [
+      50195185,
+      50196209,
+      50200170,
+      50195122
+    ],
+    "score": 3,
+    "time": 1792676035,
+    "title": "Show HN: Hookman – One stable webhook URL that follows your preview branch",
+    "type": "story",
+    "url": "https://hookman.dev/"
+  },
+  "sources": [
+    {
+      "url": "https://hookman.dev/",
+      "fetched_at": "2026-10-23T07:24:15.506999+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://hookman.dev/",
+      "sha256": "a31bc3c1929f84f59a688ee836af03c2fba4d5259082cc4ef4ccd63f6d301c0c",
+      "raw_path": "data/raw/20261023T071728151733Z/a31bc3c1929f84f59a688ee836af03c2fba4d5259082cc4ef4ccd63f6d301c0c.html",
+      "content_type": "text/html",
+      "text": "Configure once.\nRoute forever\nCreate permanent webhook endpoints that automatically route to the correct branch deployment. No more updating links. No more confusion.\n< 2ms routing latency · Cloudflare edge · 1,000 webhooks/month free\nTry it for free\nRead the docs\nhookman.dev/w/acme/payments\nLIVE\nSOURCE\nMETHOD\nSTATUS\nLATENCY\nROUTED TO\nstripe.com\nPOST\n200\n1.8ms\npr-42.acme.app/webhooks\nstripe.com\nPOST\n200\n2.3ms\npr-42.acme.app/webhooks\npaddle.com\nPOST\n200\n1.9ms\npr-42.acme.app/webhooks\n$\nhookman switch\n--branch\nmain\n✓ switched\nstripe.com\nPOST\n200\n1.6ms\napp.acme.com/webhooks\npaddle.com\nPOST\n200\n2.0ms\napp.acme.com/webhooks\nstripe.com\nPOST\n···\napp.acme.com/webhooks\nRouting\nmain\n→ app.acme.com\nA new way to work\nBranches change.\nEndpoints don’t\nHookman sits between your webhook providers and your deployments, so Stripe, Paddle and the rest can keep pointing at the same endpoint.\nSwitch branches, add routing rules or send the same event to multiple deployments without touching your provider configuration.\nBranch A\nBranch B\nLive\nSetup\nUp in 3 minutes\n01\nCreate a project\nCreate an account and project. The project slug becomes part of your permanent Hookman webhook endpoint.\nhttps://hookman.dev/w/your-org/your-project\n02\nRegister your deployments\nTell Hookman where each branch is running using the dashboard, CLI or GitHub Action.\nhookman register \\\n--branch\nfeature/checkout\n\\\n--url\nhttps://pr-42.myapp.com/api/webhooks/stripe\n03\nPoint your provider at Hookman\nUpdate Stripe or another webhook provider once to use the Hookman endpoint. You then leave it unchanged.\nWebhook URL\nhttps://hookman.dev/w/acme/payments\n04\nSwitch branches in one click\nChoose the active deployment from the dashboard or CLI, or automate the process through GitHub.\nhookman switch \\\n--project\npayments\n\\\n--branch\nfeature/checkout\n# Webhooks now routed to feature/checkout\n<\n#1 Switch routing\n“\nPoint\na\nwebhook\nsomewhere\nbut\nlet\nme\nchange\nit\nlater\n”\nPick a deployment, hit activate, done. Every webhook that hits your endpoint goes there until you say otherwise. No dashboard trips to Stripe, no ngrok URL in a Slack thread, no redeploy.\n#2 Replay\n“\nSend\nme\nthat\nwebhook\nagain,\nexactly\nas\nit\nwas\n”\nEvery payload is kept — real headers, real bytes. Hit replay and it goes again, to the same deployment or any other. Signatures still verify, so there is no begging Stripe for another test event.\n#3 Fan-out\n“\nLet\nme\ntest\nagainst\nreal\ntraffic\nwithout\ntouching\nprod\n”\nMirror every default-routed webhook to extra deployments while production keeps running. Toggle it per deployment and switch it off when you are done.\n>\nCapabilities\nWhat Hookman does\nSwitch the active branch\nFlip which deployment is live from the dashboard or\nhookman switch\n. Every webhook with no matching rule follows the active deployment — instantly, no provider changes.\nDynamic routing rules\nMatch on a header, query param or a field in the JSON body. First match wins; otherwise it falls through to the active deployment. The CLI and GitHub Action can register rules per-branch on deploy.\nFan-out\nMirror every default-routed webhook to extra deployments at once — test a refactor against real traffic while production keeps running. Toggle it per deployment.\nReplay any webhook\nEvery payload is stored. Re-deliver it to any deployment without triggering a real payment or event again — syntax-highlighted bodies and headers in the log viewer.\nAuto-register via CI\nThe GitHub Action registers a deployment (and its branch rule) on every push, and tears it down when the PR merges. Scoped API keys keep CI access tight.\nRetry on failure\nIf your branch is still spinning up, Hookman retries delivery with backoff rather than dropping the webhook. Pro and Team.\nLogging\nEvery webhook, on the record\nStart at the wall of green. Drill into the one that isn't. Replay it once it's fixed.\nConfidence\nKnow it's working, without asking anyone.\nEvery delivery is logged the moment it happens: status, timing, target, and the rule that picked it. Filter by status, method, time window or routing key and scan. A wall of 2xx is the whole answer, and you didn't write a line of logging to get it.\nLogging sits off the hot path: the webhook is answered first, the record written after. Your provider never waits on us.\nReceived\nMethod\nRouting\nStatus\nLatency\n20/09/2026, 12:02:38\nPOST\nswitch\n200\n1.8ms\n20/09/2026, 12:01:12\nPOST\nswitch\n200\n2.3ms\n20/09/2026, 11:20:37\nPOST\nswitch\n200\n1.9ms\nDiagnosis\nWhen one goes red, open it.\nThe log holds both halves of the exchange: the request exactly as it arrived — headers, body, source — and the response your endpoint sent back. Failures are named, not guessed: timed out, connection refused, upstream 5xx. You'll know in a second whether your server rejected the webhook or never received it.\nIf routing was the problem, the log shows which rules were evaluated and why none matched.\nReceived\n20/09/2026, 09:41:31\nMethod\nPOST\nStatus\n200\nLatency\n730ms\nRouting\nswitch\nReplay\nno\nSource IP\n3.209.55.129\nRouted to\nhttps://api.hybridtrainingplan.app/auth/strava/webhook\nReplay\nFixed it? Send the same webhook again.\nThe original payload is kept — real headers, real bytes, 7 days on Free, 30 on Pro, 90 on Team. Hit replay and it goes again: to the same target, or to any other deployment on the project, including your laptop.\nSignatures still verify, because it's the same request, not a reconstruction. No begging Stripe for another test event.\nReceived\nmain - https://api.hybridtrainingplan.app/auth/strava/webhook\nRe-send to:\nhttps://api.hybridtrainingplan.app/auth/strava/webhook\nReplay\nPricing\nTransparent pricing\nFree\n£0\n/mo\nFor solo devs and side projects.\n1 project\n3 deployments per project\n1,000 webhooks/month\n7-day log retention\nAll routing methods\nWebhook replay\nStart free\nMost popular\nPro\n£12\n/mo\nFor active teams shipping regularly.\n10 projects\n20 deployments per project\n50,000 webhooks/month\n30-day log retention\nRetry on failure\n£0.50/1k overage\nStart with Pro\nTeam\n£49\n/mo\nFor teams with multiple collaborators.\nUnlimited projects\nUnlimited deployments\n500,000 webhooks/month\n90-day log retention\nUp to 5 team members\nPriority support\nStart with Team\nFull pricing comparison →\nNews\nLatest from Hookman\nAll posts →\nProduct\n11 October 2026\n3 min read\nWatch webhooks arrive, and see why they went where they did\nDR\nDarren Royle\nPreview\n8 October 2026\n2 min read\nInboxes, in preview\nDR\nDarren Royle\nChangelog\n21 Oct 2026\nFixed\ndashboard ·\nOverview chart stays empty after a hard refresh\nChangelog\n12 Oct 2026\nNew\nLive tail and routing decisions (hookman tail, live dashboard log, 'why did it go there?')\nRelease\n@hookman/cli v0.13.0\nFixed\ncli ·\nHookman tail prints its ready line to stderr in --json mode too\nRelease\n@hookman/cli v0.13.1\n“\nHookman has changed everything for me. Don’t wait, just try it and start feeling the benefits.\n— Wes West, Creative Director at Jolt Studio\n”\nNever reconfigure a webhook again\nGet a Hookman endpoint in 60 seconds. Free to start, no card required.\nGet your endpoint free",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50195112",
+      "fetched_at": "2026-10-23T07:24:16.927501+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50195112",
+      "sha256": "6e016cde49cedb1ab289bf6ef3e87b70f5415fda10fd061a8a59a08fb8cf091c",
+      "raw_path": "data/raw/20261023T071728151733Z/6e016cde49cedb1ab289bf6ef3e87b70f5415fda10fd061a8a59a08fb8cf091c.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50195185",
+          "by": "pkennethkent",
+          "is_author": false,
+          "text": "How do you handle the case where multiple developers are testing different branches at the same time?"
+        },
+        {
+          "id": "50195387",
+          "by": "royletron",
+          "is_author": true,
+          "text": "Good question! Dependant on your use case you can either 1) 'fan out' - so send the same request to two different endpoints or 2) 'dynamic route' - so if there is something within the payload, or header content that identifies the request e.g. {userId: \"royletron\"} we can route these to different deployments."
+        },
+        {
+          "id": "50196209",
+          "by": "wesayso",
+          "is_author": false,
+          "text": "Why not just use a tunnel, or stripe listen?"
+        }
+      ]
+    }
+  ]
+}

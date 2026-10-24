@@ -11,7 +11,7 @@ build-eval.md 检索版本 SHA：`ba875b712ba63135c60aaba4710bf84681ddf34b`。
 - `data/browser/<run>/<HN id>.txt`：4 个动态页面的浏览器阅读快照。
 - `data/raw/<run>/`：原始 HTML / JSON 与采集清单。
 - `data/review/feedback.jsonl`：用户实际反馈，尚未标注时文件不存在。
-- `review/batch-*.md`：隐藏票数和助手结论的审阅材料。
+- `review/batch-*.md`：隐藏票数的审阅材料，每张卡附助手建议判断与理由（供快速审阅，不是标签，也不进入模型输入）。
 - `review/assistant-baseline.md`：助手的定性初评，不是用户 gold，不是模型 API 基线分数。
 
 ## 后续执行顺序

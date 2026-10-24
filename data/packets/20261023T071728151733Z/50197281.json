@@ -1,0 +1,71 @@
+{
+  "id": 50197281,
+  "title": "Show HN: XTrace – productivity observability tool for coding agents",
+  "url": "https://github.com/XTraceAI/xtrace-desktop",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "TristanX",
+    "descendants": 4,
+    "id": 50197281,
+    "kids": [
+      50199796,
+      50201339
+    ],
+    "score": 5,
+    "time": 1792685148,
+    "title": "Show HN: XTrace – productivity observability tool for coding agents",
+    "type": "story",
+    "url": "https://github.com/XTraceAI/xtrace-desktop"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/XTraceAI/xtrace-desktop",
+      "fetched_at": "2026-10-23T07:24:11.926528+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/XTraceAI/xtrace-desktop",
+      "sha256": "febea927b6fb18965bca863a36ee941f63a39b096155b7a5dede772a7d5c6dc7",
+      "raw_path": "data/raw/20261023T071728151733Z/febea927b6fb18965bca863a36ee941f63a39b096155b7a5dede772a7d5c6dc7.html",
+      "content_type": "text/html",
+      "text": "XTrace\nKnow where your coding time and money go.\nAn open-source macOS app for people who code with agents. See agent activity,\nestimated human time and API-equivalent spend from the Claude Code, Codex and\nCursor history already on your Mac. Track Claude and Codex account usage and pace\nin the sidebar.\nDownload for Mac\n·\nSetup guide\n·\nReport a bug\nSee it in 44 seconds\nxtrace-launch-44s-logo.mp4\nScreenshots and the video show the app with made-up sample projects and account usage, not real work.\nWhy XTrace\nYou run several agents, try a new tool, or change how you prompt. XTrace helps you\nsee what changed in your time, spend and activity:\nWhere did my time go?\nSee agent activity alongside estimated human time,\nthe ratio between them, and how many sessions ran at once.\nWhat would this cost at API prices?\nExplore spend by day and session,\nestimated from published API rates rather than your subscription bill.\nWhat can I improve?\nRun scoring skills on a project, read their findings,\nand add your own skills or ones you discover.\nWill my usage last until the reset?\nSee account limits, whether you are\nahead of or behind even use, and a forecast at your current pace.\nWhat happened during a session?\nInspect activity spans, prompts and recorded\ncontext compactions on a timeline.\nUse the daily charts and previous-period comparisons to investigate changes after\nadopting a tool or workflow. Compare similar work and consider what you shipped\nand the review it needed: more agent hours alone do not prove a productivity gain.\nFeatures\nTime, spend and parallel work\nCompare estimated human time and agent activity together in the\nhuman + agent\nview, or switch to agent hours, human hours or API-equivalent cost for the last\n7, 14 or 30 days. The overview shows leverage (agent hours divided by estimated\nhuman hours), concurrency and hands-off time, with previous-period comparisons.\nDefinitions explain how each number is counted and what is missing. Values the\napp could not measure show as a dash, not zero.\nScores: find what to improve\nUse scoring skills to review your project instructions, comments, repeated code,\ndocumentation and agent setup. Open a skill to grade a project and read its score,\nfindings and suggested fixes. The screenshot shows the built-in CLAUDE.md Doctor\nalongside four example added skills.\nSample scores and findings across 14 fictional projects, not measured grading results.\nAdd your own installed skills or discover skills through a public GitHub link.\nA skill needs a scoring rubric;\nMake a rubric\ncan create one for a suitable\nreview skill before you add it. Skills that need to modify a project or access\nthe network may not be suitable. See\nadding skills and rubrics\n.\nGrading and rubric creation run Claude Code on your Claude account and use your\nClaude usage. Grading reads project content and keeps the project read-only;\nthese are actions you start, separate from local history indexing. See\nYour data\nfor what is sent and stored.\nUsage pace and forecasts\nClaude and Codex usage stays in the sidebar when your local tools can report it.\nGreen and orange indicators show usage behind or ahead of an even pace. Expand a\nprovider to see remaining usage, daily readings and a linear forecast based on\naverage use since the weekly window began. The forecast assumes that pace\ncontinues; it is an estimate, not a guaranteed run-out time.\nSession activity and compactions\nSee active spans and gaps across your sessions, then hover a span for its prompt\nand activity details. Compaction counts show how often the saved context was\nsummarized. Counts cover the session's saved history; timeline markers show\nrecorded compaction times within the visible range. Hover a marker to see when it\nhappened and its trigger, when the source provides one. Unknown or unsupported\nreadings stay distinct from a confirmed zero.\nThe Sessions page brings your indexed Claude Code, Codex and Cursor sessions into\none list. Find a session by ID, repo or branch, filter by tool, and open its local\ntranscript. Codex and Cursor need the bundled readers and Python 3.10 or newer;\nmissing readers and unsupported formats show an unavailable state. Cursor SQLite\ntranscripts are not supported. A sub-session whose parent session can't be\nconfirmed is left out of the list.\nPull requests and quick access\nMerged pull requests show the effort of their linked sessions: tokens, your\nmessages, agent time and hands-off time. A session linked to several pull requests\ncounts in full toward each of them. Pull request details come from GitHub's\ncommand-line tool (\ngh\n) when it is installed and signed in. XTrace never posts\nto GitHub.\nThe menu bar keeps today's activity one click away. Settings includes light, dark\nor system appearance, the human-time break threshold, index status,\nstorage controls and the telemetry switch.\nWhat the time numbers mean\nHow is agent time counted?\nXTrace groups recorded events within each session\ninto activity spans. Gaps longer than 20 minutes are excluded. Overlapping\nsessions add together, so this measures session activity rather than pure model\ncompute time or elapsed time on a clock.\nHow is human time estimated?\nXTrace uses messages classified as sent by you,\nexcluding recognized automated messages, across conversations and tools on one\ntimeline. Consecutive messages at most 60 minutes apart count as one working\nstretch. You can change that break threshold in Settings. A single isolated\nmessage adds no time; an unknown message classification makes the estimate\nunavailable rather than silently lowering it.\nDoes reviewing diffs count?\nReviewing is not detected directly. If you send\nmessages at 2:00 and 2:40 and review in between, those 40 minutes count with the\ndefault threshold. Review after your last message is not automatically included.\nOther activity between those messages can count too, so this is an estimate of\nyour work with agents, not a record of every minute worked.\nDoes this identify who edited a file?\nNo. Agent time measures recorded agent\nactivity, and human time uses message timing. They can overlap. These metrics do\nnot attribute individual edits or lines to you or an agent.\nInstall\nDownload the\n.dmg\nfrom the\nlatest release\n.\nDrag\nXTrace\ninto\nApplications\n.\nOpen it. The first scan reads your existing history and shows its progress.\nRequires an Apple Silicon Mac with macOS 14 or newer. Claude Code history is read\ndirectly; Codex and Cursor history needs Python 3.10 or newer. Cursor\nconversations kept only in the Cursor app's own database are not read. The app\ndownloads signed updates and installs them when you click\nRestart to update\n.\nSee the\nsetup guide\nfor first launch and troubleshooting.\nYour data\nLocal history indexing.\nXTrace reads the history files your agents already\nsave without editing them or automatically uploading their transcripts.\nMetrics, not full transcripts.\nBy default the local database keeps metrics,\nrepository paths, IDs and a preview (up to 280 characters) of each message you\nsent and of each recognized Claude Code background-task summary. Previews can't\nbe turned off. Full transcripts are saved only if you turn that on. Settings\ncan delete saved text; anything imported afterwards, including older messages,\ngets new previews.\nScoring uses Claude.\nWhen you start a grade, Claude Code reads the selected\nproject and skill; that content can be sent to Claude on your account. Making a\nrubric similarly uses the selected skill's content. Grading keeps the project\nread-only and blocks network access for sandboxed commands; that does not make\nClaude's model requests offline. The run's transcript is not saved by Claude\nCode; XTrace keeps the resulting scores, summaries, findings and reports. See\ngrading and rubric details\n.\nOther network use.\nXTrace uses the network for anonymous usage telemetry\n(see\nTelemetry\n), account usage readings, GitHub pull request checks,\napp updates, and public GitHub look-ups and downloads you start with\nAdd from\na link\n. Keeping a skill stores it locally and links it into normal Claude Code\nsessions when its name is free there. Claude usage checks run your local Claude\nCode about every ten minutes, which adds small entries to Claude Code's own\nsettings and history.\nMore about local storage and account-usage checks is in\ndata and network\n.\nTelemetry\nXTrace sends a few anonymous usage events, such as when the app is opened\nand roughly how often it is used, with the app version, the macOS version, which\ncoding agents have history on this Mac and a random ID. It never sends repository\nnames, file paths, prompts or other conversation text, pull-request links, token\ncounts or costs. Telemetry is on by default, and nothing is sent until the app has\nshown a notice about it. Turn it off with\nTurn off\nin that notice, the switch in\nSettings, or by starting the app with\nXTRACE_TELEMETRY=0\n.\nTELEMETRY.md\nlists every event and property.\nStatus\nXTrace is a public beta. Some numbers can be incomplete when part of your\nhistory is missing. Rulebook and Leaderboard are marked as coming soon in the sidebar. See the\nbeta testing limits\n.\nBuild from source\nYou need macOS 14 or newer, Xcode command-line tools, Rust 1.94.1, Node 22.23.1\nand pnpm 10.33.0.\npnpm install --frozen-lockfile\npnpm check\ncargo\ntest\n--workspace --locked\npnpm tauri dev\nA development build reads your local history by default.\nDEVELOPING.md\ncovers sample data, all required checks and native verification, and the\narchitecture map\nexplains how the pieces fit together.\nContributing\nIssues and pull requests are welcome. Read the\ncontributor guide\nfor review and DCO sign-off, and the\ncode of conduct\n.\nSecurity reports go through\nSECURITY.md\n.\nLicense\nSource code is licensed under\nApache-2.0\n. The XTrace name and logo are\ncovered by the\ntrademark terms\n.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50197281",
+      "fetched_at": "2026-10-23T07:24:14.307674+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50197281",
+      "sha256": "c723a16bfcb933690fdd053ce4f4609148490d8847698535bba825b4219fa2e0",
+      "raw_path": "data/raw/20261023T071728151733Z/c723a16bfcb933690fdd053ce4f4609148490d8847698535bba825b4219fa2e0.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50199796",
+          "by": "h164654156465",
+          "is_author": false,
+          "text": "Dear author, what's the highlight of this tool among the competitive and extensive agent observability tool? This looks cool by the way."
+        },
+        {
+          "id": "50200687",
+          "by": "TristanX",
+          "is_author": true,
+          "text": "Glad you like it! 3 things that we are different: > we calculate user agent:human time leverage (we have a robust mechanism to math that out)\n> we use linear extrapolation to predict when you will use your usage before reset so you can adjust your pace\n> we have built out the framework for anyone to grade their coding session history and environment for the indexes they care about with agent skills. i.e. claude.md doctor, comment hygiene, spec drift, subagent cost, etc"
+        },
+        {
+          "id": "50201339",
+          "by": "kevinsslin",
+          "is_author": false,
+          "text": "Looks cool :), if it can coaching me on how to make my agent or workflow even customized skill more effective that will be super helpful!"
+        },
+        {
+          "id": "50203388",
+          "by": "TristanX",
+          "is_author": true,
+          "text": "briliant idea! I'm adding that to the next release which should come to live this weekend"
+        }
+      ]
+    }
+  ]
+}

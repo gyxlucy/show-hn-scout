@@ -1,0 +1,52 @@
+{
+  "run": {
+    "task_id": "ct_2f4ffbcf2da84d42a276c83e151e79c5",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 2636,
+      "cached_tokens": 0,
+      "output_tokens": 330,
+      "total_tokens": 2966,
+      "context_tokens": 2966
+    },
+    "transcript": [
+      {
+        "id": "0beba6b9-1b49-40fa-b3d4-50922561f438",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792778925882_iccsquyjz",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "<think>This is an interesting Show HN post. Let me analyze it.\n\nTitle: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\n\nThis is a browser demo called \"lgit\" - version control where the storage is a neural network. You commit code/images, it trains a small neural network to memorize them, and checkout reconstructs from memory. It's an educational/fun tool that shows how neural networks memorize/reconstruct data, and how neural corruption breaks programs in novel ways.\n\nThis fits several of the push criteria:\n- An interesting product idea: a fresh, clever take on version control / data storage using neural networks.\n- A creative way of explaining/presenting how neural networks work.\n- A useful sample of what people are building now - interesting and instructive.\n- Works in the browser, nice demo.\n\nThis is a fun, educational project that's clever and presented well. I'll push it.\n\nReasoning in Chinese: 一个用神经网络作为存储后端的版本控制工具（lgit），非常巧妙且具有教育意义的展示，能直观看到神经网络如何记忆数据以及神经网络特有的损坏方式，很有意思。</think>{\"decision\": \"push\", \"reason\": \"一个用神经网络作为存储后端的版本控制工具（lgit），非常巧妙且具有教育意义，能直观展示神经网络如何记忆数据以及神经网络特有的数据损坏方式，很有意思。\"}]}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 2636,
+            "cached_tokens": 0,
+            "output_tokens": 330,
+            "total_tokens": 2966,
+            "context_tokens": 2966
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": null
+}

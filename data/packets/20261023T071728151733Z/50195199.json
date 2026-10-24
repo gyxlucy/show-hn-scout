@@ -1,0 +1,59 @@
+{
+  "id": 50195199,
+  "title": "Show HN: Unspin – live per-step progress for Claude Code's shell commands",
+  "url": "https://github.com/nkyriazis/unspin",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "nkyriazis",
+    "descendants": 2,
+    "id": 50195199,
+    "kids": [
+      50195878,
+      50195269
+    ],
+    "score": 2,
+    "time": 1792676484,
+    "title": "Show HN: Unspin – live per-step progress for Claude Code's shell commands",
+    "type": "story",
+    "url": "https://github.com/nkyriazis/unspin"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/nkyriazis/unspin",
+      "fetched_at": "2026-10-23T07:23:55.160034+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/nkyriazis/unspin",
+      "sha256": "935aa1b27fce594abba90e3a63baa6fd1f59efdfa172629626f7e02d46c860b4",
+      "raw_path": "data/raw/20261023T071728151733Z/935aa1b27fce594abba90e3a63baa6fd1f59efdfa172629626f7e02d46c860b4.html",
+      "content_type": "text/html",
+      "text": "unspin\nSee what your coding agent's shell commands are doing, instead of a spinner.\nWhen Claude Code runs a long shell command, you get the command and a spinner until it ends. Is it installing? On the fourth of fifty downloads? Stuck? You can't tell. unspin teaches the agent to mark the steps of its batched commands as it goes, and shows them live. Claude Code's own spinner names the step that is running, and a block above the prompt lists every step with a progress bar, its time and an ETA.\n✻ Baking · building image 37/72, eta 33s… (1m 12s · ↓ 2.1k tokens)\n▶ Ship the release  step 4/6 · 1m14s\n✔ linting 1.2s\n✘ running tests 120/120 — 1 of 120 failed 23s\n· test_88.py is a known flake, carrying on\n⠴ building image 35s  ━━━━━───── 37/72 · eta 33s · layer sha256:ab12cd34ef56\nInstall\nIn Claude Code, install the plugin. There is nothing to configure.\n/plugin marketplace add nkyriazis/unspin\n/plugin install unspin@unspin\nRestart Claude Code, then ask Claude to run the\nunspin demo\ncommand.\nPrefer the flow under your status line, or still on Claude Code before 2.1.287? Use the installer instead. It backs up\nsettings.json\nbefore changing it.\ncurl -fsSL https://raw.githubusercontent.com/nkyriazis/unspin/main/install.sh\n|\nbash\nMore ways to install\ncovers both at once, other agents and installing from a clone.\nEveryday use\nTell Claude once, at the start of a session.\nuse unspin from now on\nFrom then on, when it batches several steps into one command or starts something long, such as a build, a test run, a loop over files or a wait for a server, it marks the steps and you watch them as they go. A hook reminds it when it forgets. A long job can also run in the background with its progress in view.\nTo have this in every session without asking, add a line like this to\n~/.claude/CLAUDE.md\n.\nUse the unspin skill for batched and long-running shell commands, so I can see their steps and progress live.\nWhat the agent writes\nThe skill gives Claude a few shell functions. A typical command looks like this.\nsource\n\"\n${CLAUDE_SKILL_DIR}\n/unspin.sh\n\"\nflow\n\"\nShip the release\n\"\n6\nrun -q\n\"\ninstalling dependencies\n\"\nnpm ci\nflow_each -j 4\n\"\noptimizing images\n\"\nassets/\n*\n.png -- optipng -quiet {}\nrun -p\n\"\nbuilding\n\"\nninja -C build\nrun\n\"\nunit tests\n\"\nnpm\ntest\n&\nrun\n\"\nlint\n\"\nnpm run lint\n&\nwait\nflow_wait -t 60\n\"\nwaiting for the preview\n\"\n-- curl -sf localhost:3000/health\nCall\nWhat it does\nflow \"Title\" [N]\nStarts a flow of N steps\nstep \"msg\"\n,\nok\n,\nfail\n,\nnote \"msg\"\nOpen a step, close it, or add a note\nrun \"msg\" cmd…\nA step around one command, closed by its exit status.\n-l\nshows its latest output line,\n-p\nreads counts like\n[3/10]\nfrom it,\n-q\nkeeps the output in a log and prints only the tail if it fails\nprogress N [TOTAL] [\"label\"]\nMoves the bar. Counts can carry units (\n1.2G/4G\n) or be percentages\nflow_each [-j N] \"msg\" items… -- cmd {}\nA loop with one bar, the current item and a failure tally, N at a time\nflow_wait [-t SECS] \"msg\" -- cmd…\nRetries until cmd succeeds, with a bar for the time\ncmd | flow_lines [-p]\nCounts output lines as progress, or reads counts from them\nJobs started with\n&\neach get their own row. The\nskill\nhas the details the agent reads.\nWhere it shows\nWhere\nHow\nClaude Code's spinner, and the band above the prompt\nthe plugin\nUnder your Claude Code status line\nunspin setup\n, which the installer runs\nYour own status line script\nunspin block \"$session_id\"\nprints the block, or nothing\nccstatusline and other status line builders\na custom command running\nunspin statusline --line\nA second terminal or a tmux pane\nunspin watch\nThe tmux status bar\nset -g status-right '#(unspin tmux)'\nand\nset -g status-interval 1\nCodex, Gemini CLI, opencode, Goose, Cline, Cursor, Amp\neach step is also printed to the command's stderr, which these agents show\nHow it works\nThe helper appends one line per event to a file for the agent session, in\n$XDG_RUNTIME_DIR/unspin\nor\n/tmp/unspin-<uid>\n. The plugin reads that file twice a second and the status line once a second, and both draw it. No daemon runs and nothing goes over the network. The helper writes to that file and not to stdout, so the agent still reads the command's own output.\nEach event is a plain line of text, so anything that can append to a file can report progress. A Python loop, a Makefile and a hand-typed\necho\nall work. The format is in\ndocs/protocol.md\n.\nA step remembers the process that opened it. If that process dies before closing the step (you pressed Esc, the shell was killed), the step shows as interrupted instead of spinning forever. Steps that are running or have failed stay in view when later steps would push them out. A short reminder reaches Claude when it writes a batched command without the helper, at most once every five minutes. When you send your next prompt the finished flow is put away.\nConfiguration\nSet these in the environment, or under\nenv\nin Claude Code's\nsettings.json\n.\nVariable\nDefault\nEffect\nUNSPIN_ROWS\n4\nSteps shown under the header\nUNSPIN_SPINNER\n1\n0\nkeeps the plugin out of the spinner\nUNSPIN_BAND\n1\n0\nkeeps the plugin out of the band above the prompt\nUNSPIN_NUDGE\n1\n0\nstops the reminder to instrument batched commands\nUNSPIN_ECHO\nauto\n1\nalso writes each step to stderr,\n0\nnever does. Auto turns it on in agents without a live status line\nUNSPIN_ASCII\n0\n1\ndraws with plain ASCII\nNO_COLOR\nTurns color off in the status line\nUNSPIN_DIR\nWhere flow files go\nWorks with\nbash 3.2 (the one macOS ships) to 5.3, and zsh. gawk, mawk, busybox awk and BSD awk. Linux and macOS. The test suite runs the helper under each of these shells and the status line renderer under each of these awks, and the plugin's mod under Claude Code's own test kit.\nTroubleshooting\nunspin doctor\nchecks the install and says what to fix.\nIf the plugin is installed but nothing shows in the spinner or above the prompt, mods may be off for your account or organization.\nclaude --debug\nlogs why a mod did not load. The status line works either way, so until that changes, add it next to the plugin as in\nMore ways to install\n.\nMore ways to install\nBoth places.\nWith the plugin installed, run the installer with\n--statusline\n. It then adds only the status line.\ncurl -fsSL https://raw.githubusercontent.com/nkyriazis/unspin/main/install.sh\n|\nbash -s -- --statusline\nOther agents.\nnpx skills add nkyriazis/unspin\ninstalls the skill for Codex, Gemini CLI, opencode, Cursor, Goose and the other agents\nskills\nknows about.\nWhere it shows\nsays what you see in each.\nFrom a clone.\ngit clone https://github.com/nkyriazis/unspin && unspin/install.sh\ninstalls that working copy.\nUninstall\nThe plugin goes with\n/plugin uninstall unspin@unspin\n. The installer's setup goes with\nunspin uninstall\n, which restores your status line and hooks, and then\nrm -rf ~/.local/share/unspin\nremoves the files.\nLicense\nMIT",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50195199",
+      "fetched_at": "2026-10-23T07:23:58.931557+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50195199",
+      "sha256": "3fe2d950b2cc30c002a00c3e2d9de8c62429ad54be6d4ac15f77430d0d13f2d3",
+      "raw_path": "data/raw/20261023T071728151733Z/3fe2d950b2cc30c002a00c3e2d9de8c62429ad54be6d4ac15f77430d0d13f2d3.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50195878",
+          "by": "nkyriazis",
+          "is_author": true,
+          "text": "When you enable it does two things: \n - it biases the model to act in compounds, a bit more, i.e. get more done in less tool uses\n - it pushes for the right amount of feedback while waiting, on the spinner or at the status bar"
+        },
+        {
+          "id": "50195269",
+          "by": "nkyriazis",
+          "is_author": true,
+          "text": "I know that lately watching claude work isn't a thing, but, when it's not that time..."
+        }
+      ]
+    }
+  ]
+}

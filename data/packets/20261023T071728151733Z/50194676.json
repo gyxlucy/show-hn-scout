@@ -1,0 +1,42 @@
+{
+  "id": 50194676,
+  "title": "Show HN: OpenSocials, plan and approve social posts",
+  "url": "https://opensocials.thecompound.tech",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "kyisaiah47",
+    "descendants": 0,
+    "id": 50194676,
+    "score": 1,
+    "time": 1792673645,
+    "title": "Show HN: OpenSocials, plan and approve social posts",
+    "type": "story",
+    "url": "https://opensocials.thecompound.tech"
+  },
+  "sources": [
+    {
+      "url": "https://opensocials.thecompound.tech",
+      "fetched_at": "2026-10-23T07:24:03.246412+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://opensocials.thecompound.tech",
+      "sha256": "f186568f996d9da4559339f6ef52c792c12a76ce76dd36aef53d30b455c9cd4b",
+      "raw_path": "data/raw/20261023T071728151733Z/f186568f996d9da4559339f6ef52c792c12a76ce76dd36aef53d30b455c9cd4b.html",
+      "content_type": "text/html",
+      "text": "One morning with OpenSocials\nThis is how drafting and review fit into a day. The times come from the plan above.\nStart free\n07:30\n1\nof 6\nThe day's drafts are ready.\nYour AI wrote one draft for each slot from your product's facts. Each draft passed checks for length, links, repeats and claims missing from your facts.\n5 drafts are waiting\n4 clean\n1 needs a fact\nThursday 9 October\nMaya Ortiz\n10:40\nOur\n2.4\nrelease\nadds\nrecurring\nbills.\nclean\nYour product\n12:15\nSet\nthe\nrent\nonce,\nand\nevery\nflatmate\nsees\ntheir\nshare\non\nthe\n1st.\nclean\nyourproduct.bsky.social\n14:06\nclean\nMaya Ortiz\n17:20\nneeds a fact\nSam Lee\n19:00\nclean\nLength\nLinks\nRepeats\nClaims in your facts\n07:31\n2\nof 6\nA refused draft was already rewritten.\nOne Bluesky draft claimed something your facts do not say. OpenSocials refused it and wrote it again in the same slot.\nyourproduct.bsky.social · 14:06\nrefused\nThe best way\nto split bills is here.\nNot in your facts: “The best way”\nyourproduct.bsky.social · 14:06\nrewritten, now clean\nSet\nthe\nrent\nonce,\nand\nevery\nflatmate\nsees\ntheir\nshare\non\nthe\n1st.\nF6\nSame slot, every check passed\n07:32\n3\nof 6\nYou approve the clean drafts.\nApprove all clean takes the four drafts that passed. You check the per-platform previews for the fifth and press A.\n4 clean drafts\nApprove all clean (4)\n⇧A\nMaya Ortiz\n10:40\nOur 2.4 release adds recurring bills.\napproved\nYour product\n12:15\nSet the rent once, and every flatmate sees their share on the 1st.\napproved\nMaya Ortiz\n17:20\nneeds a fact\nLinkedIn\nAs Bluesky\nApprove\nA\nEdit\nE\n⇧A\napprove all clean\nJ\nK\nmove\nA\napprove\nE\nedit\n07:33\n4\nof 6\nYou change your mind once.\nEach approval waits 60 seconds before it posts. You press Z, and the YouTube draft returns to the queue.\nReleasing\nYour product\n18:40\n0:41\nreleases in\n0:41\nUndo\nZ\nZ\nQueue\nYour product\n18:40\nback in the queue\n09:05\n5\nof 6\nPosts go out on schedule.\nEach post goes out in its slot through the platform's official API. If a platform times out, the post stays owed and OpenSocials retries.\n08:00\n12:00\n16:00\n20:00\nYour product\n09:05 sent\n12:15 waiting\nSam Lee\n11:30 sent\n16:30 retrying at 16:45\n09:05 sent on YouTube\n16:30 retrying at 16:45\nofficial API\nLater\n6\nof 6\nAn account earns auto-approve.\nAfter 20 clean approvals in a row, you can turn on auto-approve for that account. One rejection sets the count back to zero.\nBluesky\n20\nof 20\nAuto-approve\nready to turn on\nConnect the AI that writes your drafts.\nThe AI sees only your facts. Bring your own AI costs $9 a month on OpenSocials, and your provider bills you separately for drafts. You can switch the AI later in Settings.\nOpenRouter\nSign in and approve in one click. OpenRouter takes the cost of each draft from your OpenRouter credits.\n$9 a month plus OpenRouter credits\nA free\nGemini key\nWe walk you through Google AI Studio and test the key. The key is free, and Google's free tier covers a few drafts a day.\n$9 a month, free key\nYour\nOpenAI or\nAnthropic key\nPaste a key you already have. That company bills you for each draft.\n$9 a month plus your provider's bill\nAI included\nOur AI writes up to 300 drafts a month. You set up nothing, and no provider bills you.\n$19 a month, nothing else\nPricing\nStart free and add AI when you want drafts written for you.\nFree\nYou write the posts. There is no AI.\n$0\na month\nPosts to\nDay plan for every account\nApproval queue and keyboard\n60-second undo\nStart free\nBring your own AI\nThe AI you connect writes the drafts.\n$9\na month\nPosts to\nEverything in Free\nAny of the four AIs above\nA draft for every slot\nYour provider bills drafts\nChoose Bring your own AI\nAI included\nOur AI writes the drafts.\n$19\na month\nPosts to\nEverything in Free\nUp to 300 drafts a month\nNo keys to set up\nChoose AI included\nQuestions\nDoes anything post without me?\nNo. Each draft waits for your approval. An account posts on its own only after it earns auto-approve and you turn it on.\nWhat if I approve by mistake?\nPress Z or Undo within 60 seconds. The draft returns to your queue.\nHow does it post?\nIt posts through each platform's official API with the access you grant. It never uses a browser.\nDoes it reply or comment?\nOnly to people who comment on, mention or reply to your account. Each reply waits in your inbox until you approve it.\nWhich platforms does it post to?\nPosts to Bluesky, LinkedIn and YouTube today.\nLinkedIn means personal profiles.\nX, Threads, Instagram, Facebook Pages and TikTok are coming soon.\nWhat does the AI know about my product?\nIt knows only the facts you list. A draft with a claim missing from your facts is refused and written again.\nTomorrow's posts can be waiting for you tonight.\nThe free plan needs no card. AI plans cost $9 or $19 a month.\nStart free",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50194676",
+      "fetched_at": "2026-10-23T07:24:05.136726+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50194676",
+      "sha256": "10a89814a5277ffcea9e9318a26f05ad9ac025da3e8f9d5342edb157bdf33b8d",
+      "raw_path": "data/raw/20261023T071728151733Z/10a89814a5277ffcea9e9318a26f05ad9ac025da3e8f9d5342edb157bdf33b8d.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

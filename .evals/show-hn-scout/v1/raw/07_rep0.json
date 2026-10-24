@@ -1,0 +1,52 @@
+{
+  "run": {
+    "task_id": "ct_f7b9c1ecbaf341e8b6b3acd63f803ef0",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 2941,
+      "cached_tokens": 0,
+      "output_tokens": 399,
+      "total_tokens": 3340,
+      "context_tokens": 3340
+    },
+    "transcript": [
+      {
+        "id": "d1800c15-4a72-4d43-90c3-7fd5592977cc",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Riff – An iPhone calendar you zoom instead of switching views\nProject URL: https://riffcalendar.com\nPosted (UTC): 2026-10-21T16:25:02Z\n\n## Project page text (fetch status: ok)\n\n```text\nTyler Hall\nBuilding Mac apps since 2006\nOn Mastodon,\n2 September 2026\nThis is seriously impressive. It’s rare to find such a well-done new\ntake on an established category like calendar apps.\nA closer look\nCreate an event by holding its time\nHold an empty slot and a new event appears there. Slide to adjust\nthe start, and drag the bar at its foot to set the duration. For an\nall-day event, hold under the date.\nRound times by default, exact when needed\nDrags snap to round times. For an exact time, pause before you drag\non, or drag the time tag at the left edge.\nRiff remembers your regular events\nType the start of a title you have used before, and Riff suggests the\nevent with its length, place and alert from last time. There is\nnothing to set up. The suggestions come from your own calendar.\nReschedule with your calendar in view\nTap the arrows beside an event’s time and it lifts off. Scroll to\nanother week or day, then place it among what is already there.\nThe weather where you plan\nEach day’s forecast stands beside its date, and a single day shows it\nhour by hour. An event pinned to a place shows the forecast\nthere. Weather is a switch in Riff’s settings.\nSee when it gets dark\nA faint shade covers the hours between sunset and sunrise where you\nare, so an evening run before dark is easy to plan. Daylight is a\nswitch in Riff’s settings.\nAnd there is more: reminders beside your events, search by\ntitle or place, alerts in a tap, time zones when you travel, a one-thumb\nzoom…\nThe calendar itself, as a widget\nThe Schedule widget is the calendar itself: every event drawn at\nits hour, with its length and its name. Each size shows as many days\nas you choose, up to three on the small, a week on the medium and two\nwhole weeks on the large. Month draws this month, or this month and\nthe next, and Up next lists what is coming, on the Home Screen or the\nLock Screen.\nThree days at true scale on the large widget, the day’s list on the medium.\nYour calendars, not copies of them\nWork\nPersonal\nFamily\nRiff works directly on the calendars already on your iPhone: iCloud,\nGoogle, Exchange, whatever Apple Calendar sees. There is no Riff account\nand nothing to import. Events you create or move in Riff show up\neverywhere else. Delete the app and your data hasn’t gone anywhere.\nData collected: none\nRiff has no server, no account and no analytics. Your events pass\nbetween Apple’s calendar database and your screen. Riff adds no stop of\nits own. Not collecting data isn’t a policy. There is nowhere for it\nto go.\nGet Riff\n★★★★★\nThe best interface for a calendar app I have yet found. Zooming in\nand out is smooth and adding events is a breeze. I actually like to\nadd more events to my calendar now.\nAshlyme, in an App Store review\nGet Riff on the App Store\niPhone · iOS 26 or later\nLeave your address for an email when Riff gets a major update.\nEmail address\nEmail me about updates\n```\n\n## HN discussion (1 comment)\n\n- [other] cavo2000: I've been using Riff for a little while during late testing stage. It takes a little to get used to but moving around the calendar is a lot like Google/Apple Maps. Recurring meetings, which are not exact, like getting a haircut is very easy to book with just one small swipe. The best feature is how quickly you can see an overview. Just like maps."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792778986417_5wimqoq3q",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "<think>Let me analyze this candidate.\n\n**Candidate:** Riff, an iPhone calendar you zoom instead of switching views.\n\n**Core idea:** A calendar interface where you zoom to change views (instead of switching between day/week/month views), similar to Google/Apple Maps.\n\n**Product features:**\n1. Zoomable calendar interface (the unique selling point)\n2. Easy event creation by holding a time slot, dragging to adjust\n3. Smart suggestions based on previous events\n4. Rescheduling events while keeping the calendar in view\n5. Weather integration (daily forecast, per-hour, location-based)\n6. Sunset/sunrise shading to see when it gets dark\n7. Reminders, search, alerts, time zones\n8. Widget support\n9. Works with existing iPhone calendars (no account, no copies)\n10. Data privacy (no server, no analytics)\n\n**Why push:**\n1. Interesting product idea: the \"zoom instead of switching views\" is a clever, fresh angle on a well-known category. It applies the maps interaction metaphor to a calendar, which is a nice piece of UX design.\n2. Small product for a specific field (calendar apps) that seems well-executed.\n3. Professional and solid — it works with system calendars, no account required, privacy-focused.\n4. Good sample of what people are building now.\n\n**Decision:** Push. The zoomable interface is a creative, clever take on a familiar category, and the product is polished and respects user privacy.\n\nLet me write the reason.</think>{\"decision\": \"push\", \"reason\": \"这是一个对老旧日程表品类的聪明改进：用「缩放」来代替切换视图，把地图的操作逻辑移植到日历上。加上小巧、无需账号且注重隐私的设计，是个值得一看的扎实产品。\" }",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 2941,
+            "cached_tokens": 0,
+            "output_tokens": 399,
+            "total_tokens": 3340,
+            "context_tokens": 3340
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": null
+}

@@ -1,0 +1,12 @@
+--- v1/system-prompt.md	2026-10-23 15:04:08
++++ v2/system-prompt.md	2026-10-24 02:24:35
+@@ -24,6 +24,8 @@
+ 
+ `push` means it is worth interrupting the reader. `pass` means it is not. Pushing nothing is fine.
+ 
+-Reply with only one JSON object and nothing else:
++Reply with only one JSON object and nothing else. Do not write any analysis, reasoning, thinking, or XML-style tags before or after it. The first character of your reply must be `{` and the last must be `}`.
+ 
++The JSON object:
++
+ {"decision": "push" | "pass" | "unsure", "reason": "<one or two sentences in Chinese naming the specific thing in the evidence that decided it>"}

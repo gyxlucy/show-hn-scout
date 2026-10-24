@@ -1,0 +1,43 @@
+{
+  "id": 50197685,
+  "title": "Show HN: Ternlux – Free, local-first, bring-your-own-key AI pipeline builder",
+  "url": "https://www.ternlux.com/online-demo/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "sdataengineer",
+    "descendants": 0,
+    "id": 50197685,
+    "score": 3,
+    "text": "For the past 12 years as a data engineer, I&#x27;ve been building pipelines across many different business categories and sizes. Most pipelines that I’ve encountered were relatively simple jobs and required more orchestration and infrastructure than the work seems to justify. I wanted to make it easier for business users or analysts to take on the less complicated requests and technical engineers be able to focus on more complex pipelines. So in the past year I&#x27;ve been building a local desktop application (Mac&#x2F;PC&#x2F;Linux) to make it easy enough for analysts to build pipelines and answer analytical questions they have about their data, no matter their level of technical expertise. It’s called Ternlux, and it streamlines the process of transforming and getting your data where it needs to go.<p>There are two key features:<p>- Ask questions: AI helps to write the query for your connection and answer your question\n- Build reusable workflows: The AI generates SQL, Python, and workflow logic that executes based on your defined rules and triggers<p>One of the key advantages of the application is you can perform cross-database joins between databases, local files, vector databases, and cloud storage. You describe the workflow you want and the app writes the code and builds the environment to execute it in (for local joins, it uses either JS, Python, or DuckDB to execute the code). For example, if I want to build a workflow that joins a Postgres table with a CSV file and write the results to Snowflake, I just describe the tables I want to use, the keys to join on, and where the join should run. The app takes care of the rest.<p>I also wanted the app to be as secure as possible. It always asks for approval before performing any database or local file manipulation. It never sends anything to Ternlux servers if you haven’t opted into telemetry. It’s important to note that the app will send query results to your selected AI provider to analyze and answer your questions. It will also send the schema and a small sample size of your data to build workflows properly.<p>It is a bring your own key application. It supports Gemini, Claude, OpenAI, and any models that are OpenAI compatible (Ollama, LM Studio, Openrouter…). All of your credentials stay encrypted locally. And the app is completely free including all features (besides the AI models you use with your own key obviously).<p>I’ve built a quick demo showcasing the applications<p>Demo: <a href=\"https:&#x2F;&#x2F;www.ternlux.com&#x2F;online-demo&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;www.ternlux.com&#x2F;online-demo&#x2F;</a><p>3-min overview: <a href=\"https:&#x2F;&#x2F;youtu.be&#x2F;tA7N7wiLliA\" rel=\"nofollow\">https:&#x2F;&#x2F;youtu.be&#x2F;tA7N7wiLliA</a><p>The list of connectors that exist:\nPostgres, MySQL, SQL Server, BigQuery, Snowflake, MongoDB, Pinecone, LanceDB, S3, GCS, Azure Blob, Google Drive, OneDrive, Dropbox, and Google Sheets.<p>I would love your honest feedback on this.<p>How can this product be improved?<p>Would you currently use it as a tool to replace your current tool or in conjunction with your other tools?<p>What feature do you find most useful and I should focus on from the list?",
+    "time": 1792686838,
+    "title": "Show HN: Ternlux – Free, local-first, bring-your-own-key AI pipeline builder",
+    "type": "story",
+    "url": "https://www.ternlux.com/online-demo/"
+  },
+  "sources": [
+    {
+      "url": "https://www.ternlux.com/online-demo/",
+      "fetched_at": "2026-10-23T07:24:11.059200+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://www.ternlux.com/online-demo/",
+      "sha256": "2015f3c0e992a777e2b0b8bf0dfbc144a5c5846b323ab9c23b4e131889f9f4d2",
+      "raw_path": "data/raw/20261023T071728151733Z/2015f3c0e992a777e2b0b8bf0dfbc144a5c5846b323ab9c23b4e131889f9f4d2.html",
+      "content_type": "text/html",
+      "text": "",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50197685",
+      "fetched_at": "2026-10-23T07:24:14.347857+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50197685",
+      "sha256": "f52ecb9a2e3ea4e6b14eb7d952b273a189a21c5f23af29e39eafd32d663486e4",
+      "raw_path": "data/raw/20261023T071728151733Z/f52ecb9a2e3ea4e6b14eb7d952b273a189a21c5f23af29e39eafd32d663486e4.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

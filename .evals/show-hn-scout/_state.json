@@ -1,0 +1,76 @@
+{
+  "current_round": 0,
+  "reps": 3,
+  "dataset": "dev set: all 30 cases were used to calibrate rubric v0, none is held out",
+  "harness_paths": [
+    ".evals/show-hn-scout/run.ts",
+    ".evals/show-hn-scout/lib.ts",
+    ".evals/show-hn-scout/judge.ts",
+    ".evals/show-hn-scout/cavia.ts",
+    ".evals/show-hn-scout/rubric-reason.md"
+  ],
+  "metrics": [
+    {
+      "id": "agree",
+      "kind": "binary",
+      "label": "Agree"
+    },
+    {
+      "id": "precision",
+      "kind": "float",
+      "label": "Precision"
+    },
+    {
+      "id": "recall",
+      "kind": "float",
+      "label": "Recall"
+    },
+    {
+      "id": "specificity",
+      "kind": "float",
+      "label": "Specificity"
+    },
+    {
+      "id": "unsure",
+      "kind": "float",
+      "label": "Unsure rate",
+      "better": "lower"
+    },
+    {
+      "id": "valid",
+      "kind": "float",
+      "label": "Valid format"
+    },
+    {
+      "id": "grounded",
+      "kind": "judge",
+      "label": "Grounded"
+    },
+    {
+      "id": "specific",
+      "kind": "judge",
+      "label": "Specific"
+    },
+    {
+      "id": "consistent",
+      "kind": "judge",
+      "label": "Consistent"
+    }
+  ],
+  "perf_fields": [
+    {
+      "id": "latency_s",
+      "label": "Latency",
+      "unit": "s"
+    },
+    {
+      "id": "tool_calls",
+      "label": "Tool calls"
+    }
+  ],
+  "signoffs": {
+    "cases": "2026-10-23, dev set (no held-out split)",
+    "grading": "2026-10-23, metrics and judge accepted after 5 pilot examples",
+    "reason_language": "accepted as is (11/30 English), baseline prompt unchanged"
+  }
+}

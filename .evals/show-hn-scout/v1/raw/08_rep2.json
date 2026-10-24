@@ -1,0 +1,52 @@
+{
+  "run": {
+    "task_id": "ct_c79eca707d47404da9bc5afd223f4dd6",
+    "model": "bright-rain",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 2867,
+      "cached_tokens": 0,
+      "output_tokens": 583,
+      "total_tokens": 3450,
+      "context_tokens": 3450
+    },
+    "transcript": [
+      {
+        "id": "664954ec-3b30-446e-8a0f-908ccaf847e8",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Drop in a folder of HTML and get back a private URL\nProject URL: https://eze.page/\nPosted (UTC): 2026-10-20T23:45:03Z\n\n## Project page text (fetch status: ok)\n\n```text\nTurn a folder into a private website for your team.\neze is open-source hosting you run inside your company. Upload some HTML and get a link that only your coworkers can open. Every site gets a database, live updates, file uploads and AI, with nothing to set up.\nSet it up\nGitHub\nSelf-hosted. MIT license.\nlunch-vote\nindex.html\npoll.js\nstyle.css\neze deploy\nlunch-vote.eze.acme.com\nWhere should we eat on Friday?\nRamen place on 5th\n9\nTacos\n4\nSalad bar\n1\nAN\nBO\nCY\nDE\n4 people from Acme are voting\nHow it works\nMake a site\nWrite plain HTML, CSS and JavaScript yourself, or ask your AI tool to.\nDeploy it\nRun\neze deploy\nor drop the folder on the eze dashboard.\nShare the link\nAnyone signed in to your company can open it. Nobody else can.\nA backend without a backend\nPages load one script from eze and can save data, react to changes and know who is looking. They use the viewer's company sign-in, so there are no keys in your code.\n<script src=\"/_q/sdk.js\"></script>\n<script type=\"module\">\nconst me = await eze.id.me();\nconst votes = eze.db.collection('votes');\nawait votes.create({ place: 'Ramen', by: me.name });\nvotes.subscribe({ onCreate: (vote) => redraw() });\n</script>\neze.db\nSave and query data, with live updates\neze.files\nUploads like images, video and PDFs\neze.ws\nRooms for cursors, chat and games\neze.ai\nCall Claude, OpenAI or your own model\neze.id\nThe name and email of whoever is viewing\nWorks with your AI tools\neze init\nadds instructions that teach coding agents how to build an eze site.\neze mcp\nlets Claude Code, Cursor and other MCP apps deploy sites for you.\nclaude mcp add eze -- eze mcp\n> make a site where my team can vote\non where to eat on Friday\nSet it up\nYou need a server, a domain with wildcard DNS and HTTPS, and your company's sign-in: Google Workspace, Okta, Entra ID or any OpenID Connect provider, or an auth proxy you already use.\neze is one program with a small database file. A small VM is plenty.\nRead the setup guide\ngo install github.com/ahyield/eze/cmd/eze@latest\nEZE_DOMAIN=eze.acme.com \\\nEZE_AUTH=oidc \\\nEZE_OIDC_ISSUER=https://accounts.google.com \\\nEZE_OIDC_CLIENT_ID=... \\\nEZE_OIDC_CLIENT_SECRET=... \\\nEZE_OIDC_ALLOWED_DOMAINS=acme.com \\\nEZE_SESSION_SECRET=... \\\neze serve\nOnly for your company\nEveryone who can sign in can open, change and redeploy every site. That keeps eze simple, so keep it to your own people: eze won't start if its sign-in would let in a public email domain like gmail.com.\nFound a security problem?\nReport it privately\n.\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792779029358_j9ke84ln7",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "<think>Let me evaluate this candidate.\n\n**Product**: `eze`, a self-hosted tool that lets you drop a folder of HTML/CSS/JS and get a private URL for your team.\n\n**What it does**:\n- Self-hosted (you run it inside your company), MIT license.\n- Upload a folder (either via `eze deploy` or drop it on the dashboard).\n- Every site gets: database, live updates, file uploads, AI, auth (who is viewing).\n- SDK provides a simple API (`eze.id`, `eze.db`, `eze.files`, `eze.ws`, `eze.ai`).\n- Works with auth providers like Google Workspace, Okta, Entra ID (OIDC).\n- Also has MCP (`eze mcp`) so AI coding agents can deploy sites.\n\n**Interesting features**:\n- The \"backend without a backend\" idea — single SDK script lets pages save data, react to changes, know who is looking, use viewer's company sign-in. This is a very clever, fresh angle.\n- It's designed specifically for internal company use (\"Only for your company\"), with a nice constraint: everyone can view/change/redeploy, which simplifies the permissions.\n- It includes AI integrations and MCP support.\n- Setup is a single binary with a small database file (SQLite under the hood, presumably).\n\n**Why it's a push**:\n1. Clever fresh angle on a familiar problem: building internal tools without a real backend. The idea that \"you just write HTML/JS and the infrastructure gives you everything\" is powerful and well-presented.\n2. Useful sample of what people are building now: self-hosted internal tool platforms with auth + AI integrations.\n3. Good creative way of explaining: the lunch-vote example and the clear \"A backend without a backend\" section.\n\nI think this is worth a look — it's a well-scoped, nicely presented tool that solves a real need (internal tools) in a clever way.\n\nLet me write the decision in Chinese.\n\nDecision: push.\n\nReason: This is a clever \"backend without a backend\" idea — you just drop a folder of HTML/CSS/JS and get a private internal site with a database, auth, and AI, all via a single SDK script, which is a great, well-explained angle on a common problem.</think>{\"decision\": \"push\", \"reason\": \"这是一个绝妙的“没有后端的后端”设想——你只需丢进去一个包含 HTML/CSS/JS 的文件夹，就能得到一个带有数据库、授权和 AI 功能的内部网站，全程只用一个 SDK 脚本，把常见问题处理得非常漂亮、直观。\" }",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 2867,
+            "cached_tokens": 0,
+            "output_tokens": 583,
+            "total_tokens": 3450,
+            "context_tokens": 3450
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": null
+}

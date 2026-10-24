@@ -1,0 +1,52 @@
+{
+  "id": 50196364,
+  "title": "Show HN: Priced Out – An interactive map of US housing affordability",
+  "url": "https://explore.stokemoney.com/housing",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "compounding-err",
+    "descendants": 1,
+    "id": 50196364,
+    "kids": [
+      50196471
+    ],
+    "score": 1,
+    "time": 1792681301,
+    "title": "Show HN: Priced Out – An interactive map of US housing affordability",
+    "type": "story",
+    "url": "https://explore.stokemoney.com/housing"
+  },
+  "sources": [
+    {
+      "url": "https://explore.stokemoney.com/housing",
+      "fetched_at": "2026-10-23T07:24:05.001860+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://explore.stokemoney.com/housing",
+      "sha256": "683367d2cc59eb78f888559e1bfc88466a0fe125068a2535fb545baa60ca3f19",
+      "raw_path": "data/raw/20261023T071728151733Z/683367d2cc59eb78f888559e1bfc88466a0fe125068a2535fb545baa60ca3f19.html",
+      "content_type": "text/html",
+      "text": "At\n$\n80,000\nHousehold income before tax, per year\n$\na year,\n227\nmetros were\naffordable\nin 2021. Now, just\n43\n.\nYour annual income\n$20k\n$40k\n$60k\n$80k\n$100k\n$120k\n$140k\nExample income: drag or type yours\nSep 2021\n227\nwithin budget\nSep 2026\n43\nwithin budget\nWithin budget\nStretch\nOver budget\nLoading the map…\nAssumptions & sources\nHow the estimate works\nEvery figure is for the median-priced single-family home sold in that metro in the price month. Homes differ between metros: the median in one place is not the same house as the median in another.\nFor each metro the monthly cost is principal and interest on a 30-year fixed loan with 20% down, plus property tax and insurance:\npayment = loan × r(1+r)^360 / ((1+r)^360 − 1)   (at 0%: payment = loan / 360)\nloan = 80% of price, r = rate / 12\nmonthly cost = payment + price × tax% / 12 + price × 0.5% / 12\nProperty tax uses the lowest and highest county effective rate in the metro, so each metro has a low and a high monthly cost. Compared with your gross income:\nWithin budget\n: even the high-tax cost is at most 25% of income.\nStretch\n: not within budget, but the low-tax cost is at most 30% of income.\nOver budget\n: the low-tax cost is more than 30% of income.\n25% and 30% are planning ratios, not lending rules. Lenders look at debts, credit and reserves this map does not know.\nWhat the two sheets change\nThe two sheets are two dated snapshots, not a history. Between them, two things change together: each metro’s observed median sale price and the published 30-year rate on a dated week. The same nominal income, the 25–30% ratios, 20% down, the 30-year term, county tax rates and the 0.5% insurance assumption stay the same. Peeling the top sheet changes what you see, never the counts.\nSo the earlier sheet is a financing scenario, not what owning cost then, not an inflation-adjusted salary and not the same physical house.\nMortgage rates\nRates are national benchmarks, not personal loan offers. PMMS covers conventional conforming, fully amortizing purchase loans with 20% down and excellent credit. A large loan may require jumbo financing; jumbo rates can be higher or lower and vary by lender and borrower. Credit, points and loan product affect actual offers. The same national benchmark keeps the dated comparison consistent.\nPMMS methodology\nSurvey borrower and loan assumptions\nThe earlier-rate what-if keeps every latest price and assumption and swaps in only the earlier dated rate, through the same calculation. It is never a measured snapshot. Other rate takes an annual interest rate from 0–25%, up to three decimal places. It is the loan’s interest rate, not an APR that includes fees.\nWhat the estimate leaves out\nThe down payment is shown on its own. The monthly cost leaves out closing costs and reserves, other debts, HOA dues, maintenance, utilities and extra disaster cover such as flood or earthquake insurance. Tax is a county average for owners, not a bill for a new purchase; insurance is an assumption, not a quote.\nWhich metros are on the map\nThe map shows\n315\nmetro areas and metro divisions with a September median sale price in both 2021 and 2026 and an exact match between Redfin’s area and the official Census metro, so both periods count the same\n315\nplaces.\nMetro markets whose data could not be matched are left out rather than estimated. Search finds them and says why. Smaller micropolitan areas are not included.\nEach stamp sits at a point the Census Bureau places inside the metro’s area, which can be some distance from the main city. Stamps are all one size: a stamp is a place, not a population. Where stamps would overlap, a numbered badge stands for the group on both sheets. Its number counts every metro in the group and its teal arc is the share within budget; choose it to list its metros, or zoom in.\nSources and dates\nPrices are from Redfin Data Center, rates from Freddie Mac’s Primary Mortgage Market Survey, geography from the U.S. Census Bureau and property tax rates from the Tax Foundation. The full list loads with the figures.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50196364",
+      "fetched_at": "2026-10-23T07:24:06.587713+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50196364",
+      "sha256": "28c5fc8d1feb81aeaef2cc726d0f9323f257d183857f883799293b7feb82120f",
+      "raw_path": "data/raw/20261023T071728151733Z/28c5fc8d1feb81aeaef2cc726d0f9323f257d183857f883799293b7feb82120f.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": [
+        {
+          "id": "50196471",
+          "by": "compounding-err",
+          "is_author": true,
+          "text": "Interest rates are making housing unaffordable for a majority of Americans. I built Priced Out to remember the good ol’ days of low interest rates and to see where in America could I afford to live. Lmk what you think!"
+        }
+      ]
+    }
+  ]
+}

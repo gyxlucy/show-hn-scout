@@ -1,0 +1,42 @@
+{
+  "id": 50195582,
+  "title": "Show HN: Using an LLM chat template in reverse to play the user",
+  "url": "https://selfgpt.pages.dev/",
+  "run_id": "20261023T071728151733Z",
+  "item": {
+    "by": "belluxx",
+    "descendants": 0,
+    "id": 50195582,
+    "score": 2,
+    "time": 1792678264,
+    "title": "Show HN: Using an LLM chat template in reverse to play the user",
+    "type": "story",
+    "url": "https://selfgpt.pages.dev/"
+  },
+  "sources": [
+    {
+      "url": "https://selfgpt.pages.dev/",
+      "fetched_at": "2026-10-23T07:24:06.827224+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://selfgpt.pages.dev/",
+      "sha256": "4a1c8a4f8f7c80ddf40a6b83eb3c6abac344800f61472dbdfb994b2d26b15821",
+      "raw_path": "data/raw/20261023T071728151733Z/4a1c8a4f8f7c80ddf40a6b83eb3c6abac344800f61472dbdfb994b2d26b15821.html",
+      "content_type": "text/html",
+      "text": "When you send a message, it gets wrapped between tokens like\n<user_start>\nand\n<user_end>\n. The assistant, on the other hand, keeps generating until it produces something like\n<assistant_end>\n, which stops it so that you (the user) can finally send another message.\nSo, we can just use the template in reverse. After\n<assistant_end>\n, we add\n<user_start>\nand let the model generate from there, so it writes the user message.\nI also wanted to test the other obvious way to simulate human messages: simply asking the model to \"be human\". So there are two configurations:\nnative\n, which uses the chat template in reverse, and\nroleplay\n.\nSome models were clearly better than others at playing the user in native mode, but I wanted to automate the evaluation to rank the models.\nGPT 6 Astra turned out to be a good judge (\ntests here\n). Astra sees the chat so far + 2 replies, the real one and the AI one, and has to say which one the person wrote (each pair is shown in both orders). A model's score is how often it fools the judge: 50% means the judge can't tell. I also made a quick test so you can\ntry to be the judge →\nSo, finally, here are the results! No model is indistinguishable from humans, not even\nUserLM\n, which was trained to do exactly that. However some models in native mode are surprisingly good, while roleplay scores very poorly. From my testing\nMistral Small 3\nis the best one in practice.\nBigger models are not better at fooling the judge, the family a model comes from matters much more.\nNative mode keeps messages varied. Real people opened the conversations in\ndifferent ways\n, and models in native mode are surprisingly varied in their openings too. Roleplay on the other hand has just a handful of openings that get recycled.\nHere, each square is a conversation: stronger shades mean more models fooled the judge in both orders. Click on the squares to see the details.\nBonus! Some of the messages the models wrote were very hilarious,\nclick here\nto check them.\nCaveats\nAstra does not support logprobs, so the results are less precise than they could have been.\nMessages are cut at\ntokens or the first blank line. This is due to the fact that models almost never print end tokens in the user slot.\nUserLM was used without its \"intent\" prompt. I checked the perplexity over the chats with and without it, and it's pretty much the same. However, the prompt significantly improved end token generation. Using it would require re-running the generation + judging, but I no longer have a ChatGPT subscription to do that.",
+      "kind": "project_page"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=50195582",
+      "fetched_at": "2026-10-23T07:24:08.608797+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://news.ycombinator.com/item?id=50195582",
+      "sha256": "2f253177392dd9382f35da00d4d91162ad2bf57ab304cf36aec1ed7633b7ceb3",
+      "raw_path": "data/raw/20261023T071728151733Z/2f253177392dd9382f35da00d4d91162ad2bf57ab304cf36aec1ed7633b7ceb3.html",
+      "content_type": "text/html",
+      "kind": "hn_discussion",
+      "comments": []
+    }
+  ]
+}

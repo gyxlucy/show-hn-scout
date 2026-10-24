@@ -92,6 +92,15 @@ class FeedbackTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 record_label('missing', 'push', 'x', path=feedback, cases_path=cases)
 
+    def test_review_card_answers_are_parsed_and_untouched_cards_are_skipped(self):
+        from hn_scout.review import parse_review_labels
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp)/'batch-01.md').write_text(
+                '## 01 · A\n\n**你的判断：**  不值得推 **原因：** 太小众\n\n'
+                '## 02 · B\n\n**你的判断：** 值得推 　**原因：**\n\n'
+                '## 03 · C\n\n**你的判断：** 值得推 / 不值得推 / 信息不足　　**原因：**\n', encoding='utf-8')
+            self.assertEqual(parse_review_labels(Path(tmp)), {'01': ('pass', '太小众'), '02': ('push', '')})
+
     def test_links_cannot_inject_markup_or_script_scheme(self):
         with self.assertRaises(ValueError):
             link('source', 'javascript:alert(1)')
