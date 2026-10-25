@@ -13,6 +13,10 @@ on:
         description: "Judge a few posts and print the Slack messages, but post nothing and save no state"
         type: boolean
         default: true
+      backfill_hours:
+        description: "Real run only: on the very first run, also judge and post the posts from the last N hours (e.g. 24) instead of just remembering them. Leave 0 for normal behaviour"
+        type: string
+        default: "0"
 
 concurrency:
   group: scout
@@ -50,9 +54,13 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          BACKFILL_HOURS: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill_hours || '0' }}
         run: |
           if [ "$DRY_RUN" = "true" ]; then
             bun bot/scout.ts --dry-run --no-seed --max-judgements 3 --state bot-state/seen.json
+          elif [[ "$BACKFILL_HOURS" =~ ^[1-9][0-9]*$ ]]; then
+            # Roughly 3 new Show HN posts an hour (a /shownew page of 30 spans about 10h): 4 pages cover 24h with margin.
+            bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
           else
             bun bot/scout.ts --state bot-state/seen.json
           fi

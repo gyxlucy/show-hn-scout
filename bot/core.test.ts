@@ -25,6 +25,7 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
     now: () => new Date("2026-10-25T00:00:00Z"),
     promptSha: "abc",
     minAgeHours: 0,
+    backfillHours: 0,
     maxPushes: 8,
     maxJudgements: 40,
     maxAttempts: 3,
@@ -42,6 +43,15 @@ test("first run seeds the backlog and neither judges nor posts", async () => {
   expect(h.judged).toHaveLength(0);
   expect(h.posted).toHaveLength(0);
   expect(h.state.items["1"].status).toBe("backlog");
+});
+
+test("first run with backfill judges and posts the recent posts and seeds only the older ones", async () => {
+  const h = harness({ firstRun: true, backfillHours: 24, candidates: [cand(3, 1), cand(2, 20), cand(1, 30)] });
+  const s = await runScout(h.deps);
+  expect(h.posted).toEqual([3, 2]);
+  expect(s.seeded).toBe(1);
+  expect(h.state.items["1"].status).toBe("backlog");
+  expect(h.judged).toHaveLength(2);
 });
 
 test("only push is posted; pass and unsure are recorded but silent", async () => {

@@ -39,6 +39,8 @@ export type Deps = {
   now: () => Date;
   promptSha: string;
   minAgeHours: number;
+  /** First run only: judge (and post) unseen posts newer than this many hours instead of seeding them. 0 = seed everything. */
+  backfillHours: number;
   maxPushes: number;
   maxJudgements: number;
   maxAttempts: number;
@@ -73,14 +75,16 @@ export async function runScout(d: Deps): Promise<Summary> {
   const sid = (id: number) => String(id);
 
   // First run ever: remember what is already there so we do not post the whole backlog at once.
+  // With backfillHours > 0 the recent part of the backlog is judged normally and only the older part is seeded.
   if (d.firstRun) {
     for (const c of d.candidates) {
+      if (d.backfillHours > 0 && c.age_hours <= d.backfillHours) continue;
       d.state.items[sid(c.id)] = { status: "backlog", title: c.title, url: c.url, age_hours: c.age_hours, posted: false, attempts: 0 };
       s.seeded++;
     }
     d.save(d.state);
-    d.log(`first run: seeded ${s.seeded} existing posts, nothing judged or posted`);
-    return s;
+    d.log(`first run: seeded ${s.seeded} existing posts${d.backfillHours > 0 ? `, backfilling the last ${d.backfillHours}h` : ", nothing judged or posted"}`);
+    if (d.backfillHours <= 0) return s;
   }
 
   let pushesLeft = d.maxPushes;

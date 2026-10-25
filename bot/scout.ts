@@ -2,6 +2,7 @@
 //
 //   bun bot/scout.ts --dry-run --no-seed --max-judgements 3   # judge a few, print Slack payloads, post and save nothing
 //   bun bot/scout.ts                                          # one real run (what the GitHub Actions cron does)
+//   bun bot/scout.ts --backfill-hours 24 --pages 4            # first run only: also judge and post the last 24h
 //
 // Env: SLACK_WEBHOOK_URL (required unless --dry-run), PYTHON (default python3), CAVIA_BASE_URL (optional).
 // The agent is `.evals/show-hn-scout/<variant>` (system-prompt.md + request.json), called as a real Cavia task,
@@ -112,6 +113,7 @@ const summary = await runScout({
   now: () => new Date(),
   promptSha,
   minAgeHours: Number(opt("min-age-hours", "0")),
+  backfillHours: Number(opt("backfill-hours", "0")),
   maxPushes: Number(opt("max-pushes", "8")),
   maxJudgements: Number(opt("max-judgements", "40")),
   maxAttempts: 3,
