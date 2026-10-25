@@ -70,7 +70,7 @@ if (!flag("skip-collect")) {
   // Two pages of /shownew (the newest ~60 posts) are enough for a half-hourly cron. One /show page is only needed
   // because collect always records it; this bot ignores /show membership.
   const c = JSON.parse(py(["collect", "--pages", opt("pages", "2"), "--show-pages", "1"]));
-  console.log(`collect: ${c.new_items} new-feed items, ${c.errors.length} errors`);
+  console.log(`collect: ${c.new_items} new-feed items, ${c.errors.length} errors${c.errors.length ? ` (${JSON.stringify(c.errors).slice(0, 300)})` : ""}`);
   // A collection that fetched nothing must fail the run loudly, not look like "nothing new".
   if (!c.new_items) throw new Error(`collect fetched no items: ${JSON.stringify(c.errors).slice(0, 300)}`);
 }

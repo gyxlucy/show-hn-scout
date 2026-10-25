@@ -129,6 +129,12 @@ test("Slack payload escapes untrusted text and only links real http(s) URLs", ()
   expect(body).toContain("15 分钟前");
 });
 
+test("the notification text does not repeat a Show HN prefix the title already has", () => {
+  const p = slackPayload(1, { title: "Show HN: Foo", url: "https://foo.dev", reason: "r", age_hours: 2 });
+  expect(p.text).toBe("Show HN: Foo");
+  expect(slackPayload(1, { title: "Foo", url: "https://foo.dev", reason: "r", age_hours: 2 }).text).toBe("Show HN: Foo");
+});
+
 test("the live prompt is the eval prompt: starts with the contract header and omits votes and verdicts", () => {
   const prompt = buildPrompt({ id: 1, title: "T", url: "https://x.y", item: { time: 1760000000, by: "a" }, sources: [] });
   expect(prompt.startsWith("# Candidate Show HN post\n")).toBe(true);

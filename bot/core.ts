@@ -194,7 +194,7 @@ export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "rea
   const reason = esc(clip((r.reason ?? "").replace(/\s+/g, " "), 600));
   const age = r.age_hours < 1 ? `${Math.round(r.age_hours * 60)} 分钟前` : `${r.age_hours.toFixed(1)} 小时前`;
   return {
-    text: `Show HN: ${title}`, // notification fallback; Slack parses mrkdwn here too, so it is escaped as well
+    text: /^show hn/i.test(title) ? title : `Show HN: ${title}`, // notification fallback; Slack parses mrkdwn here too, so it is escaped as well
     blocks: [
       { type: "section", text: { type: "mrkdwn", text: `*<${link}|${title}>*\n${reason}` } },
       { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3` }] },
