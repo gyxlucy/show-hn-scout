@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_d2f67dd50d064744aa3693fa20e66c2a",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 6190,
+      "cached_tokens": 0,
+      "output_tokens": 511,
+      "total_tokens": 6701,
+      "context_tokens": 6701
+    },
+    "transcript": [
+      {
+        "id": "a74e38d0-46fa-4e51-b7bd-bd1fc0b84f7a",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: KeibiDrop – Work on remote large files on-demand (no upload/download)\nProject URL: https://github.com/KeibiSoft/KeibiDrop/\nPosted (UTC): 2026-10-21T13:06:09Z\n\n## Project page text (fetch status: ok)\n\n```text\nWebsite\n·\nDownload\n·\nBlog\nOpen files on another computer without downloading them first\nMac to Windows, one folder, nothing to download first.\nTwo computers side by side. Click to watch on YouTube, with sound.\nAnother computer's files show up as a folder on yours, and you open and edit them in your own apps with nothing to download first.\nA big file opens right away, because only the parts you read cross the network, and your edits save back.\nNo cloud stores your files, and the relay that connects you cannot read them, because they are end-to-end encrypted with protection against future quantum computers.\nOn the same network you connect with one click. Over the internet you swap a code once and then save the contact.\nWith Teleport on, your friend's files are a real folder on your computer, so any app works with them,\ngit clone\nincluded.\nIt runs on macOS, Linux, Windows and Android, and iOS is on the way. The code is open source under the AGPL-3.0.\nGet it:\nMac\n·\nWindows\n·\nLinux\n·\nAndroid\n·\nevery click, per computer\n· or\ntry it on the web\nJump to:\nInstall\n·\nQuick start\n·\nDirect transfer and Teleport\n·\nNAS\n·\nEncryption\n·\nBy trade\n·\nTroubleshooting\nGetting started:\ninstall it on both computers and connect once. On the same Wi-Fi, turn on Local mode; anywhere else, send your code in any chat and paste your friend's code. Then drop a file in, or open their files with Teleport. Each step has a\nshort clip\n, and the clips are also a\nYouTube playlist\n. To open the files on a NAS or a home server, see\nRun it on a NAS\n.\nCopy your code, send it in any chat, paste your friend's code, and both of you press Connect.\nWith direct transfer, you drag files in and your friend saves the ones they need.\nWith Teleport, your friend's files appear as a folder that any app can open.\nFinder shows the Teleport Folder like any other folder.\ngit works inside the Teleport Folder.\nInstall\nmacOS\nbrew tap keibisoft/keibidrop\nbrew trust keibisoft/keibidrop\nbrew install keibidrop\nLinux (Debian/Ubuntu)\nwget -O keibidrop.deb\n$(\ncurl -s https://api.github.com/repos/KeibiSoft/KeibiDrop/releases/latest \\\n|\ngrep -o\n'\nhttps://[^\"]*_amd64\\.deb\n'\n)\nsudo apt install ./keibidrop.deb\nWindows\nchoco install keibidrop\nOr download from\nGitHub Releases\n.\nAndroid\nWe host our own F-Droid repository. Open\nfdroid.keibisoft.com\non your phone, scan the code, and check the fingerprint before you add it.\nTo add it by hand, use\nhttps://fdroid.keibisoft.com/fdroid/repo\nin F-Droid under Settings, Repositories. The fingerprint to check is on the same page.\nNAS or home server\nOn Unraid, open the Apps tab and search for KeibiDrop in Community Applications. On Synology Container Manager, QNAP Container Station or any other Docker host, use\nkeibisoft/keibidrop\nfrom Docker Hub, or\nghcr.io/keibisoft/keibidrop\n. The setup is in\nRun it on a NAS\n.\nBuild from source\ngit clone https://github.com/KeibiSoft/KeibiDrop.git\ncd\nKeibiDrop\nmake build-kd\n#\nCLI daemon\nmake build-cli\n#\nInteractive CLI\nmake build-rust\n#\nDesktop UI (needs Rust + Slint)\nQuick start\nOn the same network:\nYou and your friend both open KeibiDrop and turn on Local mode.\nYour computers find each other.\nClick your friend's computer to connect.\nShare files.\nOver the internet:\nYou and your friend both open KeibiDrop.\nCopy your code and send it to your friend in any chat.\nPaste each other's codes and both press Connect.\nShare files.\nSave your friend as a contact to skip the code exchange next time.\nKeibiDrop works through firewalls. When a direct connection fails, it uses an encrypted relay, so you need no port forwarding and no router setup.\nDirect transfer and Teleport\nWith direct transfer you add files and your friend saves the ones they need. It needs nothing extra and suits sending large files.\nWith Teleport your friend's files appear as a folder on your computer, which suits working on shared files and git repositories. It needs a driver installed once:\nmacFUSE\non a Mac,\nfuse3\non Linux or\nWinFsp\non Windows.\nRun it on a NAS\nA NAS or a home server stays online, so it can serve a folder to your computer all the time. The box runs the KeibiDrop container. Your computer opens the box's folder with Teleport, from anywhere, and reads only what it opens.\nOn your computer, install KeibiDrop and the Teleport driver. Open the app, keep Local mode off and press\nCopy my code\n.\nOn the box, save\ndocker-compose.yml\n, set the folder to share and paste your computer's code into\nKD_PEER\n.\nRun\ndocker compose up -d\n, then\ndocker compose logs -f\n. The log prints the box's code.\nOn your computer, turn on\nTeleport\n, paste the box's code and press\nConnect\n.\nPress\nSave contact\nand turn on\nAuto\non the contact's row. From then on both sides reconnect by themselves.\nThe box's files now show in your Teleport Folder,\n~/KeibiDrop/Mount\nby default. Open the files from there in any app. For DaVinci Resolve, follow the\nResolve setup\n.\nThe image is on Docker Hub as\nkeibisoft/keibidrop\nand on GHCR as\nghcr.io/keibisoft/keibidrop\n, for amd64 and arm64, and Unraid installs it from Community Applications. The container's settings and the limits are in\ndocker/README.md\n, and the full guide is\nRun KeibiDrop on a NAS\n.\nConnection and encryption\nThe two computers exchange codes, or find each other on the local network.\nKeibiDrop picks the fastest path: the local network, a direct connection or the encrypted relay.\nFiles cross an encrypted channel that the relay cannot read.\nKeys rotate during the session for forward secrecy.\nThe encryption is post-quantum (ML-KEM-1024 + X25519) with AES-256-GCM or ChaCha20-Poly1305. Full protocol details in\nSecurity.md\n.\nInterfaces\nDesktop UI\n(Rust/Slint)\n./keibidrop\nInteractive CLI\n(terminal REPL)\n./keibidrop-cli\nAgent CLI\n(for scripts and AI agents, all output is JSON)\n./kd start\n#\nStart daemon\n./kd show fingerprint\n#\nGet your fingerprint\n./kd register\n<\npeer-fingerprint\n>\n#\nRegister peer\n./kd create\n#\nCreate room (or: kd join)\n./kd add /path/to/file.zip\n#\nShare a file\n./kd list\n#\nList shared files\n./kd pull file.zip\n~\n/Downloads/\n#\nDownload a file\nSee\ndocs/kd-agent-guide.md\n.\nConfiguration\nKeibiDrop reads\n~/.config/keibidrop/config.toml\n. Environment variables override the config.\nSetting\nEnv var\nDefault\nRelay server\nKD_RELAY\nhttps://keibidroprelay.keibisoft.com/\nBridge relay\nKD_BRIDGE\nbridge.keibisoft.com:26600\nSave folder\nKD_SAVE_PATH\n~/KeibiDrop/Received/\nTeleport Folder\nKD_MOUNT_PATH\n~/KeibiDrop/Mount/\nInbound port\nKD_INBOUND_PORT\n26431\nTeleport off\nKD_NO_FUSE\nfalse\nSecurity\nPost-quantum hybrid key exchange prevents future quantum computers from decrypting recorded traffic. Forward secrecy via periodic re-keying limits exposure if a session key is ever compromised.\nBy default, identity persists across sessions (so saved contacts keep working), encrypted with a per-install master key stored in the OS keychain (macOS Keychain Services, Linux Secret Service, Windows Credential Manager). Headless setups fall back to\n~/.config/keibidrop/.master.key\n(mode 0600). A passphrase (Argon2id) can protect it for users who back up the config to a cloud. Incognito mode uses a new key pair for each session and writes nothing to disk, so two sessions cannot be linked.\nFull protocol description:\nSecurity.md\nTroubleshooting\nSee\nTROUBLESHOOTING.md\n.\nContributing\nSee\nCONTRIBUTING.md\n.\nLicense\nFrom version 0.5.0 the engine, CLI, mobile bindings and desktop UI are licensed under the\nGNU Affero General Public License v3.0\n(AGPL-3.0-only). A closed-source product that embeds or links them needs a commercial license.\nMobile apps and brand assets: Proprietary - see\nLICENSING.md\nDesktop UI built with\nSlint\nBuilt by\nKeibiSoft SRL\n.\nBy trade\nRemote DFIR triage\nMount an evidence share read only across NAT and extract the artifact set you need, with no inbound port, native on Windows, and no kernel driver on the evidence machine. There is a\nwrite-up\nand a\nDFIR page\n.\nPost-production handoff\nYour footage stays on the studio NAS, and DaVinci Resolve opens it on demand while you travel, with no download or upload to wait for. Click for the two minute demo.\nMount the camera originals\nand skip the proxy transcode before the handoff and the relink after it. The\nResolve setup\ngoes step by step.\nDatasets on a rented GPU box\nMount the workstation that holds the data\n, with no bucket and no upload before the first batch.\nAn always-on box, such as a NAS\nA session needs both machines online, and a NAS or a home server stays online all the time. The container in\ndocker/\nruns the serving side on that box from plain Docker with the stock kernel. Your laptop mounts the folder from anywhere and reads on demand, so only the bytes a program reads cross the wire. In that run the box, a container on a server in Timisoara, served 161 files to a laptop in Bucharest; after it paired once, the laptop listed the folder and hashed one photo. The setup steps are in\nRun it on a NAS\n.\nPhotographers and editors\nThe raws and the footage stay on the box at the studio. The laptop mounts the folder, Lightroom or Resolve opens the files from the mount, and each file moves only when it is opened; a 1 MiB read out of a big file moves one 16 MiB block. The catalog stays on the laptop, as the\npost-production page\nand the\nvideo and audio guide\ndescribe. Set the share read only when the box is the archive and the laptop must change nothing.\nAgents, and the data they work on\nTwo agents, one per machine, each drive a KeibiDrop peer through the MCP server. The laptop offers a folder where it sits, and the gpu box mounts it and checksums 24 shards out of 2,184 files six folders deep. In that run 88,581 bytes crossed the network out of 6,784,286 on disk, because that is what it opened. The whole thing, pairing included, took 12.5 seconds.\nBuild it with\nmake build-kdmcp\n, then\nkdmcp install\nprints the config snippet for your MCP client. Sending stays off until\nKD_SHARE_ROOT\nnames one directory to send from, so a receiving agent cannot be talked into shipping files out.\nLinks\nWebsite\nDocumentation\nCompared with sshfs\n- measured on a 200 ms link\nCompared with other tools\n, such as LucidLink, Syncthing, Resilio Sync, rclone, WeTransfer, LocalSend, PairDrop and KDE Connect, one table each\nTechnical deep dive\nEngineering blog\nFAQ\nComparison with alternatives\nAbout and credentials\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812309529_yh3hx6slh",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"unsure\", \"reason\": \"页面清楚描述了机制：通过 FUSE 挂载远端文件夹，只按块传输被读取的数据，并用端到端加密和中继穿透 NAT。但它与 LucidLink、sshfs 属于同一类问题，页面给出的差异和 200 ms 链路性能数字都是作者自述，没有独立验证或 HN 讨论可以佐证。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 6190,
+            "cached_tokens": 0,
+            "output_tokens": 511,
+            "total_tokens": 6701,
+            "context_tokens": 6701
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The evidence supports each claim: the Teleport folder uses FUSE, macFUSE or WinFsp, files move in blocks as they are read, traffic is end-to-end encrypted, a relay works through firewalls, and the page compares against LucidLink and sshfs on a 200 ms link. The post has 0 HN comments. The reason names concrete mechanisms, and it says what is missing for 'unsure': independent verification of the author's claims and any HN discussion."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 5523,
+      "inputTokenDetails": {
+        "noCacheTokens": 5523,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 397,
+      "outputTokenDetails": {
+        "textTokens": 183,
+        "reasoningTokens": 214
+      },
+      "totalTokens": 5920,
+      "raw": {
+        "input_tokens": 5523,
+        "output_tokens": 397,
+        "output_tokens_details": {
+          "thinking_tokens": 214
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

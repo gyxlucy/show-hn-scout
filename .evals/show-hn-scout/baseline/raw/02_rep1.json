@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_7dc09a21b8e248f8ae750485eabfd2aa",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 2902,
+      "cached_tokens": 0,
+      "output_tokens": 591,
+      "total_tokens": 3493,
+      "context_tokens": 3493
+    },
+    "transcript": [
+      {
+        "id": "a7f73163-a06c-4d0c-b130-7121475d7ea4",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812192150_cvgej3xmc",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"unsure\", \"reason\": \"页面清楚说明了机制：提交即用傅里叶位置编码的小网络训练，检出即推理重建，并给出网络大小与误差的权衡。但这基本是已知的隐式神经表示压缩思路套用到版本控制上，页面没有给出独立验证或与现有方法的对比，新意和可复用的洞见还不足以确定推送。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 2902,
+            "cached_tokens": 0,
+            "output_tokens": 591,
+            "total_tokens": 3493,
+            "context_tokens": 3493
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason accurately describes the page's mechanism: commit as training a small network with Fourier positional encoding, checkout as inference, and the size-versus-error tradeoff. Its claim that the demo page shows no comparisons holds, since benchmarks are only referenced in a separate writeup. For an unsure decision it names what is missing: independent validation and comparison to existing methods."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 1908,
+      "inputTokenDetails": {
+        "noCacheTokens": 1908,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 399,
+      "outputTokenDetails": {
+        "textTokens": 152,
+        "reasoningTokens": 247
+      },
+      "totalTokens": 2307,
+      "raw": {
+        "input_tokens": 1908,
+        "output_tokens": 399,
+        "output_tokens_details": {
+          "thinking_tokens": 247
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

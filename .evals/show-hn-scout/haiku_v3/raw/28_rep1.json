@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_edd95aed4c81423b836ea27c6f00cfc0",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 5804,
+      "cached_tokens": 0,
+      "output_tokens": 656,
+      "total_tokens": 6460,
+      "context_tokens": 6460
+    },
+    "transcript": [
+      {
+        "id": "c022e8b4-39dd-4797-bc57-6372a6777c7f",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Memdoor – A coding agent that can build and run headless workflows\nProject URL: https://github.com/guregodevo/memdoor\nPosted (UTC): 2026-10-21T13:10:14Z\n\n## Project page text (fetch status: ok)\n\n```text\nMemdoor\nThe coding agent for durable workflows.\nRepeatable, headless, open source, on your own key.\nStart it from CI, a schedule or a shell. Finish it from your phone or a window. It proves each step and stops where only you decide.\ncurl -fsSL https://memdoor.ai/install.sh\n|\nbash\nexport\nOPEN_ROUTER_API_KEY=sk-or-...\n#\nor ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, …\ncd\nyour-project\n&&\nmemdoor\n#\nthe first run sets the machine up\nOn a ChatGPT Plus or Pro plan? Skip the key:\nmemdoor connect chatgpt\n(or\n/connect chatgpt\nin the window) opens Sign in with ChatGPT, and your plan's\nallowance answers Memdoor's turns. A Claude subscription cannot be used this\nway (Anthropic's terms); Claude needs an API key.\nNo money on a key yet? A free OpenRouter account and\n/model nvidia/nemotron-3-super-120b-a12b:free\nrun a real session: 50 requests a day,\nand the free hosts train on what they are sent, so a trial, not private code.\nEvery run is a conversation on a gateway on your machine, whatever door it\ncame in by: a terminal window,\nmemdoor run\nfrom a script or CI, a cron\nschedule, your editor, or the page on your phone. The run a CI job started is\nthe one you open with\nmemdoor resume <id>\n, watch live, and answer. One\ngateway, every door (\nthe walk through them, with exit\ncodes\n).\nmemdoor run\n\"\nfix the failing test\n\"\n#\none turn, no window; the exit code is the receipt of its checks\nmemdoor workflow run release --wait\n#\na workflow from a shell or CI, exit code the run's outcome\nmemdoor resume --last\n#\nthe same run, in a window\nmemdoor\nreads your files, writes patches, runs the build and fixes what\nit broke, in the directory you launch it from. Every model call goes from your\nmachine to the provider you connected, on your account, at their list price.\nTwo more things set it apart.\nA decision model in front of the chat model.\nJev (TypeSafe) answers a\ntyped question such as\nis this hit relevant to the task?\nwith a calibrated\nprobability in under half a second, and the harness acts on it: search, file\nand log reads return only what counts; only the tools the turn needs are sent;\na turn that stops making progress ends instead of looping to a cap. Measured\nover 44 paired runs, decisions off and on: 22 of 22 passed each way; a question\nabout the codebase went from 54,661 to 14,367 input tokens (−74%); an edit with\na test and ten one-file fixes read the same files either way (within ±11%)\n(\ndocs/features/DECIDE.md\n).\nWorkflows.\nSay the steps and the coder writes them as task files, one YAML\nper step, run as a graph by\nmario\n.\nIndependent steps run in parallel; a step is done when its check passes, never\nbecause the model says so; a gate waits for your approval with the diff in\nfront of you; a failed run resumes at the failed step. The files live in your repo, so a workflow is kept, shared and\nrun again, by hand or on your local cron\n(\ndocs/features/WORKFLOWS.md\n). Why workflows\nrather than skills:\nthe write-up\n.\nWorked examples, each run before it was added:\nexamples/workflows/\n.\nA recorded session of the review loop (findings verified by running, a gate,\nthe fixes applied) plays at\nmemdoor.ai/workflows\n.\nInstall\ncurl -fsSL https://memdoor.ai/install.sh\n|\nbash\nexport\nOPEN_ROUTER_API_KEY=sk-or-...\n#\nor ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, … or /connect inside\ncd\nyour-project\n&&\nmemdoor\n#\nthe first run sets the machine up\nmacOS (Apple Silicon and Intel), Linux (amd64, arm64; static), Windows\n(\nirm https://memdoor.ai/install.ps1 | iex\n; the agent runs commands in\nGit Bash when it is installed, otherwise PowerShell). One binary, installed to\n~/.local/bin\n, no sudo, no Docker, no Python. The installer\n(\nscripts/install.sh\n) verifies the SHA-256 of what it\ndownloads.\nIn the window\nCommand\nWhat it does\n/model\nWhich model answers: the agent's ladder (cheapest rung first), or pin any model of your providers, with list prices\n/connect\nAdd a provider: OpenRouter, Anthropic, OpenAI, Gemini, DeepSeek, Baseten, Groq, xAI, any OpenAI-compatible endpoint, your company's AI gateway;\n/connect chatgpt\nsigns in with a ChatGPT Plus/Pro plan, no key\n/workflow\nThe project's workflows and runs; enter opens a run's graph,\na\napproves a gate,\n/workflow:<name>\nruns one\n/usage\nThis month on your key, per model, and what the decision model kept out of the bill\n/remote\nThis conversation on your phone: a link and a QR code, the terminal itself, end-to-end encrypted (Pro)\n/share\nA read-only link to the conversation, encrypted, secrets removed;\n/unshare\ndeletes it\n/files\nor\nctrl+f\nThe project's files, the ones this conversation read or changed first, each with what happened to it; enter previews,\nctrl+d\ndiffs,\nctrl+e\nopens in\n$EDITOR\n, tab puts\n@path\nin the prompt\n/graph\nor\nctrl+g\nThis turn as a graph: the reads, the edits that depended on them, the runs that depended on the edits, the failing check in red\n/mcp\nConnect MCP servers from a URL, a command or a\n.mcp.json\nsnippet\n/help\nThe rest\nEsc\ninterrupts a turn,\nctrl+f\nopens the files panel,\nctrl+g\nthe turn as a graph,\nctrl+o\nexpands tool\nframes,\nShift+Tab\nsets the reasoning effort,\n@path\nmentions a file.\nMEMDOOR_APPROVE=changes\nasks\nbefore every command and write, for machines whose policy requires it.\nIn your editor\nmemdoor acp\nserves the same coder over the\nAgent Client Protocol\n:\nZed and JetBrains host it natively; VS Code through an ACP client extension\n(for example \"ACP Client\"), with one setting:\n\"acp.agents\"\n: {\n\"Memdoor\"\n: {\n\"command\"\n:\n\"\nmemdoor\n\"\n,\n\"args\"\n: [\n\"\nacp\n\"\n] } }\nEach editor session is a conversation on your local gateway; a prompt is a\nturn in the editor's workspace folder, and the turn's text, tool calls and\napprovals show as the editor's own. The steps:\nmemdoor.ai/docs/editor\n.\nFrom a script\nmemdoor run\n\"\nmake the retry wait configurable and add a test\n\"\n#\na headless turn, no window\ngit diff\n|\nmemdoor run\n\"\nreview this diff; one line per finding\n\"\n#\nstdin is the input\nmemdoor run --json\n\"\nfix the failing test\n\"\n|\njq\n'\nselect(.event==\"done\")\n'\nmemdoor workflow run release --wait\n#\nprogress on stderr, results on stdout\nmemdoor remote --last\n#\nthe link /remote gives, on stdout; holds the run for your phone\nThe exit code is the turn's receipt: 0 checked, 2 unverified or a failing check,\n3 a question nobody answered (\n--yes\nanswers it), 1 an error, 130 interrupted. The gateway\nstarts if none is running; every run is a conversation\nmemdoor resume\nopens.\nHeadless, then attached\n.\nWhere your data goes\nFiles, sessions and commands stay on your machine. What leaves is what the\nmodel reads, sent to the provider you connected; on OpenRouter every request\ncarries\ndata_collection: deny\nand hosts that train on paid inputs are kept out\nof the ladders. The one exception is a model you pin whose id ends in\n:free\n:\nits hosts train on what they are sent, the request says so (\nallow\n), and the\npin warns; use one for a trial, not on private code. On a vendor key or a company gateway nothing else is contacted:\ndocs/SECURITY.md\nlists every host the binary can name and\na test fails the build on a new one.\nPrice\nFree\n: the agent, the decision model and workflows (with local schedules), on your own key.\nPro, $10/month\n: remote control through the memdoor.ai relay, and every workflow run's state kept on memdoor.ai so a workflow can wait on what another produced, from any machine. The seat never buys inference.\nEnterprise\n: the same served for a company, invoiced —\nhello@memdoor.ai\n.\nDocumentation\nGetting started\nWorkflows\n·\nScheduled checks\n·\nMCP servers\nProviders\n·\nSecurity\n·\nDecisions\nCLI reference\n·\nArchitecture\n·\nSkills\n·\nADRs\nThe served docs:\nmemdoor.ai/docs\nRepository layout\ncmd/cli/       the CLI (cobra): tui, model, workflow, cron, account, …\ngateway/       the local gateway: agent runtime, tools, providers, workflows, billing service\npkg/           the domain: decision, metering, plan, workflow (the mario task factory), …\nweb/           the memdoor.ai site and the served docs (React, Vite)\nscripts/       install.sh, install.ps1, deploy.sh\ndocs/          features, reference, ADRs\nexamples/      workflows built by the coder and run, to copy into a project\nLicense\nApache License 2.0 —\nLICENSE\n,\nNOTICE\n. The public\nrepository is\ngithub.com/guregodevo/memdoor\n; issues there.\n```\n\n## HN discussion (2 comments)\n\n- [other] thomasperson: It looks promising. Why do you mean by repeatable steps ?\n- [author] guregodevo: A worflow is basically a DAG of tasks that are defined in YAML files. Once the agent has built it it can be run retried and repeated. Think of workflows as a DAG in Airflow or any DAG orchestrator."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792815018545_xpjvf7p29",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"这是一个功能庞杂的通用编程代理，页面堆砌了模型路由、远程控制、定价和多种入口，核心差异点（以检查通过判定步骤完成、YAML 工作流）被淹没。在拥挤的编程代理赛道里，它更像大型产品的宣传页，而不是一个让读者眼前一亮的小而巧的产品。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 5804,
+            "cached_tokens": 0,
+            "output_tokens": 656,
+            "total_tokens": 6460,
+            "context_tokens": 6460
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason names features the page actually shows: model routing (/model ladder), remote control (/remote), pricing tiers, multiple entry points, check-based step completion and YAML workflows. Its view that the page is sprawling and buries the differentiators is a judgment, not an invented fact, and it supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 4919,
+      "inputTokenDetails": {
+        "noCacheTokens": 4919,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 131,
+      "outputTokenDetails": {
+        "textTokens": 131,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 5050,
+      "raw": {
+        "input_tokens": 4919,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

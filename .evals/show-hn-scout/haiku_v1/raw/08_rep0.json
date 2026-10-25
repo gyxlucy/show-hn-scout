@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_454a8ddae9c3446bba98b8707957a0fd",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3322,
+      "cached_tokens": 0,
+      "output_tokens": 290,
+      "total_tokens": 3612,
+      "context_tokens": 3612
+    },
+    "transcript": [
+      {
+        "id": "fc68936b-14d9-439d-9782-049d1833569c",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Drop in a folder of HTML and get back a private URL\nProject URL: https://eze.page/\nPosted (UTC): 2026-10-20T23:45:03Z\n\n## Project page text (fetch status: ok)\n\n```text\nTurn a folder into a private website for your team.\neze is open-source hosting you run inside your company. Upload some HTML and get a link that only your coworkers can open. Every site gets a database, live updates, file uploads and AI, with nothing to set up.\nSet it up\nGitHub\nSelf-hosted. MIT license.\nlunch-vote\nindex.html\npoll.js\nstyle.css\neze deploy\nlunch-vote.eze.acme.com\nWhere should we eat on Friday?\nRamen place on 5th\n9\nTacos\n4\nSalad bar\n1\nAN\nBO\nCY\nDE\n4 people from Acme are voting\nHow it works\nMake a site\nWrite plain HTML, CSS and JavaScript yourself, or ask your AI tool to.\nDeploy it\nRun\neze deploy\nor drop the folder on the eze dashboard.\nShare the link\nAnyone signed in to your company can open it. Nobody else can.\nA backend without a backend\nPages load one script from eze and can save data, react to changes and know who is looking. They use the viewer's company sign-in, so there are no keys in your code.\n<script src=\"/_q/sdk.js\"></script>\n<script type=\"module\">\nconst me = await eze.id.me();\nconst votes = eze.db.collection('votes');\nawait votes.create({ place: 'Ramen', by: me.name });\nvotes.subscribe({ onCreate: (vote) => redraw() });\n</script>\neze.db\nSave and query data, with live updates\neze.files\nUploads like images, video and PDFs\neze.ws\nRooms for cursors, chat and games\neze.ai\nCall Claude, OpenAI or your own model\neze.id\nThe name and email of whoever is viewing\nWorks with your AI tools\neze init\nadds instructions that teach coding agents how to build an eze site.\neze mcp\nlets Claude Code, Cursor and other MCP apps deploy sites for you.\nclaude mcp add eze -- eze mcp\n> make a site where my team can vote\non where to eat on Friday\nSet it up\nYou need a server, a domain with wildcard DNS and HTTPS, and your company's sign-in: Google Workspace, Okta, Entra ID or any OpenID Connect provider, or an auth proxy you already use.\neze is one program with a small database file. A small VM is plenty.\nRead the setup guide\ngo install github.com/ahyield/eze/cmd/eze@latest\nEZE_DOMAIN=eze.acme.com \\\nEZE_AUTH=oidc \\\nEZE_OIDC_ISSUER=https://accounts.google.com \\\nEZE_OIDC_CLIENT_ID=... \\\nEZE_OIDC_CLIENT_SECRET=... \\\nEZE_OIDC_ALLOWED_DOMAINS=acme.com \\\nEZE_SESSION_SECRET=... \\\neze serve\nOnly for your company\nEveryone who can sign in can open, change and redeploy every site. That keeps eze simple, so keep it to your own people: eze won't start if its sign-in would let in a public email domain like gmail.com.\nFound a security problem?\nReport it privately\n.\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812807590_lkqvmcrwd",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQSiQgKEAgTGAI4AUIIdGhpbmtpbmcSDGgcR/fNBO5GNu7ATxoMtNcD0OvJTF2d7byFIjDrXgZ9MaE3OXxI7HEI+xtE5jObe2qU9nGOXBd/WmmBM/RA0U4moiSL0fa50zWQW0kqpge3iDQHPLp8k6NZFAsPqHGcAJfYhCr9+4Lu11HRpgEjAC0uvi1mWZy1sqO4Q+U44Ju+JnDrXhAB2L22NuTBHub0pIXGZl1tU2NJjtIMC9oLCue8fDPEogh6cCDft6AAcnSCV9Pwj4h5lXMw11akNOGc/n250x5ZoPMOuk2jdZxUjMznZfSi+Io88uSL3wLez51m+xbsvPUmqWEUov/2zzCRwkvVkpuMg6UecdbovSe1NPsRvCRghKsva05DPayos4yeTlS0PTgQeXK8noPv5/KQ5G0a8iXHLmfCrBEi8XedNQOCyCZkkIMn8iTE4EUEcZiUsZJKtmCbVreh34MBHBzZdRP9zVU/twRDWX9bYXKxG44Pmgnp3BtEhnnCKWob5LIaMnGAPYJqNIT9ePClkNtj5WROudnMiKYUZazFnoOKOaBqnhn+2hF0ZNd0HlkDUtNjWhMcbbsMaR6dv0n85TPpXWwqT6OEzrAI3Nq6gxQb1YEukGaXXvXuGD6sPoMOhnuSNPIEJMqcnbSXlWDgYOr8jLtdyBBVz258+EiqlM6/Qceclx8cZxanVUmCceR54dO09bkGawhTHJkHHUn6a33bp7+ucPviHagY/QoFwDbduXWg+39bblBljSb/39+P4JfeuZhpXgeMS+eOwIzOjv9XJP5RaCdUUF1TyBR57lmPebGO2wapkkwlTtproVwN1d20IVlNVv64ypZPOWgFCDYQHfoD8ZIvQvzfy2tuwnBJBI3SEzjRDxGZ2bTV8QdxYzc9XAMf9kfdl8DL7HuJWnLuBEpxpqP0j8gkMWZ5+eq+rpMNyI5npQSD3mAs3igQhHR1n7c4eeu2c0KSbnDlV4i166ylM0Jd0HvrpNTRvYzbNavfeNSCmRPp1MByCz3dkIT9bKz6/3CMbNXtYJnk/FYlDOpqSt+8Mz2IuBDl/jaXl7lAkQ5BvzafZXVieqe6LL2Ac3wnOQryvUJ14leve1MTMpnIuGM9fhd7ORIfSz4UalLiOFYqENjFaVhLlnKIzTtcSmXnU4gI23nWr+FR4ZF+S2J8VJmPRg7IQWa+0YzhqDaZmQwDsYCla0KcHVH7KEdqOAX+2tPeCDXo/UKGcauKUnzfjG6GpIoX2UbDluXcEXHAB0nONuCzFjAyHUYaPNOFq4OuE10OsalXZP2sAamsXnOJmtn/CDIjQ3cRT21h1drUD0IT4PyQRYc6JToo0RB0eDih5HUOxAC5cjEgdCsKNU65q7q6GAE="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"页面清楚展示了一个具体小产品：把一个 HTML 文件夹变成只有公司内部人员能打开的私有链接，并附带数据库、实时更新和公司登录的无配置后端，还有投票午餐的实例。这是对内部小工具分享这一常见问题的有新意的切入角度，页面也专业完整。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3322,
+            "cached_tokens": 0,
+            "output_tokens": 290,
+            "total_tokens": 3612,
+            "context_tokens": 3612
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason's claims all match the page: a folder of HTML becomes a private link only coworkers can open, with a database, live updates and company sign-in, and the lunch-vote example. These are concrete details from this post, and the positive framing (\"novel angle\", \"professional and complete\" page) supports push."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2228,
+      "inputTokenDetails": {
+        "noCacheTokens": 2228,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 127,
+      "outputTokenDetails": {
+        "textTokens": 127,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2355,
+      "raw": {
+        "input_tokens": 2228,
+        "output_tokens": 127,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

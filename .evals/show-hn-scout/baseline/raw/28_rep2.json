@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_69b5379a23744fd0a1fd12dd9fa9da31",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 5574,
+      "cached_tokens": 0,
+      "output_tokens": 178,
+      "total_tokens": 5752,
+      "context_tokens": 5752
+    },
+    "transcript": [
+      {
+        "id": "0b4eea76-5434-49c0-a74c-9839e8d8a98c",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Memdoor – A coding agent that can build and run headless workflows\nProject URL: https://github.com/guregodevo/memdoor\nPosted (UTC): 2026-10-21T13:10:14Z\n\n## Project page text (fetch status: ok)\n\n```text\nMemdoor\nThe coding agent for durable workflows.\nRepeatable, headless, open source, on your own key.\nStart it from CI, a schedule or a shell. Finish it from your phone or a window. It proves each step and stops where only you decide.\ncurl -fsSL https://memdoor.ai/install.sh\n|\nbash\nexport\nOPEN_ROUTER_API_KEY=sk-or-...\n#\nor ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, …\ncd\nyour-project\n&&\nmemdoor\n#\nthe first run sets the machine up\nOn a ChatGPT Plus or Pro plan? Skip the key:\nmemdoor connect chatgpt\n(or\n/connect chatgpt\nin the window) opens Sign in with ChatGPT, and your plan's\nallowance answers Memdoor's turns. A Claude subscription cannot be used this\nway (Anthropic's terms); Claude needs an API key.\nNo money on a key yet? A free OpenRouter account and\n/model nvidia/nemotron-3-super-120b-a12b:free\nrun a real session: 50 requests a day,\nand the free hosts train on what they are sent, so a trial, not private code.\nEvery run is a conversation on a gateway on your machine, whatever door it\ncame in by: a terminal window,\nmemdoor run\nfrom a script or CI, a cron\nschedule, your editor, or the page on your phone. The run a CI job started is\nthe one you open with\nmemdoor resume <id>\n, watch live, and answer. One\ngateway, every door (\nthe walk through them, with exit\ncodes\n).\nmemdoor run\n\"\nfix the failing test\n\"\n#\none turn, no window; the exit code is the receipt of its checks\nmemdoor workflow run release --wait\n#\na workflow from a shell or CI, exit code the run's outcome\nmemdoor resume --last\n#\nthe same run, in a window\nmemdoor\nreads your files, writes patches, runs the build and fixes what\nit broke, in the directory you launch it from. Every model call goes from your\nmachine to the provider you connected, on your account, at their list price.\nTwo more things set it apart.\nA decision model in front of the chat model.\nJev (TypeSafe) answers a\ntyped question such as\nis this hit relevant to the task?\nwith a calibrated\nprobability in under half a second, and the harness acts on it: search, file\nand log reads return only what counts; only the tools the turn needs are sent;\na turn that stops making progress ends instead of looping to a cap. Measured\nover 44 paired runs, decisions off and on: 22 of 22 passed each way; a question\nabout the codebase went from 54,661 to 14,367 input tokens (−74%); an edit with\na test and ten one-file fixes read the same files either way (within ±11%)\n(\ndocs/features/DECIDE.md\n).\nWorkflows.\nSay the steps and the coder writes them as task files, one YAML\nper step, run as a graph by\nmario\n.\nIndependent steps run in parallel; a step is done when its check passes, never\nbecause the model says so; a gate waits for your approval with the diff in\nfront of you; a failed run resumes at the failed step. The files live in your repo, so a workflow is kept, shared and\nrun again, by hand or on your local cron\n(\ndocs/features/WORKFLOWS.md\n). Why workflows\nrather than skills:\nthe write-up\n.\nWorked examples, each run before it was added:\nexamples/workflows/\n.\nA recorded session of the review loop (findings verified by running, a gate,\nthe fixes applied) plays at\nmemdoor.ai/workflows\n.\nInstall\ncurl -fsSL https://memdoor.ai/install.sh\n|\nbash\nexport\nOPEN_ROUTER_API_KEY=sk-or-...\n#\nor ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, … or /connect inside\ncd\nyour-project\n&&\nmemdoor\n#\nthe first run sets the machine up\nmacOS (Apple Silicon and Intel), Linux (amd64, arm64; static), Windows\n(\nirm https://memdoor.ai/install.ps1 | iex\n; the agent runs commands in\nGit Bash when it is installed, otherwise PowerShell). One binary, installed to\n~/.local/bin\n, no sudo, no Docker, no Python. The installer\n(\nscripts/install.sh\n) verifies the SHA-256 of what it\ndownloads.\nIn the window\nCommand\nWhat it does\n/model\nWhich model answers: the agent's ladder (cheapest rung first), or pin any model of your providers, with list prices\n/connect\nAdd a provider: OpenRouter, Anthropic, OpenAI, Gemini, DeepSeek, Baseten, Groq, xAI, any OpenAI-compatible endpoint, your company's AI gateway;\n/connect chatgpt\nsigns in with a ChatGPT Plus/Pro plan, no key\n/workflow\nThe project's workflows and runs; enter opens a run's graph,\na\napproves a gate,\n/workflow:<name>\nruns one\n/usage\nThis month on your key, per model, and what the decision model kept out of the bill\n/remote\nThis conversation on your phone: a link and a QR code, the terminal itself, end-to-end encrypted (Pro)\n/share\nA read-only link to the conversation, encrypted, secrets removed;\n/unshare\ndeletes it\n/files\nor\nctrl+f\nThe project's files, the ones this conversation read or changed first, each with what happened to it; enter previews,\nctrl+d\ndiffs,\nctrl+e\nopens in\n$EDITOR\n, tab puts\n@path\nin the prompt\n/graph\nor\nctrl+g\nThis turn as a graph: the reads, the edits that depended on them, the runs that depended on the edits, the failing check in red\n/mcp\nConnect MCP servers from a URL, a command or a\n.mcp.json\nsnippet\n/help\nThe rest\nEsc\ninterrupts a turn,\nctrl+f\nopens the files panel,\nctrl+g\nthe turn as a graph,\nctrl+o\nexpands tool\nframes,\nShift+Tab\nsets the reasoning effort,\n@path\nmentions a file.\nMEMDOOR_APPROVE=changes\nasks\nbefore every command and write, for machines whose policy requires it.\nIn your editor\nmemdoor acp\nserves the same coder over the\nAgent Client Protocol\n:\nZed and JetBrains host it natively; VS Code through an ACP client extension\n(for example \"ACP Client\"), with one setting:\n\"acp.agents\"\n: {\n\"Memdoor\"\n: {\n\"command\"\n:\n\"\nmemdoor\n\"\n,\n\"args\"\n: [\n\"\nacp\n\"\n] } }\nEach editor session is a conversation on your local gateway; a prompt is a\nturn in the editor's workspace folder, and the turn's text, tool calls and\napprovals show as the editor's own. The steps:\nmemdoor.ai/docs/editor\n.\nFrom a script\nmemdoor run\n\"\nmake the retry wait configurable and add a test\n\"\n#\na headless turn, no window\ngit diff\n|\nmemdoor run\n\"\nreview this diff; one line per finding\n\"\n#\nstdin is the input\nmemdoor run --json\n\"\nfix the failing test\n\"\n|\njq\n'\nselect(.event==\"done\")\n'\nmemdoor workflow run release --wait\n#\nprogress on stderr, results on stdout\nmemdoor remote --last\n#\nthe link /remote gives, on stdout; holds the run for your phone\nThe exit code is the turn's receipt: 0 checked, 2 unverified or a failing check,\n3 a question nobody answered (\n--yes\nanswers it), 1 an error, 130 interrupted. The gateway\nstarts if none is running; every run is a conversation\nmemdoor resume\nopens.\nHeadless, then attached\n.\nWhere your data goes\nFiles, sessions and commands stay on your machine. What leaves is what the\nmodel reads, sent to the provider you connected; on OpenRouter every request\ncarries\ndata_collection: deny\nand hosts that train on paid inputs are kept out\nof the ladders. The one exception is a model you pin whose id ends in\n:free\n:\nits hosts train on what they are sent, the request says so (\nallow\n), and the\npin warns; use one for a trial, not on private code. On a vendor key or a company gateway nothing else is contacted:\ndocs/SECURITY.md\nlists every host the binary can name and\na test fails the build on a new one.\nPrice\nFree\n: the agent, the decision model and workflows (with local schedules), on your own key.\nPro, $10/month\n: remote control through the memdoor.ai relay, and every workflow run's state kept on memdoor.ai so a workflow can wait on what another produced, from any machine. The seat never buys inference.\nEnterprise\n: the same served for a company, invoiced —\nhello@memdoor.ai\n.\nDocumentation\nGetting started\nWorkflows\n·\nScheduled checks\n·\nMCP servers\nProviders\n·\nSecurity\n·\nDecisions\nCLI reference\n·\nArchitecture\n·\nSkills\n·\nADRs\nThe served docs:\nmemdoor.ai/docs\nRepository layout\ncmd/cli/       the CLI (cobra): tui, model, workflow, cron, account, …\ngateway/       the local gateway: agent runtime, tools, providers, workflows, billing service\npkg/           the domain: decision, metering, plan, workflow (the mario task factory), …\nweb/           the memdoor.ai site and the served docs (React, Vite)\nscripts/       install.sh, install.ps1, deploy.sh\ndocs/          features, reference, ADRs\nexamples/      workflows built by the coder and run, to copy into a project\nLicense\nApache License 2.0 —\nLICENSE\n,\nNOTICE\n. The public\nrepository is\ngithub.com/guregodevo/memdoor\n; issues there.\n```\n\n## HN discussion (2 comments)\n\n- [other] thomasperson: It looks promising. Why do you mean by repeatable steps ?\n- [author] guregodevo: A worflow is basically a DAG of tasks that are defined in YAML files. Once the agent has built it it can be run retried and repeated. Think of workflows as a DAG in Airflow or any DAG orchestrator."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812326170_sod5rgyn8",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"The page describes a coding agent with a headless CLI, YAML-defined DAG workflows, and a 'decision model' that filters tool results; these are mostly feature lists and a self-reported token-savings benchmark (44 runs) with no independent confirmation. The core idea, a coding agent that writes workflows as checked DAG steps, resembles existing agent-orchestration tools, and the distinctive piece (Jev decision model) is only sketched, so nothing overlooked and concrete stands out.\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 5574,
+            "cached_tokens": 0,
+            "output_tokens": 178,
+            "total_tokens": 5752,
+            "context_tokens": 5752
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "Every claim in the reason matches the evidence: the headless CLI, the YAML DAG workflows, the Jev decision model that filters reads, and the self-measured 44-run benchmark with no outside confirmation. Calling Jev 'only sketched' is a fair reading of the short README description. The reason names concrete features and argues for pass, which matches the decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 4953,
+      "inputTokenDetails": {
+        "noCacheTokens": 4953,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 147,
+      "outputTokenDetails": {
+        "textTokens": 147,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 5100,
+      "raw": {
+        "input_tokens": 4953,
+        "output_tokens": 147,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

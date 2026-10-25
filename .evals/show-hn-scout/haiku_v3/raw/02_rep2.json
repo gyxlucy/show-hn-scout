@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_da3c366756084df4983a5b3ee76ff432",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3132,
+      "cached_tokens": 0,
+      "output_tokens": 230,
+      "total_tokens": 3362,
+      "context_tokens": 3362
+    },
+    "transcript": [
+      {
+        "id": "8605ba95-b806-4f7e-8bda-5388ffcc4c75",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814844228_6550c1eym",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQSigcKEAgTGAI4AUIIdGhpbmtpbmcSDAc0snePhwC71uqLihoMkt9G2clBY80cbAeqIjCuA5yK1JXjD63WIl7X9L5l7Aelnh7TMKHfe6Q166AUFpnNSe8C+ERM+eCH3qpqarwqpwYOT7vpxPmiCHsVWrZBIDpBCuuy6U2re7wImr33EaooS4ZoZPWktlMBivTB6PRmO1uHg18QNIcDBfjX0GAVoTcyP/p8ZoLMX19s3yai/J6InUoOo1FKul6eTlFsrUDKow5Cxm19XWgXFt6+wWFhioaNnclFSOSq5qKSV+T+ymPjiCQyJiZo6vOxEzFPhsf8iAUJSSWyd3l7EGCe5+uiNWdto+Axou3Vp2zu723nGHF+o/NwIzigd1cytKhyOWYG8cLHuIxDgxGFL2FEtKWqc1cFcCkWivF2gbvGTDQ0h+yVQnk4O+XvnQJqZsg2OifrcV6Nlaf+8uEtLlVZ1JvLMMXJ+mGBOBb951hXJS7CYn2RNiPPV0c1S9rbcNU4tkLTNNnkq9B2sZ8msLIpLCyH/wWuUXijzt4BK58woZNpl+ehNyGZHTsRuakXvhdFE7vqJrI8q3t+a7/zLF1glbii6oen9hz/dxVgp55T2xMrc+wf/HeI+qtmdt7kwAi2bP8F2nrNQgd6kUmINXvExGwaNHrvq03ZuC3cgsHxqkc4WqXMWYop2OKPOkxM8GfkZTJ1wmgRTN9uwIUnjMPNNpY5zABxOMlrwje5LJ5BPl+KzDb4p+lS4SwBZbSZk/bc8dAEOKEhMjl3vzCYTFLDwTwYKySB0ivz7By+HV4TaMODfdSe5PEbl7oezBsuP6mHoQtBmcSHifNBe0h28F8Hh3g3o/ZwpFWWxBieP1WxiBs0sRgUrBV9C+lXVBUE+l/6XdhIkjikwjKSkfanl+bsxOKXT285NWXYuNvhF6YY5c8gwFDp95Ilp53lls68TH4jv2zS/kLE9+NHBp+1CtJGBNHvDm2CNRSirMotjR1EHqmFyHoUQd/cCSElq/27w7Tx5PZluuLk6XcxNqa8z7WtwqUbgt5OQKw4/pO7qIOLJymuvDJ3NVZGbUJlqzOvdfoUsbYLOdrtdGrL+pRIM5e4H1l92HVG0opR6+zX7vlbhEhRI8Xjp1L/Bd7fONsrN2Uk8jIqnWSc3lIO/WTEbIDHvyp3HQtsKp2zUHYfIKiaDU1NRvloMhgQ6iWudKkYAQ=="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"页面展示了一个有创意的小产品：把版本控制的存储换成神经网络，提交即训练、检出即重建，并用浏览器演示代码和图片在模型压缩后如何损坏。这属于以有趣方式呈现技术概念的情况，符合她喜欢的巧妙小产品标准。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3132,
+            "cached_tokens": 0,
+            "output_tokens": 230,
+            "total_tokens": 3362,
+            "context_tokens": 3362
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says commit trains a network, checkout reconstructs, and a browser demo shows code and images corrupting under compression; the page text supports each of these points. These concrete mechanisms are drawn from this post, and calling it a clever small product supports the push decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 1890,
+      "inputTokenDetails": {
+        "noCacheTokens": 1890,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 113,
+      "outputTokenDetails": {
+        "textTokens": 113,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2003,
+      "raw": {
+        "input_tokens": 1890,
+        "output_tokens": 113,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

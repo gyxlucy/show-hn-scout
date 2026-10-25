@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_6f07bc5042d841e28a233e9de11aef1d",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3648,
+      "cached_tokens": 0,
+      "output_tokens": 459,
+      "total_tokens": 4107,
+      "context_tokens": 4107
+    },
+    "transcript": [
+      {
+        "id": "24270f6e-8865-4076-bcb6-1fc46739df70",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: GitPushups, block your code if you don't do pushups during your workday\nProject URL: https://gitpushups.com\nPosted (UTC): 2026-10-22T01:28:28Z\n\n## Project page text (fetch status: ok)\n\n```text\nDo pushups...\nor we block\nyour commits.\nJoin developers who have built a pushup habit into their coding routine and logged\n42,490\n0\n42,490\npushups\nduring their workday.\nAll free and no ad spam.\nSign in with GitHub\nThese GitHub users do\npushups while coding.\nPrimeagen\nMarc Lou\nCassidy Williams\nScott Tolinski\nPieter Levels\nMelkey\nTheo\nWes Bos\nJason Lengstorf\nFireship\nHelp us get these developers\ndoing the reps, too!\nKnow them? Invite them to join.\nConfigure your training\nChoose how often you want to do pushups\nSet up with your agent\nGit hook\n›\nSet me up for GitPushups. Read the setup instructions at https://gitpushups.com/agent-setup/prompt.md?frequency=daily, ask for my GitHub username, and preserve my existing Git hooks.\nBefore\nAfter\nDaily\n8 hours\n4 hours\n1 hour\n15 min\nPushups daily\nWhy this works\nAn existing routine\nThis is a\nhabit stacking\ntool. You are already coding; add this to your routine and you’ll get stronger.\nA small interruption\nYou can do as many or as few pushups as you want. Your growth is based on the technique known as\n“greasing the groove”\n. Practice good form, frequently, at sub-maximal intensity to build neuromuscular efficiency.\nRepetition\nLike coding, eventually doing pushups while you work will become second nature. That repetition will make you stronger.\nTrack your progress\nSet your daily goal. Track your pushups.\nWatch your contribution graph fill in and see where you are on the global leaderboard.\nGlobal leaderboard\nToday’s developers\nReps\n1\ntorvalds\n120\n2\nkarpathy\n108\n3\ncassidoo\n96\n4\ngaearon\n84\n5\nsindresorhus\n72\nYour contributions\n2,674\npushups\nLess\nMore\nDaily goal\n40 pushups\nSample ranks and rep counts\nActive community\nFocus this row to stop the animation and scroll through the quotes. Each card links to its original source.\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nLatest community update\nThe Monthly Press: October 2026\nRead update\nFAQ\nWhy pushups?\n+\nCan I sync with Apple Health?\n+\nHelp! I got too swol!\n+\nWhat if I already have a workout routine?\n+\nI have a feature request!\n+\nI found a bug!\n+\nHow do I delete my account?\n+\nHow can I support this project?\n+\nWho made this?\n+\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814963093_0131pe733",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"这是一个具体的小产品：用 Git hook 把提交与做俯卧撑绑定，是对“久坐写代码”这一常见问题的新颖切入，页面也说明了工作方式（习惯叠加、少量多次）。页面有重复的推荐语和营销味较重的数字，但产品本身清楚，足以值得一看。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3648,
+            "cached_tokens": 0,
+            "output_tokens": 459,
+            "total_tokens": 4107,
+            "context_tokens": 4107
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says the tool uses a Git hook to tie commits to pushups and relies on habit stacking and frequent small sets. The page supports this with \"Git hook\", \"habit stacking tool\" and \"greasing the groove\", and it does repeat its testimonial quotes. The reason names that mechanism, and its judgment that the product is clear enough to look at supports the push decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2500,
+      "inputTokenDetails": {
+        "noCacheTokens": 2500,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 155,
+      "outputTokenDetails": {
+        "textTokens": 155,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2655,
+      "raw": {
+        "input_tokens": 2500,
+        "output_tokens": 155,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

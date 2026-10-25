@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_f8099b812df14cdc8135364547eb2c3a",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 4152,
+      "cached_tokens": 0,
+      "output_tokens": 457,
+      "total_tokens": 4609,
+      "context_tokens": 4609
+    },
+    "transcript": [
+      {
+        "id": "6de61c71-4583-4de4-b617-4491b14a58bd",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: HarnessHive – collaborative wiring harness design platform in browser\nProject URL: https://harnesshive.com\nPosted (UTC): 2026-10-22T01:32:41Z\n\n## Project page text (fetch status: ok)\n\n```text\nThe AI-native, collaborative, browser-based and versioned design ecosystem for wiring harness engineers\nThe\nAI-Native\nCollaborative\nBrowser-Based\nVersioned\nAI-Native\nDesign Ecosystem for\nWiring Harness Engineers\nSchematic, layout, BOM and a\nTO-SCALE\nformboard, all in one live document. With an assistant that helps you at every step.\nBook a demo\n25 minutes\nStart free trial\nNo credit card ·\n14 days ·\nnothing to install\nClose\nSchematic\nWiring\nBOM & cut list\nFormboard\nScroll\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nSchematic\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nWiring\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nBOM & cut list\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nFormboard\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nEverything a harness team needs,\nin one live document\n.\nCollaboration & history\nDraw together, in real time.\nEveryone edits the same live harness: cursors, drags and changes as they happen. Undo only reverts your own work, and every action lands in a history anyone can open read-only.\nLive cursors and presence\nPer-user undo\nViewer, Editor and Admin roles\nHistory by day, snapshots read-only\nStart free trial\nAI assistant\nAn assistant that reads your harness.\nAsk it to find real parts from trusted supplier sources, add them to your library, place them and connect the cavities. Every edit arrives as a proposal; nothing changes until you apply it.\nReads CSV wire lists you attach\nCreates parts from supplier pages\nGenerates a whole harness as one proposal\nApplied changes show up in history\nStart free trial\nIntegrations\nFits the tools you already use.\nBring wire lists, supplier data and whole harnesses in; send full-scale drawings, BOMs and a complete JSON back out. KiCad and Onshape importers are on the way.\nFormboard PDF at true 1:1 scale\nBOM and cut list as XLSX\nHarness JSON round-trip\nKiCad and Onshape · coming soon\nStart free trial\nParts & libraries\nReal parts, versioned.\nConnector housings, terminals, conductors, seals, splices. Every occurrence in a harness pins the exact version it was built with, so a library update never silently changes your design.\nOrganization libraries and local parts\nCavity counts on the part definition\nExact version pinned per occurrence\nBOM rows follow the model\nStart free trial\nAgents & MCP\nBring your own agent.\nHarnessHive ships an MCP server. Point Claude, ChatGPT, Cursor or your own agent at the workspace to read harnesses, BOMs, empty cavities and libraries. Tokens are read-only unless you opt in.\nEight read tools for every token\nWrites behind an explicit opt-in\nScoped to one workspace\nRevoke a token instantly\nWorks with\nRead the MCP docs\nJoin our community.\nA small team building this with the people who use it. Come say hi, show us what you’re wiring, and hear about new things first.\nJoin our Discord\nNew\nNewsletter\nBe the first to hear about new features and blog posts.\nEmail address\nWebsite\nSubscribe\nI agree to the\nPrivacy Policy\nand to receive product updates by email.\nBuilt for teams who\nactually build\n.\n[public\n/teams/startups.webp\n]\nStartups & machine builders\nShip the first harness without buying a seat of legacy EDA.\n[public\n/teams/students.webp\n]\nStudent teams\nHand the harness over each season with its full history intact.\n[public\n/teams/shops.webp\n]\nHarness shops & freelancers\nSend a 1:1 formboard and a clean BOM to the build bench.\nStudent teams\nwe sponsor\n.\nFormula Student teams across the globe, building their cars with our support.\nYour next harness, designed in the browser.\nBook a demo\n25 min\nStart free trial\n→\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814886214_qwaedyaxf",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQSyAwKEAgTGAI4AUIIdGhpbmtpbmcSDMM/YT6hxeB3v5OP/RoMCSEZTnZ63TBxZHR5IjDsA3AQjpzUpp3hdVp5cUxY4FY7woSumLc83btBHRYwh2618zgifzoRfa1smxj9xWsq5QvHkuPI5uR4BSpYjU84Z3jxzZnhSbEXQHoAM8ZHagQXsLF5KbuaAE31qsofDB1ZN0v4kXEy9/HGydpz+33pINP3qqE5f6mZVpN4F0wzJSRO4D52xtGtOIFT8yjLSzgyllLb02N64t+S20HlsUWI2Z3LcsUFsrBh08t1lxzm3HpL0mIMF/ICJFQX+pPNjEY3MC+CDhRlSrYMfUi1VIx3IYcGa+slAzvySaP3EYw3+mwyBw/IT+LlIv1IcgotYqgAEO7myBwKsNGCfVdkZ8E/ty2qzgj3eTzdKq210Fo4EFOzwUYW37H9pU33t1h9w0ydIUyEIsWgBvmoxYOXVi7PrApbXhBb57er3TpIjZUFljA7VC8G4k8Vxx3yh8BkPnelapps/0Rbf9GzfTLpYZ7rFX3CKxInKUDZpPQ59eKQwUxOMLVaw0/1xeg3WOZPkAUJf4+La8AytWJ7fgBV1rZszhxKLUTmVOpulAi6lFRNn4jn8QWdOwwbMcjv1bBOvFbchOf6tM0pcACWcxueF9fj9oUiVYg9PnlM7kB+Nxcn5GHHZ1CR3JXeNQrkoE2Gx23yK/tKiNekbHqwo9dwa6Lr9EVxxcmoteyVATheoG3Q2USRDZRfQ2XFXsq4X4zKCUUj9syulC/7WEPaDQutKyP08PDxD8iZNoSmWqOxHDvhGlsW4BQAvXdJQK3L1M5fyV1xfXQ9LPWVASBTwFB7dDllmxu8cSbT7JecUa9w1Qe8J2GxpwWXEOAR0lrISNFXpPtweDuMnWEA7/aQ0NlAnZQcAmV8n19PYpCWXs5BMG8h+fnDAmg/WfUOPLeQoF2b98wApC5eqo2MrB6FfH0er6glFoWwyQL0WIyZ+pI/79xyET1Lqhc7BJU/o2qIaTBWwerB3mOoBIvRTj8DXYi280GFObH4BF+i5BIb+umpFUWQPO+CFQA2rLMPAm/wcQiNgTt4zKnUpmIlZFIqNy+aBsNQRPbMcCBb76TO6Zs34DF8f/YJlianSkQkh+T0oTOllugqY0gjjYebOY+WbLLSfd0EUOM2BVwZFn8SE88vm5XzECrD/MHZvMa+fRCuDhM0SwHEJS/oiqSG+yjZ0LISxh4+2PIUr/0128fzvtR8tTpXidTyGesLRNvmqAMffg8wA1KUSQGUKKO4NDSKUdpmkPWZf4A5TRC9yv2PvNoWQFuy5cay5134tocEqPNfTfHuZih5+2jllqgrP1Tpni0UsBa7KIy/UXivT29h5JQp7pFEra22s+TWqYPVFyIXXWijJ1ub/6z7uLw7ddx/cFby1h8+ntwj/AqALCwebdim1xAFDi2WmRvqXwHWpPRc4736hnIrJ2kd0ripBnCy8Q2p2nbw9Ep6OL9m1f3S6NucqCvfb7+m2vdDYvt1HcVdr+zQGGTuh7ap+p+SwhNYMpIyTf+m0G2I0jU6NRev/HHR7+imt/UXTR+2S9eLLaAR1zrtS+RvZ9N/kx+M3xe5WUwHDIqGKMofUGQsi7J81WTSvziffP1QpcejYTbFXr1OP9FL8o8RGvyZIx/z53NvQ6tCnwbcNi18p99yNzEZTpmiYwzYeFMT0NmViw2WzS2i99QICfGjdb3VzsVcFvgOhq/wbKpsfb6T3prM/P5J72N1K0XEICorDtHmBSwPpxcdodIZy7vcUq0qA4rRABST+qTM8kzrNW1L7tbrWJ3cNb+p9+tejQE33egn62rPEpMslZplbxJfzmWz6tAIiQSy/BdTZ9KdtOASLuqfpdkiPz+lAVAdAAjE2JkiGXRGPIliUir/5wI7LfuHcBDiXZRvO0fqjJbhJHVq/twK+J2OHPt/ULEpVd7z865uKvNs21fNinwhz9xk6RqJJR9By+2Nljd5Pf66UUXMQ8/ZB97CYKwN8w5PrcbhywMI1wl0oxFyV2qII1cnXDjTSaukQehQAP6BWNUSIUl4SzjHjm0YluDGu5mdePXHxXCk8lU8Jo3HgRe5JCEFC9mYyRp4mSSnseUqygGnHlyQk6YjsRIYAQ=="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"页面描述清楚，是面向线束工程师的专业 EDA 类工具，但受众非常窄且偏重专业技术，更像企业级工程软件而非读者会感兴趣的小而巧的产品；页面里也没有展示特别新颖或巧妙的产品角度。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 4152,
+            "cached_tokens": 0,
+            "output_tokens": 457,
+            "total_tokens": 4609,
+            "context_tokens": 4609
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason correctly identifies the product as a professional EDA-style tool for wiring harness engineers, as the page states. Calling it narrow, enterprise-like and lacking a novel angle is a subjective judgment rather than an invented fact, and that judgment supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2954,
+      "inputTokenDetails": {
+        "noCacheTokens": 2954,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 374,
+      "outputTokenDetails": {
+        "textTokens": 121,
+        "reasoningTokens": 253
+      },
+      "totalTokens": 3328,
+      "raw": {
+        "input_tokens": 2954,
+        "output_tokens": 374,
+        "output_tokens_details": {
+          "thinking_tokens": 253
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

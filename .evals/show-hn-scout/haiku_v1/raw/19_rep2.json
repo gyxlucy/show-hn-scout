@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_e670c1f76aa64dd5a98075b6b099ac1b",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3518,
+      "cached_tokens": 0,
+      "output_tokens": 296,
+      "total_tokens": 3814,
+      "context_tokens": 3814
+    },
+    "transcript": [
+      {
+        "id": "a10896ee-eef7-4cf6-ab87-d1ce73f56e5e",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: GitPushups, block your code if you don't do pushups during your workday\nProject URL: https://gitpushups.com\nPosted (UTC): 2026-10-22T01:28:28Z\n\n## Project page text (fetch status: ok)\n\n```text\nDo pushups...\nor we block\nyour commits.\nJoin developers who have built a pushup habit into their coding routine and logged\n42,490\n0\n42,490\npushups\nduring their workday.\nAll free and no ad spam.\nSign in with GitHub\nThese GitHub users do\npushups while coding.\nPrimeagen\nMarc Lou\nCassidy Williams\nScott Tolinski\nPieter Levels\nMelkey\nTheo\nWes Bos\nJason Lengstorf\nFireship\nHelp us get these developers\ndoing the reps, too!\nKnow them? Invite them to join.\nConfigure your training\nChoose how often you want to do pushups\nSet up with your agent\nGit hook\n›\nSet me up for GitPushups. Read the setup instructions at https://gitpushups.com/agent-setup/prompt.md?frequency=daily, ask for my GitHub username, and preserve my existing Git hooks.\nBefore\nAfter\nDaily\n8 hours\n4 hours\n1 hour\n15 min\nPushups daily\nWhy this works\nAn existing routine\nThis is a\nhabit stacking\ntool. You are already coding; add this to your routine and you’ll get stronger.\nA small interruption\nYou can do as many or as few pushups as you want. Your growth is based on the technique known as\n“greasing the groove”\n. Practice good form, frequently, at sub-maximal intensity to build neuromuscular efficiency.\nRepetition\nLike coding, eventually doing pushups while you work will become second nature. That repetition will make you stronger.\nTrack your progress\nSet your daily goal. Track your pushups.\nWatch your contribution graph fill in and see where you are on the global leaderboard.\nGlobal leaderboard\nToday’s developers\nReps\n1\ntorvalds\n120\n2\nkarpathy\n108\n3\ncassidoo\n96\n4\ngaearon\n84\n5\nsindresorhus\n72\nYour contributions\n2,674\npushups\nLess\nMore\nDaily goal\n40 pushups\nSample ranks and rep counts\nActive community\nFocus this row to stop the animation and scroll through the quotes. Each card links to its original source.\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nLatest community update\nThe Monthly Press: October 2026\nRead update\nFAQ\nWhy pushups?\n+\nCan I sync with Apple Health?\n+\nHelp! I got too swol!\n+\nWhat if I already have a workout routine?\n+\nI have a feature request!\n+\nI found a bug!\n+\nHow do I delete my account?\n+\nHow can I support this project?\n+\nWho made this?\n+\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812884346_kltg1r7c2",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQS9wgKEAgTGAI4AUIIdGhpbmtpbmcSDE6HXtutl+8IkDGPiRoMhA9xPsuRBme1gJlWIjAngIzIUavcrxS5YWXmBvg27AOmrRqzHDqEt4r+BQ6GHVGWxUNyaWfVKuogoc+SLlsqlAg7mBJC+7RYcqxAdcYWu4YjP2ZGu2cADFKFbhE+qF3YxfWQKR/7P+2gc2ZOmsrbX3bdzqSOgdJrtC0ue5ZZF3XI+Qn6cdqSLu3lSkH8C6l+cHVJ0qkyxh3xJy181DjLhigTRQHSnR8pvakPpsY1CcHhiz5i4aPqK5sIou/ImN28graHK2/4gijtBeruifJPfDQTlUSdy5vX3XAurjmCqRDWjmsy7S408jAtNJgyy58rrTwRIyNs8HJV2TEM7Dp0tf4/6DIdhQ9/M2h83iaCg7WTLl12OyO8SFaASyVrK6K8t7A0cAeAHra+LfQ9di+JIZC/rCf1ibmZV7qtgyc34xeN0U3CAsvBXBD/gqs5co2lqh+wdSALfYZ7Q8XHIjsy5tVX+nfMfHK4Z4G9XzXSJ946zmCyisNBH9sQZX6NFk6hm89O34mqRn2Rw8O6vmYNMi3geMCgEmG9GgoDAy7+mFgydsf9ib4RRf/vuuSEM2K6bpbGHY2Jk2Pfo1J7iln6ZQBBq14Ss4TDG4v9Mm2aZKD0YdoLVsx6JSnUo6TCz0su52/iQ05ug9aaV8qpv4TDnxGStxvceUmTGeLeYgkcmIV0TvwPlKHqreSCmVrPk9MOFNHGTSPhBP4z6t1QLfIwgqTxAPkCUWs5I0TDVtWiHAXEt9wdvspmg6//uuCTkVJ/6KfQFp/+nNpocdCL7U3EOZt9jwu3lVKixuk/D46tWyJw1SWEcl+iLHdllP9Gv8kQ7aCa1ffXhVtRbJB/4wRRZYCK/LTDq8TJcn8vS5rSm7RNnhPV3iz2eZsIFy863Q8qdr0QZ6tAVXlINGwMXGzjP/JKFemJX4g4KmPk39yRP9RIhtCJxbrCSmscHOD7Wav8aXhrD85YaqvbUENbLXPN1WkXs833oA/bvRMn5WzXAXyweJUAK3erfA882oOF1ubQ/DHDHDUZ8QmHsqV8ZBJfo1vDYZIlySTrmveFV+y5Z6EmwX6y1Di6/OP+/CLr2ZPLzYF1pOX3XM57X+stVK+WADh076WXl3YoJG5ItQerOI5TrseMTfPNVTw7ibu6Tb358QADn1OgNGV+0MPCH9dpzBBk5nRi41p1sswf5Rbef66TUBU91LNegrMClR6bb6ztzkXsZxrUgrRe79ORL4sH4ETw/qamD165Woe507gQqFwTVAylyi4KzAe4HPPzArpoaUNl9BMG7NYoc/HSCRT6eaD/YHQ8pqh3px9LYXuOlUZjLEofGQp9tCX2SNZybZ81mjh6k2JrO2YCi/HtTZ+LHdMeRGZuGhI/hpTA/n0WMcBvCnm1y7AY7i5nM2HhwLqEtEYsodwjsFOT0mqt9N+oFTbL0yhz7nMA8FKcLPBOIJcVzAosAZZn6oibYQkTwXeIF0pmcVgYAQ=="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"这是一个具体且有巧思的小产品:把俯卧撑做成 git hook,不做就阻止提交,用编码习惯来叠加健身习惯,是对常见问题的新角度。页面虽有营销式内容,但产品用途清楚。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3518,
+            "cached_tokens": 0,
+            "output_tokens": 296,
+            "total_tokens": 3814,
+            "context_tokens": 3814
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says the product is a git hook that blocks commits unless pushups are done, stacking a fitness habit on coding, and that the page is marketing-heavy. The page text supports each of these points (\"Git hook\", \"or we block your commits\", \"habit stacking tool\"). It names the concrete mechanism and argues for push, matching the decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2470,
+      "inputTokenDetails": {
+        "noCacheTokens": 2470,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 144,
+      "outputTokenDetails": {
+        "textTokens": 144,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2614,
+      "raw": {
+        "input_tokens": 2470,
+        "output_tokens": 144,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

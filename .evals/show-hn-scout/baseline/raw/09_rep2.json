@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_4e402f6280ce4cc580aca628a4c63cda",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3922,
+      "cached_tokens": 0,
+      "output_tokens": 130,
+      "total_tokens": 4052,
+      "context_tokens": 4052
+    },
+    "transcript": [
+      {
+        "id": "b434cd9f-38c2-4367-9fc7-84d41f00e95f",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: HarnessHive – collaborative wiring harness design platform in browser\nProject URL: https://harnesshive.com\nPosted (UTC): 2026-10-22T01:32:41Z\n\n## Project page text (fetch status: ok)\n\n```text\nThe AI-native, collaborative, browser-based and versioned design ecosystem for wiring harness engineers\nThe\nAI-Native\nCollaborative\nBrowser-Based\nVersioned\nAI-Native\nDesign Ecosystem for\nWiring Harness Engineers\nSchematic, layout, BOM and a\nTO-SCALE\nformboard, all in one live document. With an assistant that helps you at every step.\nBook a demo\n25 minutes\nStart free trial\nNo credit card ·\n14 days ·\nnothing to install\nClose\nSchematic\nWiring\nBOM & cut list\nFormboard\nScroll\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nOne harness,\nfour views\n.\nDraw the logic once. Routes, cut lengths, the BOM and a 1:1 formboard all come from the same live document. Edit any view and the others follow.\nSchematic\nWiring\nBOM & cut list\nFormboard\nSchematic\nThe logical netlist. Place components and splices, connect their pins, and put the conductor on the connection itself.\nWiring\nThe physical side: connectors, branch points and the routes between them. Decide where the bundle splits and add coverings to a route.\nBOM & cut list\nParts and cut lengths, derived live from the model. Fix the harness and the numbers follow, then export the workbook to XLSX.\nFormboard\nThe manufacturing drawing at true 1:1 scale, kept in sync with the wiring. Export a full-size PDF for the build board.\nEverything a harness team needs,\nin one live document\n.\nCollaboration & history\nDraw together, in real time.\nEveryone edits the same live harness: cursors, drags and changes as they happen. Undo only reverts your own work, and every action lands in a history anyone can open read-only.\nLive cursors and presence\nPer-user undo\nViewer, Editor and Admin roles\nHistory by day, snapshots read-only\nStart free trial\nAI assistant\nAn assistant that reads your harness.\nAsk it to find real parts from trusted supplier sources, add them to your library, place them and connect the cavities. Every edit arrives as a proposal; nothing changes until you apply it.\nReads CSV wire lists you attach\nCreates parts from supplier pages\nGenerates a whole harness as one proposal\nApplied changes show up in history\nStart free trial\nIntegrations\nFits the tools you already use.\nBring wire lists, supplier data and whole harnesses in; send full-scale drawings, BOMs and a complete JSON back out. KiCad and Onshape importers are on the way.\nFormboard PDF at true 1:1 scale\nBOM and cut list as XLSX\nHarness JSON round-trip\nKiCad and Onshape · coming soon\nStart free trial\nParts & libraries\nReal parts, versioned.\nConnector housings, terminals, conductors, seals, splices. Every occurrence in a harness pins the exact version it was built with, so a library update never silently changes your design.\nOrganization libraries and local parts\nCavity counts on the part definition\nExact version pinned per occurrence\nBOM rows follow the model\nStart free trial\nAgents & MCP\nBring your own agent.\nHarnessHive ships an MCP server. Point Claude, ChatGPT, Cursor or your own agent at the workspace to read harnesses, BOMs, empty cavities and libraries. Tokens are read-only unless you opt in.\nEight read tools for every token\nWrites behind an explicit opt-in\nScoped to one workspace\nRevoke a token instantly\nWorks with\nRead the MCP docs\nJoin our community.\nA small team building this with the people who use it. Come say hi, show us what you’re wiring, and hear about new things first.\nJoin our Discord\nNew\nNewsletter\nBe the first to hear about new features and blog posts.\nEmail address\nWebsite\nSubscribe\nI agree to the\nPrivacy Policy\nand to receive product updates by email.\nBuilt for teams who\nactually build\n.\n[public\n/teams/startups.webp\n]\nStartups & machine builders\nShip the first harness without buying a seat of legacy EDA.\n[public\n/teams/students.webp\n]\nStudent teams\nHand the harness over each season with its full history intact.\n[public\n/teams/shops.webp\n]\nHarness shops & freelancers\nSend a 1:1 formboard and a clean BOM to the build bench.\nStudent teams\nwe sponsor\n.\nFormula Student teams across the globe, building their cars with our support.\nYour next harness, designed in the browser.\nBook a demo\n25 min\nStart free trial\n→\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812229244_lt93pg96x",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"页面是一个商业化的线束设计SaaS宣传页，描述了协作、版本化、1:1 formboard和AI助手等功能，但没有说明具体的技术机制或与常规做法的实质差异，也没有可复用的洞见；多数是功能罗列，更像产品营销而非值得打断读者的独特工作。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3922,
+            "cached_tokens": 0,
+            "output_tokens": 130,
+            "total_tokens": 4052,
+            "context_tokens": 4052
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason correctly describes a commercial wiring-harness SaaS page (free trial, demo) with collaboration, versioning, a 1:1 formboard and an AI assistant. Its claim that the page lacks technical depth is a fair judgment of marketing copy, though it understates details such as per-occurrence version pinning and the MCP server. The marketing-over-substance argument supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2970,
+      "inputTokenDetails": {
+        "noCacheTokens": 2970,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 510,
+      "outputTokenDetails": {
+        "textTokens": 160,
+        "reasoningTokens": 350
+      },
+      "totalTokens": 3480,
+      "raw": {
+        "input_tokens": 2970,
+        "output_tokens": 510,
+        "output_tokens_details": {
+          "thinking_tokens": 350
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

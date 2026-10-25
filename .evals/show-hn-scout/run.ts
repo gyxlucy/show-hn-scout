@@ -17,7 +17,7 @@ import { judgeFromEnv, type JudgeFn } from "./judge.ts";
 
 export type Opts = {
   dir?: string; agentDir?: string; variant: string; model: string; reps: number; timeoutS: number; concurrency: number;
-  only?: string[]; maxAttempts?: number; backoffMs?: number;
+  outName?: string; only?: string[]; maxAttempts?: number; backoffMs?: number;
 };
 export type Deps = { runTask: RunTask; judge?: JudgeFn; judgeModel?: string };
 
@@ -35,7 +35,7 @@ function classify(message: string): { cls: string; retry: boolean } {
 
 export async function runEval(o: Opts, deps: Deps) {
   const dir = o.dir ?? DIR;
-  const vdir = join(dir, o.variant);
+  const vdir = join(dir, o.outName ?? o.variant); // outName lets a second model write to its own dir while reading the same agent files
   const { agent } = loadAgent(o.agentDir ?? vdir); // held-out runs read the agent from DIR/<variant> but write under DIR/heldout/<variant>
   const gold = loadGold(dir);
   const all = loadCases(dir);
@@ -139,12 +139,12 @@ if (import.meta.main) {
   const { values: v } = parseArgs({ options: {
     model: { type: "string" }, variant: { type: "string", default: "baseline" }, reps: { type: "string", default: "3" },
     "timeout-s": { type: "string", default: "300" }, concurrency: { type: "string", default: "4" }, cases: { type: "string" },
-    "no-judge": { type: "boolean", default: false }, set: { type: "string", default: "dev" }, approved: { type: "boolean", default: false },
+    "no-judge": { type: "boolean", default: false }, set: { type: "string", default: "dev" }, approved: { type: "boolean", default: false }, out: { type: "string" },
   } });
   if (!v.model) throw new Error("--model is required (it is recorded on every row)");
   if (v.set !== "dev" && v.set !== "heldout") throw new Error(`unknown --set ${v.set}`);
   const setDir = v.set === "heldout" ? join(DIR, "heldout") : DIR;
-  const opts: Opts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, only: v.cases?.split(",") };
+  const opts: Opts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, only: v.cases?.split(",") };
   const nCases = loadCases(setDir).filter((c) => loadGold(setDir).has(c.id) && (!opts.only || opts.only.includes(c.id))).length;
   console.log(`Plan: ${nCases} cases x ${opts.reps} reps on ${opts.model} (variant ${opts.variant}, set ${v.set}), judge ${v["no-judge"] ? "off" : "on"}`);
   if (!v.approved) { console.log("Dry plan only. Pass --approved after the user approves paid calls."); process.exit(0); }

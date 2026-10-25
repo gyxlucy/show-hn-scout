@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_5cc06a6a282b4d73b8bbb6e41a60876a",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 5163,
+      "cached_tokens": 0,
+      "output_tokens": 251,
+      "total_tokens": 5414,
+      "context_tokens": 5414
+    },
+    "transcript": [
+      {
+        "id": "0497be4b-0fa0-4122-8d3b-e3e4b010ff91",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit-quiz – A pre-commit hook that quizzes you on your own diff\nProject URL: https://github.com/Cristopheer96/commit-quiz\nPosted (UTC): 2026-10-22T05:11:12Z\n\n## Project page text (fetch status: ok)\n\n```text\ncommit-quiz\nA\npre-commit\nhook that verifies the developer\nactually read their changes\nbefore committing. Useful when AI agents (Claude Code, Cursor, Codex…) generate\nthe code and the dev just hits \"commit\" without reviewing.\nEvery AI code-review tool reviews the code. This one quizzes\nyou\n.\nnpm install -g commit-quiz\ncommit-quiz install\n#\nin the repo you want guarded\nHow it works\nOn commit, the hook takes the staged diff (\ngit diff --cached\n).\nIt sends it to an AI CLI you already have and generates\n4 statements about\nthe diff: 2 true and 2 plausible-but-false\n(wrong file, inverted\ncondition, different value…).\nThe dev marks which ones are true:\nIn a terminal\n: interactive prompt, with colors.\nFrom the editor UI\n(VS Code, Cursor — no terminal): native dialogs\n(macOS via\nosascript\n, Linux via\nzenity\nwhen installed), including a\n\"generating…\" heads-up and a verdict dialog with the real summary when\nthe answer is wrong.\nOn a correct answer the commit goes through. On a wrong one the commit is\naborted and the\nreal summary\nof the diff is shown.\nThe hook is\nfail-open\n: if the LLM does not respond, there is no network, or\nthere is no way to ask, the commit goes through with a notice. A gate that gets\nin the way ends up disabled; this one only gets in the way when it can do its\njob.\nPrivacy\nWhat is sent?\nThe staged diff (\ngit diff --cached\n, unified context of 1\nline), truncated to 30 KB, plus a fixed instruction prompt. The diff carries\nthe paths of the changed files in its headers, as any diff does. Nothing else:\nno repo name, no git history, no author identity, no other files.\nTo whom?\nOnly to the AI provider you already use, through its own CLI and\nunder your own account:\nclaude\n→ Anthropic,\ncodex\n→ OpenAI,\ngemini\n→\nGoogle. The diff goes from your machine to that provider's API, the same path\nit takes when you use the CLI directly. There is no commit-quiz server, no\nshared key and no middleman. Which provider is used is yours to pin with\ngit config commit-quiz.cli\n.\nWhen?\nOnly on commits with 20 or more changed lines (configurable), and\nnever on merges, rebases or cherry-picks. Everything below the threshold is\nnever sent anywhere.\nWhat does commit-quiz keep?\nNothing. There is\nzero telemetry\n. The\noptional debug log (off by default) records timings, the chosen channel and\nyour answers, never the diff.\nWhat is excluded by default?\nLockfiles (\npnpm-lock.yaml\n,\npackage-lock.json\n,\nyarn.lock\n,\nGemfile.lock\n,\nPodfile.lock\n),\n*.snap\nand\n*.svg\n.\nHow do I keep sensitive paths out?\nAdd git pathspecs, per repo or\n--global\n; the option is repeatable:\ngit config --add commit-quiz.exclude\n\"\nconfig/credentials/**\n\"\ngit config --add commit-quiz.exclude\n\"\n*.pem\n\"\ngit config --add commit-quiz.exclude\n\"\ndb/seeds/customers.rb\n\"\nExcluded files are not sent and do not count toward the line threshold.\nHow do I skip it for one commit?\nCOMMIT_QUIZ=0 git commit …\n(or\n--no-verify\n, which skips every hook).\nCan it run fully local?\nNot yet. Providers are a small table in\nsrc/providers.js\n; a local CLI (for example one backed by Ollama) would be a\nfew lines, and contributions are welcome.\nIf sending diffs to your AI provider is not acceptable in your organization,\ndo not install this tool.\nRequirements\nNode ≥ 18.\nSome AI CLI on the PATH:\nClaude Code\n(\nclaude\n), OpenAI Codex CLI (\ncodex\n) or Gemini CLI (\ngemini\n). The first\none found is used, or the one set via config.\nNative dialogs: macOS out of the box; Linux needs\nzenity\n. Without a dialog\nbackend, editor-UI commits fail open (terminal commits always work).\nInstall\nOnce per machine:\nnpm install -g commit-quiz\n#\nonce published to npm\nnpm install -g github:Cristopheer96/commit-quiz\n#\nmeanwhile, straight from GitHub\nThen, once per repo you want guarded:\ncd\n/path/to/repo\ncommit-quiz install\nThat appends the hook line to\n.husky/pre-commit\nif the repo uses husky,\notherwise to\n.git/hooks/pre-commit\n. Idempotent. To remove it:\ncommit-quiz uninstall\nWhy once per repo? Git only runs hooks configured in each repository — that is\ngit's design, not the tool's. In husky repos the hook line is versioned, so\none teammate commits it and the whole team gets it\n; each dev only needs the\none-time\nnpm install -g\n.\nTry it without staging anything\ncd\n/path/to/repo\ncommit-quiz --range HEAD~1..HEAD --dry-run\n#\nquiz over the last commit, answers visible\ncommit-quiz --range HEAD~1..HEAD\n#\nsame but interactive\ncommit-quiz --diff-file changes.diff --dry-run\nConfiguration\nEvery option reads, in order:\nenvironment variable →\ngit config\n→ default\n.\ngit config\ncan be per repo or\n--global\n, and it also reaches hooks launched\nfrom editor UIs, where your shell environment does not.\nEnv var\ngit config key\nDefault\nWhat it does\nCOMMIT_QUIZ=0\n—\n—\nSkips the quiz for that commit (escape hatch)\nCOMMIT_QUIZ_MIN_LINES\ncommit-quiz.minlines\n20\nMinimum changed lines to trigger the quiz\nCOMMIT_QUIZ_CLI\ncommit-quiz.cli\nauto\nProvider:\nclaude\n,\ncodex\nor\ngemini\nCOMMIT_QUIZ_MODEL\ncommit-quiz.model\nhaiku\n(claude only)\nModel that generates the quiz\nCOMMIT_QUIZ_LANG\ncommit-quiz.lang\nsystem locale\nQuiz and UI language:\nen\nor\nes\nCOMMIT_QUIZ_TIMEOUT_MS\ncommit-quiz.timeoutms\n90000\nLLM call timeout\nCOMMIT_QUIZ_DEBUG=1\ncommit-quiz.debug\noff\nAppends a debug log in the temp dir\n—\ncommit-quiz.exclude\n(repeatable)\nlockfiles,\n*.snap\n,\n*.svg\nExtra pathspecs kept out of the quiz\nThe quiz and all messages are available in\nEnglish and Spanish\n(adding a\nlanguage is one new entry in\nsrc/i18n.js\n). It also skips itself on merges,\nrebases and cherry-picks in progress.\nDebugging\nEditor-spawned hooks have no visible output. With\nCOMMIT_QUIZ_DEBUG=1\n(or\ngit config commit-quiz.debug true\n) every run appends decisions and timings to\ncommit-quiz-debug.log\nin your temp dir.\nPlatform support\nTerminal commits\nEditor-UI commits\nmacOS\n✅\n✅ native dialogs\nLinux\n✅\n✅ with\nzenity\n, fail-open without\nWindows\n✅ (expected; untested)\nfail-open\nDevelopment\nbin/commit-quiz.mjs   thin CLI entry (args + top-level flow)\nsrc/config.js         env + git config resolution\nsrc/i18n.js           all user-facing copy (en, es)\nsrc/diff.js           reading the diff out of git\nsrc/providers.js      AI CLIs (claude/codex/gemini) + quiz generation\nsrc/ui/terminal.js    terminal prompt and rendering\nsrc/ui/dialogs.js     native dialogs (osascript / zenity)\nsrc/install.js        hook install/uninstall\nNo dependencies, no build step — plain Node ESM with JSDoc types. Releases are\ntagged\nvX.Y.Z\nand published to npm by the\nrelease.yml\nworkflow (requires\nthe\nNPM_TOKEN\nrepo secret); see\nCHANGELOG.md\n.\nKnown limitations\ngit commit --no-verify\nskips it, like any hook. The goal is culture, not\nsecurity.\nEach quiz is one LLM call: ~8-15 s and some cost per commit. Hence the line\nthreshold, the cheap default model, and thinking disabled.\nStatements are only as good as the diff: huge diffs are truncated to ~30 KB\nand the quiz may fall short.\nLicense\nMIT\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812772091_ufe9tpacy",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQSqAcKEAgTGAI4AUIIdGhpbmtpbmcSDNWlawQWL7EUmPxiqRoMyApb/IzUHQTzqem/IjAKXSNMrgNrVMPMsONzj5rvwP4dWFz5CGtr48oS1N6IosV7MTK1fBDlsw//1l8UYxkqxQYXxM7Ynk2GnUqpdzi5oJi7oqwA+u+Tdkr9wyA6k2+TVgRyYhJ8sJtSmKsnDoyGJ3bVyWWO6vMwaCflwglnnU3d7x/ITS1+3p3PexeR8zJuOGOc4P8dqXtUV6aY37ugCkFnmhqsX94ZGGHmvJ98NRs5gLT2PZNfXshpnaW6rt3h6mxHdLAoS4Kgl55nHtAiGkTYjfkn1eQMr4xp+9ssSHGtL/equq0N5lD1vT6dHSh1bpcxHyJAPJvN9N5JHbmbEKwYyjkRtVF0mZqSFQ48DFbiN3uSd7P3lF5zZU38jNWXxFruLE54v4RVKNOOTdS4rtjmSm5gQwbnQX96oYAC248Tcq4SRlY1FQTIMAytMpJLCO8hpi0fDjstz2lK8pjvBWIgYfYiTcpt1p9bV7u7aqTp9/q2OLcQb5Yt7m8aAViZBUZBtk3oCAY3+qWR2WzxA44weAUyq47b/sADsHAX88OfoobIIg6iFs2mCaY4rtOn0bUeKzCDVt3tf9T/w4VqdJ8XuycMDB249PyhwV5RuS3PqukrO+zkcoIH1KHzsElrZkbn80PqvYStK/juql4GEQbeCj/9knT30FTA4UUgCBhjHSVn9xp4E+LbOUX/a1fe6BErKB/HYEy5d0ykr6cy3qQBEIb15Wj+AHCZ7axsgtMbU1VKLSiQ6iR2CkTetMbdXJPnh9PpiEu/pKQ6O1pYNdy8cnMHB7D2GpAJcb7RVMAdFMiegusOhqJHVnQPjqV8ktbKTd0GotKv6wUJnVw9YWSq4iDEfOrprsQuH3NhScEl5RckgmRmH9xbWpo5LxUUGJnbejD1TYJuCkmF1OPFUkuZTi7l/xOLL/58CQodn33FPRf5YgJvsRxtolHphSXTfho9QZmcYKPIML/JYfxqet9SHz0cwIHsdFcG7hc4YQTiYp1erdkFRa9Svi1D5rfhETYbD45OG9cwNjW7+QLcCPIV6d6u8G44M3o2B6/lWs86wnCMNjjvPzLX0+WQ9ncWoIephVF0oqdVkrL10OewvXotj5ELi9wSXGcf1VNrVrLcvkVFJZvMk3pGxKWd0y7fhvnwoEIHvhHkYU8vx28axTCCPZ9dPCz3T/Zp5FhApEa3Gi7n7xgYAQ=="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"这个项目给提交前的 pre-commit hook 加了一个新角度：让开发者用 AI 生成的 4 条陈述（2 真 2假）检验自己是否读过 diff，而不是让 AI 审查代码。想法巧妙、针对 AI 编程时代的具体痛点，文档也清楚、专业。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 5163,
+            "cached_tokens": 0,
+            "output_tokens": 251,
+            "total_tokens": 5414,
+            "context_tokens": 5414
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says the hook uses AI to generate 4 statements (2 true, 2 false) to check whether the developer read the diff, rather than reviewing the code. Both claims match the page text. The pain point of AI-assisted coding and the clear documentation are also supported, and the positive framing supports the push decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 4416,
+      "inputTokenDetails": {
+        "noCacheTokens": 4416,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 129,
+      "outputTokenDetails": {
+        "textTokens": 129,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 4545,
+      "raw": {
+        "input_tokens": 4416,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

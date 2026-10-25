@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_12ff29c3e0664d389f2ab603374818b9",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3366,
+      "cached_tokens": 0,
+      "output_tokens": 532,
+      "total_tokens": 3898,
+      "context_tokens": 3898
+    },
+    "transcript": [
+      {
+        "id": "aa0b339d-2f01-4564-a8a8-4688c2580858",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Tapirscan – Scan barcodes at any angle in the browser\nProject URL: https://tapirscan.f-kleinicke.de/\nPosted (UTC): 2026-10-21T15:17:22Z\n\n## Project page text (fetch status: ok)\n\n```text\nTapirscan: barcode scanning, including rotated barcodes\nTapirscan is a barcode scanner designed for reliable detection, including barcodes rotated\nat different angles. This interactive demo compares its four scanning effort levels—TS-Low,\nTS-Med, TS-High and TS-VHigh—with the independent ZXing and ZBar barcode readers. More\nscanners also offers Quagga2 (linear barcodes), ZXing-JS (with optional extra search\npasses), jsQR (QR codes only, one per scan) and the browser’s native BarcodeDetector where\nsupported.\nWhat you see in the demo\nEach selected scanner analyzes the same image pixels. Colored outlines mark detected barcode\nlocations; nearby labels show the decoded values and the scanners that found them. Scanner\nbuttons and result cards report decoded values and processing times. The four Tapirscan\nlevels offer different trade-offs between scanning effort and speed. This demo lets you\nexplore results on individual images; it is not a comprehensive benchmark.\nTry images, PDFs and your camera\nChoose a demo image, load your own photo, or use a webcam or phone camera. Rotate and zoom\nimages, or double-click or double-tap to move the view center. Fullscreen provides a larger\nview, and Adjust opens rotation and zoom controls for photos and frozen frames. Pause /\nfreeze turns a live camera frame into an image you can explore.\nLoad a PDF to detect barcodes on complete pages. Previous page and Next page let you scan\nthe document page by page, using its stored orientation without zoom, rotation or cropping.\nPDF pages are rendered locally in your browser.\nThe Detect selector offers EAN-13, Retail, Common and All barcode formats. Readers scan the\nformats they support. Read up to controls the input resolution. Save image downloads the\nscanner input as a PNG with its crop, zoom and rotation applied, without the result\noverlays; in live mode it saves the latest analyzed frame.\nImages, PDFs and camera frames are processed locally in your browser and are not uploaded.\nLearn more or use Tapirscan in your own project on\nGitHub\n.\nPackages:\nnpm (JavaScript / TypeScript)\n·\nPyPI (Python)\n·\ncrates.io (Rust)\n.\n```\n\n## HN discussion (1 comment)\n\n- [author] kleinicke: Current open source barcode scanner libraries like zxing and zbar perform (for nowadays) remarkable bad on scanning barcodes. I built the website demo to compare these libraries with a new library (tapirscan), I built out of frustration over them. The existing scanner rely on horizontal or vertical scanlines. My new rust based scanner works well with arbitrary orientations. On the demo website you can try out the library in comparison to zxing and zbar. You can also use your own images or use your webcam to scan objects. By default it just looks at Ean-13 barcodes, but there is a setting to allow more types. I built a test suite with multiple real world images that I labeled and used GPT-6 to develop the algorithm. The code is here: https://github.com/kleinicke/tapirscan The developed library is available at js: https://www.npmjs.com/package/tapirscan , python: https://pypi.org/project/tapirscan/ and Rust: https://crates.io/crates/tapirscan (Where else should I publish it, what languages to support, let me know here or as a GitHub issue and I’ll add it) I know this topic is not a hot topic research wise (therefore there were so little advances in that field in the last 5 years), but I hope to find some people that can use it."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812298416_36aw6wthf",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"unsure\", \"reason\": \"页面清楚说明了它是面向任意旋转条码的扫描器，并提供了与 ZXing/ZBar 的对比演示，但没有解释检测算法的具体机制，只有作者声称“不用扫描线”，也缺少独立的评测证据，因此难以判断其差异是否真实且可复用。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3366,
+            "cached_tokens": 0,
+            "output_tokens": 532,
+            "total_tokens": 3898,
+            "context_tokens": 3898
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason accurately cites the evidence. The page is about rotated-barcode scanning and has a ZXing/ZBar comparison demo. It does not explain the algorithm, the scanline contrast comes from the author's comment, and the page calls the demo 'not a comprehensive benchmark'. For an unsure decision, it names what is missing: the detection mechanism and independent evaluation."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2309,
+      "inputTokenDetails": {
+        "noCacheTokens": 2309,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 349,
+      "outputTokenDetails": {
+        "textTokens": 156,
+        "reasoningTokens": 193
+      },
+      "totalTokens": 2658,
+      "raw": {
+        "input_tokens": 2309,
+        "output_tokens": 349,
+        "output_tokens_details": {
+          "thinking_tokens": 193
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

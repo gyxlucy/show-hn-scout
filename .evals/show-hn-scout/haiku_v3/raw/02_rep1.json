@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_7500da2cf9e54909b3da992d8ff98d78",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3132,
+      "cached_tokens": 0,
+      "output_tokens": 455,
+      "total_tokens": 3587,
+      "context_tokens": 3587
+    },
+    "transcript": [
+      {
+        "id": "c901c220-09a8-411d-b65c-94cb6fce29ec",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814843729_x0h70fhq7",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"这是一个在浏览器里把代码提交进神经网络的演示，与读者明确不感兴趣的“提交代码进神经网络的浏览器演示”属于同一类底层技术展示。页面本身清晰，但它并没有呈现读者会想要的小产品或特定垂直场景，因此不足以打断她。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3132,
+            "cached_tokens": 0,
+            "output_tokens": 455,
+            "total_tokens": 3587,
+            "context_tokens": 3587
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason accurately describes the project as a browser demo that commits code into a neural network, matching the title and page; its reader-preference claim is not a factual claim about the project. It names that concrete mechanism and argues the post is a low-level technical showcase rather than a small product or vertical use case, which supports pass."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 1894,
+      "inputTokenDetails": {
+        "noCacheTokens": 1894,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 356,
+      "outputTokenDetails": {
+        "textTokens": 127,
+        "reasoningTokens": 229
+      },
+      "totalTokens": 2250,
+      "raw": {
+        "input_tokens": 1894,
+        "output_tokens": 356,
+        "output_tokens_details": {
+          "thinking_tokens": 229
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

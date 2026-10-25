@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_2ee6033a0cc3456d8643dacfcec37368",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 6434,
+      "cached_tokens": 0,
+      "output_tokens": 589,
+      "total_tokens": 7023,
+      "context_tokens": 7023
+    },
+    "transcript": [
+      {
+        "id": "94ba49dd-9175-4b56-8ccc-9ac751484d1a",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Flyte devbox now runs GPU workloads on Apple Silicon\nProject URL: https://www.union.ai/blog-post/your-code-on-the-apple-silicon-gpu-apple-silicon-flyte-devbox\nPosted (UTC): 2026-10-20T21:51:32Z\n\n## Project page text (fetch status: ok)\n\n```text\nTable of Contents\nTable of Contents\nA devbox task or app that asks for `gpu=\"AppleSilicon\"` now runs natively on your Mac, so `torch.device(\"mps\")` and MLX work the way `\"cuda\"` does on a cluster.\nThe Flyte devbox is where I iterate on ML code before it goes anywhere near a cluster: `flyte start devbox`, write a task, run it, look at it in the console. On an Apple Silicon Mac there's been one glaring gap. The devbox runs every task and app in a container, and on a Mac that container is a Linux VM. Linux has no Metal, so `torch.backends.mps.is_available()` is `False` in there, MLX doesn't run at all, and the 40-core GPU on my laptop sits idle while my training loop crawls along on the CPU.\nSo we added an Apple Silicon accelerator to the devbox. You ask for it the way you'd ask for an A100:\nCopied to clipboard!\nenv = flyte.TaskEnvironment(\nname=\"apple-silicon-train\",\nimage=flyte.Image.from_debian_base().with_pip_packages(\"torch\", \"torchvision\"),\nresources=flyte.Resources(cpu=2, memory=\"4Gi\", gpu=\"AppleSilicon\"),\n)\nand start the devbox with one flag:\nCopied to clipboard!\nflyte start devbox --apple-silicon\nThat's the whole API. `gpu=flyte.APPLE_SILICON()` is the same request if you prefer the device helpers (`flyte.GPU`, `flyte.TPU`, `flyte.AMD_GPU`).\nWhat actually runs where\nThe obvious design is to pass the GPU through to the container. That isn't possible: there's no Metal inside a Linux VM to pass anything to. An earlier version of this work kept the task in its container and gave it a host-side MLX model server to call over HTTP. That's useful if all you want is completions, but it means your code can't touch the GPU itself. You can't move a PyTorch model to `mps`, you can't train, and you can't load an arbitrary Hugging Face model.\nSo the default is the other way around.\nThe workload's code runs natively on the Mac\n, and the container becomes its proxy:\nThe container starts as usual. Its Flyte entrypoint (`a0` for tasks, `fserve` for apps) sees that the backend scheduled it as an Apple Silicon workload and hands its own invocation to a bridge that `flyte start devbox --apple-silicon` runs on the host.\nThe bridge builds a cached `uv` environment for macOS from the image's pip packages, rewrites the in-cluster endpoints to the devbox ports the Mac can reach, and runs the same entrypoint there.\nThe container streams the host process's log, mirrors its exit code, forwards aborts, and for apps forwards its port, so the console, the run's logs and the app URL behave as they would for any other workload.\nFrom the console's perspective, a task ran in a pod and produced outputs. From the Mac's perspective, a Python process ran in `~/.flyte/apple-silicon/envs/...` with the GPU right there.\nOn the backend side, a pod that requests the `APPLE_SILICON` device class gets no GPU resource request (no device plugin could satisfy it, so it would sit `Pending` forever) and no GPU node affinity. Instead it gets the bridge's endpoint and a per-workload HMAC token, so one workload can't talk to another's process.\nTraining on mps from a task\nOnce the code is on the Mac, the training loop is ordinary PyTorch. The only Apple-specific line is the device:\nCopied to clipboard!\n@env.task\nasync def train(epochs: int = 3, batch_size: int = 256, lr: float = 1e-3) -> tuple[dict, flyte.io.File]:\nimport torch\n...\n# On a cluster this would be \"cuda\"; on the Mac's GPU it is \"mps\". Fail rather than train on the CPU.\nif not torch.backends.mps.is_available():\nraise RuntimeError(\"mps is not available: run with gpu='AppleSilicon' on an Apple Silicon devbox\")\ndevice = torch.device(\"mps\")\n...\nmodel = nn.Sequential(...).to(device)\nThe example trains a small CNN on MNIST and returns its metrics and weights as a `flyte.io.File`. On my M5 Max, three epochs took 7.0 s at roughly 24–28k images/s and reached 98.4% test accuracy, and the weights landed in the devbox's object store like any other output. The task's own `print` lines show up in the run's logs in the console, streamed from the process on the Mac.\nThe first run takes a few minutes because the bridge has to build the macOS environment (torch, torchvision) and download MNIST. Later runs reuse both.\nServing a Hugging Face model from an AppEnvironment\nApps work the same way. `apple_silicon_serve.py` is an `AppEnvironment` that loads `Qwen/Qwen2.5-0.5B-Instruct` in fp16 straight onto `mps` at startup:\nCopied to clipboard!\napp_env = AppEnvironment(\nname=\"hf-mps\",\nimage=flyte.Image.from_debian_base().with_pip_packages(\"torch\", \"transformers\"),\nresources=flyte.Resources(cpu=1, memory=\"4Gi\", gpu=\"AppleSilicon\"),\nport=8080,\nrequires_auth=False,\n)\n@app_env.server\ndef serve():\n...\nmodel = AutoModelForCausalLM.from_pretrained(MODEL, dtype=torch.float16).to(\"mps\")\nThere's no model server in between. The app is your code, holding your model on the GPU, behind the usual devbox app URL. On the same machine it generated at roughly 84–97 tokens/s. The weights download into the Mac's normal Hugging Face cache, so the second start is quick.\nProving it's the GPU\n\"It feels faster\" isn't evidence, so the SDK ships a proof task (`examples/accelerators/apple_silicon_proof/`) that fails unless five checks pass. Because the code runs on the Mac, it can gather the evidence itself:\nWhere it ran:\n`platform` reports `Darwin arm64`, not the container's Linux.\nWhat GPU:\nMLX reports an Apple M5 Max (`applegpu_g17s`), 40 GPU cores.\nPyTorch on mps:\na 4096×4096 fp32 matmul ran at 13.4 TFLOPS on `mps` vs 1.6 on the CPU.\nMLX on the GPU:\n36.5 TFLOPS on the GPU device vs 1.6 on the CPU.\nWhat macOS saw:\nthe IORegistry's `Device Utilization %` (the counter Activity Monitor's GPU History draws) averaged 93.5–94.7% during the GPU work vs 30% at idle.\nThe same checks run as an app, behind `GET /proof`. The runbook next to it also covers checks that don't trust our code at all: watching Activity Monitor, reading the IORegistry counter in a loop, and finding the `a0` process with `ps`.\nThe tradeoffs\nRunning workload code natively on your Mac means running it\noutside any sandbox\n. That's the price of real GPU access, and it's why `--apple-silicon` is opt-in. When you pass it, the devbox publishes every port on `127.0.0.1` only, so nothing else on your network can submit a workload that ends up running on your laptop. If you resume a paused Apple Silicon devbox, its bridge comes back without the flag; if the existing devbox was published on every interface, it refuses and tells you to recreate it. That keeps the network out, not software already on your Mac: the devbox API is unauthenticated, as any local dev server's tends to be, so treat an Apple Silicon devbox like one that can run code (because it can).\nThe rest of the sharp edges:\nNo silent CPU fallback.\nAsk for `gpu=\"AppleSilicon\"` on a devbox without the flag, an Intel Mac, Linux, or any real cluster, and the task fails before it starts with `APPLE_SILICON_NOT_AVAILABLE` and a message naming why. This is deliberate. A training job that quietly runs on the CPU is worse than one that fails.\nOnly pip packages carry over.\nThe Mac's environment is built from the image's pip packages, not the image itself, so apt packages and anything else baked into the image aren't there, and neither are k8s-mounted secrets.\nIt's the devbox, not a cluster.\nThe accelerator is never cluster-schedulable, and a single workload can't claim more than the Mac's one GPU (`AppleSilicon:2` is rejected).\nSeveral at once share one GPU.\nEach Apple Silicon workload is its own process on the Mac, so a fan-out works: `examples/accelerators/apple_silicon_fanout.py` ran eight training shards concurrently. They time-share the GPU, though. A job that already keeps the GPU busy gained little (1.0–1.35x aggregate throughput at 2–8 shards), while a small-batch job that left it idle much of the time gained 1.3–2x. Memory is the real ceiling: every process loads its own torch, Metal context and model.\n\"mps\" on the devbox, \"cuda\" on a cluster.\nThe program doesn't move between them unchanged: you change the resource request and the device string. Everything around them stays the same: inputs, outputs, caching, logs and app URLs all go through the devbox exactly as they do on a cluster.\nIf you'd rather keep the container's isolation and only need completions, set `env_vars={\"FLYTE_APPLE_SILICON_EXECUTION\": \"container\"}`. The workload stays in its container and gets a host `mlx_lm.server` behind an injected `OPENAI_BASE_URL` (choose the model with `FLYTE_APPLE_SILICON_MODEL`; `pip install 'flyte[apple-silicon]'` installs mlx-lm).\nConclusion\nThe local tier of the \"same program, laptop to cluster\" loop finally includes the GPU most of us are actually carrying around. To recap:\nAsk for it:\n`flyte.Resources(gpu=\"AppleSilicon\")` or `gpu=flyte.APPLE_SILICON()`.\nAllow it:\n`flyte start devbox --apple-silicon`, which also binds the devbox to `127.0.0.1`.\nUse it:\n`torch.device(\"mps\")`, MLX, or your own Hugging Face model, from a task or an app.\nTrust it:\na named error instead of a CPU fallback, and a proof task that checks the GPU did the work.\nTry it\nCopied to clipboard!\npip install flyte\nflyte start devbox --apple-silicon\nflyte create config --devbox\ngit clone https://github.com/flyteorg/flyte-sdk\ncd flyte-sdk\npython examples/accelerators/apple_silicon_train.py\npython examples/accelerators/apple_silicon_serve.py\nflyte run examples/accelerators/apple_silicon_proof/proof.py prove\nYou need an Apple Silicon Mac (M1 or later), Docker, and\nuv\non the host, since the bridge uses it to build each workload's environment.\nSign up\n30 day free trial\nTry the devbox\nNo items found.\nMore from Union.\nRun Durable AI Workflows on Your Mac's GPU, No Cluster Required\nUnion.ai\nFlyte\nAI\nRerun, Recover, Fork: Three Verbs for a Run That Already Failed\nDurability\nEngineering\nFlyte\nUnion.ai\nAgents That Survive a Crash Without Paying for the Same Tokens Twice\nUnion.ai\nFlyte\nAI\n```\n\n## HN discussion (1 comment)\n\n- [other] tomshafer: Nice to see this. Containers on macOS can't see the GPU, so is the devbox running the GPU work on the host through Metal? I'm curious how you hand data across that boundary without it becoming the bottleneck."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814992531_j27sav6ko",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"这是 Flyte 平台里一个面向 ML 工程师的底层开发基础设施功能，核心是在 Mac 上把容器任务代理到宿主机 Metal GPU 的桥接机制。页面专业扎实，但它更像平台组件而非读者会想用的小产品，属于偏底层、技术深度较高的内容。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 6434,
+            "cached_tokens": 0,
+            "output_tokens": 589,
+            "total_tokens": 7023,
+            "context_tokens": 7023
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says this is a Flyte devbox feature that proxies container tasks to the host Metal GPU through a bridge, which matches the page. It names that concrete mechanism and argues the feature is a low-level platform component rather than a standalone product, which supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 5351,
+      "inputTokenDetails": {
+        "noCacheTokens": 5351,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 118,
+      "outputTokenDetails": {
+        "textTokens": 118,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 5469,
+      "raw": {
+        "input_tokens": 5351,
+        "output_tokens": 118,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_a22ab505ef444d7c8cf1f8bff8dbfc59",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 7055,
+      "cached_tokens": 0,
+      "output_tokens": 508,
+      "total_tokens": 7563,
+      "context_tokens": 7563
+    },
+    "transcript": [
+      {
+        "id": "c997280b-7067-4537-8f33-dba2101a60b3",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: PySide6 Blueprints - a free book on building Qt Widgets apps in Python\nProject URL: https://leanpub.com/pyside6blueprints\nPosted (UTC): 2026-10-21T13:01:27Z\n\n## Project page text (fetch status: ok)\n\n```text\nAbout\nAbout\nAuthor\nContents\nSample\nPySide6 Blueprints\n$15.99\nPick your price\nAdd to Cart\nPySide6 Blueprints\nMinimum price\nFree!\nSuggested price\n$15.99\nYou pay\nAuthor earns\nYou pay\n$\nAdd to Cart\nAdd to Wishlist\n✦\nAlso available for 1 book credit with a\nReader Membership\nAbout\nAbout the Book\nDive into PySide6, the official Python bindings for Qt6, with this practical blueprint-style guide. This book attempts to break down essential Qt concepts into focused, reusable patterns - each featuring step-by-step walkthroughs, complete code examples, and notes.\nFrom core fundamentals to intermediate topics, you'll master:\nWidgets, layouts, buttons, input widgets, dialogs and containers\nSignals, slots, custom signals, and event handling\nModel-view programming\nMultithreading\nObject ownership, timers, properties, databases, and processes\nThe book is available as a free sample download. All code is available on\nGitHub\n.\nShare this book\nCategories\nPython\nFeedback\nContact the author\nAuthor\nAbout the Author\nUros Calakovic\nContents\nTable of Contents\nPreface\nPart I: Foundations\n1. Getting Started\n1.1 Installation\n1.2 A Reusable Starting Point\n1.3 Adding Widgets to the Window\n1.4 Reading the Qt Documentation\n1.5 A Map of Qt Widgets\n2. Signals & Slots\n2.1 Connecting a Signal to a Slot\n2.2 Passing Arguments to Slots\n3. Qt Widgets Layouts\n3.1 Stacking Widgets Vertically -\nQVBoxLayout\n3.2 Placing Widgets Side by Side -\nQHBoxLayout\n3.3 Nesting Layouts\n3.4 Arranging Widgets in a Grid -\nQGridLayout\n3.5 Laying Out Forms -\nQFormLayout\nPart II: The Qt Widgets Toolkit\n4. Display Widgets\n4.1 Displaying Text with\nQLabel\n4.2 Displaying Images with\nQLabel\n4.3 Displaying LCD-like Numbers with\nQLCDNumber\n4.4 Displaying Progress with\nQProgressBar\n5. Buttons\n5.1\nQPushButton\n- Triggering an Action\n5.2 Checkable\nQPushButton\n- Persistent On/Off State\n5.3\nQCheckBox\n- Independent Options\n5.4\nQRadioButton\n- Mutually Exclusive Choices\n5.5\nQButtonGroup\n- Managing Groups Explicitly\n6. Numeric Widgets\n6.1\nQSpinBox\n6.2\nQDoubleSpinBox\n6.3\nQSlider\n6.4\nQDial\n7. Text Widgets\n7.1\nQLineEdit\n7.2\nQTextEdit\n7.3\nQPlainTextEdit\n8. List Widgets\n8.1\nQComboBox\n8.2\nQListWidget\n8.3\nQListView\n9. Table Widgets\n9.1\nQTableWidget\n9.2\nQTableView\n10. Tree Widgets\n10.1\nQTreeWidget\n10.2\nQTreeView\n10.3 Lazy-loading Trees\n11. Containers\n11.1\nQGroupBox\n11.2\nQScrollArea\n11.3\nQToolBox\n11.4\nQTabWidget\n11.5\nQSplitter\n11.6 Choosing a Container\n12. Main Windows\n12.1 Setting Up the Central Widget\n12.2 Adding a Status Bar\n12.3 Creating Menus and Actions\n12.4 Adding Toolbars\n12.5 Using Dock Widgets\n13. Dialogs\n13.1 Standard Message Dialogs with\nQMessageBox\n13.2 Input Dialogs with\nQInputDialog\n13.3 File Dialogs with\nQFileDialog\n13.4 Color Selection with\nQColorDialog\n13.5 Font Selection with\nQFontDialog\n13.6 Creating Custom Dialogs by Subclassing\nQDialog\n14. Customizing Qt Styles\n14.1 The Style System\n14.2\nQPalette\nand Color Roles\n14.3 QProxyStyle: Reimplementing Metrics and Hints\n14.4 Primitives, Controls, and Complex Controls\n14.5 Reimplementing\ndrawControl()\n15. Qt Style Sheets - QSS\n15.1 Selector Types\n15.2 Properties\n15.3 Pseudo-States\n15.4 Subcontrols\n15.5 The Box Model\n16. Creating Custom Widgets\n16.1 Subclassing QWidget - The Minimal\nTagBar\n16.2 Drawing Tags with QPainter and\npaintEvent()\n16.3 Handling Events\n16.4 Flow Layout, Size Hints, and Layout Integration\nPart III: The Qt Object Model\n17. Object Trees and Ownership\n17.1 Parent-Child Relationships\n17.2 Reparenting Qt Objects\n17.3 Finding Qt Object Children\n17.4 Manual Ownership Transfer\n17.5 Automatic Deletion\n18. Signals & Slots in Detail\n18.1 A Common Pitfall\n18.2 Custom Signals\n18.3 Signal Blocking\n18.4 Connection Objects\n18.5 Connecting Multiple Slots with a Signal\n18.6 Disconnecting\n19. Events\n19.1 Event Handlers\n19.2 Object Event Filters\n19.3 Application-Wide (Global) Event Filters\n19.4 Event Propagation\n19.5 Custom Events\n19.6 Event Delivery Order\n20. Timers\n20.1 Single-Shot Timers\n20.2 Starting and Stopping a Timer\n20.3 Adjusting a Timer Interval\n20.4 Countdown Timer\n20.5 Stopwatch\n21. Properties\n21.1 Declaring Basic Properties\n21.2 Properties Notification and Reset\n21.3 Constant and Non-Stored Properties\n21.4 Dynamic Properties for Validation-Based Styling\n21.5 Animating Custom Properties\n21.6 Inspecting Properties with\nQMetaObject\nPart IV: Model-View Programming\n22.\nQAbstractListModel\n22.1 Read-only List Model\n22.2 Editable List Model\n22.3 Data-Widget Mapping\n22.4 Resizable List Model\n23.\nQAbstractTableModel\n23.1 Basic Read-Only Table Model\n23.2 Making the Table Model Editable\n23.3 Using Data Widget Mapper with Table Models\n23.4 Resizable Table Model\n24.\nQAbstractItemModel\n24.1 Basic Read-Only Single-Column Tree Model\n24.2 Adding Multiple Columns to the Tree Model\n24.3 Making the Tree Model Editable\n24.4 Resizable Tree Model (Inserting and Removing Nodes)\n24.5 Minimum Methods to Implement by Model Type\n24.6 Choosing the Right Model and the Right View\n25. Delegates\n25.1 Using Item Data Roles to Customize Display\n25.2 Registering Standard Widgets with\nQItemEditorFactory\n25.3 Registering Custom Widgets with\nQItemEditorFactory\n25.4 Custom Display in\nQStyledItemDelegate\n25.5 Custom Editors in\nQStyledItemDelegate\n25.6 Combining Display and Editing in Delegates\n25.7 Persistent Editors in Views\n26. Sorting, Filtering and Selection\n26.1 Implementing In-Place Sorting in Custom Models\n26.2 Non-Destructive Sorting in Custom Models\n26.3 Automatic Sorting on Data Changes\n26.4 Sorting with Proxy Models\n26.5 Basic Filtering with Proxy Models\n26.6 Custom Filtering in Proxy Models\n26.7 Selection Modes and Behaviors\n26.8 Responding to Selection Changes\n26.9 Sharing Selection Models Between Views\n26.10 Custom Selection Handling\nPart V: Multithreading\n27. Worker Objects and\nmoveToThread\n27.1 Blocking the Qt GUI: How Not to Do It\n27.2 A Minimal Working Example\n27.3 Walking the Filesystem\n27.4 Reusing the\nQThread\nobject\n27.5 Walking the Filesystem While Reusing the\nQThread\n27.6 Signals and Slots Across Threads\n28. Subclassing\nQThread\n28.1 A Minimal Example\n28.2 Walking the Filesystem\n29.\nQThreadPool\nand\nQRunnable\n29.1 A Minimal Example\n29.2 Walking the Filesystem\n30. Thread Synchronization\n30.1 Race Condition Demo\n30.2 Queued Signal-Slot Connection\n30.3\nQMutex\n30.4\nQMutexLocker\n30.5\nQSemaphore\n30.6\nQSemaphoreReleaser\n30.7\nQWaitCondition\n31. Timers in the Real World\n31.1\nQElapsedTimer\n- Measuring Elapsed Time\n31.2\nQDeadlineTimer\n- Deadline-Based Waiting\n31.3 Debouncing User Input with\nQTimer\n31.4 Throttling Rapid Updates with\nQTimer\n31.5 Low-Level Timers:\nQObject.startTimer()\nand\nQBasicTimer\n32. Signals & Slots Connection Types\n32.1 Direct Connection\n32.2 Queued Connection\n32.3 Blocking Queued Connection\n32.4 Unique Connection\n32.5 Single-Shot Connection\nPart VI: Special Topics\n33. Databases\n33.1 Database Connections\n33.2 Executing Simple Queries\n33.3 Inserting Data\n33.4 Displaying and Editing Data with\nQSqlTableModel\n33.5 Handling Relational Data with\nQSqlRelationalTableModel\n33.6 Custom Queries with\nQSqlQueryModel\n33.7 The Single Record Form\n33.8 The Master-Detail Form\n34. Processes\n34.1 Basic Process Execution\n34.2 Providing Fixed Input to a Process\n34.3 Handling Chunked Output: A Common Pitfall\n34.4 Interactive Process Communication\n34.5 Setting Process Environment\n34.6 Synchronous Process Execution\n34.7 Terminating Processes\n35. Graphics View Framework\n35.1 The Canvas:\nQGraphicsScene\nand\nQGraphicsView\n35.2 Populating the Board: Built-in Graphics Items\n35.3 A Proper Note: Custom QGraphicsItem Painting\n35.4 Picking Up Notes: Interaction and Events\n35.5 Scaling Notes: Item Transformations\n36. Animation Framework\n36.1 QPropertyAnimation Basics\n36.2 Animating Color, Geometry, and Opacity\n36.3 Easing Curves\n36.4 Sequential Animation Groups\n36.5 Parallel Animation Groups\n36.6 Pause Animations\nAppendices\nAppendix A - PySide6 Tools Reference\nAppendix B - PySide6 Modules\nAppendix C - Grouping Input Widgets by Data Type\nGet the free sample chapters\nClick the buttons to get the free sample in PDF or EPUB, or read the sample online here\nDownload Sample PDF\nDownload Sample EPUB\nRead Sample Online\nRead online\nThe Leanpub 60 Day 100% Happiness Guarantee\nWithin\n60 days of purchase\nyou can get a\n100% refund\non any Leanpub purchase, in\ntwo clicks\n.\nSee full terms...\nEarn $8 on a $10 Purchase, and $16 on a $20 Purchase\nWe pay\n80% royalties\non purchases of\n$7.99 or more\n, and\n80% royalties minus a 50 cent flat fee\non purchases between\n$0.99 and $7.98\n.\nYou earn $8 on a $10 sale, and $16 on a $20 sale\n. So, if we sell\n5000 non-refunded copies of your book for $20\n, you'll earn\n$80,000\n.\n(Yes, some authors have already earned much more than that on Leanpub.)\nLearn more about writing on Leanpub\nFree Updates. DRM Free.\nIf you buy a Leanpub book, you get free updates for as long as the author updates the book! Many authors use Leanpub to publish their books in-progress, while they are writing them. All readers get free updates, regardless of when they bought the book or how much they paid (including free).\nMost Leanpub books are available in PDF (for computers) and EPUB (for phones, tablets and Kindle). The formats that a book includes are shown at the top right corner of this page.\nFinally, Leanpub books don't have any DRM copy-protection nonsense, so you can easily read them on any supported device.\nLearn more about Leanpub's ebook formats and where to read them\nWrite and Publish on Leanpub\nYou can use Leanpub to easily write, publish and sell in-progress and completed ebooks and online courses!\nLeanpub is a powerful platform for serious authors, combining a simple, elegant writing and publishing workflow with a store focused on selling in-progress ebooks.\nLeanpub is a magical typewriter for authors: just write in plain text, and to publish your ebook, just click a button. (Or, if you are producing your ebook your own way, you can even upload your own PDF and/or EPUB files and then publish with one click!) It really is that easy.\nLearn more about writing on Leanpub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814940751_aywy9msf2",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"这是一本常规的 PySide6/Qt Widgets 教程，目录完整、专业，但它的想法本身并不新颖或巧妙，也没有特定的小众场景或创意呈现，更像是普通的学习资料，不太符合她对有趣小产品的偏好。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 7055,
+            "cached_tokens": 0,
+            "output_tokens": 508,
+            "total_tokens": 7563,
+            "context_tokens": 7563
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason calls this a PySide6/Qt Widgets tutorial with a complete, professional table of contents, which the Leanpub page supports; the judgment that it is not novel is opinion, not an invented fact. It is specific in identifying this as conventional learning material rather than a small product, and that argument supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 6135,
+      "inputTokenDetails": {
+        "noCacheTokens": 6135,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 375,
+      "outputTokenDetails": {
+        "textTokens": 134,
+        "reasoningTokens": 241
+      },
+      "totalTokens": 6510,
+      "raw": {
+        "input_tokens": 6135,
+        "output_tokens": 375,
+        "output_tokens_details": {
+          "thinking_tokens": 241
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

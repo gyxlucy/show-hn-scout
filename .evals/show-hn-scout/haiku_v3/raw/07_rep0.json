@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_142aaa04d5fb402cb5de2aa7d3311321",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3527,
+      "cached_tokens": 0,
+      "output_tokens": 149,
+      "total_tokens": 3676,
+      "context_tokens": 3676
+    },
+    "transcript": [
+      {
+        "id": "35153e36-b855-4a4d-9e72-fa1dd8fbde2b",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Riff – An iPhone calendar you zoom instead of switching views\nProject URL: https://riffcalendar.com\nPosted (UTC): 2026-10-21T16:25:02Z\n\n## Project page text (fetch status: ok)\n\n```text\nTyler Hall\nBuilding Mac apps since 2006\nOn Mastodon,\n2 September 2026\nThis is seriously impressive. It’s rare to find such a well-done new\ntake on an established category like calendar apps.\nA closer look\nCreate an event by holding its time\nHold an empty slot and a new event appears there. Slide to adjust\nthe start, and drag the bar at its foot to set the duration. For an\nall-day event, hold under the date.\nRound times by default, exact when needed\nDrags snap to round times. For an exact time, pause before you drag\non, or drag the time tag at the left edge.\nRiff remembers your regular events\nType the start of a title you have used before, and Riff suggests the\nevent with its length, place and alert from last time. There is\nnothing to set up. The suggestions come from your own calendar.\nReschedule with your calendar in view\nTap the arrows beside an event’s time and it lifts off. Scroll to\nanother week or day, then place it among what is already there.\nThe weather where you plan\nEach day’s forecast stands beside its date, and a single day shows it\nhour by hour. An event pinned to a place shows the forecast\nthere. Weather is a switch in Riff’s settings.\nSee when it gets dark\nA faint shade covers the hours between sunset and sunrise where you\nare, so an evening run before dark is easy to plan. Daylight is a\nswitch in Riff’s settings.\nAnd there is more: reminders beside your events, search by\ntitle or place, alerts in a tap, time zones when you travel, a one-thumb\nzoom…\nThe calendar itself, as a widget\nThe Schedule widget is the calendar itself: every event drawn at\nits hour, with its length and its name. Each size shows as many days\nas you choose, up to three on the small, a week on the medium and two\nwhole weeks on the large. Month draws this month, or this month and\nthe next, and Up next lists what is coming, on the Home Screen or the\nLock Screen.\nThree days at true scale on the large widget, the day’s list on the medium.\nYour calendars, not copies of them\nWork\nPersonal\nFamily\nRiff works directly on the calendars already on your iPhone: iCloud,\nGoogle, Exchange, whatever Apple Calendar sees. There is no Riff account\nand nothing to import. Events you create or move in Riff show up\neverywhere else. Delete the app and your data hasn’t gone anywhere.\nData collected: none\nRiff has no server, no account and no analytics. Your events pass\nbetween Apple’s calendar database and your screen. Riff adds no stop of\nits own. Not collecting data isn’t a policy. There is nowhere for it\nto go.\nGet Riff\n★★★★★\nThe best interface for a calendar app I have yet found. Zooming in\nand out is smooth and adding events is a breeze. I actually like to\nadd more events to my calendar now.\nAshlyme, in an App Store review\nGet Riff on the App Store\niPhone · iOS 26 or later\nLeave your address for an email when Riff gets a major update.\nEmail address\nEmail me about updates\n```\n\n## HN discussion (1 comment)\n\n- [other] cavo2000: I've been using Riff for a little while during late testing stage. It takes a little to get used to but moving around the calendar is a lot like Google/Apple Maps. Recurring meetings, which are not exact, like getting a haircut is very easy to book with just one small swipe. The best feature is how quickly you can see an overview. Just like maps."
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814872410_09nmc65bv",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"证据显示这是一个有清晰创意的小型iPhone日历应用：用缩放代替切换视图，通过长按空白时段创建事件，并基于用户自己的日历提供标题联想，还有按日落显示暗色时段和在小组件中直接呈现日历等具体功能。页面表述清楚且专业，符合‘有新角度的熟悉问题’这一推送条件。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3527,
+            "cached_tokens": 0,
+            "output_tokens": 149,
+            "total_tokens": 3676,
+            "context_tokens": 3676
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason's claims all appear in the evidence: zooming in place of switching views, holding an empty slot to create an event, title suggestions drawn from the user's own calendar, sunset shading, and the widget that shows the calendar itself. These concrete features support the push decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2300,
+      "inputTokenDetails": {
+        "noCacheTokens": 2300,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 116,
+      "outputTokenDetails": {
+        "textTokens": 116,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2416,
+      "raw": {
+        "input_tokens": 2300,
+        "output_tokens": 116,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "run": {
+    "task_id": "ct_f7fe4fd9515e4dc2855cd03ced19e215",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3418,
+      "cached_tokens": 0,
+      "output_tokens": 122,
+      "total_tokens": 3540,
+      "context_tokens": 3540
+    },
+    "transcript": [
+      {
+        "id": "204d85f3-7b98-408b-93ef-2007a3bd8ab1",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: GitPushups, block your code if you don't do pushups during your workday\nProject URL: https://gitpushups.com\nPosted (UTC): 2026-10-22T01:28:28Z\n\n## Project page text (fetch status: ok)\n\n```text\nDo pushups...\nor we block\nyour commits.\nJoin developers who have built a pushup habit into their coding routine and logged\n42,490\n0\n42,490\npushups\nduring their workday.\nAll free and no ad spam.\nSign in with GitHub\nThese GitHub users do\npushups while coding.\nPrimeagen\nMarc Lou\nCassidy Williams\nScott Tolinski\nPieter Levels\nMelkey\nTheo\nWes Bos\nJason Lengstorf\nFireship\nHelp us get these developers\ndoing the reps, too!\nKnow them? Invite them to join.\nConfigure your training\nChoose how often you want to do pushups\nSet up with your agent\nGit hook\n›\nSet me up for GitPushups. Read the setup instructions at https://gitpushups.com/agent-setup/prompt.md?frequency=daily, ask for my GitHub username, and preserve my existing Git hooks.\nBefore\nAfter\nDaily\n8 hours\n4 hours\n1 hour\n15 min\nPushups daily\nWhy this works\nAn existing routine\nThis is a\nhabit stacking\ntool. You are already coding; add this to your routine and you’ll get stronger.\nA small interruption\nYou can do as many or as few pushups as you want. Your growth is based on the technique known as\n“greasing the groove”\n. Practice good form, frequently, at sub-maximal intensity to build neuromuscular efficiency.\nRepetition\nLike coding, eventually doing pushups while you work will become second nature. That repetition will make you stronger.\nTrack your progress\nSet your daily goal. Track your pushups.\nWatch your contribution graph fill in and see where you are on the global leaderboard.\nGlobal leaderboard\nToday’s developers\nReps\n1\ntorvalds\n120\n2\nkarpathy\n108\n3\ncassidoo\n96\n4\ngaearon\n84\n5\nsindresorhus\n72\nYour contributions\n2,674\npushups\nLess\nMore\nDaily goal\n40 pushups\nSample ranks and rep counts\nActive community\nFocus this row to stop the animation and scroll through the quotes. Each card links to its original source.\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nApp Store\n“\nIt makes sense to bake it into something I do everyday: writing code. I’m getting stronger!\n”\nT\ntradiopen\nApp Store reviewer\nProduct Hunt\n“\nGit Pushups helps me integrate fitness into my daily workflow.\n”\nAhyoung Kim\n@ahyoung_kim1\nLinkedIn\n“\nShoutout to Git Pushups for getting me up from my desk everyday!\n”\nLogan Weir\nTechnical Lead\nX\n“\nFirst i love the design, the colors this is crazy good, you are top 1% vibes\n”\nClau\n@ClarkTota\nLatest community update\nThe Monthly Press: October 2026\nRead update\nFAQ\nWhy pushups?\n+\nCan I sync with Apple Health?\n+\nHelp! I got too swol!\n+\nWhat if I already have a workout routine?\n+\nI have a feature request!\n+\nI found a bug!\n+\nHow do I delete my account?\n+\nHow can I support this project?\n+\nWho made this?\n+\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792812279786_0lnfrkw5j",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"页面说明了一个 git hook 在提交前要求完成俯卧撑的机制，但核心思路是习惯叠加的常见健身提醒/打卡玩法，缺少超出常规的技术约束或独特洞见；页面大量是营销内容和排行榜，没有实现细节或独立验证。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3418,
+            "cached_tokens": 0,
+            "output_tokens": 122,
+            "total_tokens": 3540,
+            "context_tokens": 3540
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason names the git hook that blocks commits until pushups are done, the habit-stacking framing, and the marketing and leaderboard content, all of which appear on the page. Saying the page gives no implementation details is fair, since it only offers an agent setup prompt. The criticism that the idea is a common fitness reminder supports the pass decision."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 2489,
+      "inputTokenDetails": {
+        "noCacheTokens": 2489,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 139,
+      "outputTokenDetails": {
+        "textTokens": 139,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 2628,
+      "raw": {
+        "input_tokens": 2489,
+        "output_tokens": 139,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_d7d8b9e9f0454a70b029a4c2fbaef407",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 3132,
+      "cached_tokens": 0,
+      "output_tokens": 343,
+      "total_tokens": 3475,
+      "context_tokens": 3475
+    },
+    "transcript": [
+      {
+        "id": "c2194113-6932-447c-a1ad-092593d50528",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: Commit code into a neural network, see what it remembers (browser demo)\nProject URL: https://nicobrenner.github.io/lossy-git/demo.html\nPosted (UTC): 2026-10-21T11:41:25Z\n\n## Project page text (fetch status: ok)\n\n```text\nlgit: interactive demo\nOct 2026 · Nico Brenner ·\nfull writeup\n·\ncode on GitHub\nVersion control where the storage is a neural network. Commit code, it trains. Checkout, it reconstructs from memory. Sometimes perfectly. Sometimes not\nimage\ntext\nyour code\nRUN ▶\nfunction fizzbuzz(n) {\nfor (let i = 1; i <= n; i++) {\nif (i % 15 === 0) console.log(\"FizzBuzz\");\nelse if (i % 3 === 0) console.log(\"Fizz\");\nelse if (i % 5 === 0) console.log(\"Buzz\");\nelse console.log(i);\n}\n}\nfizzbuzz(20);\nsource\npaste, drop, or upload\nan image\nreconstruction\nsamples:\ngradient\nsmiley\nmondrian\nor\nupload\n/ ctrl+v\n$\nlgit commit -m\nCOMMIT\n--hidden\n16\n24\n32\n48\n64\n96\n128\n--layers\n1\n2\n3\n4\n--epochs\nneural reconstruction\nRUN ▶\ncommit log\nSmaller network = more errors = more fun. Try --hidden 16 on text, or paste your own image\nHow does it work?\nInstead of storing your files as bytes, lgit trains a small neural network to memorize them. Each commit is a training run: the network learns to map positional encodings to your data, byte by byte for code or pixel by pixel for images. Checkout is inference: the network reconstructs what it can from its weights\nThe network uses Fourier positional encoding, ReLU hidden layers, and an Adam optimizer. For text, it outputs a probability distribution over 256 byte values. For images, it predicts RGB values directly. A small network compresses aggressively and hallucinates. A larger one memorizes perfectly but defeats the point\nAnd it all runs in your browser\nThe fun part is the failures. Run the JS code before and after a commit to see how neural corruption breaks your program in ways that are nothing like traditional file corruption\nFor the full story, math, and benchmarks:\nlgit: source control for the AI era\nMore projects:\nJeffy\nFlock\nGitHub\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814836767_pzyerxs3t",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "CAQSuwoKEAgTGAI4AUIIdGhpbmtpbmcSDMuGbIVV6qfHgm6vPhoMYDbwLqkl0RWmZUZyIjCT2x1GjlvwsF5ET6wrndl4E/rfS/CFMs3/6v25BPI691bjrw56Put3bwqClwo3gwkq2AlYY0bGNghXbcCVlQtrbKRbRcaHGw/DK2TegHQ0jKXgNi37oL3IsJINY3l6xUd4Bq8ZL51GKzwgK46tyuWVDpU+58jspdlLOznfqmXCJtBfXWa1Ah3/HRGA44LNODIu2gO+UcXfcrYHkop1KHa/Bvm1mbsZUtt4LhEWfrY9CLyVILEi5UIp7zGpCsWXNBVTU2KI0yqy4NQCZW2rWqJl1NGnZR3BRI+YHhQm1ELY4oQQp4W6sypNY90wuniw6HD2k70YiCGSw9VgD7FkTQ5dpTSwWb5vxl1+m2gcJFnQPNTefQtlIEJjKew0qBpm1o1hyaU0J/rmcObLd2CvZOxecMIj9fJ8hOXzotYKVjF2INwAbfdHk6d33Pfvt3oz66jhcTPDU4icWM5dOPvbNYx3naoLkhJZbvVVelqGxk8cPzd26u+IMCpHRcw3mSRKL+8NQ53wicbVbqlQ2ey3UHvQ0wdgyYdCt58gCmUcFB8DycrXhrqDzEjF+WPi/Z4qMrVfoDsllXrZXQKw2lCks7faZz5RbubajHz7rfszGi9rCTbtiSRxaSJJ6cdlMdFg+P12KlzbSbYtHnJmJRLLAjThj0Jx9mLDgYeZc5LFD2llL6cVsN9MA4l/CGNLmWWDcsUpFegb9VnI2GtLyCjK1kzPMDxSRMcUsyvfjW6QGhEKc5/92pZe6YQHq84BeOKGr4pJ2bUdVaGKpyhJrY2d7UmW+GjTzVCM0yW2eLyPjYcSPVIIpqdkrsBAyF3l/wwsl8CjOb1LiR0CZAeEeyIzrEkM3Mhsm1NXCa+5ktjJNMvSdUgbOSrh9PVW2azEzCzPxtcpHRJALei/DJrGbeuJtWpF9aSNgkOnOI+UfEr3I3NwQ093Ifpy2AysNBOxecPWPsykc3Fyjz/e5cSgXvw3m8k5GDrnC5oJBQeGhWt6zm3Xoanh8rrfZphCpGqOZj8a5ZXFGkgB8pWkpvOD+zDBql5ebQr2wG88U10cHw/Z77AVx2WCaQP9C3bq4PDMcAd1bLE064HeIcGah48L5e65uGxQKP+xI02vo+QnqmCF9eMgZJyITo24ODBB6pIHrN3PFUfiORMKfzMdo/NyNockhxxyqTFP3d83ERTmQif5jKKn5y16PUWA5k4s8DwVGsVauiOLbE5x3PsIAxvnfEuk4avZvY/hJO9iZmRGUQEMVv3kip9d1VGx+1nlXSq9ow38FjdNtTMezMeWZ0qL4Lm27tsElZj9jd4lSYhbCjZPjPSwCqdrAojzwwvbLp8IM07B6lJkkt7HUPRA561PEs2o2esIejtm84sQ2BNoHJbgpN5RtejSPnfHvAXDIzCN+xTuGR6YMuTsjAb18brVED+m0T4HxpwD5uMAFT1QZ0c/BolC7lpRNGeSppOFMr4+6p1BC+hHURZUKiIigR1rcWpPk/W4fT70uA0F0/WN6IZeXuNgaKB+5y54wjj1mPpbN8vAwt+cjSJRGV7v6oT94pTelSZwEA71Z2RTCUTatXHRX6JHjykuKR3DCulqCF1smFijxCdnVeVg3SZohznBJvUhkv7vKNhhZGKnIoaTrqANYr21cRtAggscLAZYJXX4sAr60XEdax5DEiXfMbfpHqPhrt5suvDRj/2uFIBMquBNxDxuq64MSFxvTh0C5kEpGAE="
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"pass\", \"reason\": \"这是一个在浏览器里把代码提交进神经网络的演示，与指南中明确列为应跳过的“把代码提交进神经网络的浏览器演示”属于同一类技术性很强的底层工具；页面展示虽清晰，但不构成对读者有吸引力的小产品。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 3132,
+            "cached_tokens": 0,
+            "output_tokens": 343,
+            "total_tokens": 3475,
+            "context_tokens": 3475
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason accurately describes the project as a browser demo that commits code into a neural network, matching the page. Its appeal to a guideline that supposedly names this exact project can't be checked against the evidence, but it isn't a claim about the project itself. The reason names the concrete mechanism and argues the post lacks reader appeal, which supports pass."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 1884,
+      "inputTokenDetails": {
+        "noCacheTokens": 1884,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 474,
+      "outputTokenDetails": {
+        "textTokens": 139,
+        "reasoningTokens": 335
+      },
+      "totalTokens": 2358,
+      "raw": {
+        "input_tokens": 1884,
+        "output_tokens": 474,
+        "output_tokens_details": {
+          "thinking_tokens": 335
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}

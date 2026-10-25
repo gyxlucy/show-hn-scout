@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Show HN Scout · select_project 评测:进展与结论</title>
+<style>
+  :root { --ink:#1d2330; --mute:#5b6577; --line:#dfe3ea; --bg:#f7f8fa; --acc:#2b59c3; --good:#1f8a4c; --bad:#c43d3d; --warn:#b7791f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.65 -apple-system, "PingFang SC", "Helvetica Neue", system-ui, sans-serif; color:var(--ink); background:#fff; }
+  header { background:var(--bg); border-bottom:1px solid var(--line); padding:32px 0 24px; }
+  main, header > div { max-width:960px; margin:0 auto; padding:0 24px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  h2 { font-size:20px; margin:40px 0 10px; padding-top:8px; border-top:1px solid var(--line); }
+  h3 { font-size:16px; margin:24px 0 6px; }
+  p { margin:8px 0; }
+  .sub { color:var(--mute); margin:0; }
+  .tldr { background:#eef3ff; border:1px solid #c9d6f6; border-radius:8px; padding:16px 20px; margin:20px 0; }
+  .tldr ul { margin:6px 0 0; padding-left:20px; }
+  .tldr li { margin:6px 0; }
+  table { border-collapse:collapse; width:100%; margin:12px 0; font-size:14px; }
+  th, td { border:1px solid var(--line); padding:6px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--bg); font-weight:600; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  tr.hl td { background:#f1f8f3; }
+  small, .note { color:var(--mute); font-size:13px; }
+  code { background:var(--bg); padding:1px 5px; border-radius:4px; font-size:13px; }
+  .tag { display:inline-block; font-size:12px; padding:0 7px; border-radius:10px; border:1px solid var(--line); color:var(--mute); margin-right:4px; }
+  .tag.good { color:var(--good); border-color:#b9dcc7; }
+  .tag.bad { color:var(--bad); border-color:#efc4c4; }
+  .tag.warn { color:var(--warn); border-color:#ecd6a8; }
+  .chart { margin:14px 0 4px; }
+  .row { display:grid; grid-template-columns:230px 1fr 130px; align-items:center; gap:10px; margin:7px 0; }
+  .lbl { font-size:14px; }
+  .track { position:relative; height:22px; background:var(--bg); border:1px solid var(--line); border-radius:4px; }
+  .bar { position:absolute; left:0; top:0; bottom:0; background:var(--acc); border-radius:3px 0 0 3px; opacity:.85; }
+  .bar.base { background:#8a93a6; }
+  .bar.ref { background:#d4b46a; }
+  .ci { position:absolute; top:9px; height:2px; background:#111; }
+  .ci::before, .ci::after { content:""; position:absolute; top:-4px; width:2px; height:10px; background:#111; }
+  .ci::before { left:0; } .ci::after { right:0; }
+  .ref-line { position:absolute; top:-3px; bottom:-3px; width:0; border-left:2px dashed var(--warn); }
+  .val { font-size:13px; font-variant-numeric:tabular-nums; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:12px 16px; }
+  .card h3 { margin-top:0; }
+  .timeline { border-left:3px solid var(--line); margin:12px 0 12px 8px; padding-left:18px; }
+  .timeline > div { margin:12px 0; position:relative; }
+  .timeline > div::before { content:""; position:absolute; left:-25px; top:7px; width:11px; height:11px; border-radius:50%; background:var(--acc); }
+  .timeline b { display:block; }
+  ol, ul { padding-left:22px; }
+  footer { color:var(--mute); font-size:13px; padding:20px 0 48px; }
+  @media (max-width:720px) { .row { grid-template-columns:1fr; } .grid2 { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header><div>
+  <h1>Show HN Scout · <code>select_project</code> 评测</h1>
+  <p class="sub">目标:判断一个 agent 能不能像 Lucy 一样,从 Show HN 里挑出值得打断她的项目(<code>push</code> / <code>pass</code> / <code>unsure</code>)。 状态截至 2026-10-24。</p>
+</div></header>
+
+<main>
+
+<div class="tldr">
+  <b>一句话结论</b>
+  <ul>
+    <li><b>原来的判断标准(rubric v0)和 Lucy 的口味不一致。</b>用 v0 写的 agent 在保留集上只和 Lucy 一致 23%,低于"全部推"的 57%。它几乎不推 Lucy 想看的东西(push 召回约 12%)。</li>
+    <li><b>换成她自己的口味(rubric v1)后,agree 升到 70%,这是整个项目里最大、最可信的提升</b>(+47 点,配对 95% CI +20 到 +70)。</li>
+    <li><b>v1 过度推送:</b>Lucy 标 pass 的案例它大多也推。再加一条她自己说过的 pass 理由(太底层、太技术、她用不到),得到 v3:保留集 agree 76%,pass 识别 46% → 64%。</li>
+    <li><b>v3 相对 v1 的提升(+5.6 点)在噪声范围内</b>(CI −5.6 到 +17.8),没达到我们预设的 +15 点门槛。当前只能把 v3 当候选,不能宣称它更好。</li>
+    <li><b>相对"全部推"这个朴素答案,v3 只是勉强领先</b>(+19 点,CI 0 到 +39)。要放心上线,还需要一批全新的盲测案例。</li>
+  </ul>
+</div>
+
+<h2>1. 这个项目在评什么</h2>
+<p>Show HN Scout 是一个 Python CLI,抓取 Show HN 帖子并冻结成证据包(标题、项目链接、页面正文、HN 评论、浏览器快照)。<code>select_project(evidence, preferences)</code> 是其中最关键的一步:读一份证据,回答 <code>push</code>(值得打断读者)、<code>pass</code> 或 <code>unsure</code>,并给出中文理由。</p>
+<p>本评测用的"标准答案"只有一个来源:<b>Lucy 的人工标签</b>。评测本身是真实的 Cavia 任务(<code>POST /v1/tasks</code>,由 <code>system-prompt.md</code> + <code>request.json</code> 定义),不是直接调用模型。</p>
+
+<h2>2. 过程时间线</h2>
+<div class="timeline">
+  <div><b>10-22 · 开发集建立</b>抓取 30 个案例(15 个随机 + 15 个刻意挑选的边界案例),Lucy 逐个标注 push/pass(15/15),部分写了理由。这 30 个案例同时用来校准 rubric,所以只能当<b>开发集</b>。</div>
+  <div><b>10-23 · 评测搭建与试点</b>建 baseline agent(只依据 rubric v0)、程序打分 + judge 打分、selftest。冒烟 → 试点(claude-haiku-5-5,30 × 1):agree 27%。随后完成两次签字确认:案例集、打分方式。</div>
+  <div><b>10-23 · rubric v1 草案</b>把 Lucy 的理由整理成 v1:"产品点子有意思"为主标准,新颖不是必须;受众太窄、页面杂乱或读不到判 pass;<code>unsure</code> 只留给无法消解的矛盾。她删除了我推断的 4 条类别规则(开发基础设施、教程、纯技术实验、视觉硬件折腾,都只是巧合)。</div>
+  <div><b>10-23 · 保留集</b>新抽 30 个案例(纯随机,HN id 大于开发集),盲标(卡片不显示助手的判断),17 push / 13 pass。保留集标签和结果不进公开仓库。</div>
+  <div><b>10-23 · 三个模型</b>baseline 与 v1 各跑 3 次:claude-haiku-5-5、bright-rain、washed-bacon。后两者在 JSON 前输出 <code>&lt;think&gt;</code> 块,被严格解析器判无效,所以只做描述性对比。</div>
+  <div><b>10-24 · haiku 爬升(hillclimb)</b>第 1 轮:v1 prompt。第 2 轮:v3,即 v1 加一条 pass 规则(来自 Lucy 对 02、12、25、29 的理由)。每轮需要她批准,第 2 轮后她选择收尾。</div>
+</div>
+
+<h2>3. 数据集</h2>
+<table>
+  <tr><th>集合</th><th class="n">案例</th><th>分布</th><th>用途与限制</th></tr>
+  <tr><td>开发集 dev(= train)</td><td class="n">30</td><td>15 push / 15 pass,随机 15 + 刻意挑选 15。常数答案 50%</td><td>用来写 rubric,不能证明改进。标注时看得到助手的判断(锚定偏差)。</td></tr>
+  <tr><td>保留集 held-out(= test)</td><td class="n">30</td><td>17 push / 13 pass,纯随机。<b>"全部推"得 57%</b></td><td>盲标。但被用来在第 1、2 轮间做选择,所以有选择偏差;4 个案例页面正文为空。</td></tr>
+</table>
+<p class="note">所有成绩都是 30 个案例 × 3 次重复 = 90 行。实测同一案例 3 次的决定基本不变(26–28 个案例完全一致),所以重复次数带来的信息很少,<b>案例数才是精度瓶颈</b>。30 个案例的噪声范围约 ±14–16 个百分点。</p>
+
+<h2>4. 怎么打分</h2>
+<ul>
+  <li><b>决定(程序打分)</b>:<code>agree</code> = agent 的 push/pass 与 Lucy 一致;<code>unsure</code> 一律算不一致。辅助指标:push 精度(分母是实际推送数)、push 召回、pass 识别率、unsure 率、格式有效率。</li>
+  <li><b>理由(judge 打分)</b>:claude-opus-5-5 只看理由,不看决定,评 <code>grounded</code>(事实能在证据里找到)、<code>specific</code>(点名这篇帖子的具体内容)、<code>consistent</code>(理由支持所给决定)。judge 不会是被测模型。</li>
+  <li><b>严格解析器</b>:回复必须是单个 JSON 对象。事后诊断提取(找最后一个 <code>{"decision"...}</code>)另外报告,不混入主成绩。</li>
+  <li><b>置信区间</b>:按案例聚类的 bootstrap。配对差值也按案例聚类。区间重叠就不宣称改进。</li>
+  <li><b>不用</b>:票数、stars、排名、营收、UI 精致度、代码量。</li>
+</ul>
+
+<h2>5. 主要结果:claude-haiku-5-5 爬升</h2>
+<h3>保留集 agree(越高越好,黑线为 95% CI,虚线为"全部推" 57%)</h3>
+<div class="chart">
+  <div class="row"><div class="lbl">baseline(rubric v0)</div><div class="track"><div class="bar base" style="width:23%"></div><div class="ci" style="left:10%;width:28%"></div><div class="ref-line" style="left:57%"></div></div><div class="val">23% [10–38]</div></div>
+  <div class="row"><div class="lbl">v1(rubric v1)</div><div class="track"><div class="bar" style="width:70%"></div><div class="ci" style="left:53%;width:33%"></div><div class="ref-line" style="left:57%"></div></div><div class="val">70% [53–86]</div></div>
+  <div class="row"><div class="lbl">v3(v1 + 一条 pass 规则)</div><div class="track"><div class="bar" style="width:76%"></div><div class="ci" style="left:61%;width:28%"></div><div class="ref-line" style="left:57%"></div></div><div class="val">76% [61–89]</div></div>
+  <div class="row"><div class="lbl">参照:全部推</div><div class="track"><div class="bar ref" style="width:57%"></div></div><div class="val">57%</div></div>
+</div>
+
+<h3>完整指标</h3>
+<table>
+  <tr><th>变体</th><th>集合</th><th class="n">agree</th><th class="n">push 精度</th><th class="n">push 召回</th><th class="n">pass 识别</th><th class="n">unsure</th><th class="n">有效格式</th></tr>
+  <tr><td>baseline</td><td>保留集</td><td class="n">23% [10–38]</td><td class="n">43% (6/14)</td><td class="n">12% (6/51)</td><td class="n">38% (15/39)</td><td class="n">20%</td><td class="n">100%</td></tr>
+  <tr><td>v1</td><td>保留集</td><td class="n">70% [53–86]</td><td class="n">68% (45/66)</td><td class="n">88% (45/51)</td><td class="n">46% (18/39)</td><td class="n">0%</td><td class="n">100%</td></tr>
+  <tr class="hl"><td>v3</td><td>保留集</td><td class="n">76% [61–89]</td><td class="n">75% (43/57)</td><td class="n">84% (43/51)</td><td class="n">64% (25/39)</td><td class="n">0%</td><td class="n">100%</td></tr>
+  <tr><td>baseline</td><td>开发集</td><td class="n">32% [17–49]</td><td class="n">29% (5/17)</td><td class="n">11% (5/45)</td><td class="n">53% (24/45)</td><td class="n">24%</td><td class="n">100%</td></tr>
+  <tr><td>v1</td><td>开发集</td><td class="n">57% [39–73]</td><td class="n">54% (39/72)</td><td class="n">87% (39/45)</td><td class="n">27% (12/45)</td><td class="n">0%</td><td class="n">100%</td></tr>
+  <tr><td>v3</td><td>开发集 <span class="tag warn">已污染</span></td><td class="n">70% [54–84]</td><td class="n">69% (33/48)</td><td class="n">73% (33/45)</td><td class="n">67% (30/45)</td><td class="n">0%</td><td class="n">100%</td></tr>
+</table>
+<p class="note">开发集上 v3 的数字不能当证据:v3 的提示词点名了 4 个开发集案例当例子(02、12、25、29)。</p>
+
+<h3>配对差值(保留集,按案例聚类的 95% CI)</h3>
+<table>
+  <tr><th>对比</th><th class="n">agree 变化</th><th>95% CI</th><th>读法</th></tr>
+  <tr><td>v1 − baseline</td><td class="n">+47 点</td><td>+20 到 +70</td><td><span class="tag good">明确提升</span></td></tr>
+  <tr><td>v3 − baseline</td><td class="n">+52 点</td><td>+29 到 +72</td><td><span class="tag good">明确提升</span></td></tr>
+  <tr><td>v3 − v1</td><td class="n">+5.6 点</td><td>−5.6 到 +17.8</td><td><span class="tag warn">噪声内,未达 +15 门槛</span></td></tr>
+  <tr><td>v3 − v1,只看 pass 案例</td><td class="n">+18 点</td><td>0 到 +36</td><td><span class="tag warn">方向对,仍在边缘</span></td></tr>
+  <tr><td>v3 − v1,只看 push 案例</td><td class="n">−4 点</td><td>−18 到 +6</td><td><span class="tag good">基本没损失</span></td></tr>
+  <tr><td>v3 − "全部推"</td><td class="n">+19 点</td><td>0 到 +39</td><td><span class="tag warn">勉强领先</span></td></tr>
+</table>
+
+<h3>保留集混淆矩阵(行 = Lucy,列 = agent,90 行)</h3>
+<table>
+  <tr><th>变体</th><th class="n">push→push</th><th class="n">push→pass</th><th class="n">push→unsure</th><th class="n">pass→push</th><th class="n">pass→pass</th><th class="n">pass→unsure</th></tr>
+  <tr><td>baseline</td><td class="n">6</td><td class="n">43</td><td class="n">2</td><td class="n">8</td><td class="n">15</td><td class="n">16</td></tr>
+  <tr><td>v1</td><td class="n">45</td><td class="n">6</td><td class="n">0</td><td class="n">21</td><td class="n">18</td><td class="n">0</td></tr>
+  <tr class="hl"><td>v3</td><td class="n">43</td><td class="n">8</td><td class="n">0</td><td class="n">14</td><td class="n">25</td><td class="n">0</td></tr>
+</table>
+<p>baseline 的问题是几乎全判 pass(漏了 43/51 个她想看的),v1 把问题翻到另一边:pass 案例里仍有 21 行被推。v3 把这个数字降到 14。</p>
+
+<h3>理由质量(judge,保留集)</h3>
+<table>
+  <tr><th>变体</th><th class="n">grounded</th><th class="n">specific</th><th class="n">consistent</th></tr>
+  <tr><td>baseline</td><td class="n">80 / 90</td><td class="n">88 / 90</td><td class="n">90 / 90</td></tr>
+  <tr><td>v1</td><td class="n">89 / 90</td><td class="n">85 / 90</td><td class="n">90 / 90</td></tr>
+  <tr><td>v3</td><td class="n">85 / 89</td><td class="n">87 / 89</td><td class="n">88 / 89</td></tr>
+</table>
+<p class="note">v3 有 1 行没有 judge 评分(judge 调用出错),该行保留在决定类指标里,只在 judge 计数里排除。judge 对几乎所有理由都给通过,区分度有限;它的审计探针(空理由、"我不知道"、错项目、编造事实、前后矛盾)都按预期被判不过。<b>理由质量不是主要问题,决定是否和 Lucy 一致才是。</b></p>
+
+<h2>6. 其他模型(描述性对比)</h2>
+<p>三个模型 × 两个变体不是同一个实验的控制变量(模型和变体混在一起),只能当描述性对比。bright-rain 与 washed-bacon 在 JSON 前先输出 <code>&lt;think&gt;…&lt;/think&gt;</code>,严格解析器判无效;下表同时给出严格成绩和事后"诊断提取"成绩(只用于诊断,不进主成绩)。保留集,30 × 3:</p>
+<table>
+  <tr><th>模型</th><th>变体</th><th class="n">严格有效</th><th class="n">严格 agree</th><th class="n">诊断 agree [CI]</th><th class="n">push 数</th><th class="n">精度</th><th class="n">召回</th><th class="n">识别出 pass</th><th class="n">unsure</th></tr>
+  <tr><td>bright-rain</td><td>baseline</td><td class="n">2/90</td><td class="n">1%</td><td class="n">43% [29–58]</td><td class="n">54</td><td class="n">34/54</td><td class="n">34/51</td><td class="n">5/39</td><td class="n">15</td></tr>
+  <tr><td>bright-rain</td><td>v1</td><td class="n">7/90</td><td class="n">7%</td><td class="n">57% [41–73]</td><td class="n">77</td><td class="n">47/77</td><td class="n">47/51</td><td class="n">4/39</td><td class="n">0</td></tr>
+  <tr><td>washed-bacon</td><td>baseline</td><td class="n">5/90</td><td class="n">3%</td><td class="n">52% [38–68]</td><td class="n">60</td><td class="n">41/60</td><td class="n">41/51</td><td class="n">6/39</td><td class="n">12</td></tr>
+  <tr><td>washed-bacon</td><td>v1</td><td class="n">3/90</td><td class="n">2%</td><td class="n">64% [47–81]</td><td class="n">80</td><td class="n">50/80</td><td class="n">50/51</td><td class="n">8/39</td><td class="n">0</td></tr>
+  <tr><td>claude-haiku-5-5</td><td>baseline</td><td class="n">90/90</td><td class="n">23%</td><td class="n">—</td><td class="n">14</td><td class="n">6/14</td><td class="n">6/51</td><td class="n">15/39</td><td class="n">18</td></tr>
+  <tr><td>claude-haiku-5-5</td><td>v1</td><td class="n">90/90</td><td class="n">70%</td><td class="n">—</td><td class="n">66</td><td class="n">45/66</td><td class="n">45/51</td><td class="n">18/39</td><td class="n">0</td></tr>
+</table>
+<p>模式一致:v1 都把 push 召回拉到约 90–100%,但 pass 识别仍很低(8/39 到 18/39)。三个模型都在过度推送。</p>
+
+<h2>7. 主要发现</h2>
+<ol>
+  <li><b>原标准要求"具体机制 + 可迁移 insight",而 Lucy 推的理由是产品口味</b>("有意思的小产品""有创意""垂类小产品"),她甚至说案例 26"不新颖也推"。这就是 baseline 几乎不推的原因。换成她的口味后,提升最大。</li>
+  <li><b>pass 边界没学会。</b>她写过理由的 pass 案例只有 2/15(14:"受众太 geek 小众",22:"页面太复杂,很 slop")。分析 agent 读开发集痕迹后发现:pass/push 标签有一部分在可见证据上区分不开(如 02、27、09 更像她的 push)。再提升需要她提供 pass 理由,而不是更聪明的提示词。</li>
+  <li><b>她新补的理由是同一条规则:</b>02(太深入神经网络底层)、12(防火墙太 technical,用不到)、29(tree-sitter/wasm 太小众太细节)、25(太细节,场景用不上)。写成"低层或高度技术性组件,深度到读者自己不会用 → pass"后,pass 识别从 46% 到 64%,push 召回只降 4 点。</li>
+  <li><b>推断出来的类别规则被她否决了。</b>"开发基础设施 / 教程 / 纯技术实验 / 视觉硬件折腾都 pass"被她确认为巧合,已删除。规则要标来源:[她说] 或 [推断]。</li>
+  <li><b>haiku 的理由有 1/3 到 1/2 是英文</b>(基线保留集 42/90),尽管指令要求中文。这一项当时被接受,没有改。</li>
+  <li><b>推理类模型(bright-rain、washed-bacon)的 <code>&lt;think&gt;</code> 输出让严格评测基本不可用。</b>需要服务商关闭,或批准使用宽松解析器。</li>
+</ol>
+
+<h2>8. 能信到什么程度</h2>
+<div class="grid2">
+  <div class="card">
+    <h3>可信</h3>
+    <ul>
+      <li>标准答案只有 Lucy 的标签;保留集盲标,且 rubric v1 不是从它写出来的。</li>
+      <li>每行都是真实 Cavia 任务,记录了实际服务的模型(claude-haiku-5-5)、token 用量和 0 次工具调用。</li>
+      <li>头条数字从原始回复重算,与存储的打分一致。</li>
+      <li>judge 不是被测模型;分析 agent 只读过开发集痕迹,没见过保留集标签或痕迹。</li>
+      <li>v1 − baseline 的提升(+47 点,CI 不含 0)远大于噪声。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>限制</h3>
+    <ul>
+      <li>保留集在第 1、2 轮用来选择,数字有选择偏差,需要新的盲测集做最终数字。</li>
+      <li>30 个案例的噪声约 ±14–16 点;v3 对 v1 的 +5.6 点分不开。</li>
+      <li>开发集上 v3 的数字被污染。</li>
+      <li>v3 在某个 Lucy 标 push 的保留集案例上从 3/3 变成 0/3;为不让保留集影响调参,没有去看它。</li>
+      <li>只有 haiku 做了爬升;跨模型对比是描述性的。</li>
+      <li>保留集一次运行遇到 4 次临时证书错误(重跑续完);费用没有测量,只有 token。</li>
+    </ul>
+  </div>
+</div>
+
+<h2>9. 用量(保留集,输入 / 输出 token,haiku)</h2>
+<table>
+  <tr><th>变体</th><th class="n">输入 token</th><th class="n">输出 token</th><th class="n">延迟中位数</th></tr>
+  <tr><td>baseline</td><td class="n">454,473</td><td class="n">23,822</td><td class="n">3.3 s</td></tr>
+  <tr><td>v1</td><td class="n">463,473</td><td class="n">25,198</td><td class="n">3.8 s</td></tr>
+  <tr><td>v3</td><td class="n">475,173</td><td class="n">28,980</td><td class="n">4.5 s</td></tr>
+</table>
+<p class="note">费用没有测量,不给估计值。</p>
+
+<h2>10. 建议与待决事项</h2>
+<ol>
+  <li><b>采用 <code>v3/system-prompt.md</code> 作为候选</b>,但不把它说成"已证明更好"。理由:push 召回基本保持,pass 识别明显更好,没有额外成本。</li>
+  <li><b>请 Lucy 再标一批全新的盲测案例(建议 30 个)</b>,在 v1 和 v3 之间做最终裁决。这是把"候选"变成"结论"最缺的一步。</li>
+  <li>v3 里"有创意的技术呈现仍然推"一句是我从案例 15 推断的,需要 Lucy 确认或删除。</li>
+  <li>05、08、09、27、28 还缺 pass 理由,补上能进一步澄清 pass 边界。新的判断标准版本需要新的保留集。</li>
+  <li>推理类模型的 <code>&lt;think&gt;</code> 问题:联系服务商关闭,或批准使用宽松解析器后重跑。</li>
+  <li>未尝试:给 push 加 few-shot 示例;更多 pass 理由;更大的案例集(案例数是精度瓶颈,比增加重复次数更有效)。</li>
+</ol>
+
+<h2>11. 文件索引</h2>
+<p class="note">路径相对于仓库根目录下的 <code>.evals/show-hn-scout/</code>。保留集(<code>heldout/</code>)的标签和逐案例结果不在公开仓库里。</p>
+<table>
+  <tr><th>文件</th><th>内容</th></tr>
+  <tr><td><code>narrative.md</code></td><td>爬升状态表、推荐改动、对比基线、为什么可信、限制、试过什么</td></tr>
+  <tr><td><code>metrics.md</code></td><td>指标定义和按变体对比的表</td></tr>
+  <tr><td><code>report.html</code></td><td>开发集逐案例报告(含 haiku_v1、haiku_v3)</td></tr>
+  <tr><td><code>v1/</code>、<code>v3/</code>、<code>baseline/</code></td><td>各变体的 <code>system-prompt.md</code>、<code>request.json</code>、<code>change.md</code>、<code>change.patch</code></td></tr>
+  <tr><td><code>run.ts</code>、<code>lib.ts</code>、<code>judge.ts</code>、<code>cavia.ts</code></td><td>评测代码(TypeScript / Bun)</td></tr>
+  <tr><td><code>climb-stats.py</code></td><td>严格统计和 bootstrap CI</td></tr>
+  <tr><td><code>diagnose-extract.py</code></td><td>事后诊断提取</td></tr>
+  <tr><td><code>judge-audit.json</code></td><td>judge 审计探针结果</td></tr>
+  <tr><td><code>../../docs/rubric-v0.md</code>、<code>rubric-v1-draft.md</code></td><td>两版判断标准</td></tr>
+</table>
+
+<footer>本页只含汇总数字,不含保留集的标签或逐案例内容。无脚本,可直接在浏览器中打开。</footer>
+</main>
+</body>
+</html>

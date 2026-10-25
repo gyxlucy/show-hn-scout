@@ -14,7 +14,10 @@ const esc = (v: unknown) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "
 const state = JSON.parse(readFileSync(join(DIR, "_state.json"), "utf8"));
 const metricDefs: { id: string; label: string; better?: string }[] = state.metrics;
 const headline = (metricDefs.find((m: any) => m.kind === "binary") ?? metricDefs[0]).id;
-const variants = readdirSync(OUT, { withFileTypes: true }).filter((d) => d.isDirectory() && /^(baseline|v\d+)$/.test(d.name)).map((d) => d.name).sort((a, b) => (a === "baseline" ? -1 : b === "baseline" ? 1 : +a.slice(1) - +b.slice(1)));
+// Variant dirs are `baseline`, `v<N>`, or `<label>_baseline` / `<label>_v<N>` for a second model run (`run.ts --out`).
+const VARIANT_DIR = /^(?:([a-z][a-z-]*)_)?(baseline|v\d+)$/;
+const rank = (n: string) => { const m = VARIANT_DIR.exec(n)!; return [m[1] ?? "", m[2] === "baseline" ? 0 : +m[2].slice(1)] as const; };
+const variants = readdirSync(OUT, { withFileTypes: true }).filter((d) => d.isDirectory() && VARIANT_DIR.test(d.name)).map((d) => d.name).sort((a, b) => { const x = rank(a), y = rank(b); return x[0].localeCompare(y[0]) || x[1] - y[1]; });
 const pct = (v: number | null | undefined) => (v == null ? "–" : (100 * v).toFixed(0) + "%");
 const median = (xs: number[]) => (xs.length ? [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)] : null);
 const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
@@ -46,7 +49,7 @@ for (const v of variants) {
 <p>${rows.length} rows (${count("ok")} ok, ${count("truncated")} truncated, ${count("refused")} refused) · ${errors.length} error records${errors.length ? ": " + esc([...new Set(errors.map((e) => e.failure_class))].join(", ")) : ""} ·
  latency median ${median(rows.map((r) => r.latency_s))?.toFixed(1) ?? "–"}s · tokens in/out total ${sum(tok("input_tokens"))}/${sum(tok("output_tokens"))} · tool calls ${sum(rows.map((r) => r.tool_calls ?? 0))} · cost not measured</p>
 <table>${head}${groupRows}</table>
-<p><small>Intervals are 95% case-clustered bootstrap. Only the <code>random</code> group approximates real traffic. ${HELDOUT ? "Held-out set: labeled blind after the v1 rubric was written; not used to write or tune a prompt." : "The 30 cases calibrated the rubric, so this is a dev set, not a held-out score."}</small></p>
+<p><small>Intervals are 95% case-clustered bootstrap. Only the <code>random</code> group approximates real traffic. ${HELDOUT ? "Held-out set: labeled blind after the v1 rubric was written. Prompts were not written from it, but it was used to choose between rounds of the haiku climb, so treat the haiku_v1 / haiku_v3 numbers as selection-biased." : "The 30 cases calibrated the rubric, so this is a dev set, not a held-out score."}</small></p>
 <h3>Cases</h3><table><tr><th>case</th><th>tags</th><th>human</th><th>rep</th><th>agent</th><th>reason</th><th>grounded</th><th>specific</th><th>consistent</th><th>status</th><th>trace</th></tr>
 ${rows.sort((a, b) => a.prompt_id.localeCompare(b.prompt_id) || a.rep - b.rep).map((r) => {
     const cls = r.grade.agree === 1 ? "ok" : r.status === "ok" ? "bad" : "";

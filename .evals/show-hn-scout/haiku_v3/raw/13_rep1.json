@@ -1,0 +1,102 @@
+{
+  "run": {
+    "task_id": "ct_95d6dcb7e4df45eb9587d3b242d24e47",
+    "model": "claude-haiku-5-5",
+    "stop_reason": "stop",
+    "error": null,
+    "usage": {
+      "input_tokens": 6803,
+      "cached_tokens": 0,
+      "output_tokens": 556,
+      "total_tokens": 7359,
+      "context_tokens": 7359
+    },
+    "transcript": [
+      {
+        "id": "12333a5b-e454-4287-9f42-ca533f2f9149",
+        "role": "user",
+        "parts": [
+          {
+            "type": "text",
+            "text": "# Candidate Show HN post\n\nTitle: Show HN: The Steam Frame's wireless adapter isn't what you think\nProject URL: https://github.com/Sharktheone/steamframe-dongle\nPosted (UTC): 2026-10-21T21:22:54Z\n\n## Project page text (fetch status: ok)\n\n```text\nThe Steam Frame's wireless adapter isn't what you think\nAre you like me and thought that the Adapter was the Router? Well, no. The adapter is just a WiFi 6E dongle that connects to the headset's own hidden hotspot.\nJust here for the tool? Jump to\nWant To Try It?\n. Here for the story? Keep reading.\nWhy?\nBut let's start from the beginning. I wanted to play Half-Life: Alyx on the Frame but forgot the Adapter at someone else's house. I didn't want that to stop me from playing.\nThe issue is that my home WiFi is just an old GL.iNet travel router which only supports 2.4GHz. With just that it is pretty much impossible to have a good time playing.\nThe Hotspot Solution\nSo the first thing I did was to just use the WiFi 6E card on my PC's motherboard. It seemed to work way better but latency spikes still were killing the experience.\nThe Frame can stream over two WiFi links at the same time (Valve calls this Multilink). As far as I can tell, that's the trick against latency spikes: when one link hiccups, the other one hopefully doesn't hiccup at the exact same moment. With only one link, every single spike ends up right on your face.\nSo the Frame can do two links, but my PC only has one WiFi card. And I don't own another WiFi 6E card... or so I thought. Turns out laptops have WiFi too. So I grabbed my MacBook and used it as a hotspot while it was connected to my network over Ethernet. In typical Apple fashion this was not as straightforward and very buggy to set up. However once it worked, I had a new AP which I could even move and that was not stuck to an antenna somewhere under my desk.\nThe \"Adapter\"\nAs you might have guessed by now, the MacBook hotspot situation again has only one radio and I had no adapter. So I needed to use the same mechanism as the Adapter to connect my PC's WiFi card to the Frame somehow. At that time I did indeed not know that it is just a hidden hotspot from the Frame side. I searched every settings menu to see if I can change where the second radio connects to, but found nothing.\nLuckily the Frame is just Linux. Linux machines normally have terminals. Terminals normally don't hide their secrets. Secrets normally are just a command away.\nTo make my job even easier, Valve actually gives an option to enable SSH on the Frame.\nOnce I connected to the Frame via SSH, I found out that\nsoftapmanager\nis used and it opened a hidden network called\nframe_XXXXXXXX\nplus a 32 character password. It uses the separate\nwlanap\ninterface.\nOn my PC I just connected to that network and it worked... ish?\nMultilink Streaming\nStreaming via Multilink (so over both radios) worked! But is my motherboard WiFi card now an official Valve adapter? Depends on who you ask.\nThe Frame has two different places that show the adapter. The first one says Valve's adapter is not connected. Fair enough, it isn't. But once you actually connect and look at the other one, it proudly tells you that you're connected via WiFi and Valve's own adapter!\nSo the Frame disagrees with itself. And SteamVR? SteamVR said the adapter was connected the whole time. If even the Frame is confused, I don't feel too bad about being confused either.\nA Small SteamVR Rant (Feel Free To Skip)\nQuick detour before the interesting part. SteamVR on Linux is... an experience.\nConnecting, even without my Frankenstein setup, was a pain. Sometimes it took a minute to connect. And every time I pressed the connect button while waiting? Saved up and replayed afterwards. All of them. Great experience!\nI've also seen a number of interesting crashes in both SteamVR and Half-Life: Alyx. No idea if that's the Frame or just Linux being Linux. One of them I traced down to a poisoned mutex in Alyx, which then spawned an SDL window, blocking, on the main thread. So the game looked frozen or crashed while it was really just waiting on that window.\nOkay, rant over. Back to the WiFi.\nOkay, this is nice, but how does it work?\nSo far I knew three things: the Frame has a hidden hotspot, it runs on its own\nwlanap\ninterface, and the Adapter is just a WiFi 6E dongle. What I didn't know: how does Steam know the credentials for that hotspot?\nMy goal was simple: A tool which connects your PC to the Frame's hidden hotspot, without the Adapter and without SSH. And oh, I am unsure if I would do it again...\nGetting the credentials was easy if the Adapter had been connected once, since Steam stores them in a NetworkManager profile. But I wanted them without ever having connected the Adapter.\nThis is the part where my understanding of how it works changed multiple times!\nDown The steamclient.so Rabbit Hole\nSo I found a really cursed way to get them. The credentials usually get shared via Steam's local Remote Play protocol, and the thing speaking that protocol on your PC is\nsteamclient.so\n. So the plan was: load\nsteamclient.so\ninto my own program, connect to the running Steam and just ask it nicely.\nHere is how \"just ask it nicely\" went:\nLoad\nsteamclient.so\n, call\nCreateInterface\n, connect to the running Steam over its IPC pipe. So far so good!\nFind the methods I need, like\nPairViaWifiAP\n. They exist! They're just not exported. They live in private C++ interfaces nobody is supposed to touch.\nNo exports, so I go through the vtable. Object pointer, table of function pointers, pick the right slot, call it and hope.\nTo find the right functions, read the ELF at runtime and look for the instructions that load the method's name. Then hash every function I call, so I don't accidentally call something else.\nSteam updates. 15 of 16 hashes change.\nPairViaWifiAP\nmoves from slot 55 to slot 61.\nAdd an option to ignore the hashes. Basically a \"trust me bro\" flag.\nSteam beta: \"Steam has no\nGetRemoteClientCount\n\". It does! The compiler just loaded the string into\nR13\nfirst and then moved it to\nRCX\n, and my scanner only looked for\nRCX\n.\nWrite an actual instruction decoder that follows registers around. In theory it now recognizes every Steam version I could find, going back a year. In theory....\nIt was a real mess and some of the worst code I have ever written, but it worked. I was able to get the credentials from Steam directly without having the adapter connected!\nWorks On My Machine\nWell, the only problem was that the other machine was also mine.\nOn my second PC, which never had the Adapter connected, it just didn't work. So I spent a lot of time debugging different\nsteamclient.so\nversions, only to realize that my mental model was fully wrong.\nMy mental model: the Frame owns the password, and Steam asks for it. So I just had to find the asking part.\nReality: Steam on my second PC never got the credentials. It never even tried. And my main PC? It just handed me cached credentials from the last time the real Adapter was paired. So my \"it works!\" was actually \"it remembers!\".\nThe Clue\nLooking back, two error messages should have tipped me off way earlier.\nThe first time I talked the Remote Play protocol myself, I got: \"unauthorized\". Fair. Just being on the same LAN doesn't mean you get to mess with someone's hotspot. You need to be paired.\nMuch later I came back with proper authentication and asked again. This time it didn't say \"unauthorized\". It said: \"No dongle present.\"\nNot \"here is your password\". Not \"go away\". \"No dongle present.\" As if the dongle had to bring something to the table... Oh fuck wait!?\nReverse Flow For Credentials\nTurns out that neither the Frame nor the adapter is responsible for setting up the credentials. It is Steam itself. Steam derives an SSID and password using information from the adapter and sends them to the Frame via the Remote Play protocol. The Frame then sets up its hotspot with those credentials.\nSo all I had to do was the same thing Steam does, just without the adapter. By default the tool generates a random SSID and password, but you can also pick your own and use your creativity!\nInterestingly enough, this works the exact opposite way of how the Frame WiFi works itself. The Frame opens the AP and the adapter connects to it. Normally the access point picks the credentials and the clients join. Here, the PC decides, and the Frame, the actual AP, just hosts whatever it's told.\nHow It Works Now\nAll that cursed\nsteamclient.so\ncode? Gone. Deleted. Never to be seen again, I hated it anyways.\nInstead, it just speaks the Remote Play LAN protocol itself:\nFind the Frame on your normal LAN, the same way Steam does.\nConnect using the keys Steam already saved when you paired your PC with the Frame. So yes, you still need to pair them in Steam once.\nTell the Frame \"yes, I totally have a dongle\". There is literally a\nwifi_dongle_present\nflag for that.\nHand it an SSID and password.\nWait for the Frame to confirm it actually took them.\nAfter that, NetworkManager connects your WiFi card to the Frame's new hotspot. No dongle, no SSH, no reading assembly at runtime.\nWant To Try It?\nYou need:\nLinux with NetworkManager\nA WiFi card that can do 6GHz and WPA3, and a regulatory domain that allows it. The Frame's hotspot used 6GHz, 160MHz and WPA3-SAE in my setup, so an old 2.4GHz card won't cut it.\nSteam running with Remote Play enabled, as the same user that runs the tool\nYour PC already paired with the Frame in Steam\nThe Frame awake and on the same LAN as your PC\nRust, OpenSSL 3 development libraries and\npkg-config\nto build it (or just download it from actions)\ncargo build --release\n./target/release/steamframe-link devices\n#\nGenerate credentials, send them to the Frame, and save them locally.\n./target/release/steamframe-link set-creds\n#\nConnect your WiFi card using the saved credentials.\n./target/release/steamframe-link setup --iface wlan0\nWant to pick your own SSID and password? Get creative:\n./target/release/steamframe-link set-creds --ssid frame_MYPC --psk-stdin\nHeads up:\nset-creds\nchanges the Frame's hotspot and can interrupt its current wireless connection.\nThe profile on your PC doesn't become your default route, so your normal internet keeps working while you're connected to the Frame.\nAll the other options\nPasswords\nmust be 8 to 63 printable ASCII characters, SSIDs 1 to 32 bytes without control characters.\n--psk PASSWORD\nworks too, but puts the password in your shell history.\nSaved credentials\nlive in\n$XDG_STATE_HOME/steamframe-link/CLIENT_ID.json\n(default\n~/.local/state/steamframe-link/\n). They're saved\nbefore\nsending, so a dropped connection can't lose a generated password. Retry them with\nset-creds --saved\n, show them with\nset-creds --saved --reveal\n.\nConfirmation:\nthe tool only treats credentials as set when the Frame answers with success or reports the matching network hash. A disconnect or timeout is never success, and\nsetup\nrefuses unconfirmed credentials.\nSeveral Frames:\nuse the ID from\ndevices\nwith\n--client ID\n. (If you really have multiply, why not send one to me? 🫣)\nDiscovery blocked?\nUse\n--host FRAME_LAN_IPV4\n.\n--steam-dir PATH\npicks another Steam install,\n--timeout SECONDS\nsets the provisioning deadline (default 30s).\nAll in one:\nsetup --provision --iface wlan0\nprovisions the Frame and sets up your PC.\nAlready know the credentials?\nsetup --iface wlan0 --ssid NAME --psk-stdin\ndoesn't touch the Frame.\nsetup --from-nm\ncopies Steam's existing NetworkManager profile.\nPlain\nsetup\ndoesn't need Steam running or LAN discovery.\n--no-connect\nsaves the PC profile without activating it,\n--no-autoconnect\ndisables autoconnect.\nWithout\n--iface\n, the tool auto-detects Valve's adapter. The profile uses WPA3-SAE with required management frame protection, hidden SSID probing, no power saving and the radio's permanent MAC.\n--wpa2\nis there for compatible setups.\nManage the PC profile with\nup --iface wlan0\n,\ndown --iface wlan0\nand\nremove\n.\nSo, Was It Worth It?\nWas it faster than just picking up the Adapter from where I left it? No. Not even close.\nBut I now know more about the Steam Frame, the Remote Play protocol and\nsteamclient.so\nthan I ever wanted to. And you can now (hopefully) use your own 6GHz or 7GHz  (⁶🤷⁷) WiFi card as your \"Adapter\".\nIf you made it this far, consider smashing that ⭐ at the top of this page. It costs you nothing and makes me very happy. And when a Steam update inevitably breaks something, you know where the issues tab is.\n```\n\n## HN discussion (0 comments)\n\n(no comments)"
+          }
+        ]
+      },
+      {
+        "id": "assistant_1792814916688_8p6ts9in1",
+        "role": "assistant",
+        "parts": [
+          {
+            "type": "step-start"
+          },
+          {
+            "type": "reasoning",
+            "text": "",
+            "state": "done",
+            "providerMetadata": {
+              "anthropic": {
+                "signature": "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"
+              }
+            }
+          },
+          {
+            "type": "text",
+            "text": "{\"decision\": \"push\", \"reason\": \"帖子的核心想法很巧妙：不用官方适配器，改由PC决定热点凭据并下发给头显，再用自己的6GHz网卡连接。作者以层层推进的逆向故事来讲解，属于对具体问题的新角度和生动的技术讲述。受众较窄，但故事本身值得一看。\"}",
+            "state": "done"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "input_tokens": 6803,
+            "cached_tokens": 0,
+            "output_tokens": 556,
+            "total_tokens": 7359,
+            "context_tokens": 7359
+          },
+          "stop_reason": "stop"
+        }
+      }
+    ]
+  },
+  "judge": {
+    "verdict": {
+      "grounded": true,
+      "specific": true,
+      "consistent": true,
+      "reasoning": "The reason says the PC decides the hotspot credentials and sends them to the headset, then a 6GHz card connects without the official adapter. The page supports this: Steam derives the SSID and password, the tool sends its own, and the user connects their own 6GHz card. The reason also mentions the layered reverse-engineering story and argues for push while acknowledging a narrow audience."
+    },
+    "judge_model": "claude-opus-5-5",
+    "judge_usage": {
+      "inputTokens": 5773,
+      "inputTokenDetails": {
+        "noCacheTokens": 5773,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      "outputTokens": 150,
+      "outputTokenDetails": {
+        "textTokens": 150,
+        "reasoningTokens": 0
+      },
+      "totalTokens": 5923,
+      "raw": {
+        "input_tokens": 5773,
+        "output_tokens": 150,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    "attempts": 1,
+    "failure_class": null
+  }
+}
