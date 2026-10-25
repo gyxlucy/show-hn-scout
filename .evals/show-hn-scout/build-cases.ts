@@ -12,6 +12,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { buildPrompt, type Packet } from "../../bot/prompt.ts";
 
 const HERE = import.meta.dir;
 const ROOT = resolve(HERE, "../..");
@@ -25,9 +26,6 @@ const CASES_SRC = join(ROOT, HELDOUT ? "data/heldout/cases.json" : "data/calibra
 const FEEDBACK = join(ROOT, HELDOUT ? "data/heldout/feedback.jsonl" : "data/review/feedback.jsonl");
 const check = process.argv.includes("--check");
 
-type Comment = { id: string; by: string; is_author: boolean; text: string };
-type Source = { url: string; kind: string; status: string; error?: string; text?: string; comments?: Comment[] };
-type Packet = { id: number; title: string; url: string; item: { time: number; by: string }; sources: Source[] };
 type Evidence = { path: string; sha256: string; kind: string };
 type SrcCase = {
   id: number; case_id: string; batch: number; split: string; sampling: string; name: string;
@@ -41,14 +39,6 @@ function readVerified(e: Evidence): Buffer {
   if (sha256(buf) !== e.sha256) throw new Error(`Evidence hash mismatch: ${e.path}`);
   return buf;
 }
-// A fence longer than any backtick run in the text, so untrusted page text cannot close it.
-function fence(text: string, lang = "text"): string {
-  const longest = Math.max(0, ...[...text.matchAll(/`+/g)].map((m) => m[0].length));
-  const f = "`".repeat(Math.max(3, longest + 1));
-  return `${f}${lang}\n${text}\n${f}`;
-}
-const iso = (t: number) => new Date(t * 1000).toISOString().replace(".000Z", "Z");
-
 const srcCases: SrcCase[] = JSON.parse(readFileSync(CASES_SRC, "utf8"));
 const rows: any[] = [];
 const audit: any = { problems: [] as string[] };
@@ -63,27 +53,7 @@ for (const c of srcCases) {
   const comments = hn?.comments ?? [];
   const snapshots = browserEv.map((e) => readVerified(e).toString("utf8"));
 
-  const parts: string[] = [
-    "# Candidate Show HN post",
-    "",
-    `Title: ${packet.title}`,
-    `Project URL: ${packet.url}`,
-    `Posted (UTC): ${iso(packet.item.time)}`,
-    "",
-    `## Project page text (fetch status: ${page?.status ?? "missing"}${page?.error ? `, ${page.error}` : ""})`,
-    "",
-    page?.text ? fence(page.text) : "(no text could be extracted from the project page)",
-    "",
-    `## HN discussion (${comments.length} comment${comments.length === 1 ? "" : "s"})`,
-    "",
-    ...(comments.length
-      ? comments.map((m) => `- ${m.is_author ? "[author]" : "[other]"} ${m.by}: ${m.text.replace(/\s+/g, " ")}`)
-      : ["(no comments)"]),
-  ];
-  snapshots.forEach((s, i) => {
-    parts.push("", `## Browser reading snapshot${snapshots.length > 1 ? ` ${i + 1}` : ""} (accessibility tree, read in a browser)`, "", fence(s));
-  });
-  const prompt = parts.join("\n") + "\n";
+  const prompt = buildPrompt(packet, snapshots);
 
   const pageOk = page?.status === "ok" && !!page.text;
   const tags = [

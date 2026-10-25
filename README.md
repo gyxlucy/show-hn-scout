@@ -37,4 +37,14 @@ SQLite 保存故事、逐次榜单位置和证据索引；原始响应按 SHA-25
 
 `cases.json` 中的 baseline 是助手定性初评。人类标签单独写入 append-only feedback.jsonl。当前 30 个案例都已用于校准，不能充当最终 held-out test。
 
-还未运行自动模型筛选、定时监控或 Slack 发布。下一步由用户反馈建立初版评测，再根据质量决定接入发布。
+## Slack 机器人
+
+`bot/` 把评测选出的 v3 agent 接到 Slack:每 30 分钟(GitHub Actions)采集 `/shownew` 最新约 60 条,对没见过的帖子逐条调用 Cavia 上的 v3(`claude-haiku-5-5`),只把判为 `push` 的发到 Slack,`pass` / `unsure` 只记录不发。
+
+- 提示词由 `bot/prompt.ts` 生成,评测(`build-cases.ts`)用的是同一份代码,`build-cases.ts --check` 保证逐字节一致。
+- 去重状态在 `bot-state` 分支的 `seen.json`,不在 main 上。第一次运行只登记当前已有的帖子,不判断、不发送,避免一次刷屏。
+- 每次最多发 8 条(`--max-pushes`),超出的标记为 suppressed 并在频道里提示一次。判断失败不会记成 pass,最多重试 3 次;Slack 发送失败会在下次重发,不再调用模型。
+- 需要一个仓库 secret:`SLACK_WEBHOOK_URL`(Incoming Webhook)。本地试跑:`bun bot/scout.ts --dry-run --no-seed --max-judgements 3`,只打印消息,不发送、不存状态。
+- 测试:`bun test ./bot/core.test.ts`。
+
+**已知限制**:v3 只在"发布满 12 小时、已不在 /show"的帖子上评测过;现在的候选范围是所有新帖,发布越早证据越少(没有评论),这个分布没有评测过。v3 对 pass 的识别只有约 64%,push 率偏高,上限是为此设的保护。没有 Slack 反馈按钮,所以目前不会自动积累新标签。

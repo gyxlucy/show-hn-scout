@@ -1,0 +1,68 @@
+name: scout
+
+# Judge new Show HN posts with the v3 agent and push the keepers to Slack.
+# Needs one repository secret: SLACK_WEBHOOK_URL (an Incoming Webhook for the target channel).
+# "Seen" state lives on the `bot-state` branch (bot-state/seen.json), never on main.
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Judge a few posts and print the Slack messages, but post nothing and save no state"
+        type: boolean
+        default: true
+
+concurrency:
+  group: scout
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: python3 -m pip install -r requirements.txt
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Load seen-state from the bot-state branch
+        run: |
+          git fetch origin bot-state || true
+          if git rev-parse --verify -q origin/bot-state >/dev/null; then
+            git worktree add bot-state origin/bot-state
+          else
+            git worktree add --orphan -b bot-state bot-state
+          fi
+
+      - name: Scout
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            bun bot/scout.ts --dry-run --no-seed --max-judgements 3 --state bot-state/seen.json
+          else
+            bun bot/scout.ts --state bot-state/seen.json
+          fi
+
+      - name: Save seen-state
+        if: always() && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        working-directory: bot-state
+        run: |
+          [ -f seen.json ] || exit 0
+          git add seen.json
+          git diff --cached --quiet && exit 0
+          git -c user.name="show-hn-scout" -c user.email="scout@users.noreply.github.com" commit -q -m "state $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push origin HEAD:bot-state
