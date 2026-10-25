@@ -1236,6 +1236,114 @@
    "prompt_sha": "2dccef761198",
    "posted": true,
    "attempts": 1
+  },
+  "50231217": {
+   "title": "Show HN: Code Counter Machine a modern analysis of AI driven development costs",
+   "url": "https://github.com/insanai/ccm",
+   "age_hours": 1.3,
+   "status": "judged",
+   "decision": "push",
+   "reason": "这是一个有具体产品形态的命令行工具，并对传统代码计数器的 COCOMO 式成本估算提出了新角度：把变更影响分析、可复用的测试结果和 AI 令牌、沙箱、人工评审成本拆开计算。页面说明清楚，实现描述也较扎实（零依赖 Rust、校验和、可复现构建）。",
+   "judged_at": "2026-10-25T14:32:22.899Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
+  },
+  "50231349": {
+   "title": "Show HN: Farol – a risk map of a pull request for the person who approves it",
+   "url": "https://github.com/winnin/farol",
+   "age_hours": 1.1,
+   "status": "judged",
+   "decision": "push",
+   "reason": "它针对合并审批这个具体环节，用静态分析给出每个 PR 的风险分级和需优先阅读的文件，是对代码审查问题的新角度，并有可查看的演示报告。HN 讨论主要涉及 OP 评论被标记和 UI 观感，并未否定产品本身。",
+   "judged_at": "2026-10-25T14:32:22.830Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
+  },
+  "50231429": {
+   "title": "Show HN: macOS window switcher replacement that keeps each Space separate",
+   "url": "https://debutspace.com/",
+   "age_hours": 0.9,
+   "status": "judged",
+   "decision": "push",
+   "reason": "页面给出了具体的产品点子：让 Command-Tab 只显示当前 Space 的窗口，并在一个视图中统一管理所有 Space，还能拖拽移动窗口、合并 Space，解决了 macOS 切换器与 Spaces 不配合的具体痛点。它是小而专注的 macOS 工具，有清晰的功能说明和隐私说明，符合“有巧思的小产品”标准。",
+   "judged_at": "2026-10-25T14:32:22.766Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
+  },
+  "50231486": {
+   "title": "Show HN: Open-Source Cybersecurity Platform Uses AI Agents to Protect Businesses",
+   "url": "https://medium.com/@thomasunise/this-open-source-cybersecurity-platform-uses-ai-agents-to-detect-threats-and-protect-businesses-762e65392b42",
+   "age_hours": 0.8,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "项目页面无法读取(403错误),只有一个Medium文章链接和标题中的泛泛口号「AI代理保护企业」,看不到具体产品是什么;评论也仅是关于成本和Ollama的简单提问,没有可判断的具体产品信息。",
+   "judged_at": "2026-10-25T14:32:22.766Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50231558": {
+   "title": "Show HN: Teamzlab for FedEx",
+   "url": "https://fedex.teamzlab.com/",
+   "age_hours": 0.7,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "这是一个标准的 WooCommerce FedEx 运费与面单集成插件，功能说明很长但没有体现新颖的产品角度或巧妙的做法；受众是特定平台的店主，且页面更像文档堆砌，不属于她想看的小而有巧思的产品。",
+   "judged_at": "2026-10-25T14:32:22.765Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50231566": {
+   "title": "Show HN: Kosh - Give the browser bookmarks a second life",
+   "url": "https://addons.mozilla.org/en-US/firefox/addon/kosh/",
+   "age_hours": 0.7,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "项目页面只显示“必需内容无法加载”的错误提示，没有可读的产品描述，无法判断Kosh具体做什么，证据缺失，因此不推送。",
+   "judged_at": "2026-10-25T14:32:22.765Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50231567": {
+   "title": "Show HN: Kolo – share your AI coding sessions with anyone",
+   "url": "https://github.com/komovaar/kolo",
+   "age_hours": 0.7,
+   "status": "judged",
+   "decision": "push",
+   "reason": "项目页明确给出一个具体需求：让团队通过浏览器链接共享同一个 AI 编码会话，观察者只读、主持人可授权接管，并支持 Claude Code、Codex CLI 等现成代理。这是一个有清晰切入角度的小产品，文档也较完整，值得一看。",
+   "judged_at": "2026-10-25T14:32:22.692Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
+  },
+  "50231698": {
+   "title": "Show HN: My biggest C# project: Game engine and programming lang",
+   "url": "https://github.com/ArcadeMakerSources/ArcadeMaker/tree/master",
+   "age_hours": 0.5,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "这是一个未完成的GameMaker式2D游戏引擎加自研脚本语言和IDE，项目页描述清楚但主要是工程内部细节和功能缺口清单，没有明显的新颖产品角度或特定垂直场景；受众偏向小众爱好者，且更像一个低层级的开发工具而非读者会想亲自看的有趣小产品。",
+   "judged_at": "2026-10-25T14:32:22.691Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50231724": {
+   "title": "Show HN: The fastest, most token-efficient iOS Simulator MCP for AI agents",
+   "url": "https://github.com/NoMac-app/simulator-use",
+   "age_hours": 0.4,
+   "status": "judged",
+   "decision": "push",
+   "reason": "该项目用每个可操作元素一行的紧凑格式把 iOS 模拟器屏幕交给 AI 代理读取，角度新颖且有具体示例（登录页约 70 token 对比完整树约 40,000），页面也清楚、专业。不过它本质上是面向开发者的 MCP 工具，因此只是中等把握的推送。",
+   "judged_at": "2026-10-25T14:32:22.509Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
   }
  }
 }
