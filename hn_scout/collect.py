@@ -80,7 +80,9 @@ def fetch(url, raw_dir, retries=1):
             except (urllib.error.URLError, TimeoutError, OSError) as exc:
                 if attempt == retries:
                     raise exc
-                time.sleep(1.5 * (attempt + 1))
+                # Rate limits (HN returns 429 to shared CI IPs) need a real pause, not 1.5 s.
+                limited = isinstance(exc, urllib.error.HTTPError) and exc.code in (429, 503)
+                time.sleep(min(30, 5 * 2 ** attempt) if limited else 1.5 * (attempt + 1))
     except Exception as exc:
         result["error"] = f"{type(exc).__name__}: {exc}"
     return result
@@ -135,7 +137,7 @@ def collect(pages=4, show_pages=12):
                 manifest["errors"].append(f"Repeated pagination URL: {surface}")
                 break
             seen_urls.add(url)
-            response = fetch(url, raw_dir)
+            response = fetch(url, raw_dir, retries=4)
             body = response.pop("body", "")
             page_records.append(response)
             if response["status"] != "ok":
