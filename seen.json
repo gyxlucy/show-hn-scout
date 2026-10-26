@@ -1980,6 +1980,78 @@
    "prompt_sha": "2dccef761198",
    "posted": false,
    "attempts": 1
+  },
+  "50237139": {
+   "title": "Show HN: Runtime-Type-Driven Multiple Dispatch JavaScript Framework – Estructura",
+   "url": "https://estructura.okzgn.com/",
+   "age_hours": 2,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "页面描述的是一个通用的 JavaScript 运行时多分派框架（类似底层工具库），没有给出具体的垂直场景或让人眼前一亮的产品创意；示例只是泛泛的认证界面和 POS 实现，缺少具体产品说明，且更偏向读者不会直接使用的底层技术组件。",
+   "judged_at": "2026-10-26T01:37:38.653Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50237273": {
+   "title": "Show HN: Calm Web – Print magazine style reader",
+   "url": "https://calmweb.app",
+   "age_hours": 1.6,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "项目页面没有可提取的文字，HN 上也没有评论，证据只有标题“打印杂志风格阅读器”，无法确认具体产品内容、目标场景或创意角度，缺少证据时应直接 pass。",
+   "judged_at": "2026-10-26T01:37:38.652Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50237291": {
+   "title": "Show HN: A 3D mesh playground for coding agents (three.js + manifold-3d)",
+   "url": "https://sketchagent.dev/s/yfYU6LhT",
+   "age_hours": 1.6,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "项目页面没有提取到任何文字，也没有 HN 评论，证据只剩标题里的技术术语（three.js、manifold-3d、coding agents）。无法确认具体产品是什么，按规则应当放行而不是打扰。",
+   "judged_at": "2026-10-26T01:37:38.652Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50237773": {
+   "title": "Show HN: RainbowSay – Learn, teach, research languages live with shows you love",
+   "url": "https://rainbowsay.ai/",
+   "age_hours": 0.5,
+   "status": "judged",
+   "decision": "push",
+   "reason": "页面描述了一个具体的小产品：监听 Mac 上正在播放的剧集或播客，在每句话结束时暂停并给出翻译、词汇和语法讲解，这是对“用喜欢的影视学语言”这一常见需求的新角度，且有创意的呈现方式和清晰的功能说明。",
+   "judged_at": "2026-10-26T01:37:38.548Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
+  },
+  "50237806": {
+   "title": "Show HN: Depono – Chat with many AI models at cost and 10%, files kept in Git",
+   "url": "https://depono.xyz/",
+   "age_hours": 0.4,
+   "status": "judged",
+   "decision": "pass",
+   "reason": "项目页面没有可提取的文字，也没有任何 HN 评论，证据里只有标题。标题描述的“按成本加 10% 使用多个 AI 模型、文件存入 Git”有一点具体性，但无法确认它到底是什么产品，所以按缺少证据处理，选择 pass。",
+   "judged_at": "2026-10-26T01:37:38.548Z",
+   "prompt_sha": "2dccef761198",
+   "posted": false,
+   "attempts": 1
+  },
+  "50237813": {
+   "title": "Show HN: Freehire, open-source search 3M+ tech jobs from company career boards",
+   "url": "https://freehire.me/",
+   "age_hours": 0.4,
+   "status": "judged",
+   "decision": "push",
+   "reason": "页面说明清楚：直接从公司招聘页抓取、去重并按技术栈、资历和地点打标签，还有开源终端工具和 Chrome 侧边栏求职代理。这个角度对求职者有实际价值，页面也具体可读。不过它规模较大、赛道拥挤，所以把握中等。",
+   "judged_at": "2026-10-26T01:37:38.246Z",
+   "prompt_sha": "2dccef761198",
+   "posted": true,
+   "attempts": 1
   }
  }
 }
