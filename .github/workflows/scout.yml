@@ -6,7 +6,8 @@ name: scout
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    # Once a day at 01:07 UTC (09:07 in China). GitHub may delay it by minutes to hours.
+    - cron: "7 1 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -62,7 +63,9 @@ jobs:
             # Roughly 3 new Show HN posts an hour (a /shownew page of 30 spans about 10h): 4 pages cover 24h with margin.
             bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
           else
-            bun bot/scout.ts --state bot-state/seen.json
+            # Daily run: about 3 new posts an hour, a /shownew page of 30 spans ~10h, so 4 pages (~40h) cover the day
+            # with margin even if GitHub runs the cron late. Caps are sized for ~70 new posts per run.
+            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 15 --concurrency 5
           fi
 
       - name: Save seen-state

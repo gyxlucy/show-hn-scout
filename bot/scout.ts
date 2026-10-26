@@ -68,7 +68,7 @@ const promptSha = createHash("sha256")
   .slice(0, 12);
 
 if (!flag("skip-collect")) {
-  // Two pages of /shownew (the newest ~60 posts) are enough for a half-hourly cron. One /show page is only needed
+  // Two pages of /shownew (the newest ~60 posts) are the default; the daily cron passes --pages 4. One /show page is only needed
   // because collect always records it; this bot ignores /show membership.
   const c = JSON.parse(py(["collect", "--pages", opt("pages", "2"), "--show-pages", "1"]));
   console.log(`collect: ${c.new_items} new-feed items, ${c.errors.length} errors${c.errors.length ? ` (${JSON.stringify(c.errors).slice(0, 300)})` : ""}`);

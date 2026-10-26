@@ -39,7 +39,7 @@ SQLite 保存故事、逐次榜单位置和证据索引；原始响应按 SHA-25
 
 ## Slack 机器人
 
-`bot/` 把评测选出的 v3 agent 接到 Slack:每 30 分钟(GitHub Actions)采集 `/shownew` 最新约 60 条,对没见过的帖子逐条调用 Cavia 上的 v3(`claude-haiku-5-5`),只把判为 `push` 的发到 Slack,`pass` / `unsure` 只记录不发。
+`bot/` 把评测选出的 v3 agent 接到 Slack:每天一次(GitHub Actions,北京时间约 09:07)采集 `/shownew` 最新约 120 条(4 页,覆盖约 40 小时),对没见过的帖子逐条调用 Cavia 上的 v3(`claude-haiku-5-5`),只把判为 `push` 的发到 Slack,`pass` / `unsure` 只记录不发。
 
 - 提示词由 `bot/prompt.ts` 生成,评测(`build-cases.ts`)用的是同一份代码,`build-cases.ts --check` 保证逐字节一致。
 - 去重状态在 `bot-state` 分支的 `seen.json`,不在 main 上。第一次运行只登记当前已有的帖子,不判断、不发送,避免一次刷屏。
