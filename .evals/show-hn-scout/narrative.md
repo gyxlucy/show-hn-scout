@@ -71,3 +71,9 @@ Pilot, one rep, dev set (all 30 cases calibrated the rubric): directional only.
 **Judge.** claude-opus-5-5 rates 28/29 reasons grounded and 29/29 specific and consistent. The audit probes (empty, "I don't know", wrong project, fabricated claim, contradiction) were each failed on the intended criterion, but a judge that passes nearly everything has little room to separate good from bad reasons until Lucy has graded some by hand.
 
 **Caveats.** 11 of 30 reasons are in English although the prompt asks for Chinese. `errors.jsonl` holds one `timeout` row that is a runner bug (task ct_1653cbbced0c4ecab9aad1ff049df93c finished normally); it is not agent behavior. Case 01 rep 0 comes from the smoke run, so it has no judge verdict (judge n = 29).
+
+## Round 3 (v4, train60): agent-infra pass rule. Delta vs v3 +0.6 pts CI [-6.9,+8.6], push recall 84->76%. No improvement; v3 retained.
+
+## Final test2 run (fresh-test, single run, 30 cases x 2 reps, claude-haiku-5-5, judge claude-opus-5-5; 60 rows each, 0 errors)
+baseline agree 40% [23-57] (0 pushes, 35% unsure); v3 agree 65% [48-82], push precision 52%, recall 64%, pass recall 66%, unsure 0. Paired v3 - baseline +25.0 pts, CI [+1.7, +48.3]. Always-pass reference 63% (19/30). v3 does NOT beat always-pass on test2.
+Caveat: labels were reviewed from assistant-prefilled suggestions (Lucy kept 54/60), so agreement is inflated and test2 is assistant-anchored; the test2 run was done once and not used to change any prompt.

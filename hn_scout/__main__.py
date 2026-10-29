@@ -15,6 +15,7 @@ commands.add_parser("render")
 commands.add_parser("feedback")
 p = commands.add_parser("import-review", help="Record answers the user filled in on review/batch-*.md cards")
 p.add_argument("--heldout", action="store_true", help="Read review/heldout/ cards into data/heldout/feedback.jsonl")
+p.add_argument("--set", choices=["fresh-train", "fresh-test"], help="Read review/<set>/ cards into data/fresh/feedback-<train|test>.jsonl (second labeling round)")
 p = commands.add_parser("label", help="Record the user's actual feedback, never an inferred label")
 p.add_argument("case_id")
 p.add_argument("decision", choices=["push", "pass", "unsure"])
@@ -35,7 +36,11 @@ elif args.command == "render":
 elif args.command == "label":
     print(json.dumps(record_label(args.case_id, args.decision, args.reason, args.originality, args.interest), ensure_ascii=False))
 elif args.command == "import-review":
-    if args.heldout:
+    if args.set:
+        from .collect import DATA, ROOT
+        which = args.set.split("-")[1]
+        rows = import_review_labels(DATA / "fresh" / f"feedback-{which}.jsonl", ROOT / "review" / args.set, DATA / "fresh" / "cases.json", "v3-round")
+    elif args.heldout:
         from .collect import DATA, ROOT
         rows = import_review_labels(DATA / "heldout" / "feedback.jsonl", ROOT / "review" / "heldout", DATA / "heldout" / "cases.json", "v1-draft")
     else:

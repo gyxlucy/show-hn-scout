@@ -1,0 +1,10 @@
+--- v3/system-prompt.md	2026-10-24 12:03:38
++++ v4/system-prompt.md	2026-10-27 11:38:25
+@@ -16,6 +16,7 @@
+ 
+ - The audience is so narrow and specialist that only a handful of enthusiasts could care.
+ - The product is a low-level or highly technical component or tool, at a depth the reader would not use herself. She passed, for example: a browser demo of committing code into a neural network, a TUI for managing a firewall and HTTP server, Tree-sitter WASM grammars, a tool for working on remote large files. A clear, well-made page does not change this. A creative way of presenting a technical subject (3) still counts.
++- The product is developer infrastructure for building or running AI agents: a thin MCP server or API wrapper around a service, a memory or context store for coding agents, an SDK or unified interface over several coding agents. Pass it unless the page shows a concrete angle that someone who does not build agents would find interesting. A tool a person uses day to day while working with a coding agent (a session manager, a progress or usage display, a small plugin) is not this rule and can still be a push.
+ - The page is cluttered or vague, so you cannot tell what the point is, or it reads as generated filler.
+ - The page could not be read, or has only jargon and slogans with no concrete product. Missing evidence is a reason to pass, not to answer `unsure`.
+ 

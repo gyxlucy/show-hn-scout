@@ -16,14 +16,16 @@ import { buildPrompt, type Packet } from "../../bot/prompt.ts";
 
 const HERE = import.meta.dir;
 const ROOT = resolve(HERE, "../..");
-// `--set heldout` builds the held-out set (data/heldout/*) into .evals/show-hn-scout/heldout/ instead of the dev set.
+// `--set heldout` builds the first held-out set (data/heldout/*) into .evals/show-hn-scout/heldout/.
+// `--set fresh-train` / `--set fresh-test` build the second labeling round (data/fresh/*) into fresh-train/ and fresh-test/.
 const setIdx = process.argv.indexOf("--set");
 const SET = setIdx >= 0 ? process.argv[setIdx + 1] : "dev";
-if (SET !== "dev" && SET !== "heldout") throw new Error(`unknown --set ${SET}`);
+if (!["dev", "heldout", "fresh-train", "fresh-test"].includes(SET)) throw new Error(`unknown --set ${SET}`);
 const HELDOUT = SET === "heldout";
-const OUT = HELDOUT ? join(HERE, "heldout") : HERE;
-const CASES_SRC = join(ROOT, HELDOUT ? "data/heldout/cases.json" : "data/calibration/cases.json");
-const FEEDBACK = join(ROOT, HELDOUT ? "data/heldout/feedback.jsonl" : "data/review/feedback.jsonl");
+const FRESH = SET.startsWith("fresh-");
+const OUT = SET === "dev" ? HERE : join(HERE, SET);
+const CASES_SRC = join(ROOT, HELDOUT ? "data/heldout/cases.json" : FRESH ? "data/fresh/cases.json" : "data/calibration/cases.json");
+const FEEDBACK = join(ROOT, HELDOUT ? "data/heldout/feedback.jsonl" : FRESH ? `data/fresh/feedback-${SET.slice(6)}.jsonl` : "data/review/feedback.jsonl");
 const check = process.argv.includes("--check");
 
 type Evidence = { path: string; sha256: string; kind: string };
@@ -39,7 +41,7 @@ function readVerified(e: Evidence): Buffer {
   if (sha256(buf) !== e.sha256) throw new Error(`Evidence hash mismatch: ${e.path}`);
   return buf;
 }
-const srcCases: SrcCase[] = JSON.parse(readFileSync(CASES_SRC, "utf8"));
+const srcCases: SrcCase[] = (JSON.parse(readFileSync(CASES_SRC, "utf8")) as SrcCase[]).filter((c) => !FRESH || c.split === (SET === "fresh-train" ? "train2" : "test2"));
 const rows: any[] = [];
 const audit: any = { problems: [] as string[] };
 
@@ -138,11 +140,17 @@ const md = [
   "",
   `${rows.length} cases, ${gold.length} human-labeled. Flow: given one Show HN post's evidence, answer \`push\` / \`pass\` / \`unsure\` with a reason.`,
   "",
-  HELDOUT
+  FRESH
+    ? `- Model-visible input: \`cases.jsonl\` (\`prompt\`). Cards were \`review/${SET}/\`. The cards carried assistant-suggested answers that you reviewed and edited (see data/fresh/assistant-suggestions.json), so these labels are not fully independent of the assistant.`
+    : HELDOUT
     ? "- Model-visible input: `cases.jsonl` (`prompt`). Cards were `review/heldout/batch-04.md` to `batch-06.md` (blind: no assistant verdict)."
     : "- Model-visible input: `cases.jsonl` (`prompt`). Read it as rendered cards in `review/batch-01.md` to `batch-03.md`.",
-  `- Gold: \`gold.jsonl\`, built only from your labels in \`${HELDOUT ? "data/heldout/feedback.jsonl" : "data/review/feedback.jsonl"}\`. Nothing is inferred from an assistant verdict.`,
-  HELDOUT
+  `- Gold: \`gold.jsonl\`, built only from your labels in \`${HELDOUT ? "data/heldout/feedback.jsonl" : FRESH ? `data/fresh/feedback-${SET.slice(6)}.jsonl` : "data/review/feedback.jsonl"}\`. Nothing is inferred from an assistant verdict.`,
+  FRESH
+    ? SET === "fresh-train"
+      ? "- Train set 2: drawn at random after v3 was written. Analyzers may read it and it may be used to tune prompts."
+      : "- Test set 2: drawn at random after v3 was written. LOCKED: never used to write or tune a prompt, analyzers must not read it, run it only for the final report."
+    : HELDOUT
     ? "- Held-out set: drawn and labeled after the v1 rubric was written; never used to write or tune a prompt. Analyzers must not read it."
     : "- All 30 cases were already used to calibrate the rubric, so this is a development set, not a held-out test.",
   "- The prompt carries title, URL, post time, project page text, the HN comments that existed at capture time, and browser snapshots where used. It omits votes, ranking, sampling origin, and the assistant verdict.",

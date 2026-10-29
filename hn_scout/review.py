@@ -56,7 +56,7 @@ def parse_review_labels(review_dir=None):
     for path in sorted(review_dir.glob("batch-*.md")):
         case_id = None
         for line in path.read_text(encoding="utf-8").splitlines():
-            head = re.match(r"## (\d\d) · ", line)
+            head = re.match(r"## (\d{2,3}) · ", line)
             if head:
                 case_id = head.group(1)
                 continue

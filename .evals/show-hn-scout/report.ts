@@ -7,8 +7,11 @@ import { join } from "node:path";
 import { aggregate, DIR, METRICS, type Scored } from "./lib.ts";
 
 // `--set heldout` reports DIR/heldout/<variant>/ results instead of the dev set.
-const HELDOUT = process.argv.includes("--set") && process.argv[process.argv.indexOf("--set") + 1] === "heldout";
-const OUT = HELDOUT ? join(DIR, "heldout") : DIR;
+const SETNAME = process.argv.includes("--set") ? process.argv[process.argv.indexOf("--set") + 1] : "dev";
+if (!["dev", "heldout", "fresh-train", "fresh-test", "train60"].includes(SETNAME)) throw new Error(`unknown --set ${SETNAME}`);
+const HELDOUT = SETNAME === "heldout";
+const FRESH = SETNAME.startsWith("fresh-");
+const OUT = SETNAME === "dev" ? DIR : join(DIR, SETNAME);
 const jsonl = (p: string): any[] => (existsSync(p) ? readFileSync(p, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)) : []);
 const esc = (v: unknown) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 const state = JSON.parse(readFileSync(join(DIR, "_state.json"), "utf8"));
@@ -49,7 +52,7 @@ for (const v of variants) {
 <p>${rows.length} rows (${count("ok")} ok, ${count("truncated")} truncated, ${count("refused")} refused) · ${errors.length} error records${errors.length ? ": " + esc([...new Set(errors.map((e) => e.failure_class))].join(", ")) : ""} ·
  latency median ${median(rows.map((r) => r.latency_s))?.toFixed(1) ?? "–"}s · tokens in/out total ${sum(tok("input_tokens"))}/${sum(tok("output_tokens"))} · tool calls ${sum(rows.map((r) => r.tool_calls ?? 0))} · cost not measured</p>
 <table>${head}${groupRows}</table>
-<p><small>Intervals are 95% case-clustered bootstrap. Only the <code>random</code> group approximates real traffic. ${HELDOUT ? "Held-out set: labeled blind after the v1 rubric was written. Prompts were not written from it, but it was used to choose between rounds of the haiku climb, so treat the haiku_v1 / haiku_v3 numbers as selection-biased." : "The 30 cases calibrated the rubric, so this is a dev set, not a held-out score."}</small></p>
+<p><small>Intervals are 95% case-clustered bootstrap. Only the <code>random</code> group approximates real traffic. ${FRESH ? "Second labeling round (random draw after v3 was written). The labels were reviewed from assistant-prefilled suggestions, so agreement is inflated relative to a fully independent label; see data/fresh/assistant-suggestions.json." : HELDOUT ? "Held-out set: labeled blind after the v1 rubric was written. Prompts were not written from it, but it was used to choose between rounds of the haiku climb, so treat the haiku_v1 / haiku_v3 numbers as selection-biased." : "The 30 cases calibrated the rubric, so this is a dev set, not a held-out score."}</small></p>
 <h3>Cases</h3><table><tr><th>case</th><th>tags</th><th>human</th><th>rep</th><th>agent</th><th>reason</th><th>grounded</th><th>specific</th><th>consistent</th><th>status</th><th>trace</th></tr>
 ${rows.sort((a, b) => a.prompt_id.localeCompare(b.prompt_id) || a.rep - b.rep).map((r) => {
     const cls = r.grade.agree === 1 ? "ok" : r.status === "ok" ? "bad" : "";

@@ -101,6 +101,15 @@ class FeedbackTests(unittest.TestCase):
                 '## 03 · C\n\n**你的判断：** 值得推 / 不值得推 / 信息不足　　**原因：**\n', encoding='utf-8')
             self.assertEqual(parse_review_labels(Path(tmp)), {'01': ('pass', '太小众'), '02': ('push', '')})
 
+    def test_three_digit_case_ids_are_parsed(self):
+        from hn_scout.review import parse_review_labels
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp)/'batch-12.md').write_text(
+                '## 99 · A\n\n**你的判断：** 值得推 　**原因：**\n\n'
+                '## 100 · B\n\n**你的判断：** 不值得推 **原因：** 太底层\n\n'
+                '## 120 · C\n\n**你的判断：** 信息不足 **原因：**\n', encoding='utf-8')
+            self.assertEqual(parse_review_labels(Path(tmp)), {'99': ('push', ''), '100': ('pass', '太底层'), '120': ('unsure', '')})
+
     def test_links_cannot_inject_markup_or_script_scheme(self):
         with self.assertRaises(ValueError):
             link('source', 'javascript:alert(1)')

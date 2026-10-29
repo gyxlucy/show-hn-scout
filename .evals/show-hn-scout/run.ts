@@ -2,7 +2,7 @@
 // Runner: one real Cavia task per (case, rep), graded against the human label, optionally with the reason judge.
 //
 //   bun .evals/show-hn-scout/run.ts --model <model> [--variant baseline] [--reps 3] [--timeout-s 300]
-//        [--concurrency 4] [--cases 01,02] [--no-judge] [--set dev|heldout] --approved
+//        [--concurrency 4] [--cases 01,02] [--no-judge] [--set dev|heldout|fresh-train|fresh-test|train60] --approved
 //
 // Appends results.jsonl as cases finish and resumes by (case, rep). Attempts that never produced a scorable
 // output go to errors.jsonl (never into results.jsonl, so resume re-runs them). `--approved` is the consent
@@ -142,8 +142,8 @@ if (import.meta.main) {
     "no-judge": { type: "boolean", default: false }, set: { type: "string", default: "dev" }, approved: { type: "boolean", default: false }, out: { type: "string" },
   } });
   if (!v.model) throw new Error("--model is required (it is recorded on every row)");
-  if (v.set !== "dev" && v.set !== "heldout") throw new Error(`unknown --set ${v.set}`);
-  const setDir = v.set === "heldout" ? join(DIR, "heldout") : DIR;
+  if (!["dev", "heldout", "fresh-train", "fresh-test", "train60"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
+  const setDir = v.set === "dev" ? DIR : join(DIR, v.set!);
   const opts: Opts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, only: v.cases?.split(",") };
   const nCases = loadCases(setDir).filter((c) => loadGold(setDir).has(c.id) && (!opts.only || opts.only.includes(c.id))).length;
   console.log(`Plan: ${nCases} cases x ${opts.reps} reps on ${opts.model} (variant ${opts.variant}, set ${v.set}), judge ${v["no-judge"] ? "off" : "on"}`);
