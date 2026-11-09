@@ -2,7 +2,7 @@
 // Runner: one real Cavia task per (case, rep), graded against the human label, optionally with the reason judge.
 //
 //   bun .evals/show-hn-scout/run.ts --model <model> [--variant baseline] [--reps 3] [--timeout-s 300]
-//        [--concurrency 4] [--cases 01,02] [--no-judge] [--set dev|heldout|fresh-train|fresh-test|train60] --approved
+//        [--concurrency 4] [--cases 01,02] [--no-judge] [--structured] [--strength] [--set dev|heldout|fresh-train|fresh-test|train60] --approved
 //
 // Appends results.jsonl as cases finish and resumes by (case, rep). Attempts that never produced a scorable
 // output go to errors.jsonl (never into results.jsonl, so resume re-runs them). `--approved` is the consent
@@ -12,12 +12,14 @@ import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { loadAgent, runCaviaTask, type RunTask } from "./cavia.ts";
-import { DIR, finalText, gradeAnswer, loadCases, loadGold, parseAnswer, toTrace, type Case } from "./lib.ts";
+import { DIR, finalText, gradeAnswer, gradeSignals, loadCases, loadGold, parseAnswer, toTrace, type Case } from "./lib.ts";
 import { judgeFromEnv, type JudgeFn } from "./judge.ts";
 
 export type Opts = {
   dir?: string; agentDir?: string; variant: string; model: string; reps: number; timeoutS: number; concurrency: number;
   outName?: string; only?: string[]; maxAttempts?: number; backoffMs?: number;
+  structured?: boolean; // the variant must also answer with per-criterion `signals` (see lib.ts parseAnswer)
+  strength?: boolean; // a push must also carry `strength` 1-3 (see lib.ts parseAnswer)
 };
 export type Deps = { runTask: RunTask; judge?: JudgeFn; judgeModel?: string };
 
@@ -49,11 +51,11 @@ export async function runEval(o: Opts, deps: Deps) {
   const summaryPath = join(vdir, "summary.json");
   const prev = existsSync(summaryPath) ? JSON.parse(readFileSync(summaryPath, "utf8")) : null;
   const promptSha = sha(agent.system_prompt);
-  if (prev && (prev.model !== o.model || prev.system_prompt_sha256 !== promptSha))
-    throw new Error(`${summaryPath} was written for a different model or system prompt; use a new variant directory`);
+  if (prev && (prev.model !== o.model || prev.system_prompt_sha256 !== promptSha || !!prev.structured !== !!o.structured || !!prev.strength !== !!o.strength))
+    throw new Error(`${summaryPath} was written for a different model, system prompt or output contract; use a new variant directory`);
   writeFileSync(summaryPath, JSON.stringify({
     description: prev?.description ?? "baseline", label: prev?.label ?? o.variant, target: "system_prompt",
-    model: o.model, system_prompt_sha256: promptSha, reps: o.reps, judge_model: deps.judgeModel ?? null,
+    model: o.model, system_prompt_sha256: promptSha, structured: !!o.structured, strength: !!o.strength, reps: o.reps, judge_model: deps.judgeModel ?? null,
     started_at: prev?.started_at ?? new Date().toISOString(), cost: "cost not measured (no approved pricing rule)",
   }, null, 2));
 
@@ -92,10 +94,10 @@ export async function runEval(o: Opts, deps: Deps) {
       if (!(u.input_tokens > 0) || !(u.output_tokens > 0)) { fail("usage_missing", `completed task reported usage ${JSON.stringify(run.usage)}`, run); return; }
       const status = run.stop_reason === "length" ? "truncated" : run.stop_reason === "content-filter" ? "refused" : "ok";
       const text = finalText(run.transcript);
-      const parsed = parseAnswer(text);
+      const parsed = parseAnswer(text, { structured: o.structured, strength: o.strength });
       const expected = gold.get(c.id)!;
-      const nullGrade = { agree: null, precision: null, recall: null, specificity: null, unsure: null, valid: null };
-      let grade: Record<string, number | null> = status === "ok" ? gradeAnswer(parsed, expected) : nullGrade;
+      const nullGrade = { agree: null, precision: null, recall: null, specificity: null, unsure: null, valid: null, ...(o.structured ? { sig_grounded: null, sig_consistent: null } : {}) };
+      let grade: Record<string, number | null> = status === "ok" ? { ...gradeAnswer(parsed, expected), ...(o.structured ? gradeSignals(parsed, c.prompt) : {}) } : nullGrade;
       let judgeRec = null;
       let explanation: Record<string, string> | undefined;
       if (status === "ok" && parsed.valid && deps.judge) {
@@ -112,7 +114,7 @@ export async function runEval(o: Opts, deps: Deps) {
       // Written last: a row at (case, rep) means this attempt is complete, trace and grade from the same task.
       append(resultsPath, {
         prompt_id: c.id, rep, prompt: c.prompt, tags: c.tags, task_id: run.task_id, model: o.model, status,
-        stop_reason: run.stop_reason, attempts: n, expected, answer: parsed.valid ? { decision: parsed.decision, reason: parsed.reason } : null,
+        stop_reason: run.stop_reason, attempts: n, expected, answer: parsed.valid ? { decision: parsed.decision, reason: parsed.reason, ...(parsed.strength ? { strength: parsed.strength } : {}), ...(parsed.signals ? { signals: parsed.signals } : {}) } : null,
         grade, ...(explanation ? { explanation } : {}), latency_s, tool_calls: trace.tool_calls,
         usage: { input_tokens: u.input_tokens, output_tokens: u.output_tokens, ...(u.cached_tokens != null ? { cache_read_input_tokens: u.cached_tokens } : {}) },
         judge_model: judgeRec?.judge_model ?? null, judge_usage: judgeRec?.judge_usage ?? null,
@@ -139,12 +141,12 @@ if (import.meta.main) {
   const { values: v } = parseArgs({ options: {
     model: { type: "string" }, variant: { type: "string", default: "baseline" }, reps: { type: "string", default: "3" },
     "timeout-s": { type: "string", default: "300" }, concurrency: { type: "string", default: "4" }, cases: { type: "string" },
-    "no-judge": { type: "boolean", default: false }, set: { type: "string", default: "dev" }, approved: { type: "boolean", default: false }, out: { type: "string" },
+    "no-judge": { type: "boolean", default: false }, structured: { type: "boolean", default: false }, strength: { type: "boolean", default: false }, set: { type: "string", default: "dev" }, approved: { type: "boolean", default: false }, out: { type: "string" },
   } });
   if (!v.model) throw new Error("--model is required (it is recorded on every row)");
   if (!["dev", "heldout", "fresh-train", "fresh-test", "train60"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
   const setDir = v.set === "dev" ? DIR : join(DIR, v.set!);
-  const opts: Opts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, only: v.cases?.split(",") };
+  const opts: Opts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, structured: v.structured, strength: v.strength, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, only: v.cases?.split(",") };
   const nCases = loadCases(setDir).filter((c) => loadGold(setDir).has(c.id) && (!opts.only || opts.only.includes(c.id))).length;
   console.log(`Plan: ${nCases} cases x ${opts.reps} reps on ${opts.model} (variant ${opts.variant}, set ${v.set}), judge ${v["no-judge"] ? "off" : "on"}`);
   if (!v.approved) { console.log("Dry plan only. Pass --approved after the user approves paid calls."); process.exit(0); }

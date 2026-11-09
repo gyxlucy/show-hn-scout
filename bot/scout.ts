@@ -3,6 +3,8 @@
 //   bun bot/scout.ts --dry-run --no-seed --max-judgements 3   # judge a few, print Slack payloads, post and save nothing
 //   bun bot/scout.ts                                          # one real run (what the GitHub Actions cron does)
 //   bun bot/scout.ts --backfill-hours 24 --pages 4            # first run only: also judge and post the last 24h
+//   bun bot/scout.ts --shadow-rank                            # after posting, also rank the run's pushes with v7 and log it
+//                                                             # to <state dir>/shadow-rank.jsonl (never changes what is posted)
 //
 // Env: SLACK_WEBHOOK_URL (required unless --dry-run), PYTHON (default python3), CAVIA_BASE_URL (optional).
 // The agent is `.evals/show-hn-scout/<variant>` (system-prompt.md + request.json), called as a real Cavia task,
@@ -14,6 +16,7 @@ import { loadAgent, runCaviaTask } from "../.evals/show-hn-scout/cavia.ts";
 import { finalText, parseAnswer } from "../.evals/show-hn-scout/lib.ts";
 import { runScout, slackPayload, type Candidate, type State } from "./core.ts";
 import { buildPrompt, type Packet } from "./prompt.ts";
+import { shadowRank } from "./shadow.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const argv = process.argv.slice(2);
@@ -109,6 +112,24 @@ const summary = await runScout({
     await webhook(payload);
   },
   postNote: async (text) => (DRY ? console.log(`[dry-run] note: ${text}`) : webhook({ text })),
+  shadow: flag("shadow-rank")
+    ? async (items) => {
+        const dir = join(ROOT, ".evals/show-hn-scout", opt("shadow-variant", "v7"));
+        await shadowRank(items, {
+          agent: loadAgent(dir).agent,
+          variant: opt("shadow-variant", "v7"),
+          model: MODEL,
+          reps: Number(opt("shadow-reps", "3")),
+          timeoutS: Number(opt("shadow-timeout-s", "300")),
+          concurrency: 3,
+          minPool: 3,
+          runTask: runCaviaTask,
+          logPath: DRY ? null : join(dirname(STATE_PATH), "shadow-rank.jsonl"),
+          now: () => new Date(),
+          log: (l) => console.log(l),
+        });
+      }
+    : undefined,
   save: saveState,
   now: () => new Date(),
   promptSha,

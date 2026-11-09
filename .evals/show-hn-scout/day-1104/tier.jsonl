@@ -1,0 +1,54 @@
+{"id": "50352087", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "替买家挖亚马逊商品隐藏缺点的 Chrome 插件，角度实用，但页面抓不到内容，也比较常见。"}
+{"id": "50360046", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "中期选举广告交互地图，数据可视化有看头；页面几乎没有说明，信息薄。"}
+{"id": "50351830", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "帮普通人看懂 MRI 报告并整理问医生的问题，生活化、角度有用；但医疗 AI 有风险。"}
+{"id": "50359805", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "给你日常用的多个 AI 编码助手（Claude Code、Codex、Cursor 等）做 changelog 订阅，直接对口你的日常工具。"}
+{"id": "50352961", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "把 HN 嵌进 x.com 的浏览器插件，受众窄，偏 HN 圈内自嗨。"}
+{"id": "50355011", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "用 Windows Media Player 皮肤做的 macOS 播放器，怀旧好玩，但属于玩具级。"}
+{"id": "50354044", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "用 embedding 找 YC 公司之间的空白做创业点子地图，角度新，能给 side project 找思路。"}
+{"id": "50358109", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "给 TikTok Shop 卖家的联盟达人外联，窄垂直 B2B。"}
+{"id": "50351982", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "用词汇生成情景视频学中文，学习方式有新意；你本人是中文母语，参考价值一般。"}
+{"id": "50352315", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "给 AI 作品打“slop”分数，概念空泛，主要是在推自己别的产品。"}
+{"id": "50361927", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "让 agent 帮你装分析/邮件/回放，和 GA、Hotjar 重复，偏基础设施。"}
+{"id": "50361289", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "日语阅读器，点词查词、解释句子、存成闪卡，做得完整；类别常见。"}
+{"id": "50361230", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "在终端里渲染 3D 模型，创作感强，但是技术博客，实用性低。"}
+{"id": "50360833", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "Android 无线调试的菜单栏小工具，只服务 Android 开发者。"}
+{"id": "50357326", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "原生 WhatsApp 客户端，重复官方产品，评论里也担心封号风险。"}
+{"id": "50358104", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "TikTok Shop 卖家的成本利润核算，垂直窄 B2B。"}
+{"id": "50352209", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "API 网关加鉴权，基础设施，和 Kong/Auth0 同类。"}
+{"id": "50358352", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "用会撒谎的 LLM 嫌疑人做侦探游戏，创意好玩，评论 69 条说明大家有反应，拓宽产品视角。"}
+{"id": "50358314", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "开源风控决策平台，企业级低层组件，你不会用。"}
+{"id": "50355461", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "浏览器端 PDF/图片隐私打码的 npm 组件，更像开发组件。"}
+{"id": "50353110", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "让 agent 读 Codex 和 Claude Code 的历史对话，和你同时用这两个工具的场景直接相关（类似 Toli）。"}
+{"id": "50361263", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "像素风股票模拟器，有游戏感，但页面信息偏营销。"}
+{"id": "50356643", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "把课堂录音转成 Obsidian 笔记和闪卡，仓库还不稳定，受众是学生。"}
+{"id": "50357117", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "只能用像素画发帖的“推特”，个人表达的玩法有趣；评论提到内容管理问题，我不太确定你会不会打必读。"}
+{"id": "50360658", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "浏览器内去掉视频静音和口头禅，对做内容的人有用，隐私友好；类别不算新。"}
+{"id": "50354314", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "Game Boy 卡带做离线飞机雷达，硬件加怀旧的 side project，很能拓宽视野。"}
+{"id": "50361850", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "浏览器端图片转换/压缩/裁剪工具合集，同类很多。"}
+{"id": "50355931", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "HN 评论里推荐过的书/电影/游戏榜单，和你喜欢的 Logfolio 类生活化 idea 接近。"}
+{"id": "50351797", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "自托管的 AI 产品用量计费，企业后端组件。"}
+{"id": "50355392", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "3KB 的 LLM 推理引擎，技术炫技但偏底层，不是产品。"}
+{"id": "50356156", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "屏蔽社交媒体 AI 图片的 Chrome 插件，只有 9 个用户，较薄。"}
+{"id": "50358404", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "给 man 手册做 MCP 服务，偏底层文档工具。"}
+{"id": "50355595", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "给编码 agent 用的纯 HTML/CSS/JS 风格指南 skill，和你的 AI 编码日常有点关系，但内容偏观点。"}
+{"id": "50360517", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "改一个框不会让整张图重排的图表语言，比 Mermaid 有新角度，但偏小众开发工具。"}
+{"id": "50355827", "tier": "must_read", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "从你自己的骨架一路滚到可观测宇宙边缘，创意呈现好，和 Gol 地球仪是同一类“纯好玩”。"}
+{"id": "50352316", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "用纯 CSS 跑 Game of Life，技术玩具，好玩但看完就完。"}
+{"id": "50352862", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "must_read", "reason": "给每首歌写一句“为什么选它”再分享给别人，很生活化的个人表达，类似 Logfolio。"}
+{"id": "50355591", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "读完问你几个问题、做成卡片并按遗忘曲线提醒的稍后读 app，想法不错但类别常见。"}
+{"id": "50361465", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "给 Claude Code/Codex 的云沙箱，和你的日常工具相关，但偏基础设施。"}
+{"id": "50353696", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "在 Mac 上微调 LLM 并逐层查看变化，早期项目，受众偏研究者。"}
+{"id": "50351684", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "HN 招聘帖的可搜索职位板，实用但与你无关，同类很多。"}
+{"id": "50355009", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "tmux 重启后恢复窗口和 agent 对话，直接解决 Claude Code 用户痛点。"}
+{"id": "50353251", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "几乎不耗流量的 macOS 网速桌面小组件，小而具体。"}
+{"id": "50362025", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "给家长用的电视派对游戏套装，生活化、有创意，但离你的工作较远。"}
+{"id": "50356948", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "给 fork 做 rebase 的付费中间层，评论里也说一个 cron 加脚本就能做。"}
+{"id": "50358826", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "做 App Store 截图的 Claude Code skill，受众窄。"}
+{"id": "50361909", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "又一个 HackerSomething 榜单，内容单薄。"}
+{"id": "50354365", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "Mac 录屏自动放大点击，对做 demo 视频有用，但同类产品很多。"}
+{"id": "50355555", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "检查 npm 依赖发布权限的安全工具，面向软件团队。"}
+{"id": "50357042", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "给编码 agent 的可视化设计画布，和你的工具相关；是否算必读取决于你想不想试。"}
+{"id": "50357386", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "极简 macOS 书签管理，同类很多。"}
+{"id": "50359691", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "导出 Character.AI 聊天记录的工具，只服务特定用户。"}
+{"id": "50353468", "tier": "push", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "push", "reason": "用交互方式讲 RLHF/注意力/LoRA，表达形式有意思；评论说有些地方讲得不清楚。"}
+{"id": "50352158", "tier": "pass", "label_source": "human", "provenance": "human_reviewed_assistant_prediction", "pred": "pass", "reason": "监控竞争对手 YouTube 标题/缩略图 A/B 测试，窄垂直，页面偏营销。"}

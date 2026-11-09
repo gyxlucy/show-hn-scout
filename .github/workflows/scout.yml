@@ -65,7 +65,8 @@ jobs:
           else
             # Daily run: about 3 new posts an hour, a /shownew page of 30 spans ~10h, so 4 pages (~40h) cover the day
             # with margin even if GitHub runs the cron late. Caps are sized for ~70 new posts per run.
-            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
+            # --shadow-rank also ranks the day's pushes with v7 and logs it to bot-state/shadow-rank.jsonl. It does not change what is posted.
+            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5 --shadow-rank
           fi
 
       - name: Save seen-state
@@ -74,6 +75,7 @@ jobs:
         run: |
           [ -f seen.json ] || exit 0
           git add seen.json
+          [ -f shadow-rank.jsonl ] && git add shadow-rank.jsonl
           git diff --cached --quiet && exit 0
           git -c user.name="show-hn-scout" -c user.email="scout@users.noreply.github.com" commit -q -m "state $(date -u +%Y-%m-%dT%H:%MZ)"
           git push origin HEAD:bot-state

@@ -44,6 +44,7 @@ SQLite 保存故事、逐次榜单位置和证据索引；原始响应按 SHA-25
 - 提示词由 `bot/prompt.ts` 生成,评测(`build-cases.ts`)用的是同一份代码,`build-cases.ts --check` 保证逐字节一致。
 - 去重状态在 `bot-state` 分支的 `seen.json`,不在 main 上。第一次运行只登记当前已有的帖子,不判断、不发送,避免一次刷屏。
 - 每次最多发 10 条(`--max-pushes`),超出的标记为 suppressed 并在频道里提示一次。判断失败不会记成 pass,最多重试 3 次;Slack 发送失败会在下次重发,不再调用模型。
+- 影子排序(`--shadow-rank`,每日定时任务已开启):发完之后,用 v7 排序器对这次判成 push 的帖子排 3 次序,追加写入 `bot-state` 分支的 `shadow-rank.jsonl`。它不改变发了什么,失败只记日志。以后用你的标注和这份记录对比,再决定要不要让排序取代"最新 10 条"。
 - 需要一个仓库 secret:`SLACK_WEBHOOK_URL`(Incoming Webhook)。本地试跑:`bun bot/scout.ts --dry-run --no-seed --max-judgements 3`,只打印消息,不发送、不存状态。
 - 测试:`bun test ./bot/core.test.ts`。
 

@@ -55,6 +55,16 @@
       "id": "consistent",
       "kind": "judge",
       "label": "Consistent"
+    },
+    {
+      "id": "sig_grounded",
+      "kind": "binary",
+      "label": "Signal quotes found in evidence"
+    },
+    {
+      "id": "sig_consistent",
+      "kind": "binary",
+      "label": "Decision follows from signals"
     }
   ],
   "perf_fields": [

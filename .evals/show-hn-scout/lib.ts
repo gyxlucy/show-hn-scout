@@ -30,10 +30,22 @@ export function finalText(transcript: Message[]): string {
   return (last?.parts ?? []).filter((p) => p.type === "text").map((p) => p.text as string).join("").trim();
 }
 
-export type Parsed = { valid: true; decision: Decision; reason: string } | { valid: false; error: string };
+export const PUSH_SIGNALS = ["P1", "P2", "P3", "P4", "P5"] as const;
+export const PASS_SIGNALS = ["X1", "X2", "X3", "X4"] as const;
+export const SIGNAL_IDS = [...PUSH_SIGNALS, ...PASS_SIGNALS] as const;
+export type Signals = Record<(typeof SIGNAL_IDS)[number], { present: boolean; quote: string | null }>;
 
-/** Strict contract: one JSON object {decision, reason}. A single ```json fence around it is tolerated. No answer is never a pass. */
-export function parseAnswer(text: string): Parsed {
+export type Strength = 1 | 2 | 3;
+export type Parsed = { valid: true; decision: Decision; reason: string; signals?: Signals; strength?: Strength } | { valid: false; error: string };
+
+/**
+ * Strict contract: one JSON object {decision, reason}. A single ```json fence around it is tolerated. No answer is never a pass.
+ * With `structured` the object must also carry `signals`: every id in SIGNAL_IDS with a boolean `present`, and a non-empty
+ * string `quote` wherever present is true. A structured reply missing or malforming signals is "no answer", not a pass.
+ * With `strength` a push must also carry `strength`: the integer 1, 2 or 3 (3 = must-read). Any other value, or none, on a
+ * push is "no answer". On pass and unsure the field is ignored. This is what a daily cap uses to keep the best pushes.
+ */
+export function parseAnswer(text: string, opts: { structured?: boolean; strength?: boolean } = {}): Parsed {
   let t = text.trim();
   const fenced = t.match(/^```(?:json)?\s*\n([\s\S]*?)\n```$/);
   if (fenced) t = fenced[1].trim();
@@ -47,7 +59,44 @@ export function parseAnswer(text: string): Parsed {
   if (!obj || typeof obj !== "object" || Array.isArray(obj)) return { valid: false, error: "JSON is not an object" };
   if (!DECISIONS.includes(obj.decision)) return { valid: false, error: `decision must be push|pass|unsure, got ${JSON.stringify(obj.decision)}` };
   if (typeof obj.reason !== "string" || !obj.reason.trim()) return { valid: false, error: "reason must be a non-empty string" };
-  return { valid: true, decision: obj.decision, reason: obj.reason.trim() };
+  let strength: Strength | undefined;
+  if (opts.strength && obj.decision === "push") {
+    if (obj.strength !== 1 && obj.strength !== 2 && obj.strength !== 3) return { valid: false, error: `strength must be 1, 2 or 3 on a push, got ${JSON.stringify(obj.strength)}` };
+    strength = obj.strength;
+  }
+  if (!opts.structured) return { valid: true, decision: obj.decision, reason: obj.reason.trim(), ...(strength ? { strength } : {}) };
+  const raw = obj.signals;
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return { valid: false, error: "signals must be an object" };
+  const signals = {} as Signals;
+  for (const id of SIGNAL_IDS) {
+    const s = raw[id];
+    if (!s || typeof s !== "object" || typeof s.present !== "boolean") return { valid: false, error: `signals.${id}.present must be a boolean` };
+    if (s.present && (typeof s.quote !== "string" || !s.quote.trim())) return { valid: false, error: `signals.${id} is present but has no quote` };
+    signals[id] = { present: s.present, quote: typeof s.quote === "string" && s.quote.trim() ? s.quote.trim() : null };
+  }
+  return { valid: true, decision: obj.decision, reason: obj.reason.trim(), signals, ...(strength ? { strength } : {}) };
+}
+
+const squash = (x: string) => x.replace(/\s+/g, " ").trim().toLowerCase();
+
+/**
+ * Structured-variant diagnostics. These do not need human signal labels, so they measure how the judger applies the
+ * rubric, not whether its reading of each signal matches the reader's:
+ *   sig_grounded    1 if every quote of a present signal appears verbatim (whitespace and case folded) in the evidence;
+ *                   undefined when no signal is present
+ *   sig_consistent  0 when the decision does not follow from the signals: push with no P present, or pass with a P present
+ *                   and no X present (nothing explains why the P did not win). unsure is not judged.
+ * The pooled mean over rows with a value is the pooled ratio, as for the decision metrics.
+ */
+export function gradeSignals(p: Parsed, evidence: string): { sig_grounded: number | null; sig_consistent: number | null } {
+  if (!p.valid || !p.signals) return { sig_grounded: null, sig_consistent: null };
+  const present = SIGNAL_IDS.filter((id) => p.signals![id].present);
+  const ev = squash(evidence);
+  const sig_grounded = present.length ? +present.every((id) => ev.includes(squash(p.signals![id].quote!))) : null;
+  const anyP = PUSH_SIGNALS.some((id) => p.signals![id].present);
+  const anyX = PASS_SIGNALS.some((id) => p.signals![id].present);
+  const sig_consistent = p.decision === "push" ? +anyP : p.decision === "pass" ? +!(anyP && !anyX) : null;
+  return { sig_grounded, sig_consistent };
 }
 
 export const METRICS = ["agree", "precision", "recall", "specificity", "unsure", "valid"] as const;

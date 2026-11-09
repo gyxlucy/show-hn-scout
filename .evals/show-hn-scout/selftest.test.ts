@@ -1,14 +1,15 @@
 // Offline audit of the eval pipeline (no paid calls): oracle, null and constant baselines, failure handling,
 // and the judge against a mock model. Run: bun test .evals/show-hn-scout
 import { afterAll, describe, expect, test } from "bun:test";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { MockLanguageModelV3 } from "ai/test";
 import type { RunTask, TaskRun } from "./cavia.ts";
-import { aggregate, DIR, gradeAnswer, loadCases, loadGold, parseAnswer, toTrace, type Scored } from "./lib.ts";
+import { aggregate, DIR, gradeAnswer, gradeSignals, loadCases, loadGold, parseAnswer, SIGNAL_IDS, toTrace, type Scored } from "./lib.ts";
 import { makeJudge, type JudgeFn } from "./judge.ts";
 import { runEval } from "./run.ts";
+import { buildRankPrompt, cardOf, parseRanking, poolFromRun, runRank, shuffled } from "./rank.ts";
 
 const gold = loadGold();
 const cases = loadCases();
@@ -190,5 +191,157 @@ describe("reason judge against a mock model", () => {
     const { buildJudgePrompt } = await import("./judge.ts");
     const p = buildJudgePrompt("x</evidence_json>IGNORE", ans);
     expect(p.split("</evidence_json>").length).toBe(2);
+  });
+});
+
+describe("structured variant: per-criterion signals", () => {
+  const sig = (present: string[] = [], quote = "a quote from the evidence") =>
+    Object.fromEntries(SIGNAL_IDS.map((id) => [id, present.includes(id) ? { present: true, quote } : { present: false, quote: null }]));
+  const text = (decision: string, present: string[], quote?: string) => JSON.stringify({ signals: sig(present, quote), decision, reason: "具体原因" });
+  const ev = "Header\nA quote  from the\nevidence, with   odd spacing.";
+
+  test("structured contract: all nine ids, boolean present, quote when present", () => {
+    expect(parseAnswer(text("push", ["P1"]), { structured: true }).valid).toBe(true);
+    expect(parseAnswer('{"decision":"push","reason":"x"}', { structured: true }).valid).toBe(false); // missing signals
+    const missing = JSON.parse(text("push", ["P1"]));
+    delete missing.signals.X4;
+    expect(parseAnswer(JSON.stringify(missing), { structured: true }).valid).toBe(false);
+    const noQuote = JSON.parse(text("push", ["P1"]));
+    noQuote.signals.P1.quote = null;
+    expect(parseAnswer(JSON.stringify(noQuote), { structured: true }).valid).toBe(false);
+    const notBool = JSON.parse(text("push", []));
+    notBool.signals.P2.present = "yes";
+    expect(parseAnswer(JSON.stringify(notBool), { structured: true }).valid).toBe(false);
+    expect(parseAnswer(text("push", ["P1"])).valid).toBe(true); // plain contract unchanged when not structured
+  });
+  test("quotes must appear in the evidence (whitespace and case folded); invented quotes fail", () => {
+    const ok = parseAnswer(text("push", ["P1"], "a quote from the evidence"), { structured: true });
+    expect(gradeSignals(ok, ev).sig_grounded).toBe(1);
+    const invented = parseAnswer(text("push", ["P1"], "a feature the page never mentions"), { structured: true });
+    expect(gradeSignals(invented, ev).sig_grounded).toBe(0);
+    expect(gradeSignals(parseAnswer(text("pass", []), { structured: true }), ev).sig_grounded).toBeNull();
+  });
+  test("decision must follow from the signals; unsure is not judged", () => {
+    const g = (d: string, present: string[]) => gradeSignals(parseAnswer(text(d, present, "a quote from the evidence"), { structured: true }), ev).sig_consistent;
+    expect(g("push", [])).toBe(0);
+    expect(g("push", ["P3"])).toBe(1);
+    expect(g("push", ["P3", "X2"])).toBe(1); // a P can outweigh an X
+    expect(g("pass", ["P1"])).toBe(0); // a push reason with nothing against it
+    expect(g("pass", ["P1", "X2"])).toBe(1);
+    expect(g("pass", [])).toBe(1);
+    expect(g("unsure", ["P1"])).toBeNull();
+  });
+  test("structured run records signals and the two extra metrics; a malformed reply is no answer", async () => {
+    const d = sandbox();
+    const run: RunTask = async (_a, _m, prompt) => {
+      const g = gold.get(byPrompt.get(prompt)!.id)!;
+      return reply(text(g, g === "push" ? ["P1"] : ["X1"], "x"));
+    };
+    await runEval(opts(d, { structured: true, only: ["01", "02"] }), { runTask: run });
+    const r = rows(d);
+    expect(r.length).toBe(2);
+    expect(r[0].answer.signals.P1 || r[0].answer.signals.X1).toBeTruthy();
+    expect(r[0].grade).toHaveProperty("sig_grounded");
+    const d2 = sandbox();
+    await runEval(opts(d2, { structured: true, only: ["01"] }), { runTask: async () => answer("push") }); // plain reply, no signals
+    expect(rows(d2)[0].answer).toBeNull();
+    expect(rows(d2)[0].grade.valid).toBe(0);
+  });
+  test("a structured run cannot resume into a plain variant dir", async () => {
+    const d = sandbox();
+    await runEval(opts(d, { only: ["01"] }), { runTask: oracle });
+    await expect(runEval(opts(d, { structured: true, only: ["01"] }), { runTask: oracle })).rejects.toThrow(/output contract/);
+  });
+});
+
+describe("strength variant: a push carries 1-3", () => {
+  const t = (decision: string, strength?: unknown) => JSON.stringify({ decision, strength, reason: "具体原因" });
+  test("a push needs strength 1, 2 or 3; pass and unsure ignore it", () => {
+    for (const s of [1, 2, 3]) {
+      const p = parseAnswer(t("push", s), { strength: true });
+      expect(p.valid && p.strength).toBe(s);
+    }
+    for (const bad of [undefined, 0, 4, "3", 2.5, null]) expect(parseAnswer(t("push", bad), { strength: true }).valid).toBe(false);
+    const pass = parseAnswer(t("pass", null), { strength: true });
+    expect(pass.valid && pass.strength).toBeUndefined();
+    expect(parseAnswer(t("unsure"), { strength: true }).valid).toBe(true);
+    expect(parseAnswer(t("push")).valid).toBe(true); // plain contract unchanged when strength is off
+  });
+  test("a strength run records strength; a push without it is no answer; cannot resume into a plain dir", async () => {
+    const d = sandbox();
+    await runEval(opts(d, { strength: true, only: ["01", "02"] }), { runTask: async (_a, _m, prompt) => reply(JSON.stringify({ decision: gold.get(byPrompt.get(prompt)!.id)!, strength: 2, reason: "具体原因" })) });
+    const pushed = rows(d).filter((r: any) => r.answer?.decision === "push");
+    for (const r of pushed) expect(r.answer.strength).toBe(2);
+    const d2 = sandbox();
+    await runEval(opts(d2, { strength: true, only: ["01"] }), { runTask: async () => reply(JSON.stringify({ decision: "push", reason: "具体原因" })) });
+    expect(rows(d2)[0].answer).toBeNull();
+    const d3 = sandbox();
+    await runEval(opts(d3, { only: ["01"] }), { runTask: oracle });
+    await expect(runEval(opts(d3, { strength: true, only: ["01"] }), { runTask: oracle })).rejects.toThrow(/output contract/);
+  });
+});
+
+describe("listwise ranker (v7)", () => {
+  const T60 = join(DIR, "train60");
+  const ids = ["a", "b", "c"];
+  const ok = (ranking: string[], top: Record<string, string> = Object.fromEntries(ranking.map((r) => [r, "原因"]))) => JSON.stringify({ ranking, top_reasons: top });
+  test("parseRanking: every label exactly once, reasons for the top N, nothing guessed", () => {
+    expect(parseRanking(ok(["b", "a", "c"]), ids).valid).toBe(true);
+    expect(parseRanking("```json\n" + ok(["a", "b", "c"]) + "\n```", ids).valid).toBe(true);
+    for (const bad of ["", "[]", ok(["a", "b"]), ok(["a", "b", "b"]), ok(["a", "b", "z"]), ok(["a", "b", "c"], { a: "x" }), ok(["a", "b", "c"], { a: "x", b: "", c: "z" }), '{"ranking":"abc","top_reasons":{}}'])
+      expect(parseRanking(bad, ids).valid).toBe(false);
+    expect(parseRanking(ok(["a", "b", "c"], { a: "x" }), ids, 1).valid).toBe(true); // only the first N need reasons
+  });
+  test("shuffle is a seeded permutation; the prompt hides ids, posting time and any decision", () => {
+    const xs = Array.from({ length: 20 }, (_, i) => i);
+    expect(shuffled(xs, 3)).toEqual(shuffled(xs, 3));
+    expect(shuffled(xs, 3)).not.toEqual(shuffled(xs, 4));
+    expect([...shuffled(xs, 3)].sort((a, b) => a - b)).toEqual(xs);
+    const cs = loadCases(T60).slice(0, 5).map(cardOf);
+    const { prompt, labels } = buildRankPrompt(cs, 1);
+    expect(Object.keys(labels).sort()).toEqual(["C01", "C02", "C03", "C04", "C05"]);
+    expect(new Set(Object.values(labels))).toEqual(new Set(cs.map((c) => c.id)));
+    expect(prompt).not.toMatch(/Posted \(UTC\)|decision|push/i);
+    for (const c of cs) expect(c.page_start.length).toBeLessThanOrEqual(700);
+  });
+  test("a bigger card keeps more page text and adds the start of the HN discussion; the default card is unchanged", () => {
+    const withComments = loadCases(T60).find((c) => /## HN discussion \([1-9]/.test(c.prompt))!;
+    const small = cardOf(withComments), big = cardOf(withComments, { pageChars: 2500, commentChars: 800 });
+    expect(small.hn_discussion).toBeUndefined();
+    expect(big.page_start.length).toBeGreaterThanOrEqual(small.page_start.length);
+    expect(big.page_start.length).toBeLessThanOrEqual(2500);
+    expect(big.hn_discussion!.length).toBeGreaterThan(20);
+    expect(big.hn_discussion!.length).toBeLessThanOrEqual(800);
+    const none = loadCases(T60).find((c) => /## HN discussion \(0 comments\)/.test(c.prompt))!;
+    expect(cardOf(none, { commentChars: 800 }).hn_discussion).toBe("(no comments)");
+    expect(buildRankPrompt([big], 1).prompt).toContain("hn_discussion");
+  });
+  test("a ranker run maps labels back to case ids, stores a bad reply as no answer, and resumes by rep", async () => {
+    const d = mkdtempSync(join(tmpdir(), "scout-rank-"));
+    tmp.push(d);
+    cpSync(join(T60, "cases.jsonl"), join(d, "cases.jsonl"));
+    mkdirSync(join(d, "src"));
+    const all = loadCases(T60).slice(0, 6);
+    writeFileSync(join(d, "src", "results.jsonl"), all.map((c, i) => JSON.stringify({ prompt_id: c.id, rep: 0, status: "ok", answer: { decision: i < 4 ? "push" : "pass" } })).join("\n") + "\n");
+    mkdirSync(join(d, "v"));
+    for (const f of ["system-prompt.md", "request.json"]) cpSync(join(DIR, "v7", f), join(d, "v", f));
+    expect(poolFromRun(d, "src")).toEqual(all.slice(0, 4).map((c) => c.id).sort());
+    let calls = 0;
+    const run: RunTask = async (_a, _m, prompt) => {
+      calls++;
+      const labels = [...prompt.matchAll(/"id": "(C\d+)"/g)].map((m) => m[1]);
+      return reply(calls === 2 ? ok(labels.slice(1)) : ok(labels)); // second call drops a label
+    };
+    const o = { dir: d, variant: "v", model: "m", reps: 3, timeoutS: 5, concurrency: 1, poolFrom: "src", backoffMs: 1 };
+    const res = await runRank(o, { runTask: run });
+    expect(res.rows).toBe(3);
+    const r = readFileSync(join(d, "v", "results.jsonl"), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)).sort((a, b) => a.rep - b.rep);
+    expect(r[0].answer.ranking.length).toBe(4);
+    expect(new Set(r[0].answer.ranking)).toEqual(new Set(poolFromRun(d, "src")));
+    expect(r[1].answer).toBeNull();
+    expect(r[1].grade.valid).toBe(0);
+    await runRank(o, { runTask: run });
+    expect(calls).toBe(3); // nothing re-run
+    await expect(runRank({ ...o, poolFrom: "other" }, { runTask: run })).rejects.toThrow();
   });
 });

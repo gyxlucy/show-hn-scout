@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>Day-1104 review</title>
+<style>
+  body { font: 15px/1.5 -apple-system, "PingFang SC", sans-serif; max-width: 760px; margin: 24px auto; padding: 0 16px; color: #222; }
+  .muted { color: #777; font-size: 12px; }
+  .top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .bar { height: 5px; background: #e3e3e3; border-radius: 3px; overflow: hidden; margin: 8px 0 12px; }
+  .bar > div { height: 100%; background: #3b82f6; width: 0; }
+  .card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; display: grid; gap: 10px; }
+  .title { font-size: 18px; font-weight: 600; line-height: 1.35; }
+  .url { font-size: 12px; color: #2563eb; word-break: break-all; }
+  .ex { border-left: 3px solid #ddd; padding-left: 10px; font-size: 13px; color: #444; }
+  .pred { border: 1px dashed #3b82f6; border-radius: 6px; padding: 8px 10px; background: #f5f9ff; }
+  .choices { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 8px; }
+  button { padding: 9px 6px; border-radius: 6px; border: 1px solid #bbb; background: #fff; cursor: pointer; font-size: 14px; }
+  button:hover { background: #f0f0f0; }
+  button.sel { background: #2563eb; color: #fff; border-color: #2563eb; }
+  textarea { width: 100%; box-sizing: border-box; min-height: 70px; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid #bbb; }
+  .nav { display: flex; justify-content: space-between; gap: 8px; }
+  .dots { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
+  .dots button { width: 26px; height: 26px; padding: 0; font-size: 11px; }
+  .dots button.done { background: #bbf7d0; }
+  .dots button.cur { outline: 2px solid #2563eb; }
+  #saved { color: #16a34a; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <b>Day-1104 复核（共 <span id="total"></span> 条）</b>
+    <span class="muted">已确认 <span id="done"></span> · 改动 <span id="chg"></span> · <span id="saved">已保存</span></span>
+  </div>
+  <div class="bar"><div id="fill"></div></div>
+  <div class="card">
+    <div class="muted" id="pos"></div>
+    <div class="title" id="title"></div>
+    <a class="url" id="url" target="_blank" rel="noopener"></a>
+    <div class="ex" id="ex"></div>
+    <div class="muted" id="meta"></div>
+    <div class="pred"><b>我的预测：</b><span id="pred"></span></div>
+    <div class="choices">
+      <button data-v="agree">同意我的预测</button>
+      <button data-v="must_read">改为必读</button>
+      <button data-v="push">改为 push</button>
+      <button data-v="pass">改为 pass</button>
+    </div>
+    <textarea id="reason" placeholder="理由（已预填我的理由，可修改）"></textarea>
+    <div class="nav"><button id="prev">← 上一条</button><button id="next">下一条 →</button></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <p class="muted">每次点击都会自动保存到 day-1104/labels.json 与 labels.jsonl，关掉页面再打开也会恢复。</p>
+<script src="review.js"></script>
+</body>
+</html>

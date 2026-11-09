@@ -150,3 +150,27 @@ test("the live prompt is the eval prompt: starts with the contract header and om
   expect(prompt.startsWith("# Candidate Show HN post\n")).toBe(true);
   expect(prompt).not.toMatch(/score|points|rank/i);
 });
+
+test("shadow hook gets only this run's pushes, after posting, with posted/suppressed flags; a throw changes nothing", async () => {
+  const seen: { id: number; posted: boolean; suppressed: boolean }[] = [];
+  const order: string[] = [];
+  const h = harness({
+    maxPushes: 2,
+    candidates: [cand(5), cand(4), cand(3), cand(2)],
+    answers: { 4: { decision: "pass", reason: "x" } },
+    post: async ({ id }) => void order.push(`post${id}`),
+    shadow: async (items) => {
+      order.push("shadow");
+      for (const i of items) seen.push({ id: i.id, posted: i.posted, suppressed: i.suppressed });
+      throw new Error("ranker down");
+    },
+  });
+  const s = await runScout(h.deps);
+  expect(order).toEqual(["post5", "post3", "shadow"]);
+  expect(seen).toEqual([
+    { id: 5, posted: true, suppressed: false },
+    { id: 3, posted: true, suppressed: false },
+    { id: 2, posted: false, suppressed: true },
+  ]);
+  expect(s.posted).toBe(2);
+});

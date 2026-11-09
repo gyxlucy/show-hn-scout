@@ -24,6 +24,9 @@ export type State = { version: 1; items: Record<string, Record_> };
 
 export type Judgement = { decision: Decision; reason: string };
 
+/** A post judged push in this run, handed to the shadow ranker after all posting is done. */
+export type ShadowItem = { id: number; title: string; prompt: string; posted: boolean; suppressed: boolean };
+
 export type Deps = {
   state: State;
   /** True when no state existed before this run: seed the backlog instead of flooding the channel. */
@@ -35,6 +38,8 @@ export type Deps = {
   judge: (prompt: string) => Promise<Judgement | { error: string }>;
   post: (c: { id: number; record: Record_ }) => Promise<void>;
   postNote?: (text: string) => Promise<void>;
+  /** Optional shadow ranking of this run's pushes. Runs last, never changes what was posted, and a throw is only logged. */
+  shadow?: (items: ShadowItem[]) => Promise<void>;
   save: (state: State) => void;
   now: () => Date;
   promptSha: string;
@@ -151,6 +156,7 @@ export async function runScout(d: Deps): Promise<Summary> {
   });
 
   // Post in feed order (candidates are newest-first), after judging, so the cap keeps the freshest posts.
+  const pushed: number[] = [];
   for (const c of todo) {
     const key = sid(c.id);
     const prev = d.state.items[key];
@@ -172,7 +178,10 @@ export async function runScout(d: Deps): Promise<Summary> {
     const rec: Record_ = { ...base, status: "judged", decision: r.decision, reason: r.reason, judged_at: d.now().toISOString(), prompt_sha: d.promptSha, posted: false, attempts };
     d.state.items[key] = rec;
     d.save(d.state);
-    if (r.decision === "push") await postOne(c.id, rec);
+    if (r.decision === "push") {
+      pushed.push(c.id);
+      await postOne(c.id, rec);
+    }
   }
 
   if (overflow && d.postNote) {
@@ -180,6 +189,18 @@ export async function runScout(d: Deps): Promise<Summary> {
       await d.postNote(`另有 ${overflow} 条 push 因单次上限(${d.maxPushes})未发送,已在状态里标记为 suppressed。`);
     } catch (e) {
       d.log(`note failed: ${(e as Error).message}`);
+    }
+  }
+
+  if (d.shadow && pushed.length) {
+    const items: ShadowItem[] = pushed.map((id) => {
+      const rec = d.state.items[sid(id)];
+      return { id, title: rec.title, prompt: prompts.get(id)!, posted: rec.posted, suppressed: rec.status === "suppressed" };
+    });
+    try {
+      await d.shadow(items);
+    } catch (e) {
+      d.log(`shadow ranking failed (posting is unaffected): ${(e as Error).message}`);
     }
   }
   return s;
