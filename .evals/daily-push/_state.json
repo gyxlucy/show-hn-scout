@@ -1,0 +1,113 @@
+{
+  "flow": "daily-push",
+  "description": "Daily push quality: v3 judge -> optional stage-2 ranker -> at most 10 pushes per day. Gold is existing data only; no recall measurement.",
+  "current_round": 0,
+  "reps": 6,
+  "goal": {
+    "target": "wanted_p10",
+    "direction": "higher",
+    "hold": [
+      "must_at10",
+      "pass_at10",
+      "valid"
+    ]
+  },
+  "approve_each_round": true,
+  "train_ids": [],
+  "test_ids": [],
+  "day_ids": [
+    "day-1104",
+    "train60-sim",
+    "day-1109"
+  ],
+  "dataset": {
+    "text": "174 posts from existing labelled sets plus day-1109. Three scored days: day-1104 (real, 54 pooled posts, anchored labels), train60-sim (simulated, 34 pooled posts) and day-1109 (real held-out, 38 pooled posts, blind human labels, never tuned on). Pipeline recall (good posts the judge dropped) is not measurable.",
+    "cases_md": "cases.md",
+    "registry": "cases/registry.jsonl"
+  },
+  "harness_paths": [
+    ".evals/daily-push/metrics.ts",
+    ".evals/daily-push/registry.ts",
+    ".evals/daily-push/adapt.ts",
+    ".evals/daily-push/stats.ts",
+    ".evals/daily-push/report.ts",
+    ".evals/daily-push/variants.json",
+    ".evals/show-hn-scout/rank.ts"
+  ],
+  "metrics": [
+    {
+      "id": "wanted_p10",
+      "kind": "float",
+      "label": "Wanted prec.",
+      "better": "higher"
+    },
+    {
+      "id": "wanted_at10",
+      "kind": "float",
+      "label": "Wanted@10",
+      "better": "higher"
+    },
+    {
+      "id": "must_at10",
+      "kind": "float",
+      "label": "Must@10",
+      "better": "higher"
+    },
+    {
+      "id": "pass_at10",
+      "kind": "float",
+      "label": "Pass@10",
+      "better": "lower"
+    },
+    {
+      "id": "pushes",
+      "kind": "float",
+      "label": "Pushes",
+      "better": "higher"
+    },
+    {
+      "id": "valid",
+      "kind": "float",
+      "label": "Valid",
+      "better": "higher"
+    }
+  ],
+  "perf_fields": [
+    {
+      "id": "latency_s",
+      "label": "Latency",
+      "unit": "s"
+    },
+    {
+      "id": "input_tokens",
+      "label": "Input tokens",
+      "unit": "tok"
+    },
+    {
+      "id": "output_tokens",
+      "label": "Output tokens",
+      "unit": "tok"
+    }
+  ],
+  "cost": "tokens and latency only; cost not measured (no pricing rule approved); no $ figure",
+  "signoffs": {
+    "cases": "approved",
+    "grading": "approved"
+  },
+  "models": {
+    "requested": [
+      "claude-opus-5-5",
+      "deepseek-4.1-flash"
+    ],
+    "spend_approved": "pilot (4 calls, day-1104 + train60-sim, 1 rep) and day-1109 (3 models x 6 reps = 18 calls, approved 2026-11-10); a full 6-rep run on day-1104/train60-sim would need a separate approval",
+    "planned_variants": {
+      "v5": "v7 ranker on claude-opus-5-5",
+      "v6": "v7 ranker on deepseek-4.1-flash"
+    },
+    "pilot": "day-1109: all 18 reps parsed; no <think> failure seen"
+  },
+  "held_out_day": {
+    "id": "day-1109",
+    "preregistered": ".evals/show-hn-scout/day-1109/PREREGISTERED.md"
+  }
+}

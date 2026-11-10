@@ -5,3 +5,12 @@ data/*.sqlite3*
 data/raw/
 .DS_Store
 /bot-state/
+
+# daily-push eval: derived and bulk output
+**/traces/
+.evals/daily-push/report.html
+.evals/daily-push/report-details.html
+.evals/daily-push/trajectory/
+**/raw/
+.evals/stage1-judge/report.html
+.evals/stage1-judge/trajectory/analyzer-*/traces_*/

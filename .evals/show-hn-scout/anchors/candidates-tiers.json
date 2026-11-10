@@ -1,0 +1,42 @@
+{
+ "50": {
+  "tier": "pass",
+  "core": false
+ },
+ "39": {
+  "tier": "must_read",
+  "core": false
+ },
+ "52": {
+  "tier": "must_read",
+  "core": true
+ },
+ "43": {
+  "tier": "push",
+  "core": false
+ },
+ "54": {
+  "tier": "pass",
+  "core": false
+ },
+ "88": {
+  "tier": "must_read",
+  "core": true
+ },
+ "37": {
+  "tier": "pass",
+  "core": false
+ },
+ "59": {
+  "tier": "push",
+  "core": false
+ },
+ "46": {
+  "tier": "must_read",
+  "core": true
+ },
+ "57": {
+  "tier": "push",
+  "core": false
+ }
+}

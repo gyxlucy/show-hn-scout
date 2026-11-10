@@ -1,0 +1,17 @@
+{
+  "description": "v3 control (baseline)",
+  "label": "baseline",
+  "target": "system_prompt",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "0dbc5965413fc7d709e0a3b70fc12ff72e3942a87d0cfc6a5514441f3df705ce",
+  "structured": false,
+  "strength": false,
+  "reps": 3,
+  "judge_model": null,
+  "started_at": "2026-11-10T16:11:48.590Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-10T16:21:48.416Z",
+  "rows": 270,
+  "error_rows": 2,
+  "aborted": null
+}

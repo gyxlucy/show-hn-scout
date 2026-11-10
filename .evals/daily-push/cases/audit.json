@@ -1,0 +1,190 @@
+{
+  "posts": 174,
+  "tiered": 114,
+  "per_set": {
+    "dev": {
+      "n": 30,
+      "stage1": {
+        "push": 15,
+        "pass": 15
+      },
+      "tier": {
+        "null": 30
+      },
+      "anchored": {
+        "null": 30
+      }
+    },
+    "heldout": {
+      "n": 30,
+      "stage1": {
+        "push": 17,
+        "pass": 13
+      },
+      "tier": {
+        "must_read": 7,
+        "pass": 13,
+        "push": 10
+      },
+      "anchored": {
+        "false": 17,
+        "true": 13
+      }
+    },
+    "fresh-train": {
+      "n": 30,
+      "stage1": {
+        "pass": 20,
+        "push": 10
+      },
+      "tier": {
+        "pass": 20,
+        "must_read": 6,
+        "push": 4
+      },
+      "anchored": {
+        "false": 22,
+        "true": 8
+      }
+    },
+    "fresh-test": {
+      "n": 30,
+      "stage1": {
+        "pass": 19,
+        "push": 11
+      },
+      "tier": {
+        "null": 30
+      },
+      "anchored": {
+        "null": 30
+      }
+    },
+    "day-1104": {
+      "n": 54,
+      "stage1": {
+        "pass": 28,
+        "push": 26
+      },
+      "tier": {
+        "pass": 28,
+        "push": 18,
+        "must_read": 8
+      },
+      "anchored": {
+        "true": 54
+      }
+    },
+    "train60": {
+      "n": 60,
+      "stage1": {
+        "push": 27,
+        "pass": 33
+      },
+      "tier": {
+        "must_read": 13,
+        "pass": 33,
+        "push": 14
+      },
+      "anchored": {
+        "false": 39,
+        "true": 21
+      }
+    }
+  },
+  "problems": {
+    "duplicate_story_ids": 0,
+    "duplicate_urls_across_posts": [],
+    "missing_title_or_url_or_posted": [],
+    "empty_page_text": [
+      50175741,
+      50196376,
+      50196795,
+      50197593,
+      50197685,
+      50217369,
+      50218772,
+      50222559,
+      50223763,
+      50228301,
+      50232415,
+      50232722,
+      50233315,
+      50236286,
+      50237273,
+      50241871,
+      50352087,
+      50356948,
+      50361909
+    ],
+    "leaks_points_by_text": [
+      {
+        "story_id": 50198769,
+        "sets": [
+          {
+            "set": "heldout",
+            "id": "46"
+          },
+          {
+            "set": "train60",
+            "id": "46"
+          }
+        ]
+      },
+      {
+        "story_id": 50215652,
+        "sets": [
+          {
+            "set": "fresh-train",
+            "id": "71"
+          },
+          {
+            "set": "train60",
+            "id": "71"
+          }
+        ]
+      },
+      {
+        "story_id": 50216053,
+        "sets": [
+          {
+            "set": "fresh-train",
+            "id": "62"
+          },
+          {
+            "set": "train60",
+            "id": "62"
+          }
+        ]
+      },
+      {
+        "story_id": 50219762,
+        "sets": [
+          {
+            "set": "fresh-train",
+            "id": "63"
+          },
+          {
+            "set": "train60",
+            "id": "63"
+          }
+        ]
+      },
+      {
+        "story_id": 50238873,
+        "sets": [
+          {
+            "set": "fresh-test",
+            "id": "119"
+          }
+        ]
+      }
+    ],
+    "label_missing": []
+  },
+  "notes": [
+    "day-1104 shares no story id or URL with any other set (checked here by story id and URL).",
+    "train60 is a tier overlay on heldout + fresh-train, so those 60 posts are counted once.",
+    "A daily 'day' needs tiers: only day-1104 and train60 have them. fresh-test has push/pass only and a first-stage pool of about 17 posts, too few for a top-10 cap."
+  ]
+}

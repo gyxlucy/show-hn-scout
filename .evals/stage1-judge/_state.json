@@ -1,0 +1,208 @@
+{
+  "flow": "stage1-judge",
+  "description": "Stage-1 v3 judge (claude-haiku-5-5): push/pass/unsure per Show HN post against Lucy's labels. Hillclimb on the system prompt only.",
+  "current_round": 3,
+  "reps": 3,
+  "goal": {
+    "target": "precision",
+    "direction": "higher",
+    "hold": [
+      "recall>=0.80",
+      "valid"
+    ]
+  },
+  "approve_each_round": false,
+  "max_rounds": 3,
+  "train_ids": [
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
+    "61",
+    "62",
+    "63",
+    "64",
+    "65",
+    "66",
+    "67",
+    "68",
+    "69",
+    "70",
+    "71",
+    "72",
+    "73",
+    "74",
+    "75",
+    "76",
+    "77",
+    "78",
+    "79",
+    "80",
+    "81",
+    "82",
+    "83",
+    "84",
+    "85",
+    "86",
+    "87",
+    "88",
+    "89",
+    "90"
+  ],
+  "test_ids": [
+    "91",
+    "92",
+    "93",
+    "94",
+    "95",
+    "96",
+    "97",
+    "98",
+    "99",
+    "100",
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "110",
+    "111",
+    "112",
+    "113",
+    "114",
+    "115",
+    "116",
+    "117",
+    "118",
+    "119",
+    "120"
+  ],
+  "split_note": "Fixed by the user: train = train60 (60 cases, analyzer reads only these traces); test = fresh-test (30 cases, never read by the analyzer). Not stratified by tags[0]. Train and test means differ (see narrative.md).",
+  "harness_paths": [
+    ".evals/stage1-judge/run.ts",
+    ".evals/show-hn-scout/run.ts",
+    ".evals/show-hn-scout/lib.ts",
+    ".evals/show-hn-scout/cavia.ts",
+    ".evals/stage1-judge/cases.jsonl",
+    ".evals/stage1-judge/gold.jsonl"
+  ],
+  "metrics": [
+    {
+      "id": "precision",
+      "kind": "float",
+      "label": "Precision",
+      "better": "higher"
+    },
+    {
+      "id": "recall",
+      "kind": "float",
+      "label": "Recall (push)",
+      "better": "higher"
+    },
+    {
+      "id": "specificity",
+      "kind": "float",
+      "label": "Specificity",
+      "better": "higher"
+    },
+    {
+      "id": "agree",
+      "kind": "float",
+      "label": "Agree",
+      "better": "higher"
+    },
+    {
+      "id": "unsure",
+      "kind": "float",
+      "label": "Unsure",
+      "better": "lower"
+    },
+    {
+      "id": "valid",
+      "kind": "float",
+      "label": "Valid",
+      "better": "higher"
+    }
+  ],
+  "perf_fields": [
+    {
+      "id": "latency_s",
+      "label": "Latency",
+      "unit": "s"
+    },
+    {
+      "id": "input_tokens",
+      "label": "Input tokens",
+      "unit": "tok"
+    },
+    {
+      "id": "output_tokens",
+      "label": "Output tokens",
+      "unit": "tok"
+    }
+  ],
+  "cost": "tokens and latency only; cost not measured (no pricing rule approved); no $ figure",
+  "model": {
+    "requested": "claude-haiku-5-5",
+    "served_check": "not possible: Cavia task/transcript responses do not expose the served model; the requested id is recorded on every row"
+  },
+  "judge": "off (reason judge not used; precision/recall are graded directly against the human label)",
+  "spend_approved": "v3 control (270 tasks) + at most 3 rounds x 270 tasks on claude-haiku-5-5, approved by the user on 2026-11-11; anything beyond needs a new approval",
+  "signoffs": {
+    "cases": "approved (existing labelled sets, no new labels)",
+    "grading": "approved"
+  },
+  "harness_sha": "7765b12ce5b26dda5e75e7131d97b61a00de0ea657c4c62fc4e5ef7ce55cb907",
+  "best": {
+    "variant": "baseline",
+    "note": "no variant beat the v3 control outside noise; v3 (round 3) is flat: pooled precision 67% vs 66%, recall 81% vs 79%, test -5/-15"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "variant": "v1",
+      "result": "rejected: pooled recall 31%"
+    },
+    {
+      "round": 2,
+      "variant": "v2",
+      "result": "no effect: pooled precision 65% vs 66%, recall 78% vs 79%; train +2/+6, test -9/-18 (inside noise)"
+    },
+    {
+      "round": 3,
+      "variant": "v3",
+      "result": "flat: pooled precision 67% vs 66% (+1.5 [-3.2, 6.4]), recall 81% vs 79% (+1.8 [-10.6, 14.0]); train precision +2.7, recall +8.6; test precision -4.9, recall -15.2 (inside noise)"
+    }
+  ],
+  "status": "finished (3 rounds); no change recommended"
+}

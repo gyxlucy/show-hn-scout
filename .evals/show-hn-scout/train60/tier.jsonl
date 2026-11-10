@@ -1,0 +1,60 @@
+{"id": "31", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "32", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "33", "tier": "pass", "label_source": "human"}
+{"id": "34", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "35", "tier": "pass", "label_source": "human"}
+{"id": "36", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "37", "tier": "pass", "label_source": "human"}
+{"id": "38", "tier": "pass", "label_source": "human"}
+{"id": "39", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "disagree", "reason": "呈现有创意，但纯好玩，拓宽产品视角有些帮助", "reason_source": "human_edited"}
+{"id": "40", "label_source": "human", "tier": "must_read", "core": true, "reason": "管理social posts确实是个我会想做的事情", "provenance": "human_first_pass"}
+{"id": "41", "tier": "pass", "label_source": "human"}
+{"id": "42", "label_source": "human", "tier": "must_read", "core": true, "reason": "我也有点在做一个类似desktop陪伴的东西，所以很感兴趣", "provenance": "human_first_pass"}
+{"id": "43", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "44", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "45", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "46", "label_source": "human", "tier": "must_read", "core": true, "reason": "听起来是会对我有用的，练习对外表达", "provenance": "human_first_pass"}
+{"id": "47", "tier": "pass", "label_source": "human"}
+{"id": "48", "tier": "pass", "label_source": "human"}
+{"id": "49", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "disagree", "reason": "有趣，也有个人化的味道，虽然偏玩具，但是给vibe coding side project提供了一些思路", "reason_source": "human_edited"}
+{"id": "50", "tier": "pass", "label_source": "human"}
+{"id": "51", "tier": "pass", "label_source": "human"}
+{"id": "52", "label_source": "human", "tier": "must_read", "core": true, "reason": "很实用的技巧，因为我也在claude code和codex一起用", "provenance": "human_first_pass"}
+{"id": "53", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree", "reason": "同时看 Claude Code 和 Codex 的用量与花费，对应你同时用多个 agent 的场景。与 55、90 同类，只取这一条。", "reason_source": "assistant_endorsed"}
+{"id": "54", "tier": "pass", "label_source": "human"}
+{"id": "55", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "56", "tier": "pass", "label_source": "human"}
+{"id": "57", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "58", "tier": "pass", "label_source": "human"}
+{"id": "59", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "60", "tier": "pass", "label_source": "human"}
+{"id": "61", "tier": "pass", "label_source": "human"}
+{"id": "62", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "63", "tier": "pass", "label_source": "human"}
+{"id": "64", "tier": "pass", "label_source": "human"}
+{"id": "65", "tier": "pass", "label_source": "human"}
+{"id": "66", "tier": "pass", "label_source": "human"}
+{"id": "67", "tier": "pass", "label_source": "human"}
+{"id": "68", "label_source": "human", "tier": "must_read", "core": true, "reason": "一行脚本让任何网站能被 AI 浏览器操作，角度新，也能看出大家在往哪做", "provenance": "human_first_pass"}
+{"id": "69", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "70", "tier": "pass", "label_source": "human"}
+{"id": "71", "tier": "pass", "label_source": "human"}
+{"id": "72", "tier": "pass", "label_source": "human"}
+{"id": "73", "tier": "pass", "label_source": "human"}
+{"id": "74", "tier": "pass", "label_source": "human"}
+{"id": "75", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree"}
+{"id": "76", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree", "reason": "小工具，贴近实际场景，虽然可能比较烂大街，但会对打开思路也有些帮助", "reason_source": "human_edited"}
+{"id": "77", "tier": "pass", "label_source": "human"}
+{"id": "78", "tier": "pass", "label_source": "human"}
+{"id": "79", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "agree", "reason": "属于日常沟通和表达工具，中英切换的场景可能用得上；把握不大，主要凭沟通类和日常使用。", "reason_source": "assistant_endorsed"}
+{"id": "80", "tier": "pass", "label_source": "human"}
+{"id": "81", "tier": "pass", "label_source": "human"}
+{"id": "82", "tier": "pass", "label_source": "human"}
+{"id": "83", "tier": "pass", "label_source": "human"}
+{"id": "84", "tier": "pass", "label_source": "human"}
+{"id": "85", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "disagree", "reason": "有点兴趣，感觉对于email的拓展有很多可能性", "reason_source": "human_edited"}
+{"id": "86", "label_source": "human", "tier": "must_read", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "disagree", "reason": "垂类小产品，做得清楚，我学乐器的！所以感兴趣", "reason_source": "human_edited"}
+{"id": "87", "tier": "pass", "label_source": "human"}
+{"id": "88", "label_source": "human", "tier": "must_read", "core": true, "reason": "把看过的书、电影、游戏放在一个公开页面，能从各平台导入，有个人表达的角度；很生活化的一个idea", "provenance": "human_first_pass"}
+{"id": "89", "tier": "pass", "label_source": "human"}
+{"id": "90", "label_source": "human", "tier": "push", "core": false, "provenance": "assistant_suggested_human_reviewed", "verdict": "disagree", "reason": "网站看起来太简陋，是个很糙的产品。并且claude code已经有mac desktop了其实", "reason_source": "human_edited"}

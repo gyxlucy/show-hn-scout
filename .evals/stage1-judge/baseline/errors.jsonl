@@ -1,0 +1,2 @@
+{"prompt_id":"36","rep":1,"attempt":1,"failure_class":"timeout","error":"timeout","task_id":"ct_91f5a00eedbe4889be9c50e7df03a5a9","model":"claude-haiku-5-5","usage":{"input_tokens":14202,"cached_tokens":0,"output_tokens":413,"total_tokens":14615,"context_tokens":14615},"latency_s":301.54,"at":"2026-11-10T16:17:27.230Z"}
+{"prompt_id":"113","rep":1,"attempt":1,"failure_class":"harness_error","error":"The operation timed out.","task_id":null,"model":"claude-haiku-5-5","usage":null,"latency_s":297.975,"at":"2026-11-10T16:21:12.157Z"}

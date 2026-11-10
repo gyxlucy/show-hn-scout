@@ -1,0 +1,103 @@
+{
+  "stage1": {
+    "agent": "v3",
+    "model": "claude-haiku-5-5",
+    "pool_run": "haiku_v3",
+    "note": "first-stage judge: one call per post, push/pass/unsure; the pool of a day is the posts it pushed (at least half of the reps)"
+  },
+  "days": {
+    "day-1104": {
+      "dir": "day-1104",
+      "kind": "real",
+      "note": "real day 2026-11-04; the pool is the 54 posts the live v3 judge pushed (decisions recorded, not re-run)"
+    },
+    "train60-sim": {
+      "dir": "train60",
+      "kind": "simulated",
+      "note": "60 random posts from many days; pool is what v3 pushed in 3 reps (34 posts); the newest-10 baseline is only a mock because the posts are not from one day"
+    },
+    "day-1109": {
+      "dir": "day-1109",
+      "kind": "real-heldout",
+      "note": "real day 2026-11-09, the 38 posts the live v3 bot pushed (recorded decisions, no stage-1 re-run); blind human tiers; never tuned on; rankers and guardrails declared before labels (day-1109/PREREGISTERED.md)"
+    }
+  },
+  "variants": {
+    "baseline": {
+      "label": "live cap",
+      "agent": "v3",
+      "kind": "cap",
+      "model": "claude-haiku-5-5",
+      "description": "today's product: v3 judge pushes, the newest 10 are posted",
+      "sources": {}
+    },
+    "v1": {
+      "label": "v3 + v7 ranker",
+      "agent": "v7",
+      "kind": "ranker",
+      "model": "claude-haiku-5-5",
+      "description": "second stage: listwise ranker with 700-char cards, top 10 of the ranking",
+      "sources": {
+        "day-1104": "day-1104/haiku_v7",
+        "train60-sim": "train60/haiku_v7",
+        "day-1109": "day-1109/haiku_v7"
+      }
+    },
+    "v2": {
+      "label": "v3 + v8 ranker",
+      "agent": "v8",
+      "kind": "ranker",
+      "model": "claude-haiku-5-5",
+      "description": "second stage: v7 with richer cards (2,500 page chars + 800 discussion chars)",
+      "sources": {
+        "train60-sim": "train60/haiku_v8"
+      }
+    },
+    "v3": {
+      "label": "v3 + v9 anchor",
+      "agent": "v9",
+      "kind": "anchor",
+      "model": "claude-haiku-5-5",
+      "push_rank": 3,
+      "description": "second stage: each post compared with 10 references she ordered; push when its rank is <= 3 of 10",
+      "sources": {
+        "day-1104": "day-1104/haiku_v9"
+      }
+    },
+    "v4": {
+      "label": "v3 + v10 anchor",
+      "agent": "v10",
+      "kind": "anchor",
+      "model": "claude-haiku-5-5",
+      "push_rank": 3,
+      "description": "v9 plus her reasons on 5 references",
+      "sources": {
+        "day-1104": "day-1104/haiku_v10"
+      }
+    },
+    "v5": {
+      "label": "v7 on claude-opus-5-5",
+      "agent": "v7",
+      "kind": "ranker",
+      "model": "claude-opus-5-5",
+      "description": "the v7 ranker prompt on a stronger model, same pool from haiku_v3",
+      "sources": {
+        "day-1104": "day-1104/opus_v7",
+        "train60-sim": "train60/opus_v7",
+        "day-1109": "day-1109/opus_v7"
+      }
+    },
+    "v6": {
+      "label": "v7 on deepseek-4.1-flash",
+      "agent": "v7",
+      "kind": "ranker",
+      "model": "deepseek-4.1-flash",
+      "description": "the v7 ranker prompt on a cheaper model, same pool from haiku_v3",
+      "sources": {
+        "day-1104": "day-1104/deepseek_v7",
+        "train60-sim": "train60/deepseek_v7",
+        "day-1109": "day-1109/deepseek_v7"
+      }
+    }
+  }
+}

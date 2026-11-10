@@ -1,0 +1,23 @@
+{
+  "description": "the v7 ranker prompt on a cheaper model, same pool from haiku_v3",
+  "label": "v6",
+  "target": "system_prompt",
+  "kind": "ranker",
+  "model": "deepseek-4.1-flash",
+  "system_prompt_sha256": "3f4f8f28bce1fe263cb4f6c1330690fa582af276ae6bdd3e3309e75df41f63d8",
+  "days": [
+    "day-1104",
+    "train60-sim",
+    "day-1109"
+  ],
+  "rows": 18,
+  "error_rows": 0,
+  "sources": {
+    "day-1104": "day-1104/deepseek_v7",
+    "train60-sim": "train60/deepseek_v7",
+    "day-1109": "day-1109/deepseek_v7"
+  },
+  "cost": "tokens and latency only; cost not measured (no pricing rule)",
+  "generated_by": "adapt.ts (no model calls)",
+  "generated_at": "2026-11-10T10:35:11.765Z"
+}

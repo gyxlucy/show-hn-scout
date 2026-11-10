@@ -1,0 +1,17 @@
+{
+  "description": "Two narrow Pass bullets: product not actually offered yet, and a page that leads with a speed/size/benchmark number instead of what the user can do",
+  "label": "v2",
+  "target": "system_prompt",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "0d84bea8c360fdc0a3033628cc195ff6a2304382754f954d0430f81ea8730c48",
+  "structured": false,
+  "strength": false,
+  "reps": 3,
+  "judge_model": null,
+  "started_at": "2026-11-10T16:41:45.098Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-10T16:45:23.767Z",
+  "rows": 270,
+  "error_rows": 0,
+  "aborted": null
+}

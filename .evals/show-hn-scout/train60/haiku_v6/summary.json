@@ -1,0 +1,17 @@
+{
+  "description": "baseline",
+  "label": "v6",
+  "target": "system_prompt",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "29581396775e4ac6337cfef39731e82ac1b173eddf1dc0572eed1571f54788d1",
+  "structured": false,
+  "strength": true,
+  "reps": 2,
+  "judge_model": null,
+  "started_at": "2026-11-05T08:38:28.251Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-05T08:40:38.840Z",
+  "rows": 120,
+  "error_rows": 0,
+  "aborted": null
+}

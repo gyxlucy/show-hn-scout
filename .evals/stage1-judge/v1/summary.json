@@ -1,0 +1,17 @@
+{
+  "description": "Push gate needs a real twist: a better/faster/more private version of a known job, or a clear page alone, no longer counts (criteria 1 and 5)",
+  "label": "v1",
+  "target": "system_prompt",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "faddde5450b1d576c373654ec3d7793ec8ec3719966ae5d4b739f36c6b5e37ee",
+  "structured": false,
+  "strength": false,
+  "reps": 3,
+  "judge_model": null,
+  "started_at": "2026-11-10T16:30:43.236Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-10T16:34:28.802Z",
+  "rows": 270,
+  "error_rows": 0,
+  "aborted": null
+}

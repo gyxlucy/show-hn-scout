@@ -1,0 +1,1 @@
+{"prompt_id":"train60-sim","rep":5,"attempt":1,"failure_class":"timeout","error":"timeout","task_id":"ct_4d3565d3beee4cf484caa1a3decc5e10","model":"claude-haiku-5-5","usage":null,"latency_s":302.442,"at":"2026-11-05T15:10:34.216Z"}

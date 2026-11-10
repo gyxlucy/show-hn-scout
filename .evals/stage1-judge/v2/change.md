@@ -1,0 +1,8 @@
+Two narrow Pass bullets: product not actually offered yet, and a page that leads with a speed/size/benchmark number instead of what the user can do
+
+Round 2 hypothesis (analyzer-r2, train traces of baseline and v1; trajectory/analyzer-r2/proposal.md). Round 1 (v1) removed 25 of 30 train false-push rows but lost 44 of 68 true-push rows (recall 31% pooled; rejected): the criterion-1 rewrite ("better/faster/more private is not a fresh angle") was the main cause, because the same wording describes the model's reading of both the lost true pushes and the removed false pushes. No semantic rule separated the groups. What does separate them are two evidence-level signatures that the baseline pushes right past and that do not occur on true pushes: (a) the page itself says the product is not released or shows only an empty demo; (b) the title/opening lines lead with a performance or benchmark number.
+
+Change (system prompt only; request.json identical to baseline), [TUNE]: baseline prompt plus two Pass bullets (the novelty sentence, criterion 1 and the Push preamble are left as in the baseline). Case quotes from the traces were removed from the bullets (behaviour, not content).
+
+Evidence base is small: about 5 distinct train cases (11-14 false-push rows). Expected: 11-14 false-push rows removed, 1-3 true-push rows lost (one near-certain row on a case that is already pushed only 1 of 3 times); precision about 78-81%, recall about 80-83% on train; i.e. a gain near the edge of the noise (paired train half-width about 9 pts). Not touched: the 13 baseline-missed push rows.
+Output contract unchanged. Prompt about +90 tokens.

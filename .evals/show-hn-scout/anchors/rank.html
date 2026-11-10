@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>排序 10 条参照 post</title>
+<style>
+  body { font: 15px/1.5 -apple-system, "PingFang SC", sans-serif; max-width: 820px; margin: 24px auto; padding: 0 16px; color: #222; }
+  .muted { color: #777; font-size: 12px; }
+  .top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+  .hint { background: #f5f9ff; border: 1px dashed #3b82f6; border-radius: 8px; padding: 10px 12px; margin: 10px 0 14px; font-size: 13px; }
+  .row { display: grid; grid-template-columns: 38px 1fr 64px; gap: 10px; border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 8px; background: #fff; }
+  .row.drag { opacity: .4; }
+  .row.over { border-color: #2563eb; box-shadow: 0 0 0 2px #bfdbfe; }
+  .badge { font-size: 20px; font-weight: 700; color: #2563eb; text-align: center; padding-top: 2px; cursor: grab; user-select: none; }
+  .title { font-weight: 600; font-size: 16px; line-height: 1.35; }
+  .links { font-size: 12px; margin: 2px 0 6px; }
+  .links a { color: #2563eb; margin-right: 12px; word-break: break-all; }
+  .ex { border-left: 3px solid #ddd; padding-left: 10px; font-size: 13px; color: #444; }
+  .ex.full { max-height: 340px; overflow: auto; }
+  .more { font-size: 12px; color: #2563eb; cursor: pointer; background: none; border: none; padding: 2px 0; }
+  .ctl { display: grid; gap: 6px; align-content: start; }
+  button.mv { padding: 6px 0; border-radius: 6px; border: 1px solid #bbb; background: #fff; cursor: pointer; font-size: 14px; }
+  button.mv:hover { background: #f0f0f0; }
+  input.note { width: 100%; box-sizing: border-box; margin-top: 8px; font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 6px; border: 1px solid #ccc; }
+  label.tie { font-size: 12px; color: #555; display: inline-block; margin-top: 6px; }
+  .cut { text-align: center; color: #dc2626; font-size: 13px; font-weight: 600; border-top: 2px dashed #dc2626; margin: 10px 0 12px; padding-top: 4px; }
+  #saved { color: #16a34a; }
+  .done { margin: 14px 0; }
+  .done button { padding: 10px 16px; border-radius: 6px; border: 1px solid #2563eb; background: #2563eb; color: #fff; cursor: pointer; font-size: 14px; }
+  .done button.on { background: #16a34a; border-color: #16a34a; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <b>把这 10 条按“该不该 push”从强到弱排序</b>
+    <span class="muted"><span id="saved">已保存</span></span>
+  </div>
+  <div class="hint">
+    <b>第 1 位 = 最该 push，第 10 位 = 最不该 push。</b>用右侧 ↑ ↓ 按钮，或者按住左边的数字拖动。<br>
+    点标题下面的链接可以看原页面和 HN 讨论；页面摘要只是开头一段。<br>
+    两条分不出高低时，勾选下面那条的“和上一条差不多”。每条可以写一句备注（为什么放这里），非必填，但以后写判断标准时很有用。<br>
+    顺序是随机的，这里没有显示任何旧标签或我的判断。
+  </div>
+  <div id="list"></div>
+  <div class="done"><button id="confirm">排好了，确认</button> <span class="muted" id="cstate"></span></div>
+  <p class="muted">每次改动都会自动保存到 anchors/ranking.json 和 ranking.jsonl，关掉页面再打开会恢复。</p>
+<script src="rank.js"></script>
+</body>
+</html>

@@ -182,7 +182,7 @@ if (import.meta.main) {
     "page-chars": { type: "string", default: "700" }, "comment-chars": { type: "string", default: "0" },
   } });
   if (!v.model) throw new Error("--model is required (it is recorded on every row)");
-  if (!["fresh-train", "fresh-test", "train60", "heldout", "day-1104"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
+  if (!["fresh-train", "fresh-test", "train60", "heldout", "day-1104", "day-1109"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
   const setDir = join(DIR, v.set!);
   const opts: RankOpts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, poolFrom: v["pool-from"]!, pageChars: +v["page-chars"]!, commentChars: +v["comment-chars"]! };
   console.log(`Plan: ${opts.reps} reps x 1 ranking call on ${opts.model} (variant ${opts.variant}, set ${v.set}), pool ${poolFromRun(setDir, opts.poolFrom).length} cases from ${opts.poolFrom}, cards: ${opts.pageChars} page chars + ${opts.commentChars} discussion chars`);

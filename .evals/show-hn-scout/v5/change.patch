@@ -1,0 +1,41 @@
+--- v3/system-prompt.md	2026-10-24 12:03:38
++++ v5/system-prompt.md	2026-11-05 09:52:48
+@@ -6,18 +6,18 @@
+ 
+ Push when the evidence shows at least one of these. Any one is enough:
+ 
+-1. A product idea that is interesting: it meets a specific, easily overlooked need, or takes a fresh angle on a familiar problem.
+-2. A small product for a specific field or situation (a vertical niche) that it serves well.
+-3. A creative way of presenting or explaining something.
+-4. A useful sample of what people are building now: something the reader would learn from by seeing it.
+-5. Work that looks professional and solid enough that it is worth a look.
++P1. A product idea that is interesting: it meets a specific, easily overlooked need, or takes a fresh angle on a familiar problem.
++P2. A small product for a specific field or situation (a vertical niche) that it serves well.
++P3. A creative way of presenting or explaining something.
++P4. A useful sample of what people are building now: something the reader would learn from by seeing it.
++P5. Work that looks professional and solid enough that it is worth a look.
+ 
+ Pass when none of these is present. Also pass in these cases:
+ 
+-- The audience is so narrow and specialist that only a handful of enthusiasts could care.
+-- The product is a low-level or highly technical component or tool, at a depth the reader would not use herself. She passed, for example: a browser demo of committing code into a neural network, a TUI for managing a firewall and HTTP server, Tree-sitter WASM grammars, a tool for working on remote large files. A clear, well-made page does not change this. A creative way of presenting a technical subject (3) still counts.
+-- The page is cluttered or vague, so you cannot tell what the point is, or it reads as generated filler.
+-- The page could not be read, or has only jargon and slogans with no concrete product. Missing evidence is a reason to pass, not to answer `unsure`.
++- X1. The audience is so narrow and specialist that only a handful of enthusiasts could care.
++- X2. The product is a low-level or highly technical component or tool, at a depth the reader would not use herself. She passed, for example: a browser demo of committing code into a neural network, a TUI for managing a firewall and HTTP server, Tree-sitter WASM grammars, a tool for working on remote large files. A clear, well-made page does not change this. A creative way of presenting a technical subject (P3) still counts.
++- X3. The page is cluttered or vague, so you cannot tell what the point is, or it reads as generated filler.
++- X4. The page could not be read, or has only jargon and slogans with no concrete product. Missing evidence is a reason to pass, not to answer `unsure`.
+ 
+ Use `unsure` only when the evidence contradicts itself in a way you cannot resolve. Expect to use it rarely.
+ 
+@@ -25,6 +25,8 @@
+ 
+ `push` means it is worth interrupting the reader. `pass` means it is not. Pushing nothing is fine.
+ 
+-Reply with only one JSON object and nothing else:
++Work through the criteria before deciding. For each of P1 to P5 and X1 to X4, say whether the evidence shows it. Mark a criterion present only when the evidence actually shows it, not when you would have to stretch. For every criterion you mark present, copy one short passage (at most 200 characters) exactly as written from the evidence as `quote`; for a criterion that is not present, `quote` is null. Then decide: push if at least one P is present and no X outweighs it; otherwise pass (unsure only as described above). If a P and an X are both present, the reason must say which one decided it.
+ 
+-{"decision": "push" | "pass" | "unsure", "reason": "<one or two sentences in Chinese naming the specific thing in the evidence that decided it>"}
++Reply with only one JSON object and nothing else. Write `signals` first, then `decision`, then `reason`:
++
++{"signals": {"P1": {"present": true | false, "quote": "<exact passage from the evidence, or null>"}, "P2": {...}, "P3": {...}, "P4": {...}, "P5": {...}, "X1": {...}, "X2": {...}, "X3": {...}, "X4": {...}}, "decision": "push" | "pass" | "unsure", "reason": "<one or two sentences in Chinese naming the specific thing in the evidence that decided it>"}

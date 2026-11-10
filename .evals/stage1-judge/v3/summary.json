@@ -1,0 +1,17 @@
+{
+  "description": "Pass conditions become gates that outrank the Push criteria; a conceded Pass-kind reservation means pass (precedence, not new wording about novelty)",
+  "label": "v3",
+  "target": "system_prompt",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "2e562f62f133e1b09acc0955b4a3a91f9640e8393cb4296deafb93497fd56a0c",
+  "structured": false,
+  "strength": false,
+  "reps": 3,
+  "judge_model": null,
+  "started_at": "2026-11-10T16:53:36.708Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-10T16:57:16.884Z",
+  "rows": 270,
+  "error_rows": 0,
+  "aborted": null
+}

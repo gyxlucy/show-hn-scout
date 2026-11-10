@@ -1,0 +1,19 @@
+{
+  "description": "second stage: v7 with richer cards (2,500 page chars + 800 discussion chars)",
+  "label": "v2",
+  "target": "system_prompt",
+  "kind": "ranker",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "826a6f2f9cf8b4ae502dd5b6e07595f67ab1da6585d58576b055d12e9ad6e68d",
+  "days": [
+    "train60-sim"
+  ],
+  "rows": 6,
+  "error_rows": 0,
+  "sources": {
+    "train60-sim": "train60/haiku_v8"
+  },
+  "cost": "tokens and latency only; cost not measured (no pricing rule)",
+  "generated_by": "adapt.ts (no model calls)",
+  "generated_at": "2026-11-10T10:35:11.747Z"
+}

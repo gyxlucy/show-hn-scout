@@ -1,0 +1,2992 @@
+{
+ "generated_from": "stage1-judge variant dirs; no model calls",
+ "recall_floor": 0.8,
+ "reps": 3,
+ "model": "claude-haiku-5-5",
+ "sizes": {
+  "train": 60,
+  "test": 30,
+  "test_push": 11,
+  "train_push": 27
+ },
+ "variants": [
+  {
+   "id": "baseline",
+   "change": "v3 control (unchanged production prompt)",
+   "splits": {
+    "train": {
+     "rows": 180,
+     "precision": 0.6938775510204082,
+     "n_precision": 98,
+     "precision_ci": [
+      0.53125,
+      0.84251968503937
+     ],
+     "recall": 0.8395061728395061,
+     "n_recall": 81,
+     "recall_ci": [
+      0.6944444444444444,
+      0.96
+     ],
+     "specificity": 0.696969696969697,
+     "pushes": 0.5444444444444444,
+     "valid": 1,
+     "unanimity": 0.9166666666666666,
+     "d_precision": null,
+     "d_precision_ci": null,
+     "d_recall": null,
+     "d_recall_ci": null
+    },
+    "test": {
+     "rows": 90,
+     "precision": 0.5641025641025641,
+     "n_precision": 39,
+     "precision_ci": [
+      0.2916666666666667,
+      0.8095238095238095
+     ],
+     "recall": 0.6666666666666666,
+     "n_recall": 33,
+     "recall_ci": [
+      0.3888888888888889,
+      0.9
+     ],
+     "specificity": 0.7017543859649122,
+     "pushes": 0.43333333333333335,
+     "valid": 1,
+     "unanimity": 0.8333333333333334,
+     "d_precision": null,
+     "d_precision_ci": null,
+     "d_recall": null,
+     "d_recall_ci": null
+    },
+    "all": {
+     "rows": 270,
+     "precision": 0.656934306569343,
+     "n_precision": 137,
+     "precision_ci": [
+      0.5182481751824818,
+      0.7841726618705036
+     ],
+     "recall": 0.7894736842105263,
+     "n_recall": 114,
+     "recall_ci": [
+      0.6576576576576577,
+      0.905982905982906
+     ],
+     "specificity": 0.6987179487179487,
+     "pushes": 0.5074074074074074,
+     "valid": 1,
+     "unanimity": 0.8888888888888888,
+     "d_precision": null,
+     "d_precision_ci": null,
+     "d_recall": null,
+     "d_recall_ci": null
+    }
+   },
+   "latency_s": 5.144825925925924,
+   "tokens_in": 5030.8,
+   "tokens_out": 270.6259259259259
+  },
+  {
+   "id": "v1",
+   "change": "Push gate needs a real twist: a better/faster/more private version of a known job, or a clear page alone, no longer counts (criteria 1 and 5)",
+   "splits": {
+    "train": {
+     "rows": 180,
+     "precision": 0.8275862068965517,
+     "n_precision": 29,
+     "precision_ci": [
+      0.5714285714285714,
+      1
+     ],
+     "recall": 0.2962962962962963,
+     "n_recall": 81,
+     "recall_ci": [
+      0.13636363636363635,
+      0.4696969696969697
+     ],
+     "specificity": 0.9494949494949495,
+     "pushes": 0.16111111111111112,
+     "valid": 1,
+     "unanimity": 0.9166666666666666,
+     "d_precision": 0.13370865587614356,
+     "d_precision_ci": [
+      -0.074712643678161,
+      0.34363295880149813
+     ],
+     "d_recall": -0.5432098765432098,
+     "d_recall_ci": [
+      -0.7058823529411765,
+      -0.36904761904761907
+     ]
+    },
+    "test": {
+     "rows": 90,
+     "precision": 1,
+     "n_precision": 11,
+     "precision_ci": [
+      1,
+      1
+     ],
+     "recall": 0.3333333333333333,
+     "n_recall": 33,
+     "recall_ci": [
+      0.07407407407407407,
+      0.625
+     ],
+     "specificity": 1,
+     "pushes": 0.12222222222222222,
+     "valid": 1,
+     "unanimity": 0.9666666666666667,
+     "d_precision": 0.4358974358974359,
+     "d_precision_ci": [
+      0.19047619047619047,
+      0.6956521739130435
+     ],
+     "d_recall": -0.3333333333333333,
+     "d_recall_ci": [
+      -0.5833333333333333,
+      -0.09999999999999998
+     ]
+    },
+    "all": {
+     "rows": 270,
+     "precision": 0.875,
+     "n_precision": 40,
+     "precision_ci": [
+      0.6818181818181818,
+      1
+     ],
+     "recall": 0.30701754385964913,
+     "n_recall": 114,
+     "recall_ci": [
+      0.18018018018018017,
+      0.44166666666666665
+     ],
+     "specificity": 0.967948717948718,
+     "pushes": 0.14814814814814814,
+     "valid": 1,
+     "unanimity": 0.9333333333333333,
+     "d_precision": 0.21806569343065696,
+     "d_precision_ci": [
+      0.051948051948051965,
+      0.38530020703933743
+     ],
+     "d_recall": -0.4824561403508772,
+     "d_recall_ci": [
+      -0.6239316239316239,
+      -0.3423423423423423
+     ]
+    }
+   },
+   "latency_s": 4.716888888888888,
+   "tokens_in": 5182.8,
+   "tokens_out": 254.65185185185186
+  },
+  {
+   "id": "v2",
+   "change": "Two narrow Pass bullets: product not actually offered yet, and a page that leads with a speed/size/benchmark number instead of what the user can do",
+   "splits": {
+    "train": {
+     "rows": 180,
+     "precision": 0.7156862745098039,
+     "n_precision": 102,
+     "precision_ci": [
+      0.5583333333333333,
+      0.8571428571428571
+     ],
+     "recall": 0.9012345679012346,
+     "n_recall": 81,
+     "recall_ci": [
+      0.7738095238095238,
+      1
+     ],
+     "specificity": 0.7070707070707071,
+     "pushes": 0.5666666666666667,
+     "valid": 1,
+     "unanimity": 0.9666666666666667,
+     "d_precision": 0.021808723489395776,
+     "d_precision_ci": [
+      -0.059473684210526345,
+      0.10537918871252205
+     ],
+     "d_recall": 0.06172839506172845,
+     "d_recall_ci": [
+      -0.015873015873015928,
+      0.16666666666666663
+     ]
+    },
+    "test": {
+     "rows": 90,
+     "precision": 0.47058823529411764,
+     "n_precision": 34,
+     "precision_ci": [
+      0.17647058823529413,
+      0.7428571428571429
+     ],
+     "recall": 0.48484848484848486,
+     "n_recall": 33,
+     "recall_ci": [
+      0.18518518518518517,
+      0.7619047619047619
+     ],
+     "specificity": 0.6842105263157895,
+     "pushes": 0.37777777777777777,
+     "valid": 1,
+     "unanimity": 0.9,
+     "d_precision": -0.09351432880844646,
+     "d_precision_ci": [
+      -0.23375262054507334,
+      0
+     ],
+     "d_recall": -0.18181818181818177,
+     "d_recall_ci": [
+      -0.42424242424242425,
+      0.03703703703703709
+     ]
+    },
+    "all": {
+     "rows": 270,
+     "precision": 0.6544117647058824,
+     "n_precision": 136,
+     "precision_ci": [
+      0.5142857142857142,
+      0.7857142857142857
+     ],
+     "recall": 0.7807017543859649,
+     "n_recall": 114,
+     "recall_ci": [
+      0.6486486486486487,
+      0.9047619047619048
+     ],
+     "specificity": 0.6987179487179487,
+     "pushes": 0.5037037037037037,
+     "valid": 1,
+     "unanimity": 0.9444444444444444,
+     "d_precision": -0.002522541863460681,
+     "d_precision_ci": [
+      -0.062280102924959335,
+      0.05719577907498885
+     ],
+     "d_recall": -0.00877192982456143,
+     "d_recall_ci": [
+      -0.10810810810810811,
+      0.09166666666666667
+     ]
+    }
+   },
+   "latency_s": 4.682262962962965,
+   "tokens_in": 5153.8,
+   "tokens_out": 317.6148148148148
+  },
+  {
+   "id": "v3",
+   "change": "Pass conditions become gates that outrank the Push criteria; a conceded Pass-kind reservation means pass (precedence, not new wording about novelty)",
+   "splits": {
+    "train": {
+     "rows": 180,
+     "precision": 0.7211538461538461,
+     "n_precision": 104,
+     "precision_ci": [
+      0.5647058823529412,
+      0.864406779661017
+     ],
+     "recall": 0.9259259259259259,
+     "n_recall": 81,
+     "recall_ci": [
+      0.8148148148148148,
+      1
+     ],
+     "specificity": 0.7070707070707071,
+     "pushes": 0.5777777777777777,
+     "valid": 1,
+     "unanimity": 0.9666666666666667,
+     "d_precision": 0.02727629513343799,
+     "d_precision_ci": [
+      -0.01680672268907557,
+      0.08252427184466016
+     ],
+     "d_recall": 0.0864197530864198,
+     "d_recall_ci": [
+      -0.050000000000000044,
+      0.22666666666666668
+     ]
+    },
+    "test": {
+     "rows": 90,
+     "precision": 0.5151515151515151,
+     "n_precision": 33,
+     "precision_ci": [
+      0.20689655172413793,
+      0.78125
+     ],
+     "recall": 0.5151515151515151,
+     "n_recall": 33,
+     "recall_ci": [
+      0.20833333333333334,
+      0.8
+     ],
+     "specificity": 0.7192982456140351,
+     "pushes": 0.36666666666666664,
+     "valid": 1,
+     "unanimity": 0.8333333333333334,
+     "d_precision": -0.04895104895104896,
+     "d_precision_ci": [
+      -0.19243421052631576,
+      0.048484848484848464
+     ],
+     "d_recall": -0.1515151515151515,
+     "d_recall_ci": [
+      -0.38095238095238093,
+      0
+     ]
+    },
+    "all": {
+     "rows": 270,
+     "precision": 0.6715328467153284,
+     "n_precision": 137,
+     "precision_ci": [
+      0.5354330708661418,
+      0.7980769230769231
+     ],
+     "recall": 0.8070175438596491,
+     "n_recall": 114,
+     "recall_ci": [
+      0.6829268292682927,
+      0.9238095238095239
+     ],
+     "specificity": 0.7115384615384616,
+     "pushes": 0.5074074074074074,
+     "valid": 1,
+     "unanimity": 0.9222222222222223,
+     "d_precision": 0.014598540145985384,
+     "d_precision_ci": [
+      -0.03167638396345496,
+      0.06355304319192134
+     ],
+     "d_recall": 0.01754385964912275,
+     "d_recall_ci": [
+      -0.10569105691056913,
+      0.14035087719298245
+     ]
+    }
+   },
+   "latency_s": 4.639055555555559,
+   "tokens_in": 5177.8,
+   "tokens_out": 308.02222222222224
+  }
+ ],
+ "cases": [
+  {
+   "id": "31",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Lalabase, self-hosted project management with an AI that cites sources",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "32",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: WhatYouSay – Self-hosted WhatsApp voice-note transcription",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "33",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: shapcn brings shape-aware icon morphing",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "34",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Unspin – live per-step progress for Claude Code's shell commands",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "35",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: PDT – Open-source deployment of scheduled jobs on your own cloud",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "pass",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "36",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Finance Toolkit MCP with 500 financial metrics for Claude and others",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "37",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: We ported FLA's Triton kernels to Jax Pallas; they're faster on H100",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "38",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: IAMSentry – Paste an IAM policy, see privesc attack paths and fixes",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "39",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Gol – An interactive globe of the other side of everywhere",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "40",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: OpenSocials, plan and approve social posts",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "41",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Pipe Dream Remastered",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "42",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Cute and Fun little 3D Desktop pets for Mac",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "43",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Priced Out – An interactive map of US housing affordability",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "push",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "44",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Inillucent – agentic db written in Rust that is 500% faster than SQLite",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "45",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Using an LLM chat template in reverse to play the user",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "46",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Podium, presentation rehearsal with coaching",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "push",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "47",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: CxxDox, a mkdocs plugin for complex C++ projects",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "48",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Aven-stops AI coding tools from breaking yours project's rules",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "49",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: A Claude Code plugin that plays a song and shows a startup card",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "50",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Route Optimization Mini-Games",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "pass",
+     "push",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "51",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Ternlux – Free, local-first, bring-your-own-key AI pipeline builder",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "52",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Toli – Let Claude Code on one computer work with Codex on another",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "push",
+     "pass"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "53",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: XTrace – productivity observability tool for coding agents",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "54",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Mnemolith – AI coding memory that goes stale when your code changes",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "55",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Trace Intelligence for Claude Code, Codex, Cursor, OpenCode, Grok",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "56",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Hookman – One stable webhook URL that follows your preview branch",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "57",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Online timer you can see",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "pass",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "58",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Documenting the file formats and engine of Elder Scrolls: Redguard 1998",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "59",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: 4096x – Merge puzzle games where you build 4096",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "60",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Flint-interactive, a language for interactive data visualizations (MSR)",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "61",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Visual Studio extension that shows decimal and hex in the debugger",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "62",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: You Can Just Filter YouTube Playlists in the 'Save to Playlist' Dialog",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "63",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Benchmarks of continual learning model trained for a month on a laptop",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "64",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Loböle, open-source parametric CAD that AI agents can drive",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "65",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Nord Theme for Cursor",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "66",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: MindThread CLI and MCP server for Threads, with per-permission approval",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "67",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: I found out a way to make openF1 data easy to analyse for normies",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "68",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Latch – Make any website usable by AI agents in one line (WebMCP)",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "69",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Narro – Read web pages and Kindle books using local AI voices",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "70",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Automated newsletter built with Grok bot",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "71",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: CAS-X – An input-dominant recursive filter (8.5x recovery acceleration)",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "72",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: I Made a Multiplayer 3D Shooter Game in Lisp (Again)",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "73",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Repotruck – Mirror and organize GitHub repos with a TUI and MCP server",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "74",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Managing AI Models After Launch-Versioning, Evaluations, and Fallbacks",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "75",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Quill Desktop; Lightweight AI harness, no electron/WebKit native GUI",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "76",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: AiSniff, underline the phrases in a text that read like AI wrote them",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "77",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Privacy Meridian, navigate global privacy laws",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "78",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Lavoi – On-device speech-to-text in under 500ms",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "79",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Whistle Translator",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "80",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Graph-MIND – Local memory for AI coding agents, no LLM calls to save",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "81",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: AI Trend Video – Put your photo into viral AI video templates",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "82",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Claude Code(and others) embedded in your app",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "83",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Snaparser – a tool to browse your Snapchat exports",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "84",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: A set of test-cases for CP/M emulators",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "85",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Mailrelay – Email to Webhook in Minutes",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "86",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Wabetune – Intonation Analyser · Strings · Winds · Brass · Voice",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "87",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: ToolsOfWeb – 69 free online tools that run in the browser",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "88",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Logfolio – A public log for books, films, games and anything you keep",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "89",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Sbr, a sing-box compatible client for government resistant VPN infra",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "90",
+   "split": "train",
+   "tag": "random",
+   "title": "Show HN: Perch, a calm Mac app for juggling Claude Code sessions",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "91",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Kolo – share your AI coding sessions with anyone",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "pass",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "92",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Only thing you need to stay informed on tech without doom scrolling x",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "push",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "push",
+     "pass",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "93",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: CallFlow – VS Code REST client that also captures your terminal's HTTP",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "pass",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "94",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: AI Detector that is private, free and unlimited use",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "95",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Monkeytype for Developers",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "96",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: The missing clipboard history for macOS that idles at 16 MB",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "97",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: CodeAIHQ – High-performance technical analysis of cinema VFX pipelines",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "98",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Git-ing Over it, learn Git like you'll use it IRL",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "pass",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "99",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Twigg Free and Open Source Centralized VCS",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "100",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: LiveWorldTrends – Real-time 3D globe of global trends and crisis radar",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "101",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Orgiggly – Claude Code plugin that hosts the apps it builds",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "pass",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "102",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: 27B open model to grade robot data 48x cheaper/27x faster vs. 6 Astra",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "103",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Dadgpt Open Source Halloween Costume",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "104",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Free Online Image Tools",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "105",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Calm Web – Print magazine style reader",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "106",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: See how much revenue declined cards cost your SaaS",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "107",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Black Swan – a Flappy Bird where the rules randomly break",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "108",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Kosh - Give the browser bookmarks a second life",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "109",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: A map of outdoor gyms and pull-up bars",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "110",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Find Open Source Alternatives to Paid Software",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "111",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Glitchrupt: Glitch your desktop when your AI agent needs your attention",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "112",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Paycoinly WordPress Plugin",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "113",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Directory 958 inspirational artisans, craftspeople, smiths, for post-AI",
+   "gold": "push",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "114",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Muxer – Control cmux terminals from Android",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "115",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: AI agent swarms test if new CVEs are exploitable in your env",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "116",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: A randomized controlled trial run inside an agent simulation",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "117",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Zilum – A tiny Snipping Tool alternative for Windows 11",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "push"
+    ],
+    "v3": [
+     "push",
+     "push",
+     "push"
+    ]
+   }
+  },
+  {
+   "id": "118",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: Enzyme – a programming language that compiles wikis for agents",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "push",
+     "push",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "push",
+     "push",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "push",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "119",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: AI Client Lead Qualifier and Review Responder for Agencies",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  },
+  {
+   "id": "120",
+   "split": "test",
+   "tag": "random",
+   "title": "Show HN: I added stacked subgraphs to Mermaid flowcharts",
+   "gold": "pass",
+   "decisions": {
+    "baseline": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v1": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v2": [
+     "pass",
+     "pass",
+     "pass"
+    ],
+    "v3": [
+     "pass",
+     "pass",
+     "pass"
+    ]
+   }
+  }
+ ]
+}

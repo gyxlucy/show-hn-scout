@@ -1,0 +1,19 @@
+{
+  "description": "listwise ranker",
+  "label": "v8",
+  "target": "system_prompt",
+  "kind": "ranker",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "826a6f2f9cf8b4ae502dd5b6e07595f67ab1da6585d58576b055d12e9ad6e68d",
+  "pool_from": "haiku_v3",
+  "pool_size": 34,
+  "page_chars": 2500,
+  "comment_chars": 800,
+  "reps": 6,
+  "started_at": "2026-11-05T15:21:22.914Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-05T15:23:57.522Z",
+  "rows": 6,
+  "error_rows": 0,
+  "aborted": null
+}

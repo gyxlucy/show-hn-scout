@@ -1,0 +1,26 @@
+{
+  "problems": [],
+  "cases": 30,
+  "labeled": 30,
+  "unlabeled": 0,
+  "duplicate_ids": 0,
+  "duplicate_story_ids": 0,
+  "duplicate_prompts": 0,
+  "by_primary_tag": {
+    "random": 30
+  },
+  "by_evidence_tag": {
+    "page-text": 23,
+    "no-page-text": 7
+  },
+  "by_gold_decision": {
+    "push": 11,
+    "pass": 19
+  },
+  "prompt_chars": {
+    "min": 279,
+    "median": 1891,
+    "max": 31155
+  },
+  "note": "Report precision/recall per tags[0] group; the random group is the only one that approximates real traffic."
+}

@@ -1,0 +1,17 @@
+{
+  "description": "anchor comparison",
+  "label": "v9",
+  "target": "system_prompt",
+  "kind": "anchor",
+  "model": "claude-haiku-5-5",
+  "system_prompt_sha256": "5233ba547ed4d7ea4f0bfece6640f047ef3de46dc622a087a691f93447afafa0",
+  "n_refs": 10,
+  "push_rank": 3,
+  "cases": 54,
+  "reps": 3,
+  "started_at": "2026-11-09T18:09:56.686Z",
+  "cost": "cost not measured (no approved pricing rule)",
+  "finished_at": "2026-11-09T18:12:55.977Z",
+  "rows": 162,
+  "error_rows": 0
+}

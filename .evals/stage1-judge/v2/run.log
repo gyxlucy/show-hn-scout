@@ -1,0 +1,8 @@
+Resolved: 90 cases (train 60, test 30) x 3 reps = 270 tasks on claude-haiku-5-5, variant v2, judge off, concurrency 6
+{
+  "planned": 270,
+  "ran": 269,
+  "rows": 270,
+  "errors": 0,
+  "skipped_unlabeled": []
+}
