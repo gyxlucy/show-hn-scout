@@ -1,6 +1,6 @@
 name: scout
 
-# Judge new Show HN posts with the v3 agent, rank the keepers with v7, and push only those that are both a v3 push and in the day's top 3.
+# Judge new Show HN posts with the v3 agent, rank the keepers with v7, and push only those that are both a v3 push and inside the ranker's top 10.
 # Needs one repository secret: SLACK_WEBHOOK_URL (an Incoming Webhook for the target channel).
 # "Seen" state lives on the `bot-state` branch (bot-state/seen.json), never on main.
 
@@ -61,14 +61,14 @@ jobs:
             bun bot/scout.ts --dry-run --no-seed --max-judgements 3 --state bot-state/seen.json
           elif [[ "$BACKFILL_HOURS" =~ ^[1-9][0-9]*$ ]]; then
             # Roughly 3 new Show HN posts an hour (a /shownew page of 30 spans about 10h): 4 pages cover 24h with margin.
-            bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 3 --concurrency 5
+            bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
           else
             # Daily run: about 3 new posts an hour, a /shownew page of 30 spans ~10h, so 4 pages (~40h) cover the day
             # with margin even if GitHub runs the cron late. Caps are sized for ~70 new posts per run.
-            # Stage 2 (on by default, --no-rank turns it off): v7 ranks every push (3 reps) and only the top 3 are posted, best
+            # Stage 2 (on by default, --no-rank turns it off): v7 ranks every push (3 reps) and only the top 10 are posted, best
             # first, fewer if there are fewer pushes. Rankings are logged to bot-state/rank-log.jsonl. If ranking fails nothing is
             # posted and the run fails visibly.
-            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 3 --concurrency 5
+            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
           fi
 
       - name: Save seen-state

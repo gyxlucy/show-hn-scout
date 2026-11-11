@@ -6,7 +6,7 @@
 //   bun bot/scout.ts --no-rank                                # skip stage 2: post the pushes newest first, up to the cap
 //
 // Stage 2: a post is sent only if the v3 judge said push AND the v7 listwise ranker (3 reps merged by mean position) puts it
-// in the day's top --max-pushes (default 3). They are posted best first; with fewer pushes than that only those are posted
+// in the day's top --max-pushes (the cron passes 10). They are posted best first; with fewer pushes than that only those are posted
 // (the cap is never filled up), and the rest stay silent (marked suppressed in the state). Every ranking is appended to
 // <state dir>/rank-log.jsonl. If ranking fails, nothing is posted (an unranked post has not met stage 2), the pushes are
 // marked suppressed, and the run exits with code 1 so the failure is visible. --no-rank posts the newest pushes instead.
@@ -138,7 +138,7 @@ const summary = await runScout({
   promptSha,
   minAgeHours: Number(opt("min-age-hours", "0")),
   backfillHours: Number(opt("backfill-hours", "0")),
-  maxPushes: Number(opt("max-pushes", "3")),
+  maxPushes: Number(opt("max-pushes", "8")),
   maxJudgements: Number(opt("max-judgements", "40")),
   maxAttempts: 3,
   concurrency: Number(opt("concurrency", "3")),
