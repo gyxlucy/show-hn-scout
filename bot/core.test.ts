@@ -6,7 +6,6 @@ const cand = (id: number, age = 3): Candidate => ({ id, title: `post ${id}`, url
 
 function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { error: string }> } = {}) {
   const posted: number[] = [];
-  const notes: string[] = [];
   const judged: string[] = [];
   const state: State = over.state ?? { version: 1, items: {} };
   const deps: Deps = {
@@ -20,7 +19,6 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
       return over.answers?.[id] ?? { decision: "push", reason: "有意思" };
     },
     post: async ({ id }) => void posted.push(id),
-    postNote: async (t) => void notes.push(t),
     save: () => {},
     now: () => new Date("2026-10-25T00:00:00Z"),
     promptSha: "abc",
@@ -33,7 +31,7 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
     log: () => {},
     ...over,
   };
-  return { deps, posted, notes, judged, state };
+  return { deps, posted, judged, state };
 }
 
 test("first run seeds the backlog and neither judges nor posts", async () => {
@@ -104,13 +102,12 @@ test("a Slack failure keeps the push and retries the post without calling the mo
   expect(h.judged).toHaveLength(1);
 });
 
-test("the per-run cap keeps the newest posts, suppresses the rest, and says so once", async () => {
+test("without a ranker the per-run cap keeps the newest posts and silently suppresses the rest", async () => {
   const h = harness({ maxPushes: 2, candidates: [cand(5), cand(4), cand(3), cand(2)] });
   const s = await runScout(h.deps);
   expect(h.posted).toEqual([5, 4]);
   expect(s.suppressed).toBe(2);
   expect(h.state.items["3"].status).toBe("suppressed");
-  expect(h.notes).toHaveLength(1);
   await runScout({ ...h.deps });
   expect(h.posted).toEqual([5, 4]); // suppressed posts do not come back
 });
@@ -151,7 +148,7 @@ test("the live prompt is the eval prompt: starts with the contract header and om
   expect(prompt).not.toMatch(/score|points|rank/i);
 });
 
-test("with more pushes than the cap the ranker chooses and the winners are posted best first, with their rank", async () => {
+test("with more pushes than the cap the ranker chooses and the winners are posted best first, with their rank; the rest stay silent", async () => {
   const seen: number[][] = [];
   const caps: number[] = [];
   const ranks: any[] = [];
@@ -175,16 +172,33 @@ test("with more pushes than the cap the ranker chooses and the winners are poste
   expect(s.ranked).toBe(true);
   expect(s.suppressed).toBe(1);
   expect(h.state.items["3"].status).toBe("suppressed");
-  expect(h.notes).toHaveLength(1);
 });
 
-test("ranking is skipped when the cap does not bind", async () => {
+test("every push goes through the ranker even under the cap; only as many as there are pushes are posted, in ranked order", async () => {
   let called = 0;
-  const h = harness({ maxPushes: 5, candidates: [cand(3), cand(2), cand(1)], rank: async () => (called++, null) });
+  const h = harness({
+    maxPushes: 10,
+    candidates: [cand(3), cand(2), cand(1)],
+    rank: async (items) => (called++, [1, 3, 2]),
+  });
   const s = await runScout(h.deps);
+  expect(called).toBe(1);
+  expect(h.posted).toEqual([1, 3, 2]); // not padded to 10, nothing suppressed
+  expect(s.ranked).toBe(true);
+  expect(s.suppressed).toBe(0);
+});
+
+test("a single push has nothing to be ranked against and is posted as it is; no push means no post and no ranking", async () => {
+  let called = 0;
+  const rank = async () => (called++, null);
+  const one = harness({ candidates: [cand(2), cand(1)], answers: { 1: { decision: "pass", reason: "x" } }, rank });
+  await runScout(one.deps);
+  expect(one.posted).toEqual([2]);
+  const none = harness({ candidates: [cand(1)], answers: { 1: { decision: "pass", reason: "x" } }, rank });
+  const s = await runScout(none.deps);
+  expect(none.posted).toEqual([]);
+  expect(s.posted).toBe(0);
   expect(called).toBe(0);
-  expect(h.posted).toEqual([3, 2, 1]);
-  expect(s.ranked).toBe(false);
 });
 
 test("a ranker failure, null or a bad order falls back to the newest-first cap and posts anyway", async () => {
@@ -197,8 +211,10 @@ test("a ranker failure, null or a bad order falls back to the newest-first cap a
   }
 });
 
-test("the Slack footer shows the ranked position only when there is one", () => {
+test("the Slack footer shows the ranked position, never how many posts there were", () => {
   const r = { title: "t", url: "https://e.com", reason: "r", age_hours: 2 };
-  expect(JSON.stringify(slackPayload(1, r))).not.toContain("今日排序");
-  expect(JSON.stringify(slackPayload(1, r, { pos: 2, of: 14 }))).toContain("今日排序 2/14");
+  expect(JSON.stringify(slackPayload(1, r))).not.toContain("今日第");
+  const withRank = JSON.stringify(slackPayload(1, r, { pos: 2, of: 14 }));
+  expect(withRank).toContain("今日第 2 名");
+  expect(withRank).not.toContain("14");
 });

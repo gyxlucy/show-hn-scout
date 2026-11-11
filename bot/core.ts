@@ -37,9 +37,9 @@ export type Deps = {
   /** One select_project call. Throws or returns an error string on harness failure. */
   judge: (prompt: string) => Promise<Judgement | { error: string }>;
   post: (c: { id: number; record: Record_; rank?: { pos: number; of: number } }) => Promise<void>;
-  postNote?: (text: string) => Promise<void>;
   /**
-   * Optional ranking of this run's pushes (newest first). Called only when more posts were pushed than the cap lets through.
+   * Optional stage 2: ranking of every push of this run (newest first), whether or not they fit under the cap. Skipped only
+   * for a single push, which has nothing to be compared with. `cap` is how many may still be posted.
    * Returns every id once, best first; null or a throw means "could not rank" and the newest-first order is kept.
    */
   rank?: (items: RankItem[], cap: number) => Promise<number[] | null>;
@@ -98,11 +98,9 @@ export async function runScout(d: Deps): Promise<Summary> {
   }
 
   let pushesLeft = d.maxPushes;
-  let overflow = 0;
   const postOne = async (id: number, rec: Record_, rank?: { pos: number; of: number }): Promise<boolean> => {
     if (pushesLeft <= 0) {
       rec.status = "suppressed";
-      overflow++;
       s.suppressed++;
       d.save(d.state);
       return false;
@@ -186,10 +184,11 @@ export async function runScout(d: Deps): Promise<Summary> {
     if (r.decision === "push") pushed.push(c.id);
   }
 
-  // Which pushes go out. With more pushes than the cap, the ranker picks the best ones and they go out best first.
-  // If it cannot rank, fall back to the newest-first order (candidates are newest-first), which keeps the freshest posts.
+  // Which pushes go out, and in what order. Every push goes through the ranker; the ones inside the cap go out best first,
+  // however few that is (nothing is added to fill the cap). If it cannot rank, fall back to the newest-first order
+  // (candidates are newest-first), which keeps the freshest posts.
   let order = pushed;
-  if (d.rank && pushed.length > pushesLeft && pushed.length > 1) {
+  if (d.rank && pushed.length > 1) {
     try {
       const items: RankItem[] = pushed.map((id) => ({ id, title: d.state.items[sid(id)].title, prompt: prompts.get(id)! }));
       const ranked = await d.rank(items, pushesLeft);
@@ -205,15 +204,9 @@ export async function runScout(d: Deps): Promise<Summary> {
     }
   }
   const useRank = s.ranked;
+  // Posts over the cap are only marked suppressed in the state; the channel is not told about them.
   for (const [i, id] of order.entries()) await postOne(id, d.state.items[sid(id)], useRank ? { pos: i + 1, of: order.length } : undefined);
 
-  if (overflow && d.postNote) {
-    try {
-      await d.postNote(`另有 ${overflow} 条 push 因单次上限(${d.maxPushes})未发送${useRank ? ",已按排序保留最靠前的" : ",保留了最新的"},已在状态里标记为 suppressed。`);
-    } catch (e) {
-      d.log(`note failed: ${(e as Error).message}`);
-    }
-  }
   return s;
 }
 
@@ -224,6 +217,7 @@ const clip = (t: string, n: number) => (t.length > n ? t.slice(0, n - 1) + "…"
 
 /** Slack mrkdwn escaping matters: titles and reasons are untrusted text and must not make mentions or links. */
 export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "reason" | "age_hours">, rank?: { pos: number; of: number }) {
+  // `of` stays out of the message on purpose: it would reveal how many posts were held back.
   const hn = `https://news.ycombinator.com/item?id=${id}`;
   const link = /^https?:\/\/[^\s<>|]+$/.test(r.url) ? r.url : hn;
   const title = esc(clip(r.title.replace(/\s+/g, " "), 150));
@@ -233,7 +227,7 @@ export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "rea
     text: /^show hn/i.test(title) ? title : `Show HN: ${title}`, // notification fallback; Slack parses mrkdwn here too, so it is escaped as well
     blocks: [
       { type: "section", text: { type: "mrkdwn", text: `*<${link}|${title}>*\n${reason}` } },
-      { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3${rank ? ` · 今日排序 ${rank.pos}/${rank.of}` : ""}` }] },
+      { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3${rank ? ` · 今日第 ${rank.pos} 名` : ""}` }] },
     ],
   };
 }

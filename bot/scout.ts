@@ -3,10 +3,11 @@
 //   bun bot/scout.ts --dry-run --no-seed --max-judgements 3   # judge a few, print Slack payloads, post and save nothing
 //   bun bot/scout.ts                                          # one real run (what the GitHub Actions cron does)
 //   bun bot/scout.ts --backfill-hours 24 --pages 4            # first run only: also judge and post the last 24h
-//   bun bot/scout.ts --no-rank                                # skip stage 2: with more pushes than the cap, post the newest ones
+//   bun bot/scout.ts --no-rank                                # skip stage 2: post the pushes newest first, up to the cap
 //
-// Stage 2: when more posts are judged push than the cap (--max-pushes) lets through, the v7 listwise ranker (3 reps merged
-// by mean position) picks the best ones and they are posted best first. Every ranking is appended to
+// Stage 2: every post judged push (two or more) goes through the v7 listwise ranker (3 reps merged by mean position). The
+// best ones, at most --max-pushes, are posted best first; with fewer pushes than the cap only those are posted (the cap is
+// never filled up), and posts over the cap stay silent (marked suppressed in the state). Every ranking is appended to
 // <state dir>/rank-log.jsonl. If ranking fails the newest pushes are posted instead.
 //
 // Env: SLACK_WEBHOOK_URL (required unless --dry-run), PYTHON (default python3), CAVIA_BASE_URL (optional).
@@ -114,7 +115,6 @@ const summary = await runScout({
     }
     await webhook(payload);
   },
-  postNote: async (text) => (DRY ? console.log(`[dry-run] note: ${text}`) : webhook({ text })),
   rank: flag("no-rank")
     ? undefined
     : async (items, cap) => {

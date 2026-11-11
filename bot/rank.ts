@@ -1,5 +1,4 @@
-// Stage 2 of the daily push: when more posts were judged push than the cap lets through, the v7 listwise ranker orders
-// them and the top ones go to Slack. Several ranking reps (different shuffles) are merged by mean position, which keeps
+// Stage 2 of the daily push: the v7 listwise ranker orders every post judged push, and the top ones (at most the cap) go to Slack. Several ranking reps (different shuffles) are merged by mean position, which keeps
 // the selection steadier than a single rep. Every ranking is logged so it can be compared later with her tiers on the
 // same posts (see .evals/show-hn-scout/day-rank-stats.py). If no rep is valid the caller keeps the newest-first order.
 import { appendFileSync, mkdirSync } from "node:fs";

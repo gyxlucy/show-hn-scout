@@ -1,6 +1,6 @@
 name: scout
 
-# Judge new Show HN posts with the v3 agent; when more than 10 are keepers, the v7 ranker picks the 10 to push to Slack.
+# Judge new Show HN posts with the v3 agent, rank the keepers with v7, and push the best ones (at most 10) to Slack.
 # Needs one repository secret: SLACK_WEBHOOK_URL (an Incoming Webhook for the target channel).
 # "Seen" state lives on the `bot-state` branch (bot-state/seen.json), never on main.
 
@@ -65,8 +65,8 @@ jobs:
           else
             # Daily run: about 3 new posts an hour, a /shownew page of 30 spans ~10h, so 4 pages (~40h) cover the day
             # with margin even if GitHub runs the cron late. Caps are sized for ~70 new posts per run.
-            # Stage 2 (on by default, --no-rank turns it off): with more than 10 pushes, v7 ranks them (3 reps) and the top 10 are
-            # posted best first. Rankings are logged to bot-state/rank-log.jsonl. If ranking fails the newest 10 are posted.
+            # Stage 2 (on by default, --no-rank turns it off): v7 ranks every push (3 reps) and at most the top 10 are posted best
+            # first, fewer if there are fewer pushes. Rankings are logged to bot-state/rank-log.jsonl. If ranking fails the newest 10 are posted.
             bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
           fi
 
