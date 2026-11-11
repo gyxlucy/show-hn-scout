@@ -201,13 +201,17 @@ test("a single push has nothing to be ranked against and is posted as it is; no 
   expect(called).toBe(0);
 });
 
-test("a ranker failure, null or a bad order falls back to the newest-first cap and posts anyway", async () => {
+test("if the ranker fails (throw, null or a bad order) nothing is posted: unranked posts have not met stage 2", async () => {
   for (const rank of [async () => { throw new Error("ranker down"); }, async () => null, async () => [5, 5, 3], async () => [5, 3]]) {
     const h = harness({ maxPushes: 2, candidates: [cand(5), cand(3), cand(2)], rank });
     const s = await runScout(h.deps);
-    expect(h.posted).toEqual([5, 3]);
+    expect(h.posted).toEqual([]);
     expect(s.ranked).toBe(false);
-    expect(s.suppressed).toBe(1);
+    expect(s.rank_failed).toBe(true);
+    expect(["5", "3", "2"].map((k) => h.state.items[k].status)).toEqual(["suppressed", "suppressed", "suppressed"]);
+    expect(h.state.items["5"].last_error).toContain("ranking failed");
+    await runScout({ ...h.deps });
+    expect(h.posted).toEqual([]); // they do not come back on the next run
   }
 });
 

@@ -5,10 +5,11 @@
 //   bun bot/scout.ts --backfill-hours 24 --pages 4            # first run only: also judge and post the last 24h
 //   bun bot/scout.ts --no-rank                                # skip stage 2: post the pushes newest first, up to the cap
 //
-// Stage 2: every post judged push (two or more) goes through the v7 listwise ranker (3 reps merged by mean position). The
-// best ones, at most --max-pushes, are posted best first; with fewer pushes than the cap only those are posted (the cap is
-// never filled up), and posts over the cap stay silent (marked suppressed in the state). Every ranking is appended to
-// <state dir>/rank-log.jsonl. If ranking fails the newest pushes are posted instead.
+// Stage 2: a post is sent only if the v3 judge said push AND the v7 listwise ranker (3 reps merged by mean position) puts it
+// in the day's top --max-pushes (default 3). They are posted best first; with fewer pushes than that only those are posted
+// (the cap is never filled up), and the rest stay silent (marked suppressed in the state). Every ranking is appended to
+// <state dir>/rank-log.jsonl. If ranking fails, nothing is posted (an unranked post has not met stage 2), the pushes are
+// marked suppressed, and the run exits with code 1 so the failure is visible. --no-rank posts the newest pushes instead.
 //
 // Env: SLACK_WEBHOOK_URL (required unless --dry-run), PYTHON (default python3), CAVIA_BASE_URL (optional).
 // The agent is `.evals/show-hn-scout/<variant>` (system-prompt.md + request.json), called as a real Cavia task,
@@ -137,10 +138,11 @@ const summary = await runScout({
   promptSha,
   minAgeHours: Number(opt("min-age-hours", "0")),
   backfillHours: Number(opt("backfill-hours", "0")),
-  maxPushes: Number(opt("max-pushes", "8")),
+  maxPushes: Number(opt("max-pushes", "3")),
   maxJudgements: Number(opt("max-judgements", "40")),
   maxAttempts: 3,
   concurrency: Number(opt("concurrency", "3")),
   log: (l) => console.log(l),
 });
 console.log(JSON.stringify({ variant: VARIANT, model: MODEL, prompt_sha: promptSha, dry_run: DRY, ...summary }));
+if (summary.rank_failed) process.exit(1);

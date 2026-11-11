@@ -38,9 +38,9 @@ export type Deps = {
   judge: (prompt: string) => Promise<Judgement | { error: string }>;
   post: (c: { id: number; record: Record_; rank?: { pos: number; of: number } }) => Promise<void>;
   /**
-   * Optional stage 2: ranking of every push of this run (newest first), whether or not they fit under the cap. Skipped only
-   * for a single push, which has nothing to be compared with. `cap` is how many may still be posted.
-   * Returns every id once, best first; null or a throw means "could not rank" and the newest-first order is kept.
+   * Optional stage 2: ranking of every push of this run (newest first). A post is only sent if stage 1 said push AND it is
+   * within the top `cap` here. A single push has nothing to be compared with and goes out as rank 1.
+   * Returns every id once, best first. null, a throw or an invalid order means "could not rank": nothing is posted.
    */
   rank?: (items: RankItem[], cap: number) => Promise<number[] | null>;
   save: (state: State) => void;
@@ -67,6 +67,8 @@ export type Summary = {
   suppressed: number;
   /** True when the posts that went out were chosen by the ranker rather than by recency. */
   ranked: boolean;
+  /** True when stage 2 was on but failed, so none of this run's pushes were posted (they are marked suppressed). */
+  rank_failed: boolean;
   errors: number;
   retried_posts: number;
 };
@@ -81,7 +83,7 @@ async function pool<T>(items: T[], n: number, fn: (x: T) => Promise<void>) {
 }
 
 export async function runScout(d: Deps): Promise<Summary> {
-  const s: Summary = { candidates: d.candidates.length, seeded: 0, judged: 0, push: 0, pass: 0, unsure: 0, posted: 0, suppressed: 0, ranked: false, errors: 0, retried_posts: 0 };
+  const s: Summary = { candidates: d.candidates.length, seeded: 0, judged: 0, push: 0, pass: 0, unsure: 0, posted: 0, suppressed: 0, ranked: false, rank_failed: false, errors: 0, retried_posts: 0 };
   const sid = (id: number) => String(id);
 
   // First run ever: remember what is already there so we do not post the whole backlog at once.
@@ -184,10 +186,22 @@ export async function runScout(d: Deps): Promise<Summary> {
     if (r.decision === "push") pushed.push(c.id);
   }
 
-  // Which pushes go out, and in what order. Every push goes through the ranker; the ones inside the cap go out best first,
-  // however few that is (nothing is added to fill the cap). If it cannot rank, fall back to the newest-first order
-  // (candidates are newest-first), which keeps the freshest posts.
+  // Which pushes go out, and in what order. A post must be a stage-1 push AND inside the ranker's top `cap`; they go out
+  // best first, however few that is (nothing is added to fill the cap). If the ranker is on but cannot rank, nothing is
+  // posted: an unranked post has not met the stage-2 condition. Without a ranker (--no-rank) the newest pushes go out.
   let order = pushed;
+  const failRank = (why: string) => {
+    s.rank_failed = true;
+    order = [];
+    for (const id of pushed) {
+      const rec = d.state.items[sid(id)];
+      rec.status = "suppressed";
+      rec.last_error = `ranking failed: ${why}`;
+      s.suppressed++;
+    }
+    d.save(d.state);
+    d.log(`ranking failed, nothing posted from ${pushed.length} pushes: ${why}`);
+  };
   if (d.rank && pushed.length > 1) {
     try {
       const items: RankItem[] = pushed.map((id) => ({ id, title: d.state.items[sid(id)].title, prompt: prompts.get(id)! }));
@@ -197,10 +211,10 @@ export async function runScout(d: Deps): Promise<Summary> {
         order = ranked;
         s.ranked = true;
       } else {
-        d.log("ranking unavailable: posting the newest pushes first");
+        failRank("no valid ranking");
       }
     } catch (e) {
-      d.log(`ranking failed, posting the newest pushes first: ${(e as Error).message}`);
+      failRank((e as Error).message);
     }
   }
   const useRank = s.ranked;
