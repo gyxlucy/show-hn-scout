@@ -43,8 +43,8 @@ SQLite 保存故事、逐次榜单位置和证据索引；原始响应按 SHA-25
 
 - 提示词由 `bot/prompt.ts` 生成,评测(`build-cases.ts`)用的是同一份代码,`build-cases.ts --check` 保证逐字节一致。
 - 去重状态在 `bot-state` 分支的 `seen.json`,不在 main 上。第一次运行只登记当前已有的帖子,不判断、不发送,避免一次刷屏。
-- 每次最多发 10 条(`--max-pushes`),超出的标记为 suppressed 并在频道里提示一次。判断失败不会记成 pass,最多重试 3 次;Slack 发送失败会在下次重发,不再调用模型。
-- 影子排序(`--shadow-rank`,每日定时任务已开启):发完之后,用 v7 排序器对这次判成 push 的帖子排 3 次序,追加写入 `bot-state` 分支的 `shadow-rank.jsonl`。它不改变发了什么,失败只记日志。以后用你的标注和这份记录对比,再决定要不要让排序取代"最新 10 条"。
+- 每次最多发 10 条(`--max-pushes`)。判为 push 的帖子超过 10 条时,由第二阶段 v7 排序器(`bot/rank.ts`,3 次排序按平均名次合并)选出前 10 条,按名次从高到低发送,消息底部标"今日排序 n/N";排序失败时退回到"最新 10 条"。超出的标记为 suppressed 并在频道里提示一次。判断失败不会记成 pass,最多重试 3 次;Slack 发送失败会在下次重发,不再调用模型。
+- 每次排序都追加写入 `bot-state` 分支的 `rank-log.jsonl`(池、上限、合并后的顺序、每次排序的结果),用来和你以后的标注对照。`--no-rank` 可关闭第二阶段。上线依据:v7 在两个真实日(day-1104、day-1109,后者标注时没有任何模型预测)的前 10 条里想看的帖子约 8.7 / 6.7 条,同日"最新 10 条"为 4 / 1 条,随机为 4.8 / 3.2 条;只有两天,第二天 pass 仍有 3.3 条。
 - 需要一个仓库 secret:`SLACK_WEBHOOK_URL`(Incoming Webhook)。本地试跑:`bun bot/scout.ts --dry-run --no-seed --max-judgements 3`,只打印消息,不发送、不存状态。
 - 测试:`bun test ./bot/core.test.ts`。
 

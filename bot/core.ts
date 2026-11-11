@@ -24,8 +24,8 @@ export type State = { version: 1; items: Record<string, Record_> };
 
 export type Judgement = { decision: Decision; reason: string };
 
-/** A post judged push in this run, handed to the shadow ranker after all posting is done. */
-export type ShadowItem = { id: number; title: string; prompt: string; posted: boolean; suppressed: boolean };
+/** A post judged push in this run, handed to the ranker when there are more of them than the cap allows. */
+export type RankItem = { id: number; title: string; prompt: string };
 
 export type Deps = {
   state: State;
@@ -36,10 +36,13 @@ export type Deps = {
   prepare: (ids: number[]) => Promise<Map<number, string>>;
   /** One select_project call. Throws or returns an error string on harness failure. */
   judge: (prompt: string) => Promise<Judgement | { error: string }>;
-  post: (c: { id: number; record: Record_ }) => Promise<void>;
+  post: (c: { id: number; record: Record_; rank?: { pos: number; of: number } }) => Promise<void>;
   postNote?: (text: string) => Promise<void>;
-  /** Optional shadow ranking of this run's pushes. Runs last, never changes what was posted, and a throw is only logged. */
-  shadow?: (items: ShadowItem[]) => Promise<void>;
+  /**
+   * Optional ranking of this run's pushes (newest first). Called only when more posts were pushed than the cap lets through.
+   * Returns every id once, best first; null or a throw means "could not rank" and the newest-first order is kept.
+   */
+  rank?: (items: RankItem[], cap: number) => Promise<number[] | null>;
   save: (state: State) => void;
   now: () => Date;
   promptSha: string;
@@ -62,6 +65,8 @@ export type Summary = {
   unsure: number;
   posted: number;
   suppressed: number;
+  /** True when the posts that went out were chosen by the ranker rather than by recency. */
+  ranked: boolean;
   errors: number;
   retried_posts: number;
 };
@@ -76,7 +81,7 @@ async function pool<T>(items: T[], n: number, fn: (x: T) => Promise<void>) {
 }
 
 export async function runScout(d: Deps): Promise<Summary> {
-  const s: Summary = { candidates: d.candidates.length, seeded: 0, judged: 0, push: 0, pass: 0, unsure: 0, posted: 0, suppressed: 0, errors: 0, retried_posts: 0 };
+  const s: Summary = { candidates: d.candidates.length, seeded: 0, judged: 0, push: 0, pass: 0, unsure: 0, posted: 0, suppressed: 0, ranked: false, errors: 0, retried_posts: 0 };
   const sid = (id: number) => String(id);
 
   // First run ever: remember what is already there so we do not post the whole backlog at once.
@@ -94,7 +99,7 @@ export async function runScout(d: Deps): Promise<Summary> {
 
   let pushesLeft = d.maxPushes;
   let overflow = 0;
-  const postOne = async (id: number, rec: Record_): Promise<boolean> => {
+  const postOne = async (id: number, rec: Record_, rank?: { pos: number; of: number }): Promise<boolean> => {
     if (pushesLeft <= 0) {
       rec.status = "suppressed";
       overflow++;
@@ -103,7 +108,7 @@ export async function runScout(d: Deps): Promise<Summary> {
       return false;
     }
     try {
-      await d.post({ id, record: rec });
+      await d.post({ id, record: rec, rank });
       pushesLeft--;
       rec.posted = true;
       s.posted++;
@@ -155,7 +160,7 @@ export async function runScout(d: Deps): Promise<Summary> {
     }
   });
 
-  // Post in feed order (candidates are newest-first), after judging, so the cap keeps the freshest posts.
+  // Record every judgement first. Posting comes after, so the ranker sees the whole day's pushes at once.
   const pushed: number[] = [];
   for (const c of todo) {
     const key = sid(c.id);
@@ -178,29 +183,35 @@ export async function runScout(d: Deps): Promise<Summary> {
     const rec: Record_ = { ...base, status: "judged", decision: r.decision, reason: r.reason, judged_at: d.now().toISOString(), prompt_sha: d.promptSha, posted: false, attempts };
     d.state.items[key] = rec;
     d.save(d.state);
-    if (r.decision === "push") {
-      pushed.push(c.id);
-      await postOne(c.id, rec);
+    if (r.decision === "push") pushed.push(c.id);
+  }
+
+  // Which pushes go out. With more pushes than the cap, the ranker picks the best ones and they go out best first.
+  // If it cannot rank, fall back to the newest-first order (candidates are newest-first), which keeps the freshest posts.
+  let order = pushed;
+  if (d.rank && pushed.length > pushesLeft && pushed.length > 1) {
+    try {
+      const items: RankItem[] = pushed.map((id) => ({ id, title: d.state.items[sid(id)].title, prompt: prompts.get(id)! }));
+      const ranked = await d.rank(items, pushesLeft);
+      const valid = ranked && ranked.length === pushed.length && new Set(ranked).size === pushed.length && ranked.every((id) => pushed.includes(id));
+      if (valid) {
+        order = ranked;
+        s.ranked = true;
+      } else {
+        d.log("ranking unavailable: posting the newest pushes first");
+      }
+    } catch (e) {
+      d.log(`ranking failed, posting the newest pushes first: ${(e as Error).message}`);
     }
   }
+  const useRank = s.ranked;
+  for (const [i, id] of order.entries()) await postOne(id, d.state.items[sid(id)], useRank ? { pos: i + 1, of: order.length } : undefined);
 
   if (overflow && d.postNote) {
     try {
-      await d.postNote(`另有 ${overflow} 条 push 因单次上限(${d.maxPushes})未发送,已在状态里标记为 suppressed。`);
+      await d.postNote(`另有 ${overflow} 条 push 因单次上限(${d.maxPushes})未发送${useRank ? ",已按排序保留最靠前的" : ",保留了最新的"},已在状态里标记为 suppressed。`);
     } catch (e) {
       d.log(`note failed: ${(e as Error).message}`);
-    }
-  }
-
-  if (d.shadow && pushed.length) {
-    const items: ShadowItem[] = pushed.map((id) => {
-      const rec = d.state.items[sid(id)];
-      return { id, title: rec.title, prompt: prompts.get(id)!, posted: rec.posted, suppressed: rec.status === "suppressed" };
-    });
-    try {
-      await d.shadow(items);
-    } catch (e) {
-      d.log(`shadow ranking failed (posting is unaffected): ${(e as Error).message}`);
     }
   }
   return s;
@@ -212,7 +223,7 @@ const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const clip = (t: string, n: number) => (t.length > n ? t.slice(0, n - 1) + "…" : t);
 
 /** Slack mrkdwn escaping matters: titles and reasons are untrusted text and must not make mentions or links. */
-export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "reason" | "age_hours">) {
+export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "reason" | "age_hours">, rank?: { pos: number; of: number }) {
   const hn = `https://news.ycombinator.com/item?id=${id}`;
   const link = /^https?:\/\/[^\s<>|]+$/.test(r.url) ? r.url : hn;
   const title = esc(clip(r.title.replace(/\s+/g, " "), 150));
@@ -222,7 +233,7 @@ export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "rea
     text: /^show hn/i.test(title) ? title : `Show HN: ${title}`, // notification fallback; Slack parses mrkdwn here too, so it is escaped as well
     blocks: [
       { type: "section", text: { type: "mrkdwn", text: `*<${link}|${title}>*\n${reason}` } },
-      { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3` }] },
+      { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3${rank ? ` · 今日排序 ${rank.pos}/${rank.of}` : ""}` }] },
     ],
   };
 }
