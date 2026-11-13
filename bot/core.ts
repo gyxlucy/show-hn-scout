@@ -27,6 +27,8 @@ export type Judgement = { decision: Decision; reason: string };
 /** A post judged push in this run, handed to the ranker when there are more of them than the cap allows. */
 export type RankItem = { id: number; title: string; prompt: string };
 
+export type Outgoing = { id: number; record: Record_ };
+
 export type Deps = {
   state: State;
   /** True when no state existed before this run: seed the backlog instead of flooding the channel. */
@@ -36,7 +38,8 @@ export type Deps = {
   prepare: (ids: number[]) => Promise<Map<number, string>>;
   /** One select_project call. Throws or returns an error string on harness failure. */
   judge: (prompt: string) => Promise<Judgement | { error: string }>;
-  post: (c: { id: number; record: Record_; rank?: { pos: number; of: number } }) => Promise<void>;
+  /** One call per run: everything to announce goes out as a single message, best first. `ranked` says stage 2 ordered it. */
+  post: (items: Outgoing[], meta: { ranked: boolean }) => Promise<void>;
   /**
    * Optional stage 2: ranking of every push of this run (newest first). A post is only sent if stage 1 said push AND it is
    * within the top `cap` here. A single push has nothing to be compared with and goes out as rank 1.
@@ -99,33 +102,44 @@ export async function runScout(d: Deps): Promise<Summary> {
     if (d.backfillHours <= 0) return s;
   }
 
+  // Everything that is going out this run is collected here and sent as ONE Slack message at the end.
   let pushesLeft = d.maxPushes;
-  const postOne = async (id: number, rec: Record_, rank?: { pos: number; of: number }): Promise<boolean> => {
+  const outbox: Outgoing[] = [];
+  const retriedIds = new Set<number>();
+  const take = (id: number, rec: Record_): boolean => {
     if (pushesLeft <= 0) {
       rec.status = "suppressed";
       s.suppressed++;
       d.save(d.state);
       return false;
     }
+    pushesLeft--;
+    outbox.push({ id, record: rec });
+    return true;
+  };
+  const flush = async () => {
+    if (!outbox.length) return;
     try {
-      await d.post({ id, record: rec, rank });
-      pushesLeft--;
-      rec.posted = true;
-      s.posted++;
-      d.save(d.state);
-      return true;
+      await d.post(outbox, { ranked: s.ranked });
     } catch (e) {
-      rec.last_error = `slack: ${(e as Error).message}`;
-      d.log(`post failed for ${id}: ${rec.last_error}`);
+      for (const o of outbox) o.record.last_error = `slack: ${(e as Error).message}`;
+      d.log(`post failed for ${outbox.length} posts: ${(e as Error).message}`);
       d.save(d.state);
-      return false;
+      return;
     }
+    for (const o of outbox) {
+      o.record.posted = true;
+      s.posted++;
+      if (retriedIds.has(o.id)) s.retried_posts++;
+    }
+    d.save(d.state);
   };
 
-  // Earlier pushes that Slack rejected are retried without calling the model again.
-  for (const [id, rec] of Object.entries(d.state.items)) {
+  // Earlier pushes that Slack rejected go into the same message again, without calling the model again.
+  // Newest first (HN ids grow over time).
+  for (const [id, rec] of Object.entries(d.state.items).sort((x, y) => Number(y[0]) - Number(x[0]))) {
     if (rec.status === "judged" && rec.decision === "push" && !rec.posted) {
-      if (await postOne(Number(id), rec)) s.retried_posts++;
+      if (take(Number(id), rec)) retriedIds.add(Number(id));
     }
   }
 
@@ -142,6 +156,7 @@ export async function runScout(d: Deps): Promise<Summary> {
   if (!todo.length) {
     d.log("nothing new to judge");
     d.save(d.state);
+    await flush();
     return s;
   }
 
@@ -217,9 +232,9 @@ export async function runScout(d: Deps): Promise<Summary> {
       failRank((e as Error).message);
     }
   }
-  const useRank = s.ranked;
   // Posts over the cap are only marked suppressed in the state; the channel is not told about them.
-  for (const [i, id] of order.entries()) await postOne(id, d.state.items[sid(id)], useRank ? { pos: i + 1, of: order.length } : undefined);
+  for (const id of order) take(id, d.state.items[sid(id)]);
+  await flush();
 
   return s;
 }
@@ -229,19 +244,25 @@ export async function runScout(d: Deps): Promise<Summary> {
 const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const clip = (t: string, n: number) => (t.length > n ? t.slice(0, n - 1) + "…" : t);
 
+/** Slack allows 50 blocks per message; a header plus a divider and a section per post must fit. */
+export const MAX_DIGEST_POSTS = 24;
+
 /** Slack mrkdwn escaping matters: titles and reasons are untrusted text and must not make mentions or links. */
-export function slackPayload(id: number, r: Pick<Record_, "title" | "url" | "reason" | "age_hours">, rank?: { pos: number; of: number }) {
-  // `of` stays out of the message on purpose: it would reveal how many posts were held back.
-  const hn = `https://news.ycombinator.com/item?id=${id}`;
-  const link = /^https?:\/\/[^\s<>|]+$/.test(r.url) ? r.url : hn;
-  const title = esc(clip(r.title.replace(/\s+/g, " "), 150));
-  const reason = esc(clip((r.reason ?? "").replace(/\s+/g, " "), 600));
-  const age = r.age_hours < 1 ? `${Math.round(r.age_hours * 60)} 分钟前` : `${r.age_hours.toFixed(1)} 小时前`;
-  return {
-    text: /^show hn/i.test(title) ? title : `Show HN: ${title}`, // notification fallback; Slack parses mrkdwn here too, so it is escaped as well
-    blocks: [
-      { type: "section", text: { type: "mrkdwn", text: `*<${link}|${title}>*\n${reason}` } },
-      { type: "context", elements: [{ type: "mrkdwn", text: `<${hn}|HN 讨论> · 发布于 ${age} · scout v3${rank ? ` · 今日第 ${rank.pos} 名` : ""}` }] },
-    ],
-  };
+export function slackPayload(items: Outgoing[], meta: { ranked: boolean }) {
+  if (items.length > MAX_DIGEST_POSTS) throw new Error(`too many posts for one Slack message: ${items.length}`);
+  const hn = (id: number) => `https://news.ycombinator.com/item?id=${id}`;
+  const blocks: unknown[] = [
+    { type: "section", text: { type: "mrkdwn", text: `*Show HN 今日推荐 · ${items.length} 条*${meta.ranked ? "(按排序从高到低)" : ""}` } },
+  ];
+  for (const [i, { id, record: r }] of items.entries()) {
+    const link = /^https?:\/\/[^\s<>|]+$/.test(r.url) ? r.url : hn(id);
+    const title = esc(clip(r.title.replace(/\s+/g, " "), 150));
+    const reason = esc(clip((r.reason ?? "").replace(/\s+/g, " "), 600));
+    const age = r.age_hours < 1 ? `${Math.round(r.age_hours * 60)} 分钟前` : `${r.age_hours.toFixed(1)} 小时前`;
+    blocks.push({ type: "divider" });
+    blocks.push({ type: "section", text: { type: "mrkdwn", text: `*${i + 1}. <${link}|${title}>*\n${reason}\n<${hn(id)}|HN 讨论> · 发布于 ${age}` } });
+  }
+  // Notification fallback; Slack parses mrkdwn here too, so the title is escaped as well.
+  const first = items[0] ? esc(clip(items[0].record.title.replace(/\s+/g, " "), 80)) : "";
+  return { text: `Show HN 今日推荐 ${items.length} 条:${first}${items.length > 1 ? " 等" : ""}`, blocks };
 }

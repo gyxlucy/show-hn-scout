@@ -1,11 +1,12 @@
 import { expect, test } from "bun:test";
-import { runScout, slackPayload, type Candidate, type Deps, type Judgement, type State } from "./core.ts";
+import { runScout, slackPayload, type Candidate, type Deps, type Judgement, type Outgoing, type Record_, type State } from "./core.ts";
 import { buildPrompt } from "./prompt.ts";
 
 const cand = (id: number, age = 3): Candidate => ({ id, title: `post ${id}`, url: `https://example.com/${id}`, age_hours: age, run_id: "r1" });
 
 function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { error: string }> } = {}) {
   const posted: number[] = [];
+  const batches: number[][] = [];
   const judged: string[] = [];
   const state: State = over.state ?? { version: 1, items: {} };
   const deps: Deps = {
@@ -18,7 +19,7 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
       const id = Number(p.split(":")[1]);
       return over.answers?.[id] ?? { decision: "push", reason: "有意思" };
     },
-    post: async ({ id }) => void posted.push(id),
+    post: async (items) => void (batches.push(items.map((i) => i.id)), posted.push(...items.map((i) => i.id))),
     save: () => {},
     now: () => new Date("2026-10-25T00:00:00Z"),
     promptSha: "abc",
@@ -31,7 +32,7 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
     log: () => {},
     ...over,
   };
-  return { deps, posted, judged, state };
+  return { deps, posted, batches, judged, state };
 }
 
 test("first run seeds the backlog and neither judges nor posts", async () => {
@@ -88,9 +89,9 @@ test("a Slack failure keeps the push and retries the post without calling the mo
   const posted: number[] = [];
   const h = harness({
     candidates: [cand(1)],
-    post: async ({ id }) => {
+    post: async (items) => {
       if (fail) throw new Error("HTTP 500");
-      posted.push(id);
+      posted.push(...items.map((i) => i.id));
     },
   });
   await runScout(h.deps);
@@ -126,8 +127,10 @@ test("evidence that could not be built counts as a failed attempt, not a pass", 
   expect(h.state.items["1"].decision).toBeUndefined();
 });
 
+const out = (id: number, r: Partial<Record_> = {}): Outgoing => ({ id, record: { title: "t", url: "https://e.com", reason: "r", age_hours: 2, status: "judged", posted: false, attempts: 1, ...r } });
+
 test("Slack payload escapes untrusted text and only links real http(s) URLs", () => {
-  const p = slackPayload(42, { title: "<!channel> A & B <script>", url: "javascript:alert(1)", reason: "<@U123> see <http://evil|click>", age_hours: 0.25 });
+  const p = slackPayload([out(42, { title: "<!channel> A & B <script>", url: "javascript:alert(1)", reason: "<@U123> see <http://evil|click>", age_hours: 0.25 })], { ranked: false });
   const body = JSON.stringify(p);
   expect(body).not.toContain("<!channel>");
   expect(body).not.toContain("<@U123>");
@@ -136,10 +139,15 @@ test("Slack payload escapes untrusted text and only links real http(s) URLs", ()
   expect(body).toContain("15 分钟前");
 });
 
-test("the notification text does not repeat a Show HN prefix the title already has", () => {
-  const p = slackPayload(1, { title: "Show HN: Foo", url: "https://foo.dev", reason: "r", age_hours: 2 });
-  expect(p.text).toBe("Show HN: Foo");
-  expect(slackPayload(1, { title: "Foo", url: "https://foo.dev", reason: "r", age_hours: 2 }).text).toBe("Show HN: Foo");
+test("all posts of a run go out as one message, numbered in the given order, without revealing how many were held back", () => {
+  const p = slackPayload([out(3, { title: "Third" }), out(1, { title: "First" })], { ranked: true });
+  const body = JSON.stringify(p);
+  expect(body).toContain("今日推荐 · 2 条");
+  expect(body.indexOf("1. <")).toBeLessThan(body.indexOf("2. <"));
+  expect(body.indexOf("Third")).toBeLessThan(body.indexOf("First"));
+  expect(p.blocks.length).toBe(1 + 2 * 2);
+  expect(() => slackPayload(Array.from({ length: 25 }, (_, i) => out(i)), { ranked: true })).toThrow();
+  expect(slackPayload(Array.from({ length: 24 }, (_, i) => out(i)), { ranked: true }).blocks.length).toBeLessThanOrEqual(50);
 });
 
 test("the live prompt is the eval prompt: starts with the contract header and omits votes and verdicts", () => {
@@ -151,13 +159,13 @@ test("the live prompt is the eval prompt: starts with the contract header and om
 test("with more pushes than the cap the ranker chooses and the winners are posted best first, with their rank; the rest stay silent", async () => {
   const seen: number[][] = [];
   const caps: number[] = [];
-  const ranks: any[] = [];
+  const metas: any[] = [];
   const posted: number[] = [];
   const h = harness({
     maxPushes: 2,
     candidates: [cand(5), cand(4), cand(3), cand(2)],
     answers: { 4: { decision: "pass", reason: "x" } },
-    post: async ({ id, rank }) => void (posted.push(id), ranks.push(rank)),
+    post: async (items, meta) => void (posted.push(...items.map((i) => i.id)), metas.push(meta)),
     rank: async (items, cap) => {
       seen.push(items.map((i) => i.id));
       caps.push(cap);
@@ -168,7 +176,7 @@ test("with more pushes than the cap the ranker chooses and the winners are poste
   expect(seen).toEqual([[5, 3, 2]]); // only this run's pushes, newest first, prompts attached
   expect(caps).toEqual([2]);
   expect(posted).toEqual([2, 5]);
-  expect(ranks).toEqual([{ pos: 1, of: 3 }, { pos: 2, of: 3 }]);
+  expect(metas).toEqual([{ ranked: true }]);
   expect(s.ranked).toBe(true);
   expect(s.suppressed).toBe(1);
   expect(h.state.items["3"].status).toBe("suppressed");
@@ -215,10 +223,22 @@ test("if the ranker fails (throw, null or a bad order) nothing is posted: unrank
   }
 });
 
-test("the Slack footer shows the ranked position, never how many posts there were", () => {
-  const r = { title: "t", url: "https://e.com", reason: "r", age_hours: 2 };
-  expect(JSON.stringify(slackPayload(1, r))).not.toContain("今日第");
-  const withRank = JSON.stringify(slackPayload(1, r, { pos: 2, of: 14 }));
-  expect(withRank).toContain("今日第 2 名");
-  expect(withRank).not.toContain("14");
+test("one run sends exactly one Slack message, and a failed send retries them all together next run", async () => {
+  let fail = true;
+  const h = harness({
+    candidates: [cand(3), cand(2), cand(1)],
+    post: async (items) => {
+      if (fail) throw new Error("HTTP 500");
+      h.batches.push(items.map((i) => i.id));
+    },
+  });
+  await runScout(h.deps);
+  expect(h.batches).toEqual([]);
+  fail = false;
+  const s = await runScout({ ...h.deps });
+  expect(h.batches).toEqual([[3, 2, 1]]);
+  expect(s.retried_posts).toBe(3);
+  const h2 = harness({ candidates: [cand(3), cand(2), cand(1)] });
+  await runScout(h2.deps);
+  expect(h2.batches).toEqual([[3, 2, 1]]);
 });

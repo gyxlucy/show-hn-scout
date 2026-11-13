@@ -19,7 +19,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import { dirname, join, resolve } from "node:path";
 import { loadAgent, runCaviaTask } from "../.evals/show-hn-scout/cavia.ts";
 import { finalText, parseAnswer } from "../.evals/show-hn-scout/lib.ts";
-import { runScout, slackPayload, type Candidate, type State } from "./core.ts";
+import { MAX_DIGEST_POSTS, runScout, slackPayload, type Candidate, type State } from "./core.ts";
 import { buildPrompt, type Packet } from "./prompt.ts";
 import { rankPushes } from "./rank.ts";
 
@@ -108,10 +108,10 @@ const summary = await runScout({
     const parsed = parseAnswer(finalText(run.transcript));
     return parsed.valid ? { decision: parsed.decision, reason: parsed.reason } : { error: `invalid answer: ${parsed.error}` };
   },
-  post: async ({ id, record, rank }) => {
-    const payload = slackPayload(id, record, rank);
+  post: async (items, meta) => {
+    const payload = slackPayload(items, meta);
     if (DRY) {
-      console.log(`[dry-run] would post ${id}: ${JSON.stringify(payload)}`);
+      console.log(`[dry-run] would post ${items.map((i) => i.id).join(",")} as one message: ${JSON.stringify(payload)}`);
       return;
     }
     await webhook(payload);
@@ -138,7 +138,7 @@ const summary = await runScout({
   promptSha,
   minAgeHours: Number(opt("min-age-hours", "0")),
   backfillHours: Number(opt("backfill-hours", "0")),
-  maxPushes: Number(opt("max-pushes", "8")),
+  maxPushes: Math.min(Number(opt("max-pushes", "8")), MAX_DIGEST_POSTS), // one Slack message holds at most this many
   maxJudgements: Number(opt("max-judgements", "40")),
   maxAttempts: 3,
   concurrency: Number(opt("concurrency", "3")),
