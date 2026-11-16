@@ -85,7 +85,7 @@ export type Ranking = { valid: true; ranking: string[]; top_reasons: Record<stri
  * `top_reasons` has a non-empty string for each of the first `topN` labels. A single ```json fence is tolerated.
  * Anything else is "no answer": a partial ranking is never completed or guessed.
  */
-export function parseRanking(text: string, labels: string[], topN = 10): Ranking {
+export function parseRanking(text: string, labels: string[], topN = 10, requireReasons = true): Ranking {
   let t = text.trim();
   const fenced = t.match(/^```(?:json)?\s*\n([\s\S]*?)\n```$/);
   if (fenced) t = fenced[1].trim();
@@ -102,7 +102,10 @@ export function parseRanking(text: string, labels: string[], topN = 10): Ranking
   if (!tr || typeof tr !== "object" || Array.isArray(tr)) return { valid: false, error: "top_reasons must be an object" };
   const top_reasons: Record<string, string> = {};
   for (const l of (r as string[]).slice(0, Math.min(topN, r.length))) {
-    if (typeof tr[l] !== "string" || !tr[l].trim()) return { valid: false, error: `top_reasons.${l} must be a non-empty string` };
+    if (typeof tr[l] !== "string" || !tr[l].trim()) {
+      if (requireReasons) return { valid: false, error: `top_reasons.${l} must be a non-empty string` };
+      continue; // the live bot only needs the order; a missing reason does not make the ranking unusable
+    }
     top_reasons[l] = tr[l].trim();
   }
   return { valid: true, ranking: r as string[], top_reasons };
@@ -182,7 +185,7 @@ if (import.meta.main) {
     "page-chars": { type: "string", default: "700" }, "comment-chars": { type: "string", default: "0" },
   } });
   if (!v.model) throw new Error("--model is required (it is recorded on every row)");
-  if (!["fresh-train", "fresh-test", "train60", "heldout", "day-1104", "day-1109"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
+  if (!["fresh-train", "fresh-test", "train60", "heldout", "day-1104", "day-1109", "pool-92"].includes(v.set!)) throw new Error(`unknown --set ${v.set}`);
   const setDir = join(DIR, v.set!);
   const opts: RankOpts = { dir: setDir, agentDir: join(DIR, v.variant!), variant: v.variant!, outName: v.out, model: v.model, reps: +v.reps!, timeoutS: +v["timeout-s"]!, concurrency: +v.concurrency!, poolFrom: v["pool-from"]!, pageChars: +v["page-chars"]!, commentChars: +v["comment-chars"]! };
   console.log(`Plan: ${opts.reps} reps x 1 ranking call on ${opts.model} (variant ${opts.variant}, set ${v.set}), pool ${poolFromRun(setDir, opts.poolFrom).length} cases from ${opts.poolFrom}, cards: ${opts.pageChars} page chars + ${opts.commentChars} discussion chars`);

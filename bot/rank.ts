@@ -1,5 +1,5 @@
 // Stage 2 of the daily push: the v7 listwise ranker orders every post judged push, and the top ones (at most the cap) go to Slack. Several ranking reps (different shuffles) are merged by mean position, which keeps
-// the selection steadier than a single rep. Every ranking is logged so it can be compared later with her tiers on the
+// the selection steadier than a single rep. An invalid answer is asked once more, and a missing reason does not invalidate a ranking. Every ranking is logged so it can be compared later with her tiers on the
 // same posts (see .evals/show-hn-scout/day-rank-stats.py). If no rep is valid the caller keeps the newest-first order.
 import { appendFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
@@ -14,6 +14,8 @@ export type RankOpts = {
   model: string;
   reps: number;
   timeoutS: number;
+  /** Calls per rep: an invalid or failed answer is asked again (a new call, same shuffle) up to this many times. Default 2. */
+  attempts?: number;
   concurrency: number;
   runTask: RunTask;
   logPath: string | null; // null = print only (dry run)
@@ -31,6 +33,8 @@ export type RankRep = {
   error?: string;
   usage?: Record<string, number>;
   latency_s: number;
+  /** Calls used for this rep (1 unless an earlier answer was invalid). */
+  attempts?: number;
 };
 
 /** Merge valid reps by mean position (0 = best). Ties keep the order of `ids` (newest first). */
@@ -53,22 +57,28 @@ export async function rankPushes(items: RankItem[], cap: number, o: RankOpts): P
         const seed = rep + 1;
         const t0 = Date.now();
         const { prompt, labels } = buildRankPrompt(cards, seed);
-        const fail = (error: string, usage?: Record<string, number>): RankRep => ({ rep, seed, valid: false, ranking: [], top_reasons: {}, error, usage, latency_s: (Date.now() - t0) / 1000 });
-        try {
-          const run = await o.runTask(o.agent, o.model, prompt, o.timeoutS * 1000);
-          if (run.error) { reps[rep] = fail(`cavia: ${run.error}`, run.usage); continue; }
-          const parsed = parseRanking(finalText(run.transcript), Object.keys(labels));
-          reps[rep] = parsed.valid
-            ? {
-                rep, seed, valid: true,
-                ranking: parsed.ranking.map((l) => labels[l]),
-                top_reasons: Object.fromEntries(Object.entries(parsed.top_reasons).map(([l, r]) => [labels[l], r])),
-                usage: run.usage, latency_s: (Date.now() - t0) / 1000,
-              }
-            : fail(`invalid ranking: ${parsed.error}`, run.usage);
-        } catch (e) {
-          reps[rep] = fail((e as Error).message);
+        const maxAttempts = Math.max(1, o.attempts ?? 2);
+        let last: RankRep | null = null;
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+          const fail = (error: string, usage?: Record<string, number>): RankRep => ({ rep, seed, valid: false, ranking: [], top_reasons: {}, error, usage, latency_s: (Date.now() - t0) / 1000, attempts: attempt });
+          try {
+            const run = await o.runTask(o.agent, o.model, prompt, o.timeoutS * 1000);
+            if (run.error) { last = fail(`cavia: ${run.error}`, run.usage); continue; }
+            // Only the order matters here; reasons are optional (requireReasons = false).
+            const parsed = parseRanking(finalText(run.transcript), Object.keys(labels), 10, false);
+            if (!parsed.valid) { last = fail(`invalid ranking: ${parsed.error}`, run.usage); continue; }
+            last = {
+              rep, seed, valid: true,
+              ranking: parsed.ranking.map((l) => labels[l]),
+              top_reasons: Object.fromEntries(Object.entries(parsed.top_reasons).map(([l, r]) => [labels[l], r])),
+              usage: run.usage, latency_s: (Date.now() - t0) / 1000, attempts: attempt,
+            };
+            break;
+          } catch (e) {
+            last = fail((e as Error).message);
+          }
         }
+        reps[rep] = last!;
       }
     }),
   );
