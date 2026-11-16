@@ -1,6 +1,7 @@
 name: scout
 
-# Judge new Show HN posts with the v3 agent, rank the keepers with v7, and push only those that are both a v3 push and inside the ranker's top 10.
+# Every day: judge new Show HN posts with the v3 agent; the keepers wait. Every 3 days: rank all waiting keepers together with v7
+# and send the top 10 (only those that are both a v3 push and in that top 10) as ONE Slack message.
 # Needs one repository secret: SLACK_WEBHOOK_URL (an Incoming Webhook for the target channel).
 # "Seen" state lives on the `bot-state` branch (bot-state/seen.json), never on main.
 
@@ -14,6 +15,10 @@ on:
         description: "Judge a few posts and print the Slack messages, but post nothing and save no state"
         type: boolean
         default: true
+      force_digest:
+        description: "Real run only: send the digest now even if the last one was less than 3 days ago"
+        type: boolean
+        default: false
       backfill_hours:
         description: "Real run only: on the very first run, also judge and post the posts from the last N hours (e.g. 24) instead of just remembering them. Leave 0 for normal behaviour"
         type: string
@@ -56,19 +61,24 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
           BACKFILL_HOURS: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill_hours || '0' }}
+          FORCE_DIGEST: ${{ github.event_name == 'workflow_dispatch' && inputs.force_digest }}
         run: |
+          # A digest is sent when 66h have passed since the last one: every 3rd daily run (72h minus a margin for a late cron).
+          DIGEST="--digest-gap-hours 66"
+          [ "$FORCE_DIGEST" = "true" ] && DIGEST="--force-digest"
           if [ "$DRY_RUN" = "true" ]; then
-            bun bot/scout.ts --dry-run --no-seed --max-judgements 3 --state bot-state/seen.json
+            bun bot/scout.ts --dry-run --no-seed --max-judgements 3 --force-digest --state bot-state/seen.json
           elif [[ "$BACKFILL_HOURS" =~ ^[1-9][0-9]*$ ]]; then
             # Roughly 3 new Show HN posts an hour (a /shownew page of 30 spans about 10h): 4 pages cover 24h with margin.
-            bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
+            bun bot/scout.ts --state bot-state/seen.json --backfill-hours "$BACKFILL_HOURS" --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5 $DIGEST
           else
             # Daily run: about 3 new posts an hour, a /shownew page of 30 spans ~10h, so 4 pages (~40h) cover the day
             # with margin even if GitHub runs the cron late. Caps are sized for ~70 new posts per run.
-            # Stage 2 (on by default, --no-rank turns it off): v7 ranks every push (3 reps) and only the top 10 are posted, best
-            # first, fewer if there are fewer pushes. Rankings are logged to bot-state/rank-log.jsonl. If ranking fails nothing is
-            # posted and the run fails visibly.
-            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5
+            # Stage 1 runs every day; pushes wait in the state. On a digest day, stage 2 (on by default, --no-rank turns it
+            # off) has v7 rank ALL waiting pushes (3 reps) and only the top 10 are posted, best first, as one Slack message,
+            # fewer if there are fewer pushes. Rankings are logged to bot-state/rank-log.jsonl. If ranking fails nothing is
+            # posted, the pushes stay waiting for the next run, and the run fails visibly.
+            bun bot/scout.ts --state bot-state/seen.json --pages 4 --max-judgements 150 --max-pushes 10 --concurrency 5 $DIGEST
           fi
 
       - name: Save seen-state

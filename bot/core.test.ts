@@ -26,6 +26,7 @@ function harness(over: Partial<Deps> & { answers?: Record<number, Judgement | { 
     minAgeHours: 0,
     backfillHours: 0,
     maxPushes: 8,
+    digestGapHours: 0,
     maxJudgements: 40,
     maxAttempts: 3,
     concurrency: 2,
@@ -99,7 +100,7 @@ test("a Slack failure keeps the push and retries the post without calling the mo
   fail = false;
   const s = await runScout({ ...h.deps });
   expect(posted).toEqual([1]);
-  expect(s.retried_posts).toBe(1);
+  expect(s.posted).toBe(1);
   expect(h.judged).toHaveLength(1);
 });
 
@@ -142,7 +143,7 @@ test("Slack payload escapes untrusted text and only links real http(s) URLs", ()
 test("all posts of a run go out as one message, numbered in the given order, without revealing how many were held back", () => {
   const p = slackPayload([out(3, { title: "Third" }), out(1, { title: "First" })], { ranked: true });
   const body = JSON.stringify(p);
-  expect(body).toContain("今日推荐 · 2 条");
+  expect(body).toContain("精选 · 2 条");
   expect(body.indexOf("1. <")).toBeLessThan(body.indexOf("2. <"));
   expect(body.indexOf("Third")).toBeLessThan(body.indexOf("First"));
   expect(p.blocks.length).toBe(1 + 2 * 2);
@@ -209,17 +210,20 @@ test("a single push has nothing to be ranked against and is posted as it is; no 
   expect(called).toBe(0);
 });
 
-test("if the ranker fails (throw, null or a bad order) nothing is posted: unranked posts have not met stage 2", async () => {
+test("if the ranker fails (throw, null or a bad order) nothing is posted and the pushes stay pending for the next run", async () => {
   for (const rank of [async () => { throw new Error("ranker down"); }, async () => null, async () => [5, 5, 3], async () => [5, 3]]) {
     const h = harness({ maxPushes: 2, candidates: [cand(5), cand(3), cand(2)], rank });
     const s = await runScout(h.deps);
     expect(h.posted).toEqual([]);
     expect(s.ranked).toBe(false);
     expect(s.rank_failed).toBe(true);
-    expect(["5", "3", "2"].map((k) => h.state.items[k].status)).toEqual(["suppressed", "suppressed", "suppressed"]);
-    expect(h.state.items["5"].last_error).toContain("ranking failed");
-    await runScout({ ...h.deps });
-    expect(h.posted).toEqual([]); // they do not come back on the next run
+    expect(s.pending).toBe(3);
+    expect(["5", "3", "2"].map((k) => h.state.items[k].status)).toEqual(["judged", "judged", "judged"]);
+    expect(h.state.last_digest_at).toBeUndefined();
+    const again = await runScout({ ...h.deps, rank: async () => [3, 2, 5] });
+    expect(h.posted).toEqual([3, 2]); // the next run ranks them again, no judge calls repeated
+    expect(again.ranked).toBe(true);
+    expect(h.judged).toHaveLength(3);
   }
 });
 
@@ -237,8 +241,73 @@ test("one run sends exactly one Slack message, and a failed send retries them al
   fail = false;
   const s = await runScout({ ...h.deps });
   expect(h.batches).toEqual([[3, 2, 1]]);
-  expect(s.retried_posts).toBe(3);
+  expect(s.posted).toBe(3);
   const h2 = harness({ candidates: [cand(3), cand(2), cand(1)] });
   await runScout(h2.deps);
   expect(h2.batches).toEqual([[3, 2, 1]]);
+});
+
+test("digest every 3 days: stage 1 runs daily, pushes wait, then the whole pool is ranked together and goes out as one message", async () => {
+  let t = Date.parse("2026-11-10T08:00:00Z");
+  const pools: { id: number; prompt: string }[][] = [];
+  const h = harness({
+    digestGapHours: 66,
+    maxPushes: 2,
+    now: () => new Date(t),
+    rank: async (items) => {
+      pools.push(items.map((i) => ({ id: i.id, prompt: i.prompt })));
+      return [...items.map((i) => i.id)].sort((a, b) => a - b); // oldest id first, just to see the order is used
+    },
+  });
+  // The very first digest (no earlier one) goes out on the first run.
+  h.deps.candidates = [cand(10)];
+  await runScout(h.deps);
+  expect(h.batches).toEqual([[10]]);
+  const last = h.state.last_digest_at;
+  expect(last).toBe(new Date(t).toISOString());
+  // Day 2 and 3: judged, nothing sent, nothing ranked.
+  for (const [day, ids] of [[1, [20, 21]], [2, [30, 31]]] as const) {
+    t += 24 * 3_600_000;
+    h.deps.candidates = ids.map((i) => cand(i));
+    const s = await runScout({ ...h.deps });
+    expect(s.digest_due).toBe(false);
+    expect(h.batches).toHaveLength(1);
+    expect(pools).toHaveLength(0);
+    expect(s.pending).toBe(2 * day);
+    expect(h.state.items[String(ids[0])].rank_prompt).toContain("post " + ids[0]);
+  }
+  // Day 4: new posts are judged too, then all 6 pending pushes are ranked in one pool.
+  t += 24 * 3_600_000;
+  h.deps.candidates = [cand(40)];
+  const s = await runScout({ ...h.deps });
+  expect(s.digest_due).toBe(true);
+  expect(pools).toHaveLength(1);
+  expect(pools[0].map((p) => p.id)).toEqual([40, 31, 30, 21, 20]);
+  expect(pools[0][0].prompt).toContain("Title: post 40");
+  expect(h.batches).toEqual([[10], [20, 21]]);
+  expect(s.posted).toBe(2);
+  expect(s.suppressed).toBe(3);
+  expect(s.pending).toBe(0);
+  expect(h.state.items["20"].rank_prompt).toBeUndefined();
+  expect(h.state.items["40"].status).toBe("suppressed");
+  expect(h.state.last_digest_at).toBe(new Date(t).toISOString());
+});
+
+test("a digest that finds nothing pending still starts the 3-day window; a failed Slack send does not", async () => {
+  const t = Date.parse("2026-11-10T08:00:00Z");
+  const empty = harness({ digestGapHours: 66, now: () => new Date(t), candidates: [cand(1)], answers: { 1: { decision: "pass", reason: "x" } } });
+  await runScout(empty.deps);
+  expect(empty.state.last_digest_at).toBe(new Date(t).toISOString());
+  const failing = harness({ digestGapHours: 66, now: () => new Date(t), candidates: [cand(1)], post: async () => { throw new Error("HTTP 500"); } });
+  await runScout(failing.deps);
+  expect(failing.state.last_digest_at).toBeUndefined();
+  expect(failing.state.items["1"].status).toBe("judged");
+});
+
+test("the age on a digest message counts the time the post waited", () => {
+  const rec = { judged_at: "2026-11-10T00:00:00Z", age_hours: 5 };
+  const now = new Date("2026-11-13T00:00:00Z"); // waited 72h
+  expect(JSON.stringify(slackPayload([out(1, rec)], { ranked: true, now }))).toContain("3 天前");
+  const soon = new Date("2026-11-10T03:00:00Z"); // waited 3h
+  expect(JSON.stringify(slackPayload([out(1, rec)], { ranked: true, now: soon }))).toContain("8.0 小时前");
 });

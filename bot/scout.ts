@@ -5,11 +5,13 @@
 //   bun bot/scout.ts --backfill-hours 24 --pages 4            # first run only: also judge and post the last 24h
 //   bun bot/scout.ts --no-rank                                # skip stage 2: post the pushes newest first, up to the cap
 //
-// Stage 2: a post is sent only if the v3 judge said push AND the v7 listwise ranker (3 reps merged by mean position) puts it
-// in the day's top --max-pushes (the cron passes 10). They are posted best first; with fewer pushes than that only those are posted
-// (the cap is never filled up), and the rest stay silent (marked suppressed in the state). Every ranking is appended to
-// <state dir>/rank-log.jsonl. If ranking fails, nothing is posted (an unranked post has not met stage 2), the pushes are
-// marked suppressed, and the run exits with code 1 so the failure is visible. --no-rank posts the newest pushes instead.
+// Digest: stage 1 (the v3 judge) runs on every run, but pushes wait in the state until a digest is due (--digest-gap-hours 66
+// in the cron: every 3rd daily run; --force-digest sends one now; 0 = every run). A digest is stage 2 + posting: the v7 listwise
+// ranker (3 reps merged by mean position) ranks ALL waiting pushes together, and a post is sent only if it is a v3 push AND in
+// the top --max-pushes (the cron passes 10) of that pool. They go out best first as ONE Slack message; with fewer pushes than
+// that only those are sent (the cap is never filled up), and the rest stay silent (marked suppressed in the state). Every
+// ranking is appended to <state dir>/rank-log.jsonl. If ranking or Slack fails, nothing is sent, the pushes stay pending, and
+// ranking failure also makes the run exit with code 1 so it is visible. --no-rank sends the newest pushes instead.
 //
 // Env: SLACK_WEBHOOK_URL (required unless --dry-run), PYTHON (default python3), CAVIA_BASE_URL (optional).
 // The agent is `.evals/show-hn-scout/<variant>` (system-prompt.md + request.json), called as a real Cavia task,
@@ -109,7 +111,7 @@ const summary = await runScout({
     return parsed.valid ? { decision: parsed.decision, reason: parsed.reason } : { error: `invalid answer: ${parsed.error}` };
   },
   post: async (items, meta) => {
-    const payload = slackPayload(items, meta);
+    const payload = slackPayload(items, { ...meta, now: new Date() });
     if (DRY) {
       console.log(`[dry-run] would post ${items.map((i) => i.id).join(",")} as one message: ${JSON.stringify(payload)}`);
       return;
@@ -141,6 +143,7 @@ const summary = await runScout({
   maxPushes: Math.min(Number(opt("max-pushes", "8")), MAX_DIGEST_POSTS), // one Slack message holds at most this many
   maxJudgements: Number(opt("max-judgements", "40")),
   maxAttempts: 3,
+  digestGapHours: flag("force-digest") ? 0 : Number(opt("digest-gap-hours", "0")),
   concurrency: Number(opt("concurrency", "3")),
   log: (l) => console.log(l),
 });
